@@ -7,7 +7,7 @@ class PetType(db.Model):
     title = db.Column(db.String(50), unique=True, nullable=False)
     icon = db.Column(db.String)
     
-    # products = db.relationship("Product", back_populates="pet_type", cascade="all, delete")
+    products = db.relationship("Product", back_populates="pet_type", cascade="all, delete")
     
     def to_dict(self):
         return {

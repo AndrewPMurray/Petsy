@@ -7,7 +7,7 @@ class ProductType(db.Model):
     title = db.Column(db.String(100), unique=True, nullable=False)
     url = db.Column(db.String)
     
-    # products = db.relationship("Product", back_populates="product_type", cascade="all, delete")
+    products = db.relationship("Product", back_populates="product_type", cascade="all, delete")
     
     def to_dict(self):
         return {
