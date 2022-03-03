@@ -5,3 +5,4 @@ from .pet_types import PetType
 from .product_types import ProductType
 from .products import Product
 from .reviews import Review
+from .purchases import Purchase

@@ -18,6 +18,7 @@ class Product(db.Model):
     pet_type = db.relationship("PetType", back_populates="products")
     images = db.relationship("Image", back_populates="single_product", cascade="all, delete")
     reviews = db.relationship("Review", back_populates="single_product", cascade="all, delete")
+    purchases = db.relationship("Purchase", back_populates="single_product", cascade="all, delete")
     
     def to_dict(self):
         return {
