@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Python Web Assessment</title>
+	</head>
+	<body>
+		{% if form.errors %}
+		<p>Bad Data</p>
+		{% endif %}
+		<form method="post" action="/new_instrument">
+			{{ form.csrf_token }} 
+			{{ form.date_bought.label }} {{ form.date_bought }} 
+			{{ form.nickname.label }} {{ form.nickname }} 
+			{{ form.year.label}} {{form.year}} 
+            {{ form.maker.label}} {{form.maker}} 
+            {{ form.type.label}} {{form.type}} 
+            {{ form.used.label}} {{form.used}} 
+			{{form.submit}}
+		</form>
+	</body>
+</html>
