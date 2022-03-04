@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required
-from app.models import User
+from app.models import User, Review
 
 reviews_routes = Blueprint('reviews_routes', __name__)
 
@@ -8,6 +8,7 @@ reviews_routes = Blueprint('reviews_routes', __name__)
 @reviews_routes.route('/reviews')
 @login_required
 def all_reviews():
+  # all_reviews = Review.query.filter()
   pass
 
 

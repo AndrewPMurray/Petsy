@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required
-from app.models import User
+from app.models import User, Product
 
 products_routes = Blueprint('products_routes', __name__)
 
@@ -8,7 +8,9 @@ products_routes = Blueprint('products_routes', __name__)
 @products_routes.route('/products')
 @login_required
 def all_products():
-  pass
+  all_products = Product.query.all()
+  return {"all_products": [product.to_dict() for product in all_products]}
+
 
 # POST Route
 @products_routes.route('/products', methods=["POST"])

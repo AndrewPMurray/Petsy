@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required
-from app.models import User
+from app.models import User, Purchase
 
 purchases_routes = Blueprint('purchases_routes', __name__)
 
@@ -9,3 +9,5 @@ purchases_routes = Blueprint('purchases_routes', __name__)
 @login_required
 def all_purchases():
   pass
+
+# 
