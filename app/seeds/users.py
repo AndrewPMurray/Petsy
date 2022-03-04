@@ -22,6 +22,14 @@ def seed_users():
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
+    db.session.add(catthew)
+    db.session.add(serPurrceval)
+    db.session.add(stewart)
+    db.session.add(henderson)
+    db.session.add(paulie)
+    db.session.add(chip)
+    db.session.add(rango)
+    db.session.add(charizard)
 
     db.session.commit()
 
