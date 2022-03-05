@@ -1,16 +1,26 @@
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import './Navbar.css'
+import Account from './Account'
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 function NavBarLinks({ user }) {
     return (
         <>
-            <ul>
+            <ul id="NavBarLinks">
                 <li>
-                    <NavLink to='/' exact={true} activeClassName='active'>
-                        Home
-                    </NavLink>
+                    <i className="far fa-heart"></i>
+                </li>
+                <li>
+                    <i class="fa-solid fa-store"></i>
+                </li>
+                <li>
+                    <Account user={user} />
+                </li>
+                <li>
+                    <i class="fa-solid fa-cart-shopping"></i>
                 </li>
                 {!user && (
                     <div>
@@ -26,11 +36,11 @@ function NavBarLinks({ user }) {
                         </li>
                     </div>
                 )}
-                <li>
+                {/* <li>
                     <NavLink to='/users' exact={true} activeClassName='active'>
                         Users
                     </NavLink>
-                </li>
+                </li> */}
                 {user && (
                     <li>
                         <LogoutButton />

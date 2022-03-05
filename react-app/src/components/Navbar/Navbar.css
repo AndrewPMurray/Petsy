@@ -11,3 +11,8 @@ nav {
    display: flex;
 }
 
+
+#NavBarLinks {
+    display: flex;
+    list-style: none;
+}

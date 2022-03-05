@@ -11,7 +11,12 @@ const NavBar = () => {
 	return (
 		<nav>
 			<ul id="navbarComponents">
-				<li>Etsy</li>
+				<li>
+					<NavLink to='/' exact={true} activeClassName='active'>
+						PETSY
+						{/* LOGO HERE INSTEAD OF TEXT*/}
+					</NavLink>
+				</li>
 				<li>
 					<SearchBar />
 				</li>
