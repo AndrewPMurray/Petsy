@@ -3,16 +3,78 @@ nav > ul > li, a {
     text-decoration: none;
 }
 
-nav {
-    background-color: blue
+nav > ul {
+    margin: 20px 40px 0 40px;
+    
 }
 
 #navbarComponents {
    display: flex;
+   justify-content: space-between;
+   align-items: center;
+
 }
 
 
 #NavBarLinks {
     display: flex;
     list-style: none;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+#NavBarLinks > li {
+ padding: 5px;
+}
+
+#NotLoggedNavButtons{
+    display: flex;
+
+}
+
+#accountMenu {
+    border-radius: 20px;
+    border: none;
+    padding: 10px;
+    width: 60px;
+    color: #D3D3D3;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+}
+
+.fa-caret-down  {
+    color: #D3D3D3;
+    font-size: 15px;
+
+}
+
+.fa-user-circle {
+    color: gray;
+    font-size: 20px;
+
+}
+
+#dropdownList {
+    list-style: none;
+    padding-left: 0;
+    position: absolute;
+    background-color: white;
+    margin: 0 0 0 -170px;
+    border-radius: 10px;
+    border: #D3D3D3;
+    width: 200px;
+    padding: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+
+#dropdownList > li {
+    padding: 5px;
+}
+
+#dropdownList > li:hover {
+    background-color: #D3D3D3;
+    cursor: pointer;
 }

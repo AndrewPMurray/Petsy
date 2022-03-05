@@ -1,9 +1,7 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import './Navbar.css'
 import Account from './Account'
-import { faHome } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 function NavBarLinks({ user }) {
@@ -13,17 +11,16 @@ function NavBarLinks({ user }) {
                 <li>
                     <i className="far fa-heart"></i>
                 </li>
+                <li><Link to="/manage-listings" id="manageListings"> <i className="fa-solid fa-store">
+                </i></Link>  </li>
                 <li>
-                    <i class="fa-solid fa-store"></i>
+                    {user && <Account user={user} />}
                 </li>
                 <li>
-                    <Account user={user} />
-                </li>
-                <li>
-                    <i class="fa-solid fa-cart-shopping"></i>
+                    <i className="fa-solid fa-cart-shopping"></i>
                 </li>
                 {!user && (
-                    <div>
+                    <div id="NotLoggedNavButtons">
                         <li>
                             <NavLink to='/login' exact={true} activeClassName='active'>
                                 Login
@@ -41,11 +38,11 @@ function NavBarLinks({ user }) {
                         Users
                     </NavLink>
                 </li> */}
-                {user && (
+                {/* {user && (
                     <li>
                         <LogoutButton />
                     </li>
-                )}
+                )} */}
             </ul>
         </>
     )

@@ -6,7 +6,7 @@ export default function HomePage() {
 	const productsObj = useSelector((state) => state?.products);
 	const products = Object.values(productsObj);
 	const dispatch = useDispatch();
-	console.log(products[0]);
+	// console.log(products[0]);
 
 	useEffect(() => {
 		dispatch(loadProducts());
