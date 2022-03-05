@@ -1,1 +1,7 @@
 /* TODO Add site wide styles */
+
+
+
+
+div#root > *:first-child { margin-top: -15px; background-color: white; width: 100%; 
+}

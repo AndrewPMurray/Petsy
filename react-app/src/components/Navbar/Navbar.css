@@ -1,0 +1,13 @@
+nav > ul > li, a {
+    list-style: none;
+    text-decoration: none;
+}
+
+nav {
+    background-color: blue
+}
+
+#navbarComponents {
+   display: flex;
+}
+
