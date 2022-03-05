@@ -20,7 +20,7 @@ export default function HomePage() {
 					<p>{product.id}</p>
 					<p>{product.title}</p>
 					<p>
-						{product.details} {typeof product.details}
+						{product.details[0]}
 					</p>
 					<p>{product.description}</p>
 					<p>{product.user.username}</p>
