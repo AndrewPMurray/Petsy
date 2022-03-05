@@ -1,4 +1,6 @@
 from .db import db
+import json
+
 
 class Product(db.Model):
     __tablename__ = 'products'
@@ -25,7 +27,7 @@ class Product(db.Model):
             "id": self.id,
             "title": self.title,
             "price": self.price,
-            "details": self.details,
+            "details": json.loads(self.details),
             "description": self.description,
             "quantity": self.quantity,
             "user_id": self.user_id,
