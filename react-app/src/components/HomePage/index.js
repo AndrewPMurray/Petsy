@@ -5,8 +5,8 @@ import { loadProducts } from '../../store/products';
 export default function HomePage() {
 	const productsObj = useSelector((state) => state?.products);
 	const products = Object.values(productsObj);
+	const user = useSelector((state) => state.session?.user);
 	const dispatch = useDispatch();
-	// console.log(products[0]);
 
 	useEffect(() => {
 		dispatch(loadProducts());
@@ -14,7 +14,9 @@ export default function HomePage() {
 
 	return (
 		<div>
-			<h1>Welcome, User</h1>
+			<div id="colorBlock"></div>
+			{user && <h1>Welcome, User</h1>}
+			{!user && <h1>Explore one-of-a-kind finds from independent makers</h1>}
 			{products?.map((product) => (
 				<div key={product.id}>
 					<p>{product.id}</p>

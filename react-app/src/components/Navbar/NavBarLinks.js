@@ -17,7 +17,7 @@ function NavBarLinks({ user }) {
                     {user && <Account user={user} />}
                 </li>
                 <li>
-                    <i className="fa-solid fa-cart-shopping"></i>
+                    <Link to="/cart"><i className="fa-solid fa-cart-shopping"></i></Link>
                 </li>
                 {!user && (
                     <div id="NotLoggedNavButtons">

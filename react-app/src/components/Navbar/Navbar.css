@@ -3,16 +3,21 @@ nav > ul > li, a {
     text-decoration: none;
 }
 
-nav > ul {
-    margin: 20px 40px 0 40px;
+nav > ul, nav > div {
+    margin: 20px 250px 0 250px;
     
 }
+
+nav > div {
+    margin: 0 250px 0 250px;
+    
+}
+
 
 #navbarComponents {
    display: flex;
    justify-content: space-between;
    align-items: center;
-
 }
 
 
@@ -77,4 +82,15 @@ nav > ul {
 #dropdownList > li:hover {
     background-color: #D3D3D3;
     cursor: pointer;
+}
+
+
+#petTypes > ul{
+    display: flex;
+    justify-content: space-around;
+    margin: 0;
+}
+
+#petTypes > ul > li {
+    list-style: none;
 }

@@ -24,6 +24,14 @@ const NavBar = () => {
 					<NavBarLinks user={user} />
 				</li>
 			</ul >
+			<div id="petTypes">
+				<ul>
+					<li>Dog</li>
+					<li>Cat</li>
+					<li>Reptile</li>
+					<li>Fish</li>
+				</ul>
+			</div>
 		</nav >
 	);
 };
