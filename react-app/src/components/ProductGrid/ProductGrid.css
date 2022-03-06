@@ -1,9 +1,7 @@
 #productGrid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    column-gap: 0px;
-    /* background-color: red; */
+    gap: 20px;
 } 
 
 .gridImg {

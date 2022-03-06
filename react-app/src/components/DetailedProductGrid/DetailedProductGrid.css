@@ -1,0 +1,15 @@
+#detailedProductGrid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(100px, 1fr));
+    place-items: center;
+    grid-gap: 10px;
+} 
+
+.detailedCard {
+    object-fit: cover;
+    aspect-ratio: 1/1;
+    max-width: 300px;
+}
+
+

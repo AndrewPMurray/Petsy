@@ -1,18 +1,14 @@
-import { Link } from 'react-router-dom';
-import './ProductGrid.css'
+import './DetailedProductGrid.css'
+import ProductCard from './ProductCard';
 
 function DetailedProductGrid({ products }) {
+    const totalRatings = products.length;
 
-
+    console.log('DETAILED PRODUCT GRID', products)
     return (
         <div id="detailedProductGrid">
             {products.map((product, idx) =>
-                idx > 7 ? <></> :
-                    <div id={`card-${product.id}`} class="test" key={product.id}>
-                        <Link to={`/products/${product.id}`}>
-                            <img className="gridImg" src={product?.images[0]?.url} alt={product}></img>
-                        </Link>
-                    </div>
+                <ProductCard product={product} totalRatings={totalRatings} key={product.id} />
             )}
         </div>
     )
