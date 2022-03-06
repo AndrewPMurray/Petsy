@@ -1,51 +1,63 @@
 #productGrid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-gap: 8px;
- background-color: red;
-}
+    gap: 10px;
+    column-gap: 0px;
+    /* background-color: red; */
+} 
 
 .gridImg {
     border-radius: 10px;
     height: 300px;
-    width: 300px;
-    background-color: red;
+    object-fit: cover;
+    width: 330px;
 }
 
-#gridImg-0 {
-    grid-column: span 1;
-    grid-row: span 1;
+
+    /*
+#card-2 {
+
+    grid-area: 2;
+
 }
 
-#gridImg-1 {
-    grid-column: span 1;
-    grid-row: span 1;
+
+#card-3 {
+
+    grid-area: 3;
+
 }
 
-#gridImg-2 {
-    grid-column: span 1;
-    grid-row: span 1;
+
+#card-4 {
+
+    grid-area: 4;
+
 }
 
-#gridImg-3 {
-    grid-column: span 1;
-    grid-row: span 1;
-}
-#gridImg-4 {
-    grid-column: span 1;
-    grid-row: span 1;
+
+#card-5 {
+
+    grid-area: 5;
+
 }
 
-#gridImg-5 {
-    grid-column: span 1;
-    grid-row: span 1;
-}
-#gridImg-6 {
-    grid-column: span 1;
-    grid-row: span 1;
+
+#card-6 {
+
+    grid-area: 6;
 }
 
-#gridImg-7 {
-    grid-column: span 1;
-    grid-row: span 1;
+#card-7 {
+
+    grid-area: 7;
+
 }
+
+#card-8 {
+
+    grid-area: 8;
+
+}
+
+*/

@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadProducts } from '../../store/products';
 import './HomePage.css'
 import Welcome from './Welcome';
-import ProductsBubble from "../ProductBubbles";
+// import ProductsBubble from "../ProductBubbles";
 import ProductGrid from "../ProductGrid";
-
+import About from '../About'
 
 
 export default function HomePage() {
@@ -13,6 +13,10 @@ export default function HomePage() {
 	const products = Object.values(productsObj);
 	const user = useSelector((state) => state.session?.user);
 	const dispatch = useDispatch();
+
+
+	console.log('***', products)
+
 
 	useEffect(() => {
 		dispatch(loadProducts());
@@ -23,8 +27,9 @@ export default function HomePage() {
 			<Welcome products={products} user={user} />
 			<div id="main">
 				<ProductGrid products={products} />
-			</div>
 
+			</div>
+			<About />
 
 			{/* {products?.map((product) => (
 				<div key={product.id}>

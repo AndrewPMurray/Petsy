@@ -13,8 +13,7 @@ const NavBar = () => {
 			<ul id="navbarComponents">
 				<li>
 					<NavLink to='/' exact={true} activeClassName='active'>
-						PETSY
-						{/* LOGO HERE INSTEAD OF TEXT*/}
+						<img id="logo" src="https://live.staticflickr.com/65535/51921133284_ef49d3c445.jpg"></img>
 					</NavLink>
 				</li>
 				<li>

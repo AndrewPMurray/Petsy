@@ -3,6 +3,12 @@ nav > ul > li, a {
     text-decoration: none;
 }
 
+
+#logo{
+    height: 55px;
+}
+
+
 nav > ul, nav > div {
     margin: 20px 250px 0 250px;
     

@@ -1,38 +1,38 @@
 
 #welcome {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 100px;
 }
 
 #welcome > h1 {
-  font-family: 'Lora', serif;
-  font-size: 50px;
-  letter-spacing: 1px;
-  font-weight: 100;
-  }
+font-family: 'Lora', serif;
+font-size: 50px;
+letter-spacing: 1px;
+font-weight: 100;
+}
 
- .colorBlock {
-  background-image: repeating-linear-gradient(-45deg,
-  #FDEBD2 0px,
-  #FDEBD2 20px,
-  #FDEBD2 20px,
-  #FDEBD2 40px);
-  width: 100%;
+.colorBlock {
+background-image: repeating-linear-gradient(-45deg,
+#FDEBD2 0px,
+#FDEBD2 20px,
+#FDEBD2 20px,
+#FDEBD2 40px);
+width: 100%;
 } 
 
 
 #welcomeBubble {
-    margin-bottom: -50px;
-    margin-top: -20px;
-    /* background-color: red; */
+  margin-bottom: -50px;
+  margin-top: -20px;
+  /* background-color: red; */
 }
 
 
 
 #main {
-  margin-left: 250px;
-  margin-right: 250px;
+margin-left: 250px;
+margin-right: 250px;
 }
