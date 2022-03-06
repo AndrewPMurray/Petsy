@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadProducts } from '../../store/products';
 import Welcome from './Welcome';
 import './HomePage.css'
+import ProductsBubble from "./ProductBubble";
 
 
 export default function HomePage() {
@@ -18,6 +19,7 @@ export default function HomePage() {
 	return (
 		<div>
 			<Welcome products={products} user={user} />
+			{/* <ProductsBubble products={products} /> */}
 
 			{products?.map((product) => (
 				<div key={product.id}>
