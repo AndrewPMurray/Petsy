@@ -1,11 +1,20 @@
 // import ProductsBubble from "../ProductBubbles"
 
-function ProductTypes() {
+import ProductTypeBubbles from "../ProductTypeBubbles";
+
+function ProductTypes({ products }) {
 
     return (
         <div id="petTypeHeader">
-            <div id="sideInfo"> Testing Here</div>
-            {/* <ProductsBubble products={products} /> */}
+            <div id="petTypeHeaderContent">
+                <div id="sideInfo">
+                    <h3>Pet Type</h3>
+                    <>
+                        Necklaces, bracelets, earrings, and rings to complete your look or wow them with a perfect gift
+                    </>
+                </div>
+                <ProductTypeBubbles products={products} />
+            </div>
         </div>
 
     )

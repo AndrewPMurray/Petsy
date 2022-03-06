@@ -13,10 +13,6 @@ export default function HomePage() {
 	const user = useSelector((state) => state.session?.user);
 	const dispatch = useDispatch();
 
-
-	console.log('***', products)
-
-
 	useEffect(() => {
 		dispatch(loadProducts());
 	}, [dispatch]);

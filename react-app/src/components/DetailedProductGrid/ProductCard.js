@@ -2,12 +2,8 @@ import { Link } from 'react-router-dom';
 
 
 function ProductCard({ product }) {
-    // const reviews = Object.keys(product?.reviews).length
 
     const reviews = Object.values(product?.reviews)
-
-    console.log(reviews)
-
 
     const ratings = [];
     if (reviews) {
@@ -17,14 +13,11 @@ function ProductCard({ product }) {
     }
 
     const averageRating = (ratings.reduce((a, b) => a + b, 0) / reviews.length);
-    console.log('average', averageRating)
 
     const stars = [];
     for (let i = 0; i < averageRating; i++) {
         stars.push(i)
     };
-
-    console.log('stars', stars)
 
 
     return (
