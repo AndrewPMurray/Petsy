@@ -10,7 +10,9 @@ nav > ul, nav > div {
 
 nav > div {
     margin: 0 250px 0 250px;
-    
+
+    padding-bottom: 10px;
+    border-bottom: #D3D3D3 solid 1px;
 }
 
 
@@ -26,6 +28,8 @@ nav > div {
     list-style: none;
     justify-content: space-around;
     align-items: center;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
 }
 
 
@@ -75,6 +79,11 @@ nav > div {
 }
 
 
+#accountMenu:hover {
+    background-color: #EFEFEF;
+}
+
+
 #dropdownList > li {
     padding: 5px;
 }
@@ -89,8 +98,11 @@ nav > div {
     display: flex;
     justify-content: space-around;
     margin: 0;
+
 }
 
 #petTypes > ul > li {
     list-style: none;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
 }

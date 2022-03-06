@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadProducts } from '../../store/products';
+import Welcome from './Welcome';
+import './HomePage.css'
+
 
 export default function HomePage() {
 	const productsObj = useSelector((state) => state?.products);
@@ -14,9 +17,8 @@ export default function HomePage() {
 
 	return (
 		<div>
-			<div id="colorBlock"></div>
-			{user && <h1>Welcome, User</h1>}
-			{!user && <h1>Explore one-of-a-kind finds from independent makers</h1>}
+			<Welcome products={products} user={user} />
+
 			{products?.map((product) => (
 				<div key={product.id}>
 					<p>{product.id}</p>
