@@ -10,7 +10,7 @@ function ProductsBubble({ products }) {
                     {idx > 6 ? '' :
                         <Link to={`/products/${product.id}`}>
                             <img src={product?.images[0]?.url} alt={product.title}></img>
-                            <span>{product.product_type.title}</span>
+                            <span>{product.title.split(' ')[0] + " " + product.title.split(' ')[1]}</span>
                         </Link>
                     }
                 </div>

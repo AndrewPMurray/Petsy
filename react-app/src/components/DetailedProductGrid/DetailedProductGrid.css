@@ -1,15 +1,43 @@
+
+
+
 #detailedProductGrid {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(4, minmax(100px, 1fr));
     place-items: center;
     grid-gap: 10px;
+    min-height: 0;  /* NEW */
+    min-width: 0;   /* NEW; needed for Firefox */
 } 
 
-.detailedCard {
-    object-fit: cover;
-    aspect-ratio: 1/1;
-    max-width: 300px;
+#productCard {
+    margin-bottom: 10px;
+    overflow: hidden;  
+    display: flex;
+    flex-direction: column;
+    height: 360px;
+    width: 325px;
+
 }
 
 
+.detailedCard {
+    aspect-ratio: 1/1;;
+    overflow: hidden;  /* NEW */
+    min-width: 0;  
+    height: 280px;
+    width: 325px;
+    object-fit:cover;
+
+}
+
+
+div {
+    font-family: 'Lato', sans-serif;
+}
+
+#productTitle {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+}

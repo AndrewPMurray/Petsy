@@ -28,16 +28,16 @@ function ProductCard({ product }) {
 
 
     return (
-        <div>
+        <div id="productCard">
             <Link to={`/products/${product.id}`}>
                 <div>
                     <img className="detailedCard" src={product?.images[0]?.url} alt={product}></img>
                 </div>
                 <div>
-                    {product.title}
+                    <span id="productTitle">{product.title}</span>
                 </div>
                 <div>
-                    < span >
+                    <span>
                         {stars.map((star) => (
                             <i className="fas fa-star" key={star}></i>
                         ))}
@@ -47,9 +47,10 @@ function ProductCard({ product }) {
                     ${product.price}
                 </div>
                 <div>
-                    {product.user.username}
-                    {averageRating > 0 ? <>({reviews.length} reviews)</> : ""}
-
+                    <span>
+                        {product.user.username}
+                        {averageRating > 0 ? <> ({reviews.length} reviews)</> : ""}
+                    </span>
                 </div>
             </Link>
         </div>
