@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 
-
 function Account(user) {
     const username = Object.values(user)[0].username
 
@@ -23,11 +22,13 @@ function Account(user) {
         document.addEventListener('click', closeMenu);
 
         return () => document.removeEventListener('click', closeMenu);
-    }, [showMenu])
+    }, [showMenu]);
 
 
     return (
-        <>
+        <div>
+
+
             <button id="accountMenu" onClick={openMenu}>
                 <i className="fas fa-user-circle"></i>
                 <i className="fa-solid fa-caret-down"></i>
@@ -37,12 +38,11 @@ function Account(user) {
                 <ul id="dropdownList">
                     <li>Welcome, {username}!</li>
                     <li><Link to="/purchases" >Purchases and reviews</Link>  </li>
-                    <li className="buttonli">
-                        <LogoutButton />
-                    </li>
+                    <LogoutButton />
                 </ul >)
+
             }
-        </>
+        </div>
     )
 }
 

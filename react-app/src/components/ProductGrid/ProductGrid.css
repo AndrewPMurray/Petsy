@@ -1,0 +1,51 @@
+#productGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 8px;
+ background-color: red;
+}
+
+.gridImg {
+    border-radius: 10px;
+    height: 300px;
+    width: 300px;
+    background-color: red;
+}
+
+#gridImg-0 {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+#gridImg-1 {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+#gridImg-2 {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+#gridImg-3 {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+#gridImg-4 {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+#gridImg-5 {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+#gridImg-6 {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+#gridImg-7 {
+    grid-column: span 1;
+    grid-row: span 1;
+}

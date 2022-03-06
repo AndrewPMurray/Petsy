@@ -9,15 +9,31 @@ function NavBarLinks({ user }) {
         <>
             <ul id="NavBarLinks">
                 <li>
-                    <i className="far fa-heart"></i>
+                    <Link to="/favorites" id="favorites">
+                        <div className="faIcons">
+                            <i className="far fa-heart"></i>
+                        </div>
+                    </Link>
                 </li>
-                <li><Link to="/manage-listings" id="manageListings"> <i className="fa-solid fa-store">
-                </i></Link>  </li>
+                <li>
+
+                    <Link to="/manage-listings" id="manageListings">
+                        <div className="faIcons">
+                            <i className="fa-solid fa-store">
+                            </i>
+                        </div>
+                    </Link>
+
+                </li>
                 <li>
                     {user && <Account user={user} />}
                 </li>
                 <li>
-                    <Link to="/cart"><i className="fa-solid fa-cart-shopping"></i></Link>
+                    <Link to="/cart">
+                        <div className="faIcons">
+                            <i className="fa-solid fa-cart-shopping"></i>
+                        </div>
+                    </Link>
                 </li>
                 {!user && (
                     <div id="NotLoggedNavButtons">
@@ -38,11 +54,6 @@ function NavBarLinks({ user }) {
                         Users
                     </NavLink>
                 </li> */}
-                {/* {user && (
-                    <li>
-                        <LogoutButton />
-                    </li>
-                )} */}
             </ul>
         </>
     )

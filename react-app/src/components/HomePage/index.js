@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadProducts } from '../../store/products';
-import Welcome from './Welcome';
 import './HomePage.css'
-import ProductsBubble from "./ProductBubble";
+import Welcome from './Welcome';
+import ProductsBubble from "../ProductBubbles";
+import ProductGrid from "../ProductGrid";
+
 
 
 export default function HomePage() {
@@ -19,9 +21,12 @@ export default function HomePage() {
 	return (
 		<div>
 			<Welcome products={products} user={user} />
-			{/* <ProductsBubble products={products} /> */}
+			<div id="main">
+				<ProductGrid products={products} />
+			</div>
 
-			{products?.map((product) => (
+
+			{/* {products?.map((product) => (
 				<div key={product.id}>
 					<p>{product.id}</p>
 					<p>{product.title}</p>
@@ -32,7 +37,7 @@ export default function HomePage() {
 					<p>{product.user.username}</p>
 					<img src={product.images[0].url} alt='pic'></img>
 				</div>
-			))}
+			))} */}
 		</div>
 	);
 }

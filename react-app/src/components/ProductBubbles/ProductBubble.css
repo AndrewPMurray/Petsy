@@ -1,7 +1,14 @@
 #bubbleDiv {
     display: flex;
     justify-content: center;
+}
 
+#bubble  > a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
 }
 
 #bubble > a > img{
