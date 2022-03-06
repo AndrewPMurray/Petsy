@@ -174,6 +174,7 @@ def seed_images():
     db.session.add(cat_food_lid3)
     db.session.add(cat_food_bowl1)
     db.session.add(cat_food_bowl2)
+    db.session.add(cat_food_bowl3)
     db.session.add(cat_bird_toy1)
     db.session.add(cat_bird_toy2)
     db.session.add(cat_bird_toy3)
