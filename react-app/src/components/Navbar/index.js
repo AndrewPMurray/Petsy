@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 // import LogoutButton from '../auth/LogoutButton';
 import { useSelector } from 'react-redux';
 import './Navbar.css'
@@ -13,7 +13,7 @@ const NavBar = () => {
 			<ul id="navbarComponents">
 				<li>
 					<NavLink to='/' exact={true} activeClassName='active'>
-						<img id="logo" src="https://live.staticflickr.com/65535/51921133284_ef49d3c445.jpg"></img>
+						<img id="logo" src="https://live.staticflickr.com/65535/51921133284_ef49d3c445.jpg" alt="logo"></img>
 					</NavLink>
 				</li>
 				<li>
@@ -25,10 +25,10 @@ const NavBar = () => {
 			</ul >
 			<div id="petTypes">
 				<ul>
-					<li>Dog</li>
-					<li>Cat</li>
-					<li>Reptile</li>
-					<li>Fish</li>
+					<li><Link to='/pets/1'>Cats</Link></li>
+					<li><Link to='/pets/2'>Dogs</Link></li>
+					<li><Link to='/pets/3'>Reptiles</Link></li>
+					<li><Link to='/pets/4'>Fish</Link></li>
 				</ul>
 			</div>
 		</nav >

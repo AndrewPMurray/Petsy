@@ -1,5 +1,4 @@
 import './About.css'
-import { Link } from 'react-router-dom';
 
 
 function About() {
@@ -25,7 +24,8 @@ function About() {
             </div>
             <div className="questions">
                 <h4>Have a question? Well, we've got some answers.</h4>
-                <a target="_blank" href="https://github.com/AndrewPMurray/Petsy"> <button id="gitButton">Go to Git Hub</button></a>
+                <a href="https://github.com/AndrewPMurray/Petsy" target="_blank" rel="noreferrer">
+                    <button id="gitButton" >Go to Git Hub</button></a>
 
             </div>
         </div >

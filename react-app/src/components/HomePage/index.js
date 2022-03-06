@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadProducts } from '../../store/products';
 import './HomePage.css'
 import Welcome from './Welcome';
-// import ProductsBubble from "../ProductBubbles";
 import ProductGrid from "../ProductGrid";
 import About from '../About'
 

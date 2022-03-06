@@ -9,7 +9,7 @@ function ProductsBubble({ products }) {
                 <div id="bubble" key={product.id}>
                     {idx > 6 ? '' :
                         <Link to={`/products/${product.id}`}>
-                            <img src={product?.images[0]?.url}></img>
+                            <img src={product?.images[0]?.url} alt={product.title}></img>
                             <span>{product.product_type.title}</span>
                         </Link>
                     }

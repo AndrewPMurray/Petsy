@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import ProductCard from './ProductCard'
 import './ProductGrid.css'
 
 function ProductGrid({ products }) {
@@ -8,10 +7,10 @@ function ProductGrid({ products }) {
     return (
         <div id="productGrid">
             {products.map((product, idx) =>
-                idx > 7 ? <></> :
-                    <div id={`card-${product.id}`} class="test" key={product.id}>
-                        <Link to={`/products/${product.id}`}>
-                            <img className="gridImg" src={product?.images[0]?.url}></img>
+                idx > 7 ? '' :
+                    <div key={product.id} id={`card-${product.id}`} className="test">
+                        <Link to={`/products/${product.id}`} key={product.id}>
+                            <img className="gridImg" src={product?.images[0]?.url} alt={product.title}></img>
                         </Link>
                     </div>
             )}

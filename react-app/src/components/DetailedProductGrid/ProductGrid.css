@@ -1,0 +1,63 @@
+#detailedProductGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    column-gap: 0px;
+    /* background-color: red; */
+} 
+
+.gridImg {
+    border-radius: 10px;
+    height: 300px;
+    object-fit: cover;
+    width: 330px;
+}
+
+
+    /*
+#card-2 {
+
+    grid-area: 2;
+
+}
+
+
+#card-3 {
+
+    grid-area: 3;
+
+}
+
+
+#card-4 {
+
+    grid-area: 4;
+
+}
+
+
+#card-5 {
+
+    grid-area: 5;
+
+}
+
+
+#card-6 {
+
+    grid-area: 6;
+}
+
+#card-7 {
+
+    grid-area: 7;
+
+}
+
+#card-8 {
+
+    grid-area: 8;
+
+}
+
+*/

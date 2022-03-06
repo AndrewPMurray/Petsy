@@ -10,6 +10,7 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import HomePage from './components/HomePage';
 import Footer from './components/Footer';
+import PetTypePage from './components/PetTypePage';
 
 
 function App() {
@@ -45,6 +46,9 @@ function App() {
 				</ProtectedRoute>
 				<Route path='/' exact={true}>
 					<HomePage />
+				</Route>
+				<Route path='/pets/:petTypeId' exact={true}>
+					<PetTypePage />
 				</Route>
 			</Switch>
 			<Footer />
