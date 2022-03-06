@@ -64,7 +64,7 @@ dogs = [
         Handmade, Oven Baked and Sourced in the US
         ''',
         "quantity": 12,
-        "user_id": 6,
+        "user_id": 1,
         "product_type_id": 1,
         "pet_type_id": 2
     },

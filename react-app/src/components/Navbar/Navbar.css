@@ -30,7 +30,7 @@ nav > div {
 }
 
 
-#NavBarLinks {
+#NavBarIcons {
     display: flex;
     list-style: none;
     justify-content: space-around;
@@ -40,7 +40,7 @@ nav > div {
 }
 
 
-#NavBarLinks > li > a > div  {
+#NavBarIcons > li > a > div  {
  margin: 5px;
  display: flex;
  justify-content: center;

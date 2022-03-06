@@ -1,13 +1,12 @@
 import { NavLink, Link } from 'react-router-dom';
-// import LogoutButton from '../auth/LogoutButton';
 import './Navbar.css'
 import Account from './Account'
 
 
-function NavBarLinks({ user }) {
+function NavBarIcons({ user }) {
     return (
         <>
-            <ul id="NavBarLinks">
+            <ul id="NavBarIcons">
                 <li>
                     <Link to="/favorites" id="favorites">
                         <div className="faIcons">
@@ -59,4 +58,4 @@ function NavBarLinks({ user }) {
     )
 }
 
-export default NavBarLinks;
+export default NavBarIcons;

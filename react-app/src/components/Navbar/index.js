@@ -4,7 +4,7 @@ import { NavLink, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './Navbar.css'
 import SearchBar from './SearchBar'
-import NavBarLinks from './NavBarLinks';
+import NavBarIcons from './NavBarIcons';
 
 const NavBar = () => {
 	const user = useSelector((state) => state.session?.user);
@@ -20,7 +20,7 @@ const NavBar = () => {
 					<SearchBar />
 				</li>
 				<li>
-					<NavBarLinks user={user} />
+					<NavBarIcons user={user} />
 				</li>
 			</ul >
 			<div id="petTypes">
