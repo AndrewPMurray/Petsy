@@ -28,7 +28,7 @@ birds = [
         "quantity": 4,
         "user_id": 8,
         "product_type_id": 3,
-        "pet_type_id": 4
+        "pet_type_id": 3
     },
 
     # Product 23 --> bird product 2
@@ -48,7 +48,7 @@ birds = [
         "quantity": 10,
         "user_id": 8,
         "product_type_id": 3,
-        "pet_type_id": 4
+        "pet_type_id": 3
     },
 
     # Product 24 --> bird product 3
@@ -65,7 +65,7 @@ birds = [
         "quantity": 8,
         "user_id": 8,
         "product_type_id": 3,
-        "pet_type_id": 4
+        "pet_type_id": 3
     },
 
     # Product 25 --> bird product 4
@@ -87,7 +87,7 @@ birds = [
         "quantity": 7,
         "user_id": 8,
         "product_type_id": 3,
-        "pet_type_id": 4
+        "pet_type_id": 3
     },
 
     # Product 26 --> bird product 5
@@ -104,7 +104,7 @@ birds = [
         "quantity": 20,
         "user_id": 8,
         "product_type_id": 1,
-        "pet_type_id": 4
+        "pet_type_id": 3
     },
 
     # Product 27 --> bird product 6
@@ -122,7 +122,7 @@ birds = [
         "quantity": 22,
         "user_id": 8,
         "product_type_id": 1,
-        "pet_type_id": 4
+        "pet_type_id": 3
     },
 
     # Product 28 --> bird product 7
@@ -141,7 +141,7 @@ birds = [
         "quantity": 24,
         "user_id": 9,
         "product_type_id": 1,
-        "pet_type_id": 4
+        "pet_type_id": 3
     },
 
     # Product 29 --> bird product 8
@@ -160,7 +160,7 @@ birds = [
         "quantity": 20,
         "user_id": 9,
         "product_type_id": 1,
-        "pet_type_id": 4
+        "pet_type_id": 3
     },
 
     # Product 30 --> bird product 9
@@ -178,7 +178,7 @@ birds = [
         "quantity": 9,
         "user_id": 9,
         "product_type_id": 2,
-        "pet_type_id": 4
+        "pet_type_id": 3
     },
 
     # Product 31 --> bird product 10
@@ -200,7 +200,7 @@ birds = [
         "quantity" : 8,
         "user_id" : 9,
         "product_type_id" : 2,
-        "pet_type_id" : 4
+        "pet_type_id" : 3
     },
 
     # Product 32 --> bird product 11
@@ -216,7 +216,7 @@ birds = [
         "quantity" : 7,
         "user_id" : 9,
         "product_type_id" : 2,
-        "pet_type_id" : 4
+        "pet_type_id" : 3
     }
     
     

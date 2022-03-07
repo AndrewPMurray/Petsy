@@ -10,8 +10,7 @@ function PetTypePage() {
     const { petTypeId } = useParams();
     const dispatch = useDispatch();
     const products = useSelector(state => Object.values(state?.petTypes))
-
-    console.log('pettypespage', products)
+    const petType = products[0]?.pet_type?.title;
 
     useEffect(() => {
         dispatch(loadPetTypes(petTypeId))
@@ -19,7 +18,7 @@ function PetTypePage() {
 
     return (
         <>
-            <ProductTypes products={products} />
+            <ProductTypes products={products} petType={petType} />
             <div id="petTypePage">
                 <DetailedProductGrid products={products} />
             </div>

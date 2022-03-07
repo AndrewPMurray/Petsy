@@ -3,7 +3,6 @@ import './ProductGrid.css'
 
 function ProductGrid({ products }) {
 
-
     return (
         <div id="productGrid">
             {products.map((product, idx) =>

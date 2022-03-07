@@ -18,7 +18,7 @@ reptiles = [
         "quantity":20,
         "user_id":10,
         "product_type_id":3,
-        "pet_type_id":3
+        "pet_type_id": 4
     },
     #PRODUCT #34
     {
@@ -29,7 +29,7 @@ reptiles = [
         "quantity":3,
         "user_id":10,
         "product_type_id":4,
-        "pet_type_id":3
+        "pet_type_id": 4
     },
     #PRODUCT #35
     {
@@ -48,7 +48,7 @@ reptiles = [
         "quantity":5,
         "user_id":11,
         "product_type_id":6,
-        "pet_type_id":3
+        "pet_type_id": 4
     },
     #PRODUCT #36
     {
@@ -64,7 +64,7 @@ reptiles = [
         "quantity":20,
         "user_id":11,
         "product_type_id":1,
-        "pet_type_id":3
+        "pet_type_id": 4
     },
     #PRODUCT #37
     {
@@ -80,7 +80,7 @@ reptiles = [
         "quantity":5,
         "user_id":11,
         "product_type_id":5,
-        "pet_type_id":3
+        "pet_type_id": 4
     },
     #PRODUCT #38
     {
@@ -96,7 +96,7 @@ reptiles = [
         "quantity":10,
         "user_id":10,
         "product_type_id":4,
-        "pet_type_id":3
+        "pet_type_id": 4
     },
     #PRODUCT #39
     {
@@ -113,7 +113,7 @@ reptiles = [
         "quantity":8,
         "user_id":10,
         "product_type_id":6,
-        "pet_type_id":3
+        "pet_type_id": 4
     },
     #PRODUCT #40
     {
@@ -134,7 +134,7 @@ reptiles = [
         "quantity":2,
         "user_id":11,
         "product_type_id":2,
-        "pet_type_id":3
+        "pet_type_id": 4
     },
     #PRODUCT #41
     {
@@ -150,7 +150,7 @@ reptiles = [
         "quantity":5,
         "user_id":10,
         "product_type_id":3,
-        "pet_type_id":3
+        "pet_type_id": 4
     },
    #PRODUCT #42
     {
@@ -165,7 +165,7 @@ reptiles = [
         "quantity":4,
         "user_id":11,
         "product_type_id":2,
-        "pet_type_id":3
+        "pet_type_id": 4
     },
     #PRODUCT #43  
     {
@@ -182,6 +182,6 @@ reptiles = [
         "quantity":20,
         "user_id":10,
         "product_type_id":1,
-        "pet_type_id":3
+        "pet_type_id": 4
     },
     ]

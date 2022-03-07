@@ -27,7 +27,7 @@ function ProductCard({ product }) {
                     <img className="detailedCard" src={product?.images[0]?.url} alt={product}></img>
                 </div>
                 <div>
-                    <span id="productTitle">{product.title}</span>
+                    <span id="productTitle">{product.title.substring(0, 40)}</span>
                 </div>
                 <div>
                     <span>

@@ -2,15 +2,15 @@
 
 import ProductTypeBubbles from "../ProductTypeBubbles";
 
-function ProductTypes({ products }) {
+function ProductTypes({ products, petType }) {
 
     return (
         <div id="petTypeHeader">
             <div id="petTypeHeaderContent">
                 <div id="sideInfo">
-                    <h3>Pet Type</h3>
+                    <h3>{petType}</h3>
                     <>
-                        Necklaces, bracelets, earrings, and rings to complete your look or wow them with a perfect gift
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                     </>
                 </div>
                 <ProductTypeBubbles products={products} />

@@ -1,3 +1,8 @@
+nav {
+    border-bottom: #D3D3D3 solid 1px;
+
+}
+
 nav > ul > li, a {
     list-style: none;
     text-decoration: none;
@@ -18,7 +23,6 @@ nav > div {
     margin: 0 250px 0 250px;
 
     padding-bottom: 10px;
-    border-bottom: #D3D3D3 solid 1px;
 }
 
 

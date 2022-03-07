@@ -27,8 +27,8 @@ const NavBar = () => {
 				<ul>
 					<li><Link to='/pets/1'>Cats</Link></li>
 					<li><Link to='/pets/2'>Dogs</Link></li>
-					<li><Link to='/pets/3'>Reptiles</Link></li>
-					<li><Link to='/pets/4'>Fish</Link></li>
+					<li><Link to='/pets/3'>Birds</Link></li>
+					<li><Link to='/pets/4'>Reptiles</Link></li>
 				</ul>
 			</div>
 		</nav >
