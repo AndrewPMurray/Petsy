@@ -1,0 +1,13 @@
+.product-div {
+    width: 80vw;
+    margin: auto;
+}
+
+.product-photos-div {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 300px;
+    height: 522px;
+    margin: 0px;
+}

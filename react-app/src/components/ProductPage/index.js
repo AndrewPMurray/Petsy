@@ -4,13 +4,11 @@ import { useParams } from 'react-router-dom';
 import { loadProducts } from '../../store/products';
 import ProductPhotos from './ProductPhotos';
 
-
-
 function ProductPage() {
   const dispatch = useDispatch();
   const { productId } = useParams();
   const products = useSelector(state => state?.products)
-  
+
   let product;
   if (products) {
     product = products[productId]
@@ -20,11 +18,11 @@ function ProductPage() {
     dispatch(loadProducts())
   }, [dispatch])
 
-  console.log(product)
+  // console.log(product)
   return (
     <>
       {
-        product?.length && (
+        product && (
           <div className='product-div'>
             <ProductPhotos product={product} />
           </div>
