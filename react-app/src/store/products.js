@@ -8,6 +8,7 @@ const load = (products) => ({
 	products,
 });
 
+
 const create = (product) => ({
 	type: CREATE_PRODUCT,
 	product,
@@ -33,6 +34,7 @@ export const loadProducts = () => async (dispatch) => {
 		console.log(errors.errors);
 	}
 };
+
 
 export const createProduct = (product) => async (dispatch) => {
 	const response = await fetch('/api/products', {
