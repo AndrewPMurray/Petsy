@@ -13,6 +13,7 @@ import Footer from './components/Footer';
 import PetTypePage from './components/PetTypePage';
 import ProductPage from './components/ProductPage';
 import SearchResults from './components/SearchResults';
+import ProductTypePage from './components/ProductTypePage';
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -56,6 +57,9 @@ function App() {
 				</Route>
 				<Route path='/search/:searchInput'>
 					<SearchResults />
+				</Route>
+				<Route path='/pets/:petTypeId/:productTypeId'>
+					<ProductTypePage />
 				</Route>
 			</Switch>
 			<Footer />
