@@ -35,6 +35,7 @@ function ProductCard({ product }) {
                             <i className="fas fa-star" key={star}></i>
                         ))}
                     </span>
+                    <span id="averageRating">   {averageRating > 0 ? <> ({reviews.length})</> : ""}</span>
                 </div>
                 <div>
                     ${product.price}
@@ -42,7 +43,6 @@ function ProductCard({ product }) {
                 <div>
                     <span>
                         {product.user.username}
-                        {averageRating > 0 ? <> ({reviews.length} reviews)</> : ""}
                     </span>
                 </div>
             </Link>

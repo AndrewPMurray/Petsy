@@ -12,6 +12,7 @@ import HomePage from './components/HomePage';
 import Footer from './components/Footer';
 import PetTypePage from './components/PetTypePage';
 import ProductPage from './components/ProductPage';
+import SearchResults from './components/SearchResults';
 
 
 function App() {
@@ -53,6 +54,8 @@ function App() {
 				</Route>
 				<Route path='/products/:productId' exact={true}>
 					<ProductPage />
+				<Route path='/search/:searchInput'>
+					<SearchResults />
 				</Route>
 			</Switch>
 			<Footer />
