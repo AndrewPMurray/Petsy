@@ -12,6 +12,6 @@ export default function ProductTypePage() {
 
 	useEffect(() => {
 		dispatch(loadProductTypes(petTypeId, productTypeId));
-	}, [dispatch]);
+	}, [dispatch, petTypeId, productTypeId]);
 	return <DetailedProductGrid products={products} />;
 }
