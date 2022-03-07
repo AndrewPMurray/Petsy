@@ -43,7 +43,6 @@ function ProductCard({ product }) {
                 <div>
                     <span>
                         {product.user.username}
-
                     </span>
                 </div>
             </Link>
