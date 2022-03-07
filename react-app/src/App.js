@@ -14,7 +14,6 @@ import PetTypePage from './components/PetTypePage';
 import ProductPage from './components/ProductPage';
 import SearchResults from './components/SearchResults';
 
-
 function App() {
 	const [loaded, setLoaded] = useState(false);
 	const dispatch = useDispatch();
@@ -54,6 +53,7 @@ function App() {
 				</Route>
 				<Route path='/products/:productId' exact={true}>
 					<ProductPage />
+				</Route>
 				<Route path='/search/:searchInput'>
 					<SearchResults />
 				</Route>
