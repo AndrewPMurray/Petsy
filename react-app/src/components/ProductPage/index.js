@@ -10,18 +10,23 @@ function ProductPage() {
   const dispatch = useDispatch();
   const { productId } = useParams();
   const products = useSelector(state => state?.products)
-  const product = products?.productId
+  
+  let product;
+  if (products) {
+    product = products[productId]
+  }
 
   useEffect(() => {
     dispatch(loadProducts())
   }, [dispatch])
 
+  console.log(product)
   return (
     <>
       {
-        product.length && (
+        product?.length && (
           <div className='product-div'>
-            <ProductPhotos />
+            <ProductPhotos product={product} />
           </div>
         )
       }
