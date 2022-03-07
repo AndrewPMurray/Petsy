@@ -7,7 +7,7 @@ products_routes = Blueprint('products_routes', __name__)
 
 # GET Route
 @products_routes.route('/')
-@login_required
+# @login_required
 def all_products():
   all_products = Product.query.all()
   return {"all_products": [product.to_dict() for product in all_products]}
