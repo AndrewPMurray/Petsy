@@ -1,6 +1,3 @@
-
-
-
 #detailedProductGrid {
     width: 100%;
     display: grid;
@@ -31,7 +28,6 @@
     object-fit:cover;
 
 }
-
 
 div {
     font-family: 'Lato', sans-serif;
