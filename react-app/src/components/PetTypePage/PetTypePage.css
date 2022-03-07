@@ -1,0 +1,33 @@
+#petTypePage {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    margin-bottom: 100px;
+}
+
+#petTypeHeader {
+    background-color: #F8EBE6;
+    height: 200px;
+    margin-bottom: 50px;
+    width: 100%;
+}
+
+#petTypeHeaderContent {
+    display: flex;
+    width: 70%;
+    align-items: center;
+    align-content: center;
+    margin: 0 auto;
+    height: 100%;
+}
+
+#sideInfo {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}

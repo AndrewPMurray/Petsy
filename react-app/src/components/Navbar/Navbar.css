@@ -1,0 +1,141 @@
+nav {
+    border-bottom: #D3D3D3 solid 1px;
+
+}
+
+nav > ul > li, a {
+    list-style: none;
+    text-decoration: none;
+}
+
+
+#logo{
+    height: 55px;
+}
+
+
+nav > ul, nav > div {
+    margin: 20px 250px 0 250px;
+    
+}
+
+nav > div {
+    margin: 0 250px 0 250px;
+
+    padding-bottom: 10px;
+}
+
+
+#navbarComponents {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 20px;
+}
+
+
+#NavBarIcons {
+    display: flex;
+    list-style: none;
+    justify-content: space-around;
+    align-items: center;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+}
+
+
+#NavBarIcons > li > a > div  {
+ margin: 5px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+
+#NotLoggedNavButtons{
+    display: flex;
+
+}
+
+#accountMenu {
+    border-radius: 20px;
+    border: none;
+    padding: 10px;
+    width: 60px;
+    color: #D3D3D3;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+}
+
+
+#accountMenu:hover {
+    background-color: #EFEFEF;
+}
+
+
+
+.fa-caret-down  {
+    color: #D3D3D3;
+    font-size: 15px;
+
+}
+
+.fa-user-circle {
+    color: gray;
+    font-size: 20px;
+
+}
+
+.fa-cart-shopping, .fa-heart, .fa-store {
+font-size: 20px;
+}
+
+.faIcons {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+
+.faIcons:hover {
+    background-color: #EFEFEF;
+
+}
+
+
+#dropdownList {
+    list-style: none;
+    padding-left: 0;
+    position: absolute;
+    background-color: white;
+    margin: 0 0 0 -170px;
+    border-radius: 10px;
+    border: #D3D3D3;
+    width: 200px;
+    padding: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+
+
+#dropdownList > li {
+    padding: 5px;
+}
+
+#dropdownList > li:hover {
+    background-color: #D3D3D3;
+    cursor: pointer;
+}
+
+
+#petTypes > ul{
+    display: flex;
+    justify-content: space-around;
+    margin: 0;
+
+}
+
+#petTypes > ul > li {
+    list-style: none;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+}
