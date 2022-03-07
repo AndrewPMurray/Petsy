@@ -1,4 +1,7 @@
+#  Product IDs range from 11-21
+
 dogs = [
+    # PRODUCT 11
 
     {   
         'title': 'Get Well Bone Biscuit',
@@ -16,6 +19,7 @@ dogs = [
         "product_type_id": 1,
         "pet_type_id": 2
     },
+    # PRODUCT 12
 
     {   
         'title': 'Iced Woof Dog Treat Donut',
@@ -38,7 +42,8 @@ dogs = [
         "product_type_id": 1,
         "pet_type_id": 2
     },
-    
+    # PRODUCT 13
+
     {   
         'title': 'Happy Barkday Box',
         'price': 18.95,
@@ -68,7 +73,7 @@ dogs = [
         "product_type_id": 1,
         "pet_type_id": 2
     },
-    
+    # PRODUCT 14
     {   
         'title': 'Credit Card Dog Toy',
         'price': 12.88,
@@ -96,7 +101,7 @@ dogs = [
         "product_type_id": 2,
         "pet_type_id": 2
     },
-    
+    # PRODUCT 15
     {   
         'title': 'Starbarks Dog Name Toy',
         'price': 11.45,
@@ -124,7 +129,7 @@ dogs = [
         "product_type_id": 2,
         "pet_type_id": 2
     },
-    
+    #PRODUCT 16
     {   
         'title': 'White Dog Bed | Modern Mudcloth Dog Bed',
         'price': 60.00,
@@ -141,6 +146,7 @@ dogs = [
         "product_type_id": 3,
         "pet_type_id": 2
     },
+    #PRODUCT 17
     {   
         'title': 'Dog Polo Orange Shirt',
         'price': 9.99,
@@ -155,6 +161,7 @@ dogs = [
         "product_type_id": 4,
         "pet_type_id": 2
     },
+    #PRODUCT 18
     {   
         'title': 'Dog Pink Polo Shirt',
         'price': 9.99,
@@ -169,6 +176,7 @@ dogs = [
         "product_type_id": 4,
         "pet_type_id": 2
     },
+   #PRODUCT 19
     {   
         'title': 'Braided Fleece Dog Tug Toys',
         'price': 7.99,
@@ -181,6 +189,7 @@ dogs = [
         "product_type_id": 5,
         "pet_type_id": 2
     },
+    #PRODUCT 20  
     {   
         'title': 'Leather Dog Waste Dispenser',
         'price': 16.99,
@@ -191,6 +200,34 @@ dogs = [
         "quantity": 10,
         "user_id": 7,
         "product_type_id": 6,
+        "pet_type_id": 2
+    },
+    #PRODUCT 21  
+    {   
+        'title': 'Cotton Rope Dog Chew Toy',
+        'price': 12.99,
+        'details': '["Handmade", "Materials: Eco friendly cotton rope"]',
+        'description': '''
+            Octopus is RESTOCKED!
+
+            Please visit our shop at pawpolista.etsy.com ​for more items and details :)
+
+            Free shipping for orders $35 and up!
+
+            Sizes (height * length * width)(inches):
+            Duck - 5 * 3.5 * 3
+            Bear - 4.5 * 3.5 * 2
+            Octopus - 4.5 * 3.5 * 2.5
+            Horse - 8 * 5 * 2
+            Giraffe - 8 * 5.6 * 1.5
+            Rabbit - 6 * 3 * 2.5
+            Elephant - 3 * 10 * 2.5
+
+            FAST shipping (usually within one day)! Washable. Durable material - great for chewing.
+        ''',
+        "quantity": 10,
+        "user_id": 7,
+        "product_type_id": 2,
         "pet_type_id": 2
     },
     ]
