@@ -30,12 +30,13 @@ background-image: repeating-linear-gradient(-45deg,
 #FDEBD2 20px,
 #FDEBD2 40px);
 width: 100%;
+padding-top: 35px;
 } 
 
 
 #welcomeBubble {
   margin-bottom: -50px;
-  margin-top: -20px;
+  padding-top: 20px;
 }
 
 

@@ -1,6 +1,25 @@
-#navBarSearch {
-    border-radius: 15px;
+#searchDiv {
+    display: flex;
+    align-content: center;
+    justify-content: center;
     width: 100%;
-    border: 1.5px solid black;
+    height: 100%;
+    flex-grow: 1;
+}
+
+#searchInput {
+    width: 100%;
+    height: 100%;
+    margin: 10px;
+}
+
+
+
+#searchInput > input{
+    border-radius: 25px;
+    width: 100%;
+    border: 2px solid black;
     background-color: #F4F4F4;
+    height: 30px;
+    padding-left: 10px
 }

@@ -14,10 +14,9 @@ function SearchBar() {
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div id="searchDiv">
+            <form onSubmit={handleSubmit} id="searchInput">
                 <input
-                    id="navBarSearch"
                     placeholder='Search for anything'
                     value={searchInput}
                     onChange={(e) => setSearchInput(e.target.value)}
