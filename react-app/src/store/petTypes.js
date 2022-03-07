@@ -25,7 +25,7 @@ const petTypeReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case LOAD_PET_TYPES: {
-            newState = { ...state }
+            newState = {}
             action.productsByPet.forEach(product => { newState[product.id] = product });
             return newState;
         }
