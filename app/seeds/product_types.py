@@ -7,12 +7,15 @@ def seed_product_types():
     toys = ProductType(title='Toys', url='url')
     furniture = ProductType(title='Furniture', url='url')
     clothing = ProductType(title='Clothing', url='url')
+    accessories = ProductType(title='Accessories', url='url')
+    supplies = ProductType(title='Supplies', url='url')
 
     db.session.add(food)
     db.session.add(toys)
     db.session.add(furniture)
     db.session.add(clothing)
-
+    db.session.add(accessories)
+    db.session.add(supplies)
 
     db.session.commit()
 

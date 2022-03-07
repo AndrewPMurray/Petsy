@@ -1,10 +1,12 @@
 from .db import db
+import json
+
 
 class Product(db.Model):
     __tablename__ = 'products'
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), unique=True, nullable=False)
+    title = db.Column(db.String(500), nullable=False)
     price = db.Column(db.Float, nullable=False)
     details = db.Column(db.Text, nullable=False)
     description = db.Column(db.Text, nullable=False)
@@ -25,7 +27,7 @@ class Product(db.Model):
             "id": self.id,
             "title": self.title,
             "price": self.price,
-            "details": self.details,
+            "details": json.loads(self.details),
             "description": self.description,
             "quantity": self.quantity,
             "user_id": self.user_id,

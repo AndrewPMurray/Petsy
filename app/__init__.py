@@ -11,6 +11,7 @@ from .api.auth_routes import auth_routes
 from .api.products_routes import products_routes
 from .api.reviews_routes import reviews_routes
 from .api.product_types_routes import product_types_routes
+from .api.pet_type_routes import pet_type_routes
 
 from .seeds import seed_commands
 
@@ -37,6 +38,8 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(reviews_routes, url_prefix='/api/reviews')
 app.register_blueprint(products_routes, url_prefix='/api/products')
 app.register_blueprint(product_types_routes, url_prefix='/api/product_types')
+app.register_blueprint(pet_type_routes, url_prefix='/api/pet_types')
+
 db.init_app(app)
 Migrate(app, db)
 
