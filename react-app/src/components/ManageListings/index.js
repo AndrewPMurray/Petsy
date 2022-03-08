@@ -8,6 +8,7 @@ import './ManageListings.css';
 export default function ManageListings() {
 	const [showForm, setShowForm] = useState(false);
 	const products = useSelector((state) => Object.values(state.products));
+	const [activeProductId, setActiveProductId] = useState(null);
 	const user = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
 	const userProducts = products.filter((product) => product?.user_id === user?.id);
@@ -22,12 +23,22 @@ export default function ManageListings() {
 	}, [dispatch]);
 
 	return showForm ? (
-		<ListingForm userId={user.id} setShowForm={setShowForm} />
+		<ListingForm
+			userId={user.id}
+			setShowForm={setShowForm}
+			product={products[activeProductId]}
+		/>
 	) : (
 		<div id='manage-listings-page'>
 			<div id='top-header'>
 				<h2>Shop Manager</h2>
-				<button onClick={() => setShowForm(true)} id='add-listing-button'>
+				<button
+					onClick={() => {
+						setActiveProductId(null);
+						setShowForm(true);
+					}}
+					id='add-listing-button'
+				>
 					Add Listing
 				</button>
 			</div>
