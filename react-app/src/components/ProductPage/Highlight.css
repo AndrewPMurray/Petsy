@@ -2,6 +2,7 @@
   width: 250px;
   height: 30px;
 } */
+.
 
 .overflow{
   overflow: hidden;
@@ -13,3 +14,24 @@
   display: flex;
   flex-direction: row;
 }
+
+.close-button-div {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: grey;
+  justify-content: space-between;
+}
+
+/* .close-button-div i:active {
+  -webkit-animation: rotation 0.5s  linear;
+}
+
+@-webkit-keyframes rotation {
+  from {
+          -webkit-transform: rotate(0deg);
+  }
+  to {
+          -webkit-transform: rotate(180deg);
+  }
+} */
