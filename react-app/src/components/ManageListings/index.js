@@ -1,4 +1,4 @@
-import DetailedProductGrid from '../DetailedProductGrid';
+import ListingsGrid from './ListingsGrid';
 import ListingForm from '../ListingForm';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -42,7 +42,11 @@ export default function ManageListings() {
 					Add Listing
 				</button>
 			</div>
-			<DetailedProductGrid products={userProducts} />
+			<ListingsGrid
+				products={userProducts}
+				setShowForm={setShowForm}
+				setActiveProductId={setActiveProductId}
+			/>
 		</div>
 	);
 }
