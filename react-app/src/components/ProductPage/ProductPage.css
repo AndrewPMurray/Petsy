@@ -1,13 +1,29 @@
 .product-div {
+    display: flex;
+    flex-direction: row;
     width: 80vw;
     margin: auto;
+    margin-top: 20px;
 }
 
 .product-photos-div {
     display: flex;
     flex-direction: row;
     width: 100%;
-    max-width: 300px;
-    height: 522px;
+    /* max-width: 300px; */
+    height: 700px;
     margin: 0px;
+}
+
+.product-left-col {
+    width: 70%;
+}
+
+.product-right-col {
+    width: 30%
+}
+
+.one-line {
+    display: flex;
+    flex-direction: row;
 }

@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { loadProducts } from '../../store/products';
 import ProductPhotos from './ProductPhotos';
+import ProductInfo from './ProductInfo';
+import Reviews from '../Reviews/index'
 
 function ProductPage() {
   const dispatch = useDispatch();
@@ -24,7 +26,13 @@ function ProductPage() {
       {
         product && (
           <div className='product-div'>
+            <div className='product-left-col'>
             <ProductPhotos product={product} />
+            <Reviews product={product} />
+            </div>
+            <div className='product-right-col'>
+              <ProductInfo product={product} />
+            </div>
           </div>
         )
       }

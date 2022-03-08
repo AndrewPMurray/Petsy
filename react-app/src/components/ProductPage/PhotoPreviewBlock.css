@@ -1,7 +1,7 @@
 .photo-preview-ul {
     display: flex;
     flex-direction: column;
-    height: 522px;
+    height: 100%;
     width: 66px;
 }
 
@@ -19,13 +19,12 @@
 }
 
 .photo-gallery-view {
-    height: 522px;
+    height: 100%;
     width: 100%;
     box-sizing: border-box;
 }
 
 .main-gallery-image {
-    padding: 20px;
     position: static;
     height: 100%;
     width: 100%;
