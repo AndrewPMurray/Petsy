@@ -17,7 +17,10 @@ export default function ListingForm({ product, userId, setShowForm }) {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		const detailsArr = Object.values(details);
+		const detailsArr = [];
+		for (const key in details) {
+			if (details[key] !== '') detailsArr.push(details[key]);
+		}
 
 		const newProduct = {
 			title,
@@ -84,17 +87,15 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			</label>
 			<label>
 				Details
-				{Array.apply(null, { length: detailFields }).map((e, i) => {
-					return (
-						<input
-							key={i}
-							name='details'
-							type='text'
-							value={details[i] || ''}
-							onChange={(e) => setDetails({ ...details, [i]: e.target.value })}
-						/>
-					);
-				})}
+				{Array.apply(null, { length: detailFields }).map((e, i) => (
+					<input
+						key={i}
+						name='details'
+						type='text'
+						value={details[i] || ''}
+						onChange={(e) => setDetails({ ...details, [i]: e.target.value })}
+					/>
+				))}
 				<div onClick={() => setDetailFields(detailFields + 1)}>Add Detail</div>
 			</label>
 			<label>
