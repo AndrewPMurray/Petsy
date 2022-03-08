@@ -5,12 +5,12 @@ from app.models import User, Review
 reviews_routes = Blueprint('reviews_routes', __name__)
 
 # GET Route
-@reviews_routes.route('/reviews')
-@login_required
-def all_reviews():
-  pass
-  # all_reviews = Review.query.filter()
-  # /products/<int:id>
+@reviews_routes.route('/reviews/users/<int:id>')
+# @login_required
+def reviews_by_user(id):
+  reviews = Review.query.filter(Review.user_id == id).all()
+  # will return reviews belonging to user with product_id as the key for each review
+  return {"userReviews": [review.to_dict() for review in reviews]}
 
 # POST Route
 @reviews_routes.route('/reviews', methods=["POST"])
