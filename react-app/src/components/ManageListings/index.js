@@ -7,11 +7,11 @@ import './ManageListings.css';
 
 export default function ManageListings() {
 	const [showForm, setShowForm] = useState(false);
-	const products = useSelector((state) => Object.values(state.products));
+	const products = useSelector((state) => state.products);
 	const [activeProductId, setActiveProductId] = useState(null);
 	const user = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
-	const userProducts = products.filter((product) => product?.user_id === user?.id);
+	const userProducts = Object.values(products).filter((product) => product?.user_id === user?.id);
 
 	useEffect(() => {
 		document.querySelector('nav').style.visibility = 'hidden';
