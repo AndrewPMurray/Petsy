@@ -1,0 +1,18 @@
+.description-div {
+  width: 100%;
+  height: auto;
+}
+
+.description-text {
+  margin: 0px;
+  overflow-x: auto;
+  overflow-wrap: break-word;
+  white-space: pre-line;
+}
+
+.description-overflow {
+  height: 250px;
+  width: 100%;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent);
+}

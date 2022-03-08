@@ -1,0 +1,15 @@
+/* .highlight-div{
+  width: 250px;
+  height: 30px;
+} */
+
+.overflow{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.overflow-div{
+  display: flex;
+  flex-direction: row;
+}
