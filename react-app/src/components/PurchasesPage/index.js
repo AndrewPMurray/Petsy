@@ -22,7 +22,7 @@ function Purchases() {
 
     return (
         <div id="purchasesPage">
-            {purchases.map(purchase => <PurchaseCard purchase={purchase} key={purchase.id} />)}
+            {purchases.map(purchase => <PurchaseCard purchase={purchase} reviews={reviews} key={purchase.id} />)}
         </div>
     )
 };

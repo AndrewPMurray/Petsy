@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Review from './Review';
 
 
-function PurchaseCard({ purchase }) {
+function PurchaseCard({ purchase, reviews }) {
     return (
         <div id="purchaseCard">
             <div id="purchasedBy">
@@ -20,7 +20,7 @@ function PurchaseCard({ purchase }) {
             </div>
             <div id="purchaseReview">
                 <div>
-                    <Review />
+                    <Review purchase={purchase} reviews={reviews} />
                 </div>
             </div>
             <div id="buyAgainDiv">
