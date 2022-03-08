@@ -20,7 +20,7 @@ def all_products():
 def create_products_listing():
   form = ProductForm()
   form['csrf_token'].data = request.cookies['csrf_token']
-  data=form.data
+  data = form.data
   product = Product(
     title=data['title'],
     price=data['price'],
