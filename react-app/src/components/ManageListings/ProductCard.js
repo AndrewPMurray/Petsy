@@ -20,7 +20,7 @@ function ProductCard({ product, setShowForm, setActiveProductId }) {
 
                 </div>
                 <div id="manageProdTitle">
-                    <h4 >{product.title}...</h4>
+                    <h4 >{product.title.substring(0, 25)}...</h4>
                 </div>
                 <div id='manageProdPrice'>
                     <p>${product.price.toFixed(2)} </p>
