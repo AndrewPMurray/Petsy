@@ -42,7 +42,11 @@ export default function ManageListings() {
 					Add Listing
 				</button>
 			</div>
-			<DetailedProductGrid products={userProducts} />
+			<ManageListings
+				products={userProducts}
+				setShowForm={setShowForm}
+				setActiveProductId={setActiveProductId}
+			/>
 		</div>
 	);
 }
