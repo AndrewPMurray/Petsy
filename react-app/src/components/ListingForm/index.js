@@ -7,8 +7,10 @@ export default function ListingForm({ product, userId, setShowForm }) {
 	const dispatch = useDispatch();
 	const [title, setTitle] = useState(product?.title || '');
 	const [price, setPrice] = useState(product?.price || 0);
-	const [detailFields, setDetailFields] = useState(1);
-	const [details, setDetails] = useState({});
+	const [detailFields, setDetailFields] = useState(product?.details.length || 1);
+	const [details, setDetails] = useState(
+		product?.details.map((detail, i) => ({ [i]: detail })) || {}
+	);
 	const [description, setDescription] = useState(product?.description || '');
 	const [quantity, setQuantity] = useState(product?.quantity || 1);
 	const [productType, setProductType] = useState(product?.product_type_id || 1);
@@ -87,7 +89,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			</label>
 			<label>
 				Details
-				{Array.apply(null, { length: detailFields }).map((e, i) => (
+				{Array.apply(null, { length: detailFields }).map((el, i) => (
 					<input
 						key={i}
 						name='details'
