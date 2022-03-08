@@ -1,8 +1,14 @@
+
+* {
+    font-family: 'Lato', sans-serif;
+    box-sizing: border-box;
+}
+
 #purchasesPage {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: palegoldenrod;
+    background-color: #EFEFEB;
     height: 100vh;
 }
 
@@ -10,23 +16,79 @@
     display: flex;
     flex-direction: column;
     width: 60%;
-    background-color: red;
+    background-color: white;
+    margin-top: 20px;
+    height: 35vh;
+    border: solid 1px #d3d3d3;
 }
 
-#purchasedBy{
-    background-color: palegreen;
+#purchasedBy {
+    box-sizing: border-box;
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F5F5F1;
+    padding: 10px;
 }
+
+
+#purchasedBy > * {
+   color: gray;
+}
+
 
 #purchasedItem{
-    background-color: palevioletred;
+    width: 100%;
+    height: 45%;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+#purchaseItemImageDiv {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#purchasedImg {
+    height:80%;
+    width: 80%;
+    border-radius: 5px;
+    object-fit: cover;
+    border: solid 1px #d3d3d3;
+}
+
+#purchasedItemInfo {
+    width: 75%;
+}
+
+#purchasedItemInfo > a {
+   font-size: 2.5vh;
+   font-family: 'Lato', sans-serif;
+
 }
 
 #purchaseReview{
-    background-color: purple;
+    width: 100%;
+    height: 40%;
+    background-color: #F5F5F1;
 }
 
-
 #buyAgainDiv{
-    background-color: paleturquoise;
     width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    background-color: white;
+    padding: 10px;
+}
+
+#buyAgainButton {
+    background-color: black;
+    color: white;
+
 }
