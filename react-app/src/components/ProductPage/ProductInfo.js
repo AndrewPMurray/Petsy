@@ -1,8 +1,11 @@
 import { useState } from "react";
+import Highlight from "./Highlight";
+import './Description.css'
 
 function ProductInfo({ product }) {
     const [hiddenHighlights, setHiddenHighlights] = useState(false);
-    const [hiddenDes, setHiddenDes] = useState(false)
+    const [hiddenDes, setHiddenDes] = useState(false);
+    const [showDesp, setShowDesp] = useState(false);
 
     function getRandomNum() {
         const min = 3;
@@ -10,7 +13,7 @@ function ProductInfo({ product }) {
         const rand = min + Math.random() * (max - min);
         return Math.floor(rand)
     }
-    
+
     const handleHiddenHighlights = (e) => {
         e.preventDefault()
         setHiddenHighlights(!hiddenHighlights)
@@ -56,21 +59,25 @@ function ProductInfo({ product }) {
                 //      2. regular css, not hidden */}
             <div className="info-details-description-div">
                 <div className="info-highlights">
-                <button onClick={handleHiddenHighlights}>Highlights</button>
-                    <div>
-                        <i className="fa-solid fa-hands"></i>
-                        <p>{product.details[0]}</p>
-                    </div>
-                    {product.details.length > 1 &&
-                        <div>
-                            <i class="fa-solid fa-toolbox"></i>
-                            <p>{product.details[1]}</p>
-                        </div>
-                    }
+                    <button onClick={handleHiddenHighlights}>Highlights</button>
+                    {product.details.map(highlight => (
+                        <Highlight string={highlight} />
+                    ))}
                 </div>
                 <div className="info-description">
-                <button onClick={handleHiddenDes}>Description</button>
-                    
+                    <button onClick={handleHiddenDes}>Description</button>
+                    {showDesp ?
+                        <div className="description-div">
+                            <pre className="description-text">
+                                {product.description}
+                            </pre>
+                        </div> :
+                        <div className="description-overflow">
+                            <pre className="description-text">
+                                {product.description}
+                            </pre>
+                        </div>
+                    }
                 </div>
             </div>
         </>
