@@ -15,7 +15,6 @@ export default function HomePage() {
 	const dispatch = useDispatch();
 
 
-	console.log('all', products)
 	useEffect(() => {
 		dispatch(loadProducts());
 		dispatch(loadPetTypes(2))
