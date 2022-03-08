@@ -29,6 +29,9 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			product_type_id: +productType,
 			pet_type_id: +petType,
 		};
+
+		// dispatch(createProduct(newProduct));
+		// setShowForm(false);
 	};
 
 	return (
