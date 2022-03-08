@@ -25,16 +25,17 @@ export default function ListingForm({ product, userId, setShowForm }) {
 		const newProduct = {
 			title,
 			price: +price,
-			details: detailsArr,
+			details: JSON.stringify(detailsArr),
 			description,
 			quantity,
 			user_id: +userId,
 			product_type_id: +productType,
 			pet_type_id: +petType,
 		};
+		console.log(newProduct);
 
-		// dispatch(createProduct(newProduct));
-		// setShowForm(false);
+		dispatch(createProduct(newProduct));
+		setShowForm(false);
 	};
 
 	return (
