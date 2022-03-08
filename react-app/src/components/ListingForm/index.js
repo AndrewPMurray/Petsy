@@ -18,8 +18,8 @@ export default function ListingForm({ product, userId, setShowForm }) {
 		e.preventDefault();
 
 		const detailsArr = [];
-		for (const key in details) {
-			if (details[key] !== '') detailsArr.push(details[key]);
+		for (const i in details) {
+			if (details[i] !== '') detailsArr.push(details[i]);
 		}
 
 		const newProduct = {
