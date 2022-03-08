@@ -15,7 +15,7 @@ const loadByUser = (reviews) => ({
     reviews,
 });
 
-const create= (newReview) => ({
+const create = (newReview) => ({
     type: CREATE_REVIEW,
     newReview,
 });
@@ -34,18 +34,19 @@ export const loadReviewsByUser = (userId) => async (dispatch) => {
     const response = await fetch(`/api/reviews/${userId}`)
     if (response.ok) {
         const reviews = await response.json();
+        console.log('THINK', reviews)
         dispatch(loadByUser(reviews.userReviews))
     } else {
-		const errors = await response.json();
-		console.log(errors.errors);
-	}
+        const errors = await response.json();
+        console.log(errors.errors);
+    }
 }
 
 export const createReview = (review) => async (dispatch) => {
     const response = await fetch('/api/reviews/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify(review),
+        body: JSON.stringify(review),
     });
     if (response.ok) {
         const newReview = await response.json();
@@ -58,34 +59,34 @@ export const createReview = (review) => async (dispatch) => {
 }
 
 export const editReview = (review) => async (dispatch) => {
-	const response = await fetch(`/api/reviews/${review.id}`, {
-		method: 'PUT',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify(review),
-	});
-	if (response.ok) {
-		const editedReview = await response.json();
-		dispatch(edit(editedReview));
-		return editedReview;
-	} else {
-		const errors = await response.json();
-		console.log(errors.errors);
-	}
+    const response = await fetch(`/api/reviews/${review.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(review),
+    });
+    if (response.ok) {
+        const editedReview = await response.json();
+        dispatch(edit(editedReview));
+        return editedReview;
+    } else {
+        const errors = await response.json();
+        console.log(errors.errors);
+    }
 };
 
 export const deleteReview = (review) => async (dispatch) => {
-	const response = await fetch(`/api/reviews/${review.id}`, {
-		method: 'DELETE',
-		body: JSON.stringify(review),
-	});
-	if (response.ok) {
-		const deletedReview = await response.json();
-		dispatch(remove(deletedReview));
-		return deletedReview;
-	} else {
-		const errors = await response.json();
-		console.log(errors.errors);
-	}
+    const response = await fetch(`/api/reviews/${review.id}`, {
+        method: 'DELETE',
+        body: JSON.stringify(review),
+    });
+    if (response.ok) {
+        const deletedReview = await response.json();
+        dispatch(remove(deletedReview));
+        return deletedReview;
+    } else {
+        const errors = await response.json();
+        console.log(errors.errors);
+    }
 };
 
 const reviewReducer = (state = {}, action) => {
@@ -106,7 +107,7 @@ const reviewReducer = (state = {}, action) => {
             return { [action.editedReview.id]: action.editedReview, ...state }
         }
         case DELETE_REVIEW: {
-            newState = {...state};
+            newState = { ...state };
             delete newState[action.deleteReview];
             return newState;
         }
