@@ -1,0 +1,33 @@
+.photo-preview-ul {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 66px;
+}
+
+.photo-preview-ul li {
+    width: 66px;
+}
+
+.product-preview-block-img {
+    width: 60px;
+    height: 60px;
+}
+
+.selected-image-true {
+    border: 2px solid black;
+}
+
+.photo-gallery-view {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.main-gallery-image {
+    position: static;
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    box-sizing: border-box;
+}
