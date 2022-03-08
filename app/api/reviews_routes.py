@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, render_template
 from flask_login import login_required
 from app.models import db, Review
-from app.forms import NewReview
+from app.forms.review_form import NewReview
 from flask_migrate import Migrate
 
 reviews_routes = Blueprint('reviews_routes', __name__)
@@ -33,7 +33,7 @@ def create_review():
     db.session.add(new_review)
     db.session.commit()
     # TODO: figure out closing modal from here
-  # return new_review to dict 
+  # return new_review to dict
 
 
 # PUT Route
