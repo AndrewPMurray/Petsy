@@ -10,27 +10,28 @@ export default function ListingForm({ product, userId, setShowForm }) {
 	const [details, setDetails] = useState(product?.details || []);
 	const [description, setDescription] = useState(product?.description || '');
 	const [quantity, setQuantity] = useState(product?.quantity || 1);
-	const [productType, setProductType] = useState(product?.product_type_id || 0);
-	const [petType, setPetType] = useState(product?.pet_type_id || 0);
-
+	const [productType, setProductType] = useState(product?.product_type_id || 1);
+	const [petType, setPetType] = useState(product?.pet_type_id || 1);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
 		const newProduct = {
-			title, price: +price, details, description, quantity,
+			title,
+			price: +price,
+			details,
+			description,
+			quantity,
 			user_id: +userId,
-			product_type_id: 1,
-			pet_type_id: 1
-		}
+			product_type_id: +productType,
+			pet_type_id: +petType,
+		};
 
-		dispatch(createProduct(newProduct))
-		setShowForm(false)
-
-	}
+		dispatch(createProduct(newProduct));
+		setShowForm(false);
+	};
 
 	return (
-
 		<form id='listingForm' onSubmit={handleSubmit}>
 			<label>
 				Title
@@ -46,7 +47,8 @@ export default function ListingForm({ product, userId, setShowForm }) {
 				<select
 					value={petType}
 					onChange={(e) => setPetType(e.target.value)}
-					name='pet_type_id'>
+					name='pet_type_id'
+				>
 					<option value='1'>Cats</option>
 					<option value='2'>Dogs</option>
 					<option value='3'>Bird</option>
@@ -58,7 +60,8 @@ export default function ListingForm({ product, userId, setShowForm }) {
 				<select
 					value={productType}
 					onChange={(e) => setProductType(e.target.value)}
-					name='product_type_id'>
+					name='product_type_id'
+				>
 					<option value='1'>Food</option>
 					<option value='2'>Toys</option>
 					<option value='3'>Furniture</option>
@@ -105,5 +108,5 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			</label>
 			<button type='submit'> Submit </button>
 		</form>
-	)
+	);
 }

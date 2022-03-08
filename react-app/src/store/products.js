@@ -8,7 +8,6 @@ const load = (products) => ({
 	products,
 });
 
-
 const create = (product) => ({
 	type: CREATE_PRODUCT,
 	product,
@@ -35,8 +34,8 @@ export const loadProducts = () => async (dispatch) => {
 	}
 };
 
-
 export const createProduct = (product) => async (dispatch) => {
+	console.log(product);
 	const response = await fetch('/api/products/', {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
@@ -97,7 +96,7 @@ const productsReducer = (state = initialState, action) => {
 		}
 
 		case CREATE_PRODUCT: {
-			return { [action.newProduct.id]: action.newProduct, ...state };
+			return { [action.product.id]: action.product, ...state };
 		}
 
 		case EDIT_PRODUCT: {
