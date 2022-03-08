@@ -2,15 +2,17 @@ import './ListingForm.css';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { createProduct } from '../../store/products';
+import S3 from react-aws-s3;
 
 export default function ListingForm({ product, userId, setShowForm }) {
 	const dispatch = useDispatch();
 	const [title, setTitle] = useState(product?.title || '');
 	const [price, setPrice] = useState(product?.price || 0);
-	const [detailFields, setDetailFields] = useState(product?.details.length || 2);
-	const [details, setDetails] = useState(
-		product?.details.map((detail) => detail) || { [0]: false }
-	);
+	const [detailFields, setDetailFields] = useState(product?.details.length - 2 || 0);
+	const [details, setDetails] = useState({
+		handmade: product?.details[0] === 'Handmade' ? true : false,
+		materials: product?.details[1].slice(11, product.details[1].length) || '',
+	});
 	const [description, setDescription] = useState(product?.description || '');
 	const [quantity, setQuantity] = useState(product?.quantity || 1);
 	const [productType, setProductType] = useState(product?.product_type_id || 1);
@@ -20,12 +22,11 @@ export default function ListingForm({ product, userId, setShowForm }) {
 		e.preventDefault();
 
 		const detailsArr = [];
+		if (details.handmade === true) detailsArr.push('Handmade');
+		if (details.materials !== '') detailsArr.push(`Materials: ${details.materials}`);
 		for (const i in details) {
-			if (+i === 0 && details[i] === true) detailsArr.push('Handmade');
-			else if (+i === 1 && details[i] !== '') detailsArr.push(`Materials: ${details[i]}`);
-			else if (details[i] !== '') detailsArr.push(details[i]);
+			if (i !== 'handmade' && i !== 'materials') detailsArr.push(details[i]);
 		}
-		console.log(detailsArr);
 
 		const newProduct = {
 			title,
@@ -38,18 +39,48 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			pet_type_id: +petType,
 		};
 
-		// dispatch(createProduct(newProduct));
-		// setShowForm(false);
+		console.log(newProduct);
+
+		dispatch(createProduct(newProduct));
+		setShowForm(false);
 	};
 
 	const handleEdit = (e) => {
 		e.preventDefault();
-		console.log('EDITEDEDED!!!!');
+
+		const detailsArr = [];
+		if (details.handmade === true) detailsArr.push('Handmade');
+		if (details.materials !== '') detailsArr.push(`Materials: ${details.materials}`);
+		for (const key in details) {
+			if (key !== 'handmade' && key !== 'materials') detailsArr.push(details[key]);
+		}
+
+		const editedProduct = {
+			id: product?.id,
+			title,
+			price: +price,
+			details: JSON.stringify(detailsArr),
+			description,
+			quantity,
+			user_id: +userId,
+			product_type_id: +productType,
+			pet_type_id: +petType,
+		};
+
+		console.log(editedProduct);
+	};
+
+	const uploadImage = (e) => {
+		console.log(e);
 	};
 
 	return (
 		<>
 			<form id='listingForm' onSubmit={product ? handleEdit : handleSubmit}>
+				<label>
+					Images
+					<input type='file' onChange={uploadImage}></input>
+				</label>
 				<label>
 					Title
 					<input
@@ -100,31 +131,30 @@ export default function ListingForm({ product, userId, setShowForm }) {
 					Handmade
 					<input
 						type='checkbox'
-						value={details[0]}
+						value={details.handmade}
+						checked={details.handmade || false}
 						name='details'
-						onClick={(e) => setDetails({ ...details, [0]: !details[0] })}
+						onChange={(e) => setDetails({ ...details, handmade: !details.handmade })}
 					/>
 				</label>
 				<label>
 					Materials
 					<input
 						type='text'
-						value={details[1] || ''}
+						value={details.materials || ''}
 						name='details'
-						onChange={(e) => setDetails({ ...details, [1]: e.target.value })}
+						onChange={(e) => setDetails({ ...details, materials: e.target.value })}
 					/>
 				</label>
-				{Array.apply(null, { length: detailFields }).map((el, i) =>
-					i <= 2 ? null : (
-						<input
-							key={i}
-							name='details'
-							type='text'
-							value={details[i] || ''}
-							onChange={(e) => setDetails({ ...details, [i]: e.target.value })}
-						/>
-					)
-				)}
+				{Array.apply(null, { length: detailFields }).map((el, i) => (
+					<input
+						key={i}
+						name='details'
+						type='text'
+						value={details[i] || ''}
+						onChange={(e) => setDetails({ ...details, [i]: e.target.value })}
+					/>
+				))}
 				<div onClick={() => setDetailFields(detailFields + 1)}>Add Additional Detail</div>
 				<label>
 					Description
