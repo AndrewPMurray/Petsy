@@ -2,6 +2,7 @@ import ListingsGrid from './ListingsGrid';
 import ListingForm from '../ListingForm';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { loadProducts } from '../../store/products';
 import './ManageListings.css';
 
@@ -14,8 +15,13 @@ export default function ManageListings() {
 	const userProducts = Object.values(products).filter((product) => product?.user_id === user?.id);
 
 	useEffect(() => {
-		document.querySelector('nav').style.visibility = 'hidden';
-		return () => (document.querySelector('nav').style.visibility = 'visible');
+		document.querySelector('nav').style.display = 'none';
+		document.querySelector('footer').style.display = 'none';
+		return () => {
+			document.querySelector('nav').style.display = 'flex'
+
+			document.querySelector('footer').style.display = 'flex'
+		};
 	}, []);
 
 	useEffect(() => {
@@ -31,7 +37,11 @@ export default function ManageListings() {
 	) : (
 		<div id='manage-listings-page'>
 			<div id='top-header'>
-				<h2>Shop Manager</h2>
+				<div id="leftHeader">
+					<span><Link to='/'>Back</Link></span>
+					<h2>Shop Manager</h2>
+				</div>
+
 				<button
 					onClick={() => {
 						setActiveProductId(null);
