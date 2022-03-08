@@ -7,8 +7,10 @@ export default function ListingForm({ product, userId, setShowForm }) {
 	const dispatch = useDispatch();
 	const [title, setTitle] = useState(product?.title || '');
 	const [price, setPrice] = useState(product?.price || 0);
-	const [detailFields, setDetailFields] = useState(product?.details.length || 1);
-	const [details, setDetails] = useState(product?.details.map((detail) => detail) || {});
+	const [detailFields, setDetailFields] = useState(product?.details.length || 2);
+	const [details, setDetails] = useState(
+		product?.details.map((detail) => detail) || { [0]: false }
+	);
 	const [description, setDescription] = useState(product?.description || '');
 	const [quantity, setQuantity] = useState(product?.quantity || 1);
 	const [productType, setProductType] = useState(product?.product_type_id || 1);
@@ -19,8 +21,11 @@ export default function ListingForm({ product, userId, setShowForm }) {
 
 		const detailsArr = [];
 		for (const i in details) {
-			if (details[i] !== '') detailsArr.push(details[i]);
+			if (+i === 0 && details[i] === true) detailsArr.push('Handmade');
+			else if (+i === 1 && details[i] !== '') detailsArr.push(`Materials: ${details[i]}`);
+			else if (details[i] !== '') detailsArr.push(details[i]);
 		}
+		console.log(detailsArr);
 
 		const newProduct = {
 			title,
@@ -33,8 +38,8 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			pet_type_id: +petType,
 		};
 
-		dispatch(createProduct(newProduct));
-		setShowForm(false);
+		// dispatch(createProduct(newProduct));
+		// setShowForm(false);
 	};
 
 	const handleEdit = (e) => {
@@ -92,8 +97,25 @@ export default function ListingForm({ product, userId, setShowForm }) {
 					/>
 				</label>
 				<label>
-					Details
-					{Array.apply(null, { length: detailFields }).map((el, i) => (
+					Handmade
+					<input
+						type='checkbox'
+						value={details[0]}
+						name='details'
+						onClick={(e) => setDetails({ ...details, [0]: !details[0] })}
+					/>
+				</label>
+				<label>
+					Materials
+					<input
+						type='text'
+						value={details[1] || ''}
+						name='details'
+						onChange={(e) => setDetails({ ...details, [1]: e.target.value })}
+					/>
+				</label>
+				{Array.apply(null, { length: detailFields }).map((el, i) =>
+					i <= 2 ? null : (
 						<input
 							key={i}
 							name='details'
@@ -101,9 +123,9 @@ export default function ListingForm({ product, userId, setShowForm }) {
 							value={details[i] || ''}
 							onChange={(e) => setDetails({ ...details, [i]: e.target.value })}
 						/>
-					))}
-					<div onClick={() => setDetailFields(detailFields + 1)}>Add Detail</div>
-				</label>
+					)
+				)}
+				<div onClick={() => setDetailFields(detailFields + 1)}>Add Additional Detail</div>
 				<label>
 					Description
 					<textarea
