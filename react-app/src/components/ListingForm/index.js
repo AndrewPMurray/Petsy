@@ -1,8 +1,7 @@
 import './ListingForm.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createProduct } from '../../store/products';
-import S3 from react-aws-s3;
 
 export default function ListingForm({ product, userId, setShowForm }) {
 	const dispatch = useDispatch();
