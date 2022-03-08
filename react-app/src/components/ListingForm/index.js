@@ -7,7 +7,8 @@ export default function ListingForm({ product, userId, setShowForm }) {
 	const dispatch = useDispatch();
 	const [title, setTitle] = useState(product?.title || '');
 	const [price, setPrice] = useState(product?.price || 0);
-	const [details, setDetails] = useState(product?.details || []);
+	const [detailFields, setDetailFields] = useState(1);
+	const [details, setDetails] = useState({});
 	const [description, setDescription] = useState(product?.description || '');
 	const [quantity, setQuantity] = useState(product?.quantity || 1);
 	const [productType, setProductType] = useState(product?.product_type_id || 1);
@@ -16,19 +17,18 @@ export default function ListingForm({ product, userId, setShowForm }) {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
+		const detailsArr = Object.values(details);
+
 		const newProduct = {
 			title,
 			price: +price,
-			details,
+			details: detailsArr,
 			description,
 			quantity,
 			user_id: +userId,
 			product_type_id: +productType,
 			pet_type_id: +petType,
 		};
-
-		dispatch(createProduct(newProduct));
-		setShowForm(false);
 	};
 
 	return (
@@ -81,12 +81,18 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			</label>
 			<label>
 				Details
-				<input
-					name='details'
-					type='text'
-					value={details}
-					onChange={(e) => setDetails(e.target.value)}
-				/>
+				{Array.apply(null, { length: detailFields }).map((e, i) => {
+					return (
+						<input
+							key={i}
+							name='details'
+							type='text'
+							value={details[i] || ''}
+							onChange={(e) => setDetails({ ...details, [i]: e.target.value })}
+						/>
+					);
+				})}
+				<div onClick={() => setDetailFields(detailFields + 1)}>Add Detail</div>
 			</label>
 			<label>
 				Description

@@ -8,9 +8,9 @@ const load = (products) => ({
 	products,
 });
 
-const create = (product) => ({
+const create = (newProduct) => ({
 	type: CREATE_PRODUCT,
-	product,
+	newProduct,
 });
 
 const edit = (product) => ({
@@ -96,7 +96,7 @@ const productsReducer = (state = initialState, action) => {
 		}
 
 		case CREATE_PRODUCT: {
-			return { [action.product.id]: action.product, ...state };
+			return { [action.newProduct.id]: action.newProduct, ...state };
 		}
 
 		case EDIT_PRODUCT: {
