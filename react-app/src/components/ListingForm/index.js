@@ -10,7 +10,11 @@ export default function ListingForm({ product, userId, setShowForm }) {
 	const [detailFields, setDetailFields] = useState(product?.details.length - 2 || 0);
 	const [details, setDetails] = useState({
 		handmade: product?.details[0] === 'Handmade' ? true : false,
-		materials: product?.details[1].slice(11, product.details[1].length) || '',
+		materials: product?.details[0].startsWith('Materials')
+			? product?.details[0]?.slice(11, product.details[1]?.length)
+			: product?.details[1]?.startsWith('Materials')
+			? product?.details[1]?.slice(11, product.details[1]?.length)
+			: '',
 	});
 	const [description, setDescription] = useState(product?.description || '');
 	const [quantity, setQuantity] = useState(product?.quantity || 1);

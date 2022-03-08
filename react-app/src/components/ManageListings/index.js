@@ -34,7 +34,7 @@ export default function ManageListings() {
 				<h2>Shop Manager</h2>
 				<button
 					onClick={() => {
-						setActiveProductId(59);
+						setActiveProductId(null);
 						setShowForm(true);
 					}}
 					id='add-listing-button'
