@@ -24,6 +24,7 @@ export default function ManageListings() {
 		};
 	}, []);
 
+
 	useEffect(() => {
 		dispatch(loadProducts());
 	}, [dispatch]);
@@ -39,7 +40,11 @@ export default function ManageListings() {
 			<div id='top-header'>
 				<div id="leftHeader">
 					<span><Link to='/'><i className="fa-solid fa-arrow-left"></i> Back to Petsy</Link></span>
-					<h2>Shop Manager</h2>
+					<div id='shopManager'>
+						<div id="storeIcon">	<i className="fa-solid fa-store"></i></div>
+
+						<h2>Shop Manager</h2>
+					</ div>
 				</div>
 
 				<button

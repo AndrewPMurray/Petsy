@@ -28,6 +28,11 @@
     align-items: center;
 }
 
+#leftHeader > span {
+     width: 45%;
+
+}
+
 #leftHeader > span > a {
     font-family: 'Lato', sans-serif;
     font-size: 1.2vh;
@@ -37,10 +42,34 @@
     color: #D3D3D3;
 }
 
-
-#leftHeader > h2 {
+#shopManager {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     font-family: 'Lato', sans-serif;
-    font-size: 2vh;
+    width: 65%;
+    height: 100%;
+}
+
+#shopManager > h2 {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.5vh;
+}
+
+#shopManager > #storeIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+    background-color: black;
+}
+
+#storeIcon > .fa-store {
+    font-size: 1.4vh;
+
 }
 
 
