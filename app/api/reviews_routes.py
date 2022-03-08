@@ -27,13 +27,13 @@ def create_review():
       url=data["url"],
       user_id=data["user_id"],
       product_id=data["product_id"],
-      created_at=data["created_at"],
-      updated_at=data["updated_at"],
+      # created_at=data["created_at"],
+      # updated_at=data["updated_at"],
     )
     db.session.add(new_review)
     db.session.commit()
     # TODO: figure out closing modal from here
-  # return render_template('.html', form=form)
+  # return new_review to dict 
 
 
 # PUT Route
