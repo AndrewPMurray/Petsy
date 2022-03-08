@@ -1,5 +1,5 @@
 import './ListingForm.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createProduct } from '../../store/products';
 
@@ -7,8 +7,11 @@ export default function ListingForm({ product, userId, setShowForm }) {
 	const dispatch = useDispatch();
 	const [title, setTitle] = useState(product?.title || '');
 	const [price, setPrice] = useState(product?.price || 0);
-	const [detailFields, setDetailFields] = useState(product?.details.length || 1);
-	const [details, setDetails] = useState(product?.details.map((detail) => detail) || {});
+	const [detailFields, setDetailFields] = useState(product?.details.length - 2 || 0);
+	const [details, setDetails] = useState({
+		handmade: product?.details[0] === 'Handmade' ? true : false,
+		materials: product?.details[1].slice(11, product.details[1].length) || '',
+	});
 	const [description, setDescription] = useState(product?.description || '');
 	const [quantity, setQuantity] = useState(product?.quantity || 1);
 	const [productType, setProductType] = useState(product?.product_type_id || 1);
@@ -18,8 +21,10 @@ export default function ListingForm({ product, userId, setShowForm }) {
 		e.preventDefault();
 
 		const detailsArr = [];
+		if (details.handmade === true) detailsArr.push('Handmade');
+		if (details.materials !== '') detailsArr.push(`Materials: ${details.materials}`);
 		for (const i in details) {
-			if (details[i] !== '') detailsArr.push(details[i]);
+			if (i !== 'handmade' && i !== 'materials') detailsArr.push(details[i]);
 		}
 
 		const newProduct = {
@@ -33,18 +38,48 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			pet_type_id: +petType,
 		};
 
+		console.log(newProduct);
+
 		dispatch(createProduct(newProduct));
 		setShowForm(false);
 	};
 
 	const handleEdit = (e) => {
 		e.preventDefault();
-		console.log('EDITEDEDED!!!!');
+
+		const detailsArr = [];
+		if (details.handmade === true) detailsArr.push('Handmade');
+		if (details.materials !== '') detailsArr.push(`Materials: ${details.materials}`);
+		for (const key in details) {
+			if (key !== 'handmade' && key !== 'materials') detailsArr.push(details[key]);
+		}
+
+		const editedProduct = {
+			id: product?.id,
+			title,
+			price: +price,
+			details: JSON.stringify(detailsArr),
+			description,
+			quantity,
+			user_id: +userId,
+			product_type_id: +productType,
+			pet_type_id: +petType,
+		};
+
+		console.log(editedProduct);
+	};
+
+	const uploadImage = (e) => {
+		console.log(e);
 	};
 
 	return (
 		<>
 			<form id='listingForm' onSubmit={product ? handleEdit : handleSubmit}>
+				<label>
+					Images
+					<input type='file' onChange={uploadImage}></input>
+				</label>
 				<label>
 					Title
 					<input
@@ -92,18 +127,34 @@ export default function ListingForm({ product, userId, setShowForm }) {
 					/>
 				</label>
 				<label>
-					Details
-					{Array.apply(null, { length: detailFields }).map((el, i) => (
-						<input
-							key={i}
-							name='details'
-							type='text'
-							value={details[i] || ''}
-							onChange={(e) => setDetails({ ...details, [i]: e.target.value })}
-						/>
-					))}
-					<div onClick={() => setDetailFields(detailFields + 1)}>Add Detail</div>
+					Handmade
+					<input
+						type='checkbox'
+						value={details.handmade}
+						checked={details.handmade || false}
+						name='details'
+						onChange={(e) => setDetails({ ...details, handmade: !details.handmade })}
+					/>
 				</label>
+				<label>
+					Materials
+					<input
+						type='text'
+						value={details.materials || ''}
+						name='details'
+						onChange={(e) => setDetails({ ...details, materials: e.target.value })}
+					/>
+				</label>
+				{Array.apply(null, { length: detailFields }).map((el, i) => (
+					<input
+						key={i}
+						name='details'
+						type='text'
+						value={details[i] || ''}
+						onChange={(e) => setDetails({ ...details, [i]: e.target.value })}
+					/>
+				))}
+				<div onClick={() => setDetailFields(detailFields + 1)}>Add Additional Detail</div>
 				<label>
 					Description
 					<textarea
