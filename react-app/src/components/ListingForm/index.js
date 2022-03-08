@@ -2,6 +2,7 @@ import './ListingForm.css';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createProduct } from '../../store/products';
+import UploadPicture from './UploadPicture';
 
 export default function ListingForm({ product, userId, setShowForm }) {
 	const dispatch = useDispatch();
@@ -79,11 +80,8 @@ export default function ListingForm({ product, userId, setShowForm }) {
 
 	return (
 		<>
+			<UploadPicture />
 			<form id='listingForm' onSubmit={product ? handleEdit : handleSubmit}>
-				<label>
-					Images
-					<input type='file' onChange={uploadImage}></input>
-				</label>
 				<label>
 					Title
 					<input
