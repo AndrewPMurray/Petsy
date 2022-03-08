@@ -22,7 +22,7 @@ export default function ManageListings() {
 	}, [dispatch]);
 
 	return showForm ? (
-		<ListingForm />
+		<ListingForm userId={user.id} setShowForm={setShowForm} />
 	) : (
 		<div id='manage-listings-page'>
 			<div id='top-header'>
