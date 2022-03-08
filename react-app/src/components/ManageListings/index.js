@@ -20,7 +20,7 @@ export default function ManageListings() {
 		return () => {
 			document.querySelector('nav').style.display = 'flex'
 
-			document.querySelector('footer').style.display = 'flex'
+			document.querySelector('footer').style.display = 'block'
 		};
 	}, []);
 
@@ -38,7 +38,7 @@ export default function ManageListings() {
 		<div id='manage-listings-page'>
 			<div id='top-header'>
 				<div id="leftHeader">
-					<span><Link to='/'><i class="fa-solid fa-arrow-left"></i> Back to Petsy</Link></span>
+					<span><Link to='/'><i className="fa-solid fa-arrow-left"></i> Back to Petsy</Link></span>
 					<h2>Shop Manager</h2>
 				</div>
 
@@ -49,7 +49,7 @@ export default function ManageListings() {
 					}}
 					id='add-listing-button'
 				>
-					<i class="fa-solid fa-plus"></i>
+					<i className="fa-solid fa-plus"></i>
 					Add Listing
 				</button>
 			</div>

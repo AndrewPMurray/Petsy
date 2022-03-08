@@ -227,3 +227,11 @@ a {
 }
 
 /* end animations */
+
+
+
+button{
+    outline: none;
+border: none;
+-webkit-appearance: none;
+}
