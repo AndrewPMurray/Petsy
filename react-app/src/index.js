@@ -4,7 +4,8 @@ import { Provider } from 'react-redux';
 import './index.css';
 import App from './App';
 import configureStore from './store';
-import { ModalProvider } from '../src/context/Modal'
+import { ModalProvider } from './context/Modal';
+
 
 const store = configureStore();
 
