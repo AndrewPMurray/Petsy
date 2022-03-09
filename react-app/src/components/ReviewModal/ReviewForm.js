@@ -31,7 +31,7 @@ export default function ReviewForm({ userId, product }) {
 
     console.log('...', product, userId)
     return (
-        <div id='formPage'>
+        <div id='formPage' >
             <div id='formModalHeader'>
                 <div>
                     <h2>Great! One more thing...</h2>
