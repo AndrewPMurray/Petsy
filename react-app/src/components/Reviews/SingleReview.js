@@ -13,7 +13,7 @@ function SingleReview({ review }) {
         console.log(e.scrollHeight -1 , e.clientHeight)
         return e.scrollHeight - 1 > e.clientHeight
     } 
-
+    
     // const reviewContentDiv = document.querySelector('.overflow-review')
     // console.log(reviewContentDiv)
 
@@ -39,7 +39,7 @@ function SingleReview({ review }) {
                 {[...Array(review.rating)].map((ele, idx) => <i className="fas fa-star" key={idx}></i>)}
                 </div>
                 {tooLong ?
-                    <div className="review-content-div overflow-div">
+                <div className="review-content-div overflow-div">
                     <p ref={contentRef} className={`overflow-review review-content-${photoPresent}`}>{review.content}</p>
                     <button
                     className="review-ellipsis-button"

@@ -44,6 +44,12 @@
 
 .review-ellipsis-button{
   position: absolute;
+  right: -25px;
+  bottom: 0;
+}
+
+.review-content-div {
+  position: relative;
 }
 
 .review-content-false {
@@ -75,4 +81,13 @@
   padding: 10px;
 }
 
+.total-avg-reviews-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 
+.total-avg-reviews-div > h2 {
+  font-size: 30px;
+  padding-right: 10px;
+}
