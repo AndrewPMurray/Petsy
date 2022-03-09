@@ -1,4 +1,4 @@
-import { useContext, createContext, useState, useRef, useEffect } from 'react';
+import React, { useContext, createContext, useState, useRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import './Modal.css';
 
@@ -37,4 +37,3 @@ export function Modal({ onClose, children }) {
   ))
 
 }
-
