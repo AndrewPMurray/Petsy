@@ -1,6 +1,5 @@
 import PhotoPreviewBlock from './PhotoPreviewBlock';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './ProductPage.css';
 
 function ProductPhotos({ product }) {
@@ -24,7 +23,11 @@ function ProductPhotos({ product }) {
 				})}
 			</ul>
 			<div className='photo-gallery-view'>
-				<img className='main-gallery-image' src={photoIds[selected]}></img>
+				<img
+					className='main-gallery-image'
+					src={photoIds[selected]}
+					alt='main-gallery'
+				></img>
 			</div>
 		</div>
 	);

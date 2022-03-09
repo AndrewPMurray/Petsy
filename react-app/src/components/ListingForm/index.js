@@ -38,7 +38,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			image.id = name.id;
 			setImages((prev) => [...prev, image]);
 		});
-	}, [setImages]);
+	}, [setImages, image_names]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -101,7 +101,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			if (key !== 'handmade' && key !== 'materials') detailsArr.push(details[key]);
 		}
 
-		const editedProduct = await dispatch(
+		await dispatch(
 			editProduct({
 				id: product?.id,
 				title,
