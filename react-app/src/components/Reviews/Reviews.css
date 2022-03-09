@@ -31,6 +31,7 @@
 .review-buyer-header {
   display: flex;
   flex-direction: row;
+  align-items: end;
 }
 
 .overflow-review {
@@ -90,4 +91,9 @@
 .total-avg-reviews-div > h2 {
   font-size: 30px;
   padding-right: 10px;
+}
+
+.date-review{
+  font-size: 10px;
+  margin: 0px 4px;
 }
