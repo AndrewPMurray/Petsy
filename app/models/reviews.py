@@ -1,4 +1,5 @@
 from .db import db
+from datetime import datetime
 
 class Review(db.Model):
     __tablename__ = 'reviews'
@@ -9,8 +10,8 @@ class Review(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     url = db.Column(db.String)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
-    created_at = db.Column(db.Date)
-    updated_at = db.Column(db.Date)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
+    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
     single_product = db.relationship("Product", back_populates="reviews")
     user = db.relationship("User", back_populates="reviews")

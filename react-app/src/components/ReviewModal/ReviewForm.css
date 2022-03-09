@@ -1,0 +1,33 @@
+#formPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: palegreen;
+}
+
+#reviewForm {
+    background-color: palegoldenrod;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#starRating {
+    display: flex;
+    justify-content: center;
+}
+    
+input[type="radio"] {
+    display: none;
+}
+
+.ratingStars:hover {
+    cursor:pointer;
+    transition: color 200ms;
+}
+
+    
+
