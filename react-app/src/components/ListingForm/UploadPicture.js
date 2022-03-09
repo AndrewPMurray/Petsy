@@ -24,7 +24,7 @@ const UploadPicture = ({ images, setImages, imagesToDelete, setImagesToDelete })
 			<input type='file' accept='image/*' onChange={updateImage} />
 			<div id='picture-preview-container'>
 				{images.map((image, i) => (
-					<div key={`picture-preview-${i}`}>
+					<div key={`picture-preview-${i}`} className='picture-preview-node'>
 						<i
 							key={`delete-picture${i}`}
 							id='delete-picture'

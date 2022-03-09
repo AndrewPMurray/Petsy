@@ -7,6 +7,22 @@
     align-items: center;
 }
 
-#picture-preview-container {
-    
+.picture-preview-node {
+    position: relative;
+    display: inline-block;
+}
+
+#delete-picture {
+    visibility: hidden;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: red;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px;
+}
+
+.picture-preview-node:hover > #delete-picture {
+    visibility: visible;
 }

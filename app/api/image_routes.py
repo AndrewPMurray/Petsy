@@ -38,3 +38,25 @@ def upload_image():
     db.session.add(new_image)
     db.session.commit()
     return {"url": url}
+
+
+@image_routes.route("/<int:id>", methods=["DELETE"])
+@login_required
+def delete_image(id):
+    image = Image.query.get(id)
+    name = request.form['name']
+    
+    
+    # delete_image_from_s3()
+
+    # if "url" not in upload:
+    #     # if the dictionary doesn't have a url key
+    #     # it means that there was an error when we tried to upload
+    #     # so we send back that error message
+    #     return upload, 400
+
+    # url = upload["url"]
+    # new_image = Image(product_id=product_id, url=url)
+    # db.session.add(new_image)
+    # db.session.commit()
+    # return {"url": url}

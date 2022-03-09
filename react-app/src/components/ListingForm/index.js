@@ -1,7 +1,7 @@
 import './ListingForm.css';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { createProduct } from '../../store/products';
+import { createProduct, editProduct, loadProducts } from '../../store/products';
 import UploadPicture from './UploadPicture';
 
 export default function ListingForm({ product, userId, setShowForm }) {
@@ -23,7 +23,10 @@ export default function ListingForm({ product, userId, setShowForm }) {
 	const [petType, setPetType] = useState(product?.pet_type_id || 1);
 	const [images, setImages] = useState([]);
 	const [imagesToDelete, setImagesToDelete] = useState([]);
-	const image_names = product?.images.map((image) => image.url.split('/')[3]);
+	const image_names = product?.images.map((image) => ({
+		name: image.url.split('/')[3],
+		id: image.id,
+	}));
 
 	useEffect(() => {
 		setImages([]);
@@ -31,7 +34,8 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			const res = await fetch(`/api/images/${name}`);
 			const image = await res.blob();
 			image.exists = true;
-			image.name = name;
+			image.name = name.name;
+			image.id = name.id;
 			setImages((prev) => [...prev, image]);
 		});
 	}, [setImages]);
@@ -46,23 +50,23 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			if (i !== 'handmade' && i !== 'materials') detailsArr.push(details[i]);
 		}
 
-		const newProduct = {
-			title,
-			price: +price,
-			details: JSON.stringify(detailsArr),
-			description,
-			quantity,
-			user_id: +userId,
-			product_type_id: +productType,
-			pet_type_id: +petType,
-		};
-
-		const createdProduct = await dispatch(createProduct(newProduct));
+		const newProduct = await dispatch(
+			createProduct({
+				title,
+				price: +price,
+				details: JSON.stringify(detailsArr),
+				description,
+				quantity,
+				user_id: +userId,
+				product_type_id: +productType,
+				pet_type_id: +petType,
+			})
+		);
 
 		images.forEach(async (image) => {
 			const formData = new FormData();
 			formData.append('image', image);
-			formData.append('product_id', createdProduct.id);
+			formData.append('product_id', newProduct.id);
 
 			// aws uploads can be a bit slow—displaying
 			// some sort of loading message is a good idea
@@ -83,10 +87,11 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			}
 		});
 
+		dispatch(loadProducts());
 		setShowForm(false);
 	};
 
-	const handleEdit = (e) => {
+	const handleEdit = async (e) => {
 		e.preventDefault();
 
 		const detailsArr = [];
@@ -96,17 +101,19 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			if (key !== 'handmade' && key !== 'materials') detailsArr.push(details[key]);
 		}
 
-		const editedProduct = {
-			id: product?.id,
-			title,
-			price: +price,
-			details: JSON.stringify(detailsArr),
-			description,
-			quantity,
-			user_id: +userId,
-			product_type_id: +productType,
-			pet_type_id: +petType,
-		};
+		const editedProduct = await dispatch(
+			editProduct({
+				id: product?.id,
+				title,
+				price: +price,
+				details: JSON.stringify(detailsArr),
+				description,
+				quantity,
+				user_id: +userId,
+				product_type_id: +productType,
+				pet_type_id: +petType,
+			})
+		);
 
 		images.forEach(async (image) => {
 			if (!image.exists) {
@@ -127,6 +134,23 @@ export default function ListingForm({ product, userId, setShowForm }) {
 				}
 			}
 		});
+
+		imagesToDelete.forEach(async (image) => {
+			const formData = new FormData();
+			formData.append('name', image.name);
+
+			const res = await fetch(`/api/images/${image.id}`, {
+				method: 'DELETE',
+				body: formData,
+			});
+			if (res.ok) {
+				await res.json();
+			} else {
+				console.log('error');
+			}
+		});
+
+		setShowForm(false);
 	};
 
 	return (
