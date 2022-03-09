@@ -2,8 +2,9 @@ import './Purchases.css'
 import { loadReviewsByUser } from '../../store/reviews';
 import { loadPurchases } from '../../store/purchases';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import PurchaseCard from './PurchaseCard';
+import ReviewForm from '../ReviewModal/ReviewForm'
 
 
 function Purchases() {
@@ -15,15 +16,13 @@ function Purchases() {
     useEffect(() => {
         dispatch(loadPurchases(user.id))
         dispatch(loadReviewsByUser(user.id))
-
     }, [dispatch, user.id]);
 
-    console.log('purchases', purchases)
 
     return (
         <div id="purchasesPage">
-            {purchases.map(purchase => <PurchaseCard purchase={purchase} reviews={reviews} key={purchase.id} />)}
-        </div>
+            {purchases.map(purchase => <PurchaseCard purchase={purchase} reviews={reviews} key={purchase.id} userId={user.id} />)}
+        </div >
     )
 };
 
