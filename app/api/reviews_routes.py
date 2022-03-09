@@ -1,22 +1,39 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, render_template
 from flask_login import login_required
-from app.models import User, Review
+from app.models import db, Review
+from app.forms.review_form import NewReview
+from flask_migrate import Migrate
 
 reviews_routes = Blueprint('reviews_routes', __name__)
 
-# GET Route
-@reviews_routes.route('/reviews')
-@login_required
-def all_reviews():
-  pass
-  # all_reviews = Review.query.filter()
-  # /products/<int:id>
+# GET Route for reviews by user
+@reviews_routes.route('/<int:id>')
+# @login_required
+def reviews_by_user(id):
+  reviews = Review.query.filter(Review.user_id == id).all()
+  # will return reviews belonging to user with product_id as the key for each review
+  return {"userReviews": [review.to_dict() for review in reviews]}
 
-# POST Route
-@reviews_routes.route('/reviews', methods=["POST"])
+# GET AND POST Route | create new review form
+@reviews_routes.route('/reviews', methods=["GET","POST"])
 @login_required
 def create_review():
-  pass
+  form = NewReview()
+  if form.validate_on_submit():
+    data = form.data
+    new_review = Review(
+      content=data["content"],
+      rating=data["rating"],
+      url=data["url"],
+      user_id=data["user_id"],
+      product_id=data["product_id"],
+      # created_at=data["created_at"],
+      # updated_at=data["updated_at"],
+    )
+    db.session.add(new_review)
+    db.session.commit()
+    # TODO: figure out closing modal from here
+  # return new_review to dict
 
 
 # PUT Route

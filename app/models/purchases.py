@@ -19,4 +19,6 @@ class Purchase(db.Model):
             "product_id": self.product_id,
             "purchase_date": self.purchase_date,
             "quantity": self.quantity,
+            "product": self.single_product.to_dict(),
+            'user': self.user.to_dict()
         }

@@ -1,6 +1,9 @@
 /* default font */
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&family=Lora:wght@400;500&display=swap');
 
+/* font-family: 'Lato', sans-serif; */
+/*  font-family: 'Lato', serif;*/
+
 /* CSS Reset */
 
 html, body, div, span, applet, object, iframe,
@@ -224,3 +227,11 @@ a {
 }
 
 /* end animations */
+
+
+
+button{
+    outline: none;
+border: none;
+-webkit-appearance: none;
+}

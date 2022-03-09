@@ -14,16 +14,18 @@ function NavBarIcons({ user }) {
                         </div>
                     </Link>
                 </li>
-                <li>
 
-                    <Link to="/manage-listings" id="manageListings">
-                        <div className="faIcons">
-                            <i className="fa-solid fa-store">
-                            </i>
-                        </div>
-                    </Link>
+                {user &&
+                    <li>
+                        <Link to="/manage-listings" id="manageListings">
+                            <div className="faIcons">
+                                <i className="fa-solid fa-store">
+                                </i>
+                            </div>
+                        </Link>
+                    </li>
+                }
 
-                </li>
                 <li>
                     {user && <Account user={user} />}
                 </li>

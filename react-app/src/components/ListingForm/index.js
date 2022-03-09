@@ -44,6 +44,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			pet_type_id: +petType,
 		};
 
+
 		const createdProduct = await dispatch(createProduct(newProduct));
 
 		images.forEach(async (image) => {
