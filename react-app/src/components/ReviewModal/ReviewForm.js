@@ -1,11 +1,10 @@
 import { useState } from 'react';
+import { FaStar } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { FaStar } from 'react-icons/fa';
 import './ReviewForm.css'
 import UploadPicture from '../ListingForm/UploadPicture';
 import { createReview } from '../../store/reviews';
-
 
 export default function ReviewForm({ userId, product }) {
     const [content, setContent] = useState(product?.content || '');

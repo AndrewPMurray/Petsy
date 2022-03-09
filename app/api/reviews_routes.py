@@ -1,12 +1,11 @@
 from flask import Blueprint, jsonify, render_template, request
 from flask_login import login_required
 from app.models import db, Review
+from flask_migrate import Migrate
 from app.forms.review_form import ReviewForm
 from datetime import date
-from flask_migrate import Migrate
 from app.aws import (
     upload_file_to_s3, allowed_file, get_unique_filename)
-
 
 reviews_routes = Blueprint('reviews_routes', __name__)
 
@@ -40,11 +39,6 @@ def create_review():
     print('****',form.errors)
     
   return new_review.to_dict()
-   
-  
-  
-
-# **** {'content': 'testsetest', 'rating': 4, 'user_id': 1, 'url': 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg', 'product_id': 30, 'created_at': None, 'updated_at': None, 'csrf_token': 'IjhhMzk4YjBjY2RhMzU5ZjUyOTcyNTVmMTRjZGIzMzI0N2YzN2IwMWIi.YigbgQ.gliaP669UJt6FIRYOJemIhrU7jM'}
 
 
 # PUT Route
