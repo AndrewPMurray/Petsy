@@ -7,7 +7,7 @@ function Demo() {
     event.preventDefault();
     const email = 'demo@aa.io';
     const password = 'password';
-    return dispatch(sessionActions.login({ email, password })).catch(
+    return dispatch(sessionActions.login(email, password)).catch(
       async (res) => { await res.json() })
   };
 

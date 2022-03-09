@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
+import Demo from '../Demo';
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -16,12 +17,11 @@ const SignUpForm = () => {
     e.preventDefault();
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
-      if (data) {
-        setErrors(data)
-        // console.log('DATA', data)
-      }
+      if (data) setErrors(data)
     }
   };
+
+  console.log("ERRORS", errors)
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
@@ -43,7 +43,6 @@ const SignUpForm = () => {
     return <Redirect to='/' />;
   }
 
-  console.log("ERRORS", errors)
 
   return (
     <form onSubmit={onSignUp}>
@@ -59,7 +58,7 @@ const SignUpForm = () => {
           name='username'
           onChange={updateUsername}
           value={username}
-          // required={true}
+          required={true}
         ></input>
       </div>
       <div>
@@ -69,7 +68,7 @@ const SignUpForm = () => {
           name='email'
           onChange={updateEmail}
           value={email}
-          // required={true}
+          required={true}
         ></input>
       </div>
       <div>
@@ -79,7 +78,7 @@ const SignUpForm = () => {
           name='password'
           onChange={updatePassword}
           value={password}
-          // required={true}
+          required={true}
         ></input>
       </div>
       <div>
@@ -89,10 +88,11 @@ const SignUpForm = () => {
           name='repeat_password'
           onChange={updateRepeatPassword}
           value={repeatPassword}
-          // required={true}
+          required={true}
         ></input>
       </div>
       <button type='submit'>Sign Up</button>
+      <Demo />
     </form>
   );
 };
