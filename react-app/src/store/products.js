@@ -109,7 +109,6 @@ const productsReducer = (state = initialState, action) => {
 			delete newState[action.deletedProduct.id];
 			return newState;
 		}
-
 		default:
 			return state;
 	}
