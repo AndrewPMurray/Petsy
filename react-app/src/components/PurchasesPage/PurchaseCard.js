@@ -1,8 +1,14 @@
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
-import Review from './Review';
+// import Review from './Review';
+import ReviewModal from "../ReviewModal";
 
-function PurchaseCard({ purchase, reviews, handlePage, userId, handleUpdate }) {
+
+function PurchaseCard({ purchase, reviews, userId }) {
+
+	let message = reviews[purchase.product_id] ? 'Edit Review' : 'Add Review'
+
+
 	return (
 		<div id='purchaseCard'>
 			<div id='purchasedBy'>
@@ -26,13 +32,13 @@ function PurchaseCard({ purchase, reviews, handlePage, userId, handleUpdate }) {
 			</div>
 			<div id='purchaseReview'>
 				<div>
-					<Review
+					{/* <Review
 						purchase={purchase}
 						reviews={reviews}
 						handlePage={handlePage}
 						userId={userId}
-						handleUpdate={handleUpdate}
-					/>
+					/> */}
+					<ReviewModal message={message} userId={userId} product={purchase.product} reviews={reviews} />
 				</div>
 			</div>
 			<div id='buyAgainDiv'>

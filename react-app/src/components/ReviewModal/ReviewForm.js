@@ -1,20 +1,17 @@
 import { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import './ReviewForm.css';
 import { createReview, editReview } from '../../store/reviews';
 
-export default function ReviewForm({ userId, product, reviews }) {
+export default function ReviewForm({ userId, product, reviews, setShowModal }) {
 	const [content, setContent] = useState(reviews[product.id]?.content || '');
 	const [rating, setRating] = useState(reviews[product.id]?.rating || null);
 	// const [url, setUrl] = useState(product?.rating || '');
 	const [hover, setHover] = useState(null);
 	const dispatch = useDispatch();
-	const history = useHistory();
-
-	console.log('THIS IS A PRODUC', product)
-	console.log('THIS IS A reviews', reviews)
+	// const history = useHistory();
 
 	// getting the keys (prouct ids) of products that the user has reviewed.
 	const userReviews = Object.keys(reviews).map(key => parseInt(key));
@@ -33,13 +30,19 @@ export default function ReviewForm({ userId, product, reviews }) {
 		};
 
 		dispatch(createReview(newReview));
-		history.push('/purchases');
+		setShowModal(false)
+		// history.push('/purchases');
 	};
 
 
 
 	const handleEdit = (e) => {
 		e.preventDefault();
+
+		let reviewId;
+		if (reviewExists) {
+			reviewId = reviews[product.id].id
+		}
 
 		const editedReview = {
 			content,
@@ -49,8 +52,10 @@ export default function ReviewForm({ userId, product, reviews }) {
 			product_id: product.id,
 		};
 
-		dispatch(editReview(editedReview));
-		history.push('/purchases');
+		dispatch(editReview(editedReview, reviewId));
+		setShowModal(false)
+
+		// history.push('/purchases');
 	};
 
 	return (

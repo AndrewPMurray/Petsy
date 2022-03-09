@@ -11,7 +11,7 @@ function ReviewModal({ message, product, userId, reviews }) {
 			<button onClick={() => setShowModal(true)}>{message}</button>
 			{showModal && (
 				<Modal onClose={() => setShowModal(false)}>
-					<ReviewForm product={product} userId={userId} reviews={reviews} />
+					<ReviewForm product={product} userId={userId} reviews={reviews} setShowModal={setShowModal} />
 				</Modal>
 			)}
 		</>
