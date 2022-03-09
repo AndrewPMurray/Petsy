@@ -1,7 +1,8 @@
 import { NavLink, Link } from 'react-router-dom';
 import './Navbar.css'
 import Account from './Account'
-
+import SignupFormModal from '../SignupFormModal';
+import LoginFormModal from '../LoginFormModal';
 
 function NavBarIcons({ user }) {
     return (
@@ -39,6 +40,13 @@ function NavBarIcons({ user }) {
                 {!user && (
                     <div id="NotLoggedNavButtons">
                         <li>
+                            <LoginFormModal />
+                        </li>
+                        <li>
+                            <SignupFormModal />
+                        </li>
+
+                        {/* <li>
                             <NavLink to='/login' exact={true} activeClassName='active'>
                                 Login
                             </NavLink>
@@ -47,7 +55,7 @@ function NavBarIcons({ user }) {
                             <NavLink to='/sign-up' exact={true} activeClassName='active'>
                                 Sign Up
                             </NavLink>
-                        </li>
+                        </li> */}
                     </div>
                 )}
                 {/* <li>
