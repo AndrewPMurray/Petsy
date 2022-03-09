@@ -7,7 +7,7 @@ import UploadPicture from '../ListingForm/UploadPicture';
 import { createReview } from '../../store/reviews';
 
 
-export default function ReviewForm({ handlePage, userId, purchase }) {
+export default function ReviewForm({ userId, purchase }) {
     const [content, setContent] = useState('');
     const [rating, setRating] = useState(null);
     const [url, setUrl] = useState('');
@@ -26,23 +26,31 @@ export default function ReviewForm({ handlePage, userId, purchase }) {
         }
 
         dispatch(createReview(newReview));
-        handlePage()
         history.push('/purchases')
     }
 
     return (
         <div id='formPage'>
+            <div id='formModalHeader'>
+                <div>
+                    <h2>Great! One more thing...</h2>
+                </div>
+
+                <div>circles here</div>
+            </div>
+            <div id='reviewRecs'>
+                <span>
+                    <h4>Helpful Reviews on Petsy mention:</h4>
+                    <ul>
+                        <li>the quality of the item</li>
+                        <li>if the item of the matched description</li>
+                        <li>if the item met your expectations</li>
+                    </ul>
+                </span>
+
+            </div>
             <div id="reviewForm">
                 <form onSubmit={handleSubmit}>
-                    <div>
-                        <label>Review</label>
-                        <textarea
-                            name='content'
-                            type='text'
-                            value={content}
-                            onChange={(e) => setContent(e.target.value)}
-                        ></textarea>
-                    </div>
                     <div id="starRating">
                         {[...Array(5)].map((star, idx) => {
                             const ratingVal = idx + 1;
@@ -66,10 +74,20 @@ export default function ReviewForm({ handlePage, userId, purchase }) {
                         })}
                     </div>
 
+                    <div id='textarea'>
+                        <textarea
+                            name='content'
+                            type='text'
+                            value={content}
+                            onChange={(e) => setContent(e.target.value)}
+                        ></textarea>
+                    </div>
+
+
                     <div>
 
                         <button onSubmit={handleSubmit}>submit</button>
-                        <button onClick={handlePage}>cancel</button>
+                        {/* <button onClick={handlePage}>cancel</button> */}
                     </div>
                 </form>
 
