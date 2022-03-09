@@ -44,7 +44,27 @@ def create_products_listing():
 @products_routes.route('/<int:id>', methods=["PUT"])
 @login_required
 def edit_products_listing(id):
-  pass
+  form = ProductForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+  data = form.data  
+  
+  if form.validate_on_submit():
+    product = Product.query.get(id)
+    
+    product.title = data['title']
+    product.price=data['price'],
+    product.details=data['details'],
+    product.description=data['description'],
+    product.quantity=data['quantity'],
+    product.user_id=data['user_id'],
+    product.product_type_id=data['product_type_id'],
+    product.pet_type_id=data['pet_type_id']
+    
+    db.session.commit()
+    return product.to_dict()
+    
+    
+    
 
 
 # DELETE Route

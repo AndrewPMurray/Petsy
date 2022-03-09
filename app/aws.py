@@ -2,6 +2,7 @@ import boto3
 import botocore
 import os
 import uuid
+import json
 
 
 BUCKET_NAME = os.environ.get("S3_BUCKET")
@@ -43,3 +44,8 @@ def upload_file_to_s3(file, acl="public-read"):
         return {"errors": str(e)}
 
     return {"url": f"{S3_LOCATION}{file.filename}"}
+
+def download_image(filename):
+    s3_response_object = s3.get_object(Bucket=BUCKET_NAME, Key=filename)
+    image = s3_response_object['Body']
+    return image
