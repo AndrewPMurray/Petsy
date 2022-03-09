@@ -18,12 +18,11 @@ export default function ManageListings() {
 		document.querySelector('nav').style.display = 'none';
 		document.querySelector('footer').style.display = 'none';
 		return () => {
-			document.querySelector('nav').style.display = 'flex'
+			document.querySelector('nav').style.display = 'flex';
 
-			document.querySelector('footer').style.display = 'block'
+			document.querySelector('footer').style.display = 'block';
 		};
 	}, []);
-
 
 	useEffect(() => {
 		dispatch(loadProducts());
@@ -38,23 +37,30 @@ export default function ManageListings() {
 	) : (
 		<div id='manage-listings-page'>
 			<div id='top-header'>
-				<div id="leftHeader">
-					<span><Link to='/'><i className="fa-solid fa-arrow-left"></i> Back to Petsy</Link></span>
+				<div id='leftHeader'>
+					<span>
+						<Link to='/'>
+							<i className='fa-solid fa-arrow-left'></i> Back to Petsy
+						</Link>
+					</span>
 					<div id='shopManager'>
-						<div id="storeIcon">	<i className="fa-solid fa-store"></i></div>
+						<div id='storeIcon'>
+							{' '}
+							<i className='fa-solid fa-store'></i>
+						</div>
 
 						<h2>Shop Manager</h2>
-					</ div>
+					</div>
 				</div>
 
 				<button
 					onClick={() => {
-						setActiveProductId(76);
+						setActiveProductId(null);
 						setShowForm(true);
 					}}
 					id='add-listing-button'
 				>
-					<i className="fa-solid fa-plus"></i>
+					<i className='fa-solid fa-plus'></i>
 					Add Listing
 				</button>
 			</div>
