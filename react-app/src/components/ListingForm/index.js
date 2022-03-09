@@ -22,12 +22,15 @@ export default function ListingForm({ product, userId, setShowForm }) {
 	const [productType, setProductType] = useState(product?.product_type_id || 1);
 	const [petType, setPetType] = useState(product?.pet_type_id || 1);
 	const [images, setImages] = useState([]);
+	const [imagesToDelete, setImagesToDelete] = useState([]);
 	const image_names = product?.images.map((image) => image.url.split('/')[3]);
 
 	useEffect(() => {
+		setImages([]);
 		image_names?.forEach(async (name) => {
 			const res = await fetch(`/api/images/${name}`);
 			const image = await res.blob();
+			image.exists = true;
 			setImages((prev) => [...prev, image]);
 		});
 	}, [setImages]);
@@ -104,13 +107,36 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			pet_type_id: +petType,
 		};
 
-		console.log(editedProduct);
+		images.forEach(async (image) => {
+			if (!image.exists) {
+				const formData = new FormData();
+				formData.append('image', image);
+				formData.append('product_id', product?.id);
+
+				const res = await fetch('/api/images', {
+					method: 'POST',
+					body: formData,
+				});
+				if (res.ok) {
+					await res.json();
+				} else {
+					// a real app would probably use more advanced
+					// error handling
+					console.log('error');
+				}
+			}
+		});
 	};
 
 	return (
 		<>
 			<div id='picture-preview'>
-				<UploadPicture images={images} setImages={setImages} />
+				<UploadPicture
+					images={images}
+					setImages={setImages}
+					imagesToDelete={imagesToDelete}
+					setImagesToDelete={setImagesToDelete}
+				/>
 			</div>
 			<form id='listingForm' onSubmit={product ? handleEdit : handleSubmit}>
 				<label>

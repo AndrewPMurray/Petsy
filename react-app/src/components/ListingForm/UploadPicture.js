@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import productsReducer from '../../store/products';
 import './ListingForm.css';
 
-const UploadPicture = ({ images, setImages }) => {
+const UploadPicture = ({ images, setImages, imagesToDelete, setImagesToDelete }) => {
 	const history = useHistory(); // so that we can redirect after the image upload is successful
 	const [imageLoading, setImageLoading] = useState(false);
 
