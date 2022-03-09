@@ -30,13 +30,14 @@ export default function ListingForm({ product, userId, setShowForm }) {
 
 	useEffect(() => {
 		setImages([]);
-		image_names?.forEach(async (name) => {
-			const res = await fetch(`/api/images/${name}`);
-			const image = await res.blob();
-			image.exists = true;
-			image.name = name.name;
-			image.id = name.id;
-			setImages((prev) => [...prev, image]);
+		image_names?.forEach((name) => {
+			console.log(name);
+			// const res = await fetch(`/api/images/${name.name}`);
+			// const image = await res.blob();
+			// image.exists = true;
+			// image.name = name.name;
+			// image.id = name.id;
+			// setImages((prev) => [...prev, image]);
 		});
 	}, [setImages, image_names]);
 
