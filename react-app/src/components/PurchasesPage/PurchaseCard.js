@@ -1,12 +1,20 @@
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
-// import Review from './Review';
+import { loadReviewsByUser } from '../../store/reviews';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import ReviewModal from "../ReviewModal";
 
 
-function PurchaseCard({ purchase, reviews, userId }) {
-
+function PurchaseCard({ purchase, userId }) {
+	const reviews = useSelector((state) => state?.userReviews);
+	const dispatch = useDispatch();
 	let message = reviews[purchase.product_id] ? 'Edit Review' : 'Add Review'
+
+
+	useEffect(() => {
+		dispatch(loadReviewsByUser(userId));
+	}, [dispatch, userId]);
 
 
 	return (
@@ -32,12 +40,6 @@ function PurchaseCard({ purchase, reviews, userId }) {
 			</div>
 			<div id='purchaseReview'>
 				<div>
-					{/* <Review
-						purchase={purchase}
-						reviews={reviews}
-						handlePage={handlePage}
-						userId={userId}
-					/> */}
 					<ReviewModal message={message} userId={userId} product={purchase.product} reviews={reviews} />
 				</div>
 			</div>

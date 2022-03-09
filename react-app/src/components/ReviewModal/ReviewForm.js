@@ -5,18 +5,18 @@ import { useDispatch } from 'react-redux';
 import './ReviewForm.css';
 import { createReview, editReview } from '../../store/reviews';
 
-export default function ReviewForm({ userId, product, reviews, setShowModal }) {
+export default function ReviewForm({ userId, product, reviews, setShowModal, reviewExists }) {
+	console.log('0000', reviews)
 	const [content, setContent] = useState(reviews[product.id]?.content || '');
 	const [rating, setRating] = useState(reviews[product.id]?.rating || null);
-	// const [url, setUrl] = useState(product?.rating || '');
+	const [url, setUrl] = useState(product?.rating || '');
 	const [hover, setHover] = useState(null);
 	const dispatch = useDispatch();
-	// const history = useHistory();
 
-	// getting the keys (prouct ids) of products that the user has reviewed.
-	const userReviews = Object.keys(reviews).map(key => parseInt(key));
+	// getting the keys(prouct ids) of products that the user has reviewed.
+	// const userReviews = Object.keys(reviews).map(key => parseInt(key));
 	// Checking if the product has been reviewed.
-	const reviewExists = userReviews.includes(product.id);
+	// const reviewExists = userReviews.includes(product.id);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -31,7 +31,6 @@ export default function ReviewForm({ userId, product, reviews, setShowModal }) {
 
 		dispatch(createReview(newReview));
 		setShowModal(false)
-		// history.push('/purchases');
 	};
 
 
@@ -54,8 +53,6 @@ export default function ReviewForm({ userId, product, reviews, setShowModal }) {
 
 		dispatch(editReview(editedReview, reviewId));
 		setShowModal(false)
-
-		// history.push('/purchases');
 	};
 
 	return (
