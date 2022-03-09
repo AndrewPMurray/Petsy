@@ -8,8 +8,9 @@ const UploadPicture = ({ images, setImages, imagesToDelete, setImagesToDelete })
 
 	const removePhoto = (i) => {
 		const file = images[i];
-		if (file.exists && !imagesToDelete.includes(file))
+		if (file.exists && !imagesToDelete.includes(file)) {
 			setImagesToDelete((prev) => [...prev, file]);
+		}
 		setImages(images.filter((image) => image !== file));
 	};
 
@@ -27,7 +28,11 @@ const UploadPicture = ({ images, setImages, imagesToDelete, setImagesToDelete })
 						></i>
 						<img
 							key={i}
-							src={URL.createObjectURL(image)}
+							src={
+								image.url.includes('etsystatic')
+									? image.url
+									: URL.createObjectURL(image)
+							}
 							style={{ maxWidth: '300px' }}
 							alt='preview-upload'
 						/>

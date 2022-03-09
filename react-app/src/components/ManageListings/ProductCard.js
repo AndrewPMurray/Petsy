@@ -1,7 +1,12 @@
+import { useDispatch } from 'react-redux';
+import { loadProducts, deleteProduct } from '../../store/products';
+
 function ProductCard({ product, setShowForm, setActiveProductId }) {
+	const dispatch = useDispatch();
+
 	const handleDelete = (e) => {
 		e.preventDefault();
-		console.log('heeyyy');
+		dispatch(deleteProduct(product));
 	};
 
 	return (

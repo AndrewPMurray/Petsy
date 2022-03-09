@@ -40,7 +40,7 @@ def upload_file_to_s3(file, acl="public-read"):
             }
         )
     except Exception as e:
-        # in case the our s3 upload fails
+        # in case our s3 upload fails
         return {"errors": str(e)}
 
     return {"url": f"{S3_LOCATION}{file.filename}"}
@@ -50,3 +50,6 @@ def download_image(filename):
     print ('in the download_image')
     image = s3_response_object['Body']
     return image
+
+def delete_image_from_s3(filename):
+    s3.delete_object(Bucket=BUCKET_NAME, Key=filename)

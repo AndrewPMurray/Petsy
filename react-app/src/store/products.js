@@ -20,7 +20,7 @@ const edit = (product) => ({
 
 const remove = (product) => ({
 	type: DELETE_PRODUCT,
-	product,
+	deletedProduct: product,
 });
 
 export const loadProducts = () => async (dispatch) => {
@@ -105,10 +105,10 @@ const productsReducer = (state = initialState, action) => {
 
 		case DELETE_PRODUCT: {
 			newState = { ...state };
-			delete newState[action.deletedProduct];
+			console.log(action.deletedProduct);
+			delete newState[action.deletedProduct.id];
 			return newState;
 		}
-
 		default:
 			return state;
 	}
