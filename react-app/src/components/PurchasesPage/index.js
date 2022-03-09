@@ -16,7 +16,7 @@ function Purchases() {
         dispatch(loadPurchases(user.id))
         dispatch(loadReviewsByUser(user.id))
 
-    }, [dispatch]);
+    }, [dispatch, user.id]);
 
     console.log('purchases', purchases)
 

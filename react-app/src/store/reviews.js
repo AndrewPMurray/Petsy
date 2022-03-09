@@ -34,7 +34,6 @@ export const loadReviewsByUser = (userId) => async (dispatch) => {
     const response = await fetch(`/api/reviews/${userId}`)
     if (response.ok) {
         const reviews = await response.json();
-        console.log('THINK', reviews)
         dispatch(loadByUser(reviews.userReviews))
     } else {
         const errors = await response.json();

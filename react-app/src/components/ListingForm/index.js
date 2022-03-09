@@ -38,7 +38,6 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			pet_type_id: +petType,
 		};
 
-		console.log(newProduct);
 
 		dispatch(createProduct(newProduct));
 		setShowForm(false);

@@ -1,15 +1,23 @@
 import './ReviewForm.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Modal } from '../../context/Modal';
-// import ReviewForm from './ReviewForm';
+import ReviewForm from './ReviewForm';
 
 
 function ReviewModal({ message }) {
     const [showModal, setShowModal] = useState(false);
+    useEffect(() => {
 
+        console.log(showModal)
+    }, [showModal])
     return (
         <>
-            {/* <button>{message}</button> */}
+            <button onClick={() => setShowModal(true)}>{message}</button>
+            {showModal && (
+                <Modal onClose={() => setShowModal(false)}>
+                    <ReviewForm />
+                </Modal>
+            )}
         </>
     )
 }
