@@ -9,7 +9,14 @@ const UploadPicture = ({ images, setImages, imagesToDelete, setImagesToDelete })
 
 	const updateImage = (e) => {
 		const file = e.target.files[0];
-		setImages([...images, file]);
+		setImages((prev) => [...prev, file]);
+	};
+
+	const removePhoto = (i) => {
+		const file = images[i];
+		if (file.exists && !imagesToDelete.includes(file))
+			setImagesToDelete((prev) => [...prev, file]);
+		setImages(images.filter((image) => image !== file));
 	};
 
 	return (
@@ -17,7 +24,19 @@ const UploadPicture = ({ images, setImages, imagesToDelete, setImagesToDelete })
 			<input type='file' accept='image/*' onChange={updateImage} />
 			<div id='picture-preview-container'>
 				{images.map((image, i) => (
-					<img key={i} src={URL.createObjectURL(image)} style={{ maxWidth: '300px' }} />
+					<div key={`picture-preview-${i}`}>
+						<i
+							key={`delete-picture${i}`}
+							id='delete-picture'
+							className='fas fa-times'
+							onClick={() => removePhoto(i)}
+						></i>
+						<img
+							key={i}
+							src={URL.createObjectURL(image)}
+							style={{ maxWidth: '300px' }}
+						/>
+					</div>
 				))}
 			</div>
 		</>

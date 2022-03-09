@@ -31,6 +31,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			const res = await fetch(`/api/images/${name}`);
 			const image = await res.blob();
 			image.exists = true;
+			image.name = name;
 			setImages((prev) => [...prev, image]);
 		});
 	}, [setImages]);
