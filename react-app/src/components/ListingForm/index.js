@@ -24,21 +24,21 @@ export default function ListingForm({ product, userId, setShowForm }) {
 	const [images, setImages] = useState([]);
 	const [imagesToDelete, setImagesToDelete] = useState([]);
 	const image_names = product?.images.map((image) => ({
-		name: image.url.split('/')[3],
+		name: image.url.includes('etsystatic') ? image.url : image.url.split('/')[3],
 		id: image.id,
 	}));
 
 	useEffect(() => {
 		setImages([]);
 		image_names?.forEach(async (name) => {
-			const res = await fetch(`/api/images/${name}`);
+			const res = await fetch(`/api/images/${name.name}`);
 			const image = await res.blob();
 			image.exists = true;
 			image.name = name.name;
 			image.id = name.id;
 			setImages((prev) => [...prev, image]);
 		});
-	}, [setImages, image_names]);
+	}, []);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
