@@ -22,6 +22,15 @@ export default function ListingForm({ product, userId, setShowForm }) {
 	const [productType, setProductType] = useState(product?.product_type_id || 1);
 	const [petType, setPetType] = useState(product?.pet_type_id || 1);
 	const [images, setImages] = useState([]);
+	const image_names = product?.images.map((image) => image.url.split('/')[3]);
+
+	useEffect(() => {
+		image_names?.forEach(async (name) => {
+			const res = await fetch(`/api/images/${name}`);
+			const image = await res.blob();
+			setImages((prev) => [...prev, image]);
+		});
+	}, [setImages]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -43,7 +52,6 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			product_type_id: +productType,
 			pet_type_id: +petType,
 		};
-
 
 		const createdProduct = await dispatch(createProduct(newProduct));
 
