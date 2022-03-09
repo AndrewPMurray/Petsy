@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import './ReviewForm.css';
-import { createReview } from '../../store/reviews';
+import { createReview, editReview } from '../../store/reviews';
 
-export default function ReviewForm({ userId, product }) {
-	const [content, setContent] = useState(product?.content || '');
-	const [rating, setRating] = useState(product?.rating || null);
-	// const [url, setUrl] = useState(product?.rating || '');
+export default function ReviewForm({ userId, product, reviews, setShowModal, reviewExists }) {
+
+	const [content, setContent] = useState(reviews[product.id]?.content || '');
+	const [rating, setRating] = useState(reviews[product.id]?.rating || null);
+	const [url, setUrl] = useState(product?.rating || '');
 	const [hover, setHover] = useState(null);
 	const dispatch = useDispatch();
-	const history = useHistory();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -25,10 +25,31 @@ export default function ReviewForm({ userId, product }) {
 		};
 
 		dispatch(createReview(newReview));
-		history.push('/purchases');
+		setShowModal(false)
 	};
 
-	console.log('...', product, userId);
+
+
+	const handleEdit = (e) => {
+		e.preventDefault();
+
+		let reviewId;
+		if (reviewExists) {
+			reviewId = reviews[product.id].id
+		}
+
+		const editedReview = {
+			content,
+			rating,
+			user_id: userId,
+			url: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
+			product_id: product.id,
+		};
+
+		dispatch(editReview(editedReview, reviewId));
+		setShowModal(false)
+	};
+
 	return (
 		<div id='formPage'>
 			<div id='formModalHeader'>
@@ -49,8 +70,9 @@ export default function ReviewForm({ userId, product }) {
 				</span>
 			</div>
 			<div id='reviewForm'>
-				<form onSubmit={handleSubmit}>
-					<div id='starRating'>
+				<form onSubmit={reviewExists ? handleEdit : handleSubmit}>
+
+					{reviewExists && <div id='starRating'>
 						{[...Array(5)].map((star, idx) => {
 							const ratingVal = idx + 1;
 							return (
@@ -75,7 +97,7 @@ export default function ReviewForm({ userId, product }) {
 							);
 						})}
 					</div>
-
+					}
 					<div id='textarea'>
 						<textarea
 							name='content'
@@ -91,6 +113,6 @@ export default function ReviewForm({ userId, product }) {
 					</div>
 				</form>
 			</div>
-		</div>
+		</div >
 	);
 }

@@ -81,4 +81,21 @@ input[type="radio"] {
     border-radius: 15px;
     border: solid 1px #d3d3d3
 }
-    
+
+
+#yourReview {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+
+#reviewButtonDiv > button{
+    text-decoration: underline;
+} 
+
+
+#starRating {
+    display: flex;
+    justify-content: flex-start;
+}

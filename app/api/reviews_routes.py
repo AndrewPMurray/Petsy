@@ -45,24 +45,25 @@ def create_review():
 @reviews_routes.route('/<int:id>', methods=["PUT"])
 @login_required
 def edit_review(id):
+  print( '==========')
   form = ReviewForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   data = form.data
   
   if form.validate_on_submit():
-    edited_review = Review(
-      content=data["content"],
-      rating=data["rating"],
-      url=data["url"],
-      user_id=data["user_id"],
-      product_id=data["product_id"],
-      )
-    db.session.add(edited_review)
+    review = Review.query.get(id)
+    
+    review.content=data["content"],
+    review.rating=data["rating"],
+    review.url=data["url"],
+    review.user_id=data["user_id"],
+    review.product_id=data["product_id"],
+    
     db.session.commit() 
   else:
     print('****',form.errors)
     
-  return edited_review.to_dict()
+  return review.to_dict()
 
 
 # DELETE Route
