@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './Reviews.css'
+import SingleReview from './SingleReview';
 
 function Reviews({ product, products }) {
     const sellerProducts = Object.values(products).filter((p) => p?.user_id === product.user?.id);
@@ -8,6 +9,7 @@ function Reviews({ product, products }) {
     const [noReviews, setNoReviews] = useState(false);
 
     let allReviews = [];
+
     sellerProducts.map(p => {
         allReviews.push(...p.reviews)
     })
@@ -16,6 +18,19 @@ function Reviews({ product, products }) {
         if (!product.reviews.length) setNoItemReviews(true)
         if (!product.reviews.length && !allReviews) setNoReviews(true);
     }, [])
+
+    let content;
+
+    if( !noItemReviews ) {
+        content = (
+            <div className='reviews-map-div'>
+                {product.reviews.map(review => (
+                    <SingleReview review={review} />
+                ))}
+            </div>
+        )
+    }
+    console.log(product.reviews)
 
     return (
         <div className="reviews-container-div">
@@ -46,6 +61,9 @@ function Reviews({ product, products }) {
                     </div>
                 </div>
             }
+            <div className='reviews-body-div'>
+                {content}
+            </div>
         </div>
     )
 }

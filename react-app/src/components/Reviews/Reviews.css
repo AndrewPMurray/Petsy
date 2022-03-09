@@ -13,3 +13,66 @@
   display: flex;
   flex-direction: row;
 }
+
+.reviews-body-div {
+  width: 92%;
+}
+
+.single-review-container-div{
+  box-sizing: border-box;
+  height: auto;
+  width: 100%;
+  background-color: rgb(228, 196, 201);
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+}
+
+.review-buyer-header {
+  display: flex;
+  flex-direction: row;
+}
+
+.overflow-review {
+  overflow: hidden;
+  /* white-space: nowrap; */
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.review-ellipsis-button{
+  position: absolute;
+}
+
+.review-content-false {
+  width: 100%;
+}
+
+.review-content-true {
+  width: 100%;
+}
+
+.review-image {
+  height: 140px;
+  width: 140px;
+  object-fit: cover;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+.review-right-side-photo {
+  width: 30%;
+  height: 100%;
+  text-align: end;
+  margin: 10px;
+}
+
+.review-left-side {
+  width: 70%;
+  height: 100%;
+  padding: 10px;
+}
+
+
