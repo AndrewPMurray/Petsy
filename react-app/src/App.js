@@ -15,6 +15,7 @@ import ProductPage from './components/ProductPage';
 import SearchResults from './components/SearchResults';
 import ProductTypePage from './components/ProductTypePage';
 import ManageListings from './components/ManageListings';
+import Purchases from './components/PurchasesPage';
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -64,6 +65,9 @@ function App() {
 				</Route>
 				<Route path='/manage-listings'>
 					<ManageListings />
+				</Route>
+				<Route path='/purchases'>
+					<Purchases />
 				</Route>
 			</Switch>
 			<Footer />
