@@ -25,7 +25,6 @@ def create_review():
   form = ReviewForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   data = form.data
-  print('****',form.validate_on_submit)
   
   if form.validate_on_submit():
     new_review = Review(
@@ -35,13 +34,13 @@ def create_review():
       user_id=data["user_id"],
       product_id=data["product_id"],
       )
+    db.session.add(new_review)
+    db.session.commit() 
   else:
-    print('eeeeeeee',form.errors)
+    print('****',form.errors)
     
-    
-  db.session.add(new_review)
-  db.session.commit()
-  return new_review
+  return new_review.to_dict()
+   
   
   
 
@@ -52,7 +51,24 @@ def create_review():
 @reviews_routes.route('/reviews/<int:id>', methods=["PUT"])
 @login_required
 def edit_review(id):
-  pass
+  form = ReviewForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+  data = form.data
+  
+  if form.validate_on_submit():
+    edited_review = Review(
+      content=data["content"],
+      rating=data["rating"],
+      url=data["url"],
+      user_id=data["user_id"],
+      product_id=data["product_id"],
+      )
+    db.session.add(edited_review)
+    db.session.commit() 
+  else:
+    print('****',form.errors)
+    
+  return edited_review.to_dict()
 
 
 # DELETE Route
