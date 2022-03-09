@@ -16,3 +16,13 @@
   overflow: hidden;
   -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent);
 }
+
+.seller-username {
+  text-transform: capitalize;
+}
+
+.seller-icon-name-div {
+  display: flex;
+  flex-direction: row;
+  
+}

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import './ProductPage.css'
 
 function ProductPhotos({ product }) {
-  const [ selected, setSelected ] = useState(product.images[0].id)
+  const [selected, setSelected] = useState(product.images[0].id)
   let photoIds = {};
   product.images.map((image) => photoIds[image.id] = image.url)
 
@@ -12,7 +12,7 @@ function ProductPhotos({ product }) {
     <div className="product-photos-div">
       <ul className="photo-preview-ul">
         {product.images.map((image) => {
-        return <li><PhotoPreviewBlock image={image} selected={selected} setSelected={setSelected} /></li>
+          return <li key={image.id}><PhotoPreviewBlock image={image} selected={selected} setSelected={setSelected} /></li>
         })}
       </ul>
       <div className="photo-gallery-view">
