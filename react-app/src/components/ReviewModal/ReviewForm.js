@@ -7,8 +7,7 @@ import UploadPicture from '../ListingForm/UploadPicture';
 import { createReview } from '../../store/reviews';
 
 
-export default function ReviewForm() {
-    const user = useSelector(state => state.session?.user)
+export default function ReviewForm({ handlePage, userId, purchase }) {
     const [content, setContent] = useState('');
     const [rating, setRating] = useState(null);
     const [url, setUrl] = useState('');
@@ -18,14 +17,16 @@ export default function ReviewForm() {
     const dispatch = useDispatch();
     const history = useHistory();
 
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const newReview = {
-            content, rating, user_id: user.id, url: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg', product_id: 30
+            content, rating, user_id: userId, url: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg', product_id: purchase.product.id
         }
 
         dispatch(createReview(newReview));
+        handlePage()
         history.push('/purchases')
     }
 
@@ -68,6 +69,7 @@ export default function ReviewForm() {
                     <div>
 
                         <button onSubmit={handleSubmit}>submit</button>
+                        <button onClick={handlePage}>cancel</button>
                     </div>
                 </form>
 

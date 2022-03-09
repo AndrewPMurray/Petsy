@@ -48,7 +48,7 @@ def create_review():
 
 
 # PUT Route
-@reviews_routes.route('/reviews/<int:id>', methods=["PUT"])
+@reviews_routes.route('/<int:id>', methods=["PUT"])
 @login_required
 def edit_review(id):
   form = ReviewForm()
