@@ -35,7 +35,7 @@ function PurchaseCard({ purchase, userId }) {
 					></img>
 				</div>
 				<div id='purchasedItemInfo'>
-					<Link to={`/products/${purchase.product_id}`}>{purchase.product.title}</Link>
+					<Link to={`/products/${purchase.product_id}`} target="_blank">{purchase.product.title}</Link>
 				</div>
 			</div>
 			<div id='purchaseReview'>

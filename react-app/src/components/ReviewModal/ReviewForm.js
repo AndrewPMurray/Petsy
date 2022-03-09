@@ -6,17 +6,12 @@ import './ReviewForm.css';
 import { createReview, editReview } from '../../store/reviews';
 
 export default function ReviewForm({ userId, product, reviews, setShowModal, reviewExists }) {
-	console.log('0000', reviews)
+
 	const [content, setContent] = useState(reviews[product.id]?.content || '');
 	const [rating, setRating] = useState(reviews[product.id]?.rating || null);
 	const [url, setUrl] = useState(product?.rating || '');
 	const [hover, setHover] = useState(null);
 	const dispatch = useDispatch();
-
-	// getting the keys(prouct ids) of products that the user has reviewed.
-	// const userReviews = Object.keys(reviews).map(key => parseInt(key));
-	// Checking if the product has been reviewed.
-	// const reviewExists = userReviews.includes(product.id);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -76,7 +71,8 @@ export default function ReviewForm({ userId, product, reviews, setShowModal, rev
 			</div>
 			<div id='reviewForm'>
 				<form onSubmit={reviewExists ? handleEdit : handleSubmit}>
-					<div id='starRating'>
+
+					{reviewExists && <div id='starRating'>
 						{[...Array(5)].map((star, idx) => {
 							const ratingVal = idx + 1;
 							return (
@@ -101,7 +97,7 @@ export default function ReviewForm({ userId, product, reviews, setShowModal, rev
 							);
 						})}
 					</div>
-
+					}
 					<div id='textarea'>
 						<textarea
 							name='content'

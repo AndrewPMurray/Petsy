@@ -2,9 +2,12 @@ import './ReviewForm.css';
 import { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import ReviewForm from './ReviewForm';
+import { FaStar } from 'react-icons/fa';
 
 function ReviewModal({ message, product, userId, reviews, }) {
 	const [showModal, setShowModal] = useState(false);
+
+
 	const userReviews = Object.keys(reviews).map(key => parseInt(key));
 
 	const reviewExists = userReviews.includes(product.id);
@@ -29,20 +32,67 @@ function ReviewModal({ message, product, userId, reviews, }) {
 
 
 function ReviewDoesNotExist({ setShowModal }) {
+	const [hover, setHover] = useState(null);
+	const [rating, setRating] = useState(null);
+
+
+	const handleClick = (e, ratingVal) => {
+		setRating(ratingVal)
+		setShowModal(true)
+	}
+
+
 	return (
-		<div id="yourReview">
-			<span>Review this item</span>
-			<button onClick={() => setShowModal(true)}>Add Review</button>
-		</div>
+		<>
+			<div id="yourReview">
+				<div>Review this item</div>
+				{/* <button onClick={() => setShowModal(true)}>Add Review</button> */}
+
+
+			</div>
+			<div id='starRating'>
+				{[...Array(5)].map((star, idx) => {
+					const ratingVal = idx + 1;
+					return (
+						<label key={idx}>
+							<input
+								type='radio'
+								name='rating'
+								value={ratingVal}
+								placeholder='Tell us about your experience'
+								onClick={(e) => handleClick(e, ratingVal)}
+							/>
+							<FaStar
+								className='ratingStars'
+								size={40}
+								onMouseEnter={() => setHover(ratingVal)}
+								onMouseLeave={() => setHover(null)}
+								color={
+									ratingVal <= (hover || rating) ? 'FFA534' : '#e4e5e9'
+								}
+							/>
+						</label>
+					);
+				})}
+			</div>
+		</>
 	)
 }
 
 function ReviewDoesExist({ setShowModal, review }) {
+
+	const stars = [];
+	for (let i = 0; i < review.rating; i++) {
+		stars.push(i)
+	};
+
 	return (
 		<>
 			<div id="yourReview">
 				<div>Your Review</div>
-				<div>stars</div>
+				<div> {stars.map((star) => (
+					<i className="fas fa-star" key={star}></i>
+				))}</div>
 			</div>
 
 			<div id="existingReview">
