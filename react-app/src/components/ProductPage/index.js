@@ -20,7 +20,6 @@ function ProductPage() {
     dispatch(loadProducts())
   }, [dispatch])
 
-  // console.log(product)
   return (
     <>
       {
@@ -29,6 +28,7 @@ function ProductPage() {
             <div className='product-left-col'>
               <ProductPhotos product={product} />
               <Reviews product={product} products={products} />
+
             </div>
             <div className='product-right-col'>
               <ProductInfo product={product} />
