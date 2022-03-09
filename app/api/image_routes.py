@@ -30,7 +30,6 @@ def upload_image():
         return upload, 400
 
     url = upload["url"]
-    # flask_login allows us to get the current user from the request
     new_image = Image(product_id=product_id, url=url)
     db.session.add(new_image)
     db.session.commit()
