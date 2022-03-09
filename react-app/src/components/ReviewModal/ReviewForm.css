@@ -86,9 +86,16 @@ input[type="radio"] {
 #yourReview {
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 
 
 #reviewButtonDiv > button{
     text-decoration: underline;
 } 
+
+
+#starRating {
+    display: flex;
+    justify-content: flex-start;
+}

@@ -49,31 +49,31 @@ function ReviewDoesNotExist({ setShowModal }) {
 				{/* <button onClick={() => setShowModal(true)}>Add Review</button> */}
 
 
-			</div>
-			<div id='starRating'>
-				{[...Array(5)].map((star, idx) => {
-					const ratingVal = idx + 1;
-					return (
-						<label key={idx}>
-							<input
-								type='radio'
-								name='rating'
-								value={ratingVal}
-								placeholder='Tell us about your experience'
-								onClick={(e) => handleClick(e, ratingVal)}
-							/>
-							<FaStar
-								className='ratingStars'
-								size={40}
-								onMouseEnter={() => setHover(ratingVal)}
-								onMouseLeave={() => setHover(null)}
-								color={
-									ratingVal <= (hover || rating) ? 'FFA534' : '#e4e5e9'
-								}
-							/>
-						</label>
-					);
-				})}
+				<div id='starRating'>
+					{[...Array(5)].map((star, idx) => {
+						const ratingVal = idx + 1;
+						return (
+							<label key={idx}>
+								<input
+									type='radio'
+									name='rating'
+									value={ratingVal}
+									placeholder='Tell us about your experience'
+									onClick={(e) => handleClick(e, ratingVal)}
+								/>
+								<FaStar
+									className='ratingStars'
+									size={20}
+									onMouseEnter={() => setHover(ratingVal)}
+									onMouseLeave={() => setHover(null)}
+									color={
+										ratingVal <= (hover || rating) ? 'FFA534' : '#e4e5e9'
+									}
+								/>
+							</label>
+						);
+					})}
+				</div>
 			</div>
 		</>
 	)
