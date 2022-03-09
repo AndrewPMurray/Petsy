@@ -18,6 +18,7 @@ const SignUpForm = () => {
       const data = await dispatch(signUp(username, email, password));
       if (data) {
         setErrors(data)
+        // console.log('DATA', data)
       }
     }
   };
@@ -42,6 +43,8 @@ const SignUpForm = () => {
     return <Redirect to='/' />;
   }
 
+  console.log("ERRORS", errors)
+
   return (
     <form onSubmit={onSignUp}>
       <div>
@@ -50,12 +53,13 @@ const SignUpForm = () => {
         ))}
       </div>
       <div>
-        <label>User Name</label>
+        <label>Username</label>
         <input
           type='text'
           name='username'
           onChange={updateUsername}
           value={username}
+          // required={true}
         ></input>
       </div>
       <div>
@@ -65,6 +69,7 @@ const SignUpForm = () => {
           name='email'
           onChange={updateEmail}
           value={email}
+          // required={true}
         ></input>
       </div>
       <div>
@@ -74,6 +79,7 @@ const SignUpForm = () => {
           name='password'
           onChange={updatePassword}
           value={password}
+          // required={true}
         ></input>
       </div>
       <div>
@@ -83,7 +89,7 @@ const SignUpForm = () => {
           name='repeat_password'
           onChange={updateRepeatPassword}
           value={repeatPassword}
-          required={true}
+          // required={true}
         ></input>
       </div>
       <button type='submit'>Sign Up</button>

@@ -15,13 +15,26 @@ def user_exists(form, field):
 def username_exists(form, field):
     # Checking if username is already in use
     username = field.data
+    print("FIELD" ,field)
     user = User.query.filter(User.username == username).first()
     if user:
         raise ValidationError('Username is already in use.')
 
 
+def password_check():
+    pass
+
+
+def username_check():
+    pass
+
+
+def email_check():
+    pass
+
+
 class SignUpForm(FlaskForm):
     username = StringField(
-        'username', validators=[DataRequired(), username_exists])
-    email = StringField('email', validators=[DataRequired(), user_exists])
-    password = StringField('password', validators=[DataRequired()])
+        'username', validators=[DataRequired(), username_exists, username_check])
+    email = StringField('email', validators=[DataRequired(), user_exists, email_check])
+    password = StringField('password', validators=[DataRequired(), password_check])

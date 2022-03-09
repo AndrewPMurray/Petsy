@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
-import SignupForm from './Signup';
+import SignupForm from '../auth/SignUpForm';
 
 
 function SignupFormModal() {
   const [showModal, setShowModal] = useState(false);
 
-  console.log('MODAL', showModal)
   return (
     <>
       <button id='signup'

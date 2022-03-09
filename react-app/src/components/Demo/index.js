@@ -5,9 +5,9 @@ function Demo() {
   const dispatch = useDispatch();
   const demoLogin = event => {
     event.preventDefault();
-    const credential = 'Demo-lition';
+    const email = 'demo@aa.io';
     const password = 'password';
-    return dispatch(sessionActions.login({ credential, password })).catch(
+    return dispatch(sessionActions.login({ email, password })).catch(
       async (res) => { await res.json() })
   };
 
