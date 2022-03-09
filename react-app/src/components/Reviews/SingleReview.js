@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import dayjs from 'dayjs';
 
 function SingleReview({ review }) {
 	const [photoPresent, setPhotoPresent] = useState(false);
@@ -21,7 +22,7 @@ function SingleReview({ review }) {
 		if (review?.url) setPhotoPresent(true);
 	}, [review?.url]);
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		if (!isOverflowed(contentRef.current)) {
 			setTooLong(false);
 			return;
@@ -34,6 +35,9 @@ function SingleReview({ review }) {
 				<div className='review-buyer-header'>
 					<i className='fa-solid fa-circle-user'></i>
 					<p className='buyer-username'>{review.user.username}</p>
+                    <div className='date-review'>
+                        {dayjs(review.created_at).format('MMM D, YYYY')}{' '}
+                    </div>
 				</div>
 				<div className='review-star-div'>
 					{[...Array(review.rating)].map((ele, idx) => (

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useLayoutEffect } from 'react';
 import './Reviews.css';
 import SingleReview from './SingleReview';
 
@@ -7,6 +7,9 @@ function Reviews({ product, products }) {
 
 	const [noItemReviews, setNoItemReviews] = useState(false);
 	const [noReviews, setNoReviews] = useState(false);
+
+    const [showItemReviews, setShowItemReviews] = useState(false)
+    const [showSellerReviews, setSellerReviews] = useState(false)
 
 	// Yanelys' Avg Rating!
 	const reviews = Object.values(product?.reviews);
@@ -28,7 +31,7 @@ function Reviews({ product, products }) {
 		allReviews.push(...p.reviews);
 	});
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		if (!product.reviews.length) setNoItemReviews(true);
 		if (!product.reviews.length && !allReviews) setNoReviews(true);
 	}, []);
