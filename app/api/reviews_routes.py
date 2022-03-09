@@ -1,8 +1,12 @@
-from flask import Blueprint, jsonify, render_template
+from flask import Blueprint, jsonify, render_template, request
 from flask_login import login_required
 from app.models import db, Review
-from app.forms.review_form import NewReview
+from app.forms.review_form import ReviewForm
+from datetime import date
 from flask_migrate import Migrate
+from app.aws import (
+    upload_file_to_s3, allowed_file, get_unique_filename)
+
 
 reviews_routes = Blueprint('reviews_routes', __name__)
 
@@ -15,25 +19,33 @@ def reviews_by_user(id):
   return {"userReviews": [review.to_dict() for review in reviews]}
 
 # GET AND POST Route | create new review form
-@reviews_routes.route('/reviews', methods=["GET","POST"])
+@reviews_routes.route('/', methods=["POST"])
 @login_required
 def create_review():
-  form = NewReview()
+  form = ReviewForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+  data = form.data
+  print('****',form.validate_on_submit)
+  
   if form.validate_on_submit():
-    data = form.data
     new_review = Review(
       content=data["content"],
       rating=data["rating"],
       url=data["url"],
       user_id=data["user_id"],
       product_id=data["product_id"],
-      # created_at=data["created_at"],
-      # updated_at=data["updated_at"],
-    )
-    db.session.add(new_review)
-    db.session.commit()
-    # TODO: figure out closing modal from here
-  # return new_review to dict
+      )
+  else:
+    print('eeeeeeee',form.errors)
+    
+    
+  db.session.add(new_review)
+  db.session.commit()
+  return new_review
+  
+  
+
+# **** {'content': 'testsetest', 'rating': 4, 'user_id': 1, 'url': 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg', 'product_id': 30, 'created_at': None, 'updated_at': None, 'csrf_token': 'IjhhMzk4YjBjY2RhMzU5ZjUyOTcyNTVmMTRjZGIzMzI0N2YzN2IwMWIi.YigbgQ.gliaP669UJt6FIRYOJemIhrU7jM'}
 
 
 # PUT Route
