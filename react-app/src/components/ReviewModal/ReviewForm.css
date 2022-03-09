@@ -1,4 +1,6 @@
-#formPage {
+ 
+ 
+ #formPage {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,15 +10,15 @@
     border-radius: 20px;
     box-sizing: border-box;
     padding: 10px;
-}
+ }
 
-#formModalHeader {
+ #formModalHeader {
      width: 80%;
      display: flex;
      align-items: center;
      justify-content: space-between;
      margin-bottom: 20px;
-}
+ }
 
 #formModalHeader > div >  * {
     font-family: 'Laro', serif;
@@ -25,25 +27,25 @@
     font-size: 4vh;
 }
 
-#reviewRecs {
+ #reviewRecs {
     width: 70%;
     display: flex;
     justify-content: flex-start;
-}
+ }
 
 
-#reviewRecs > span > h4{
+ #reviewRecs > span > h4{
     font-family: 'Lato', sans-serif;
     margin-left: -25px;
     font-weight: 700;
 
-}
+ }
 
-#reviewRecs > span >ul > li {
+ #reviewRecs > span >ul > li {
     font-family: 'Lato', sans-serif;
     list-style:disc;
 
-}
+ }
 
 #reviewForm {
     margin-top: 20px;
