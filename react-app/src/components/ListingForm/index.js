@@ -29,7 +29,6 @@ export default function ListingForm({ product, userId, setShowForm }) {
 	}));
 
 	useEffect(() => {
-		setImages([]);
 		image_names?.forEach(async (name) => {
 			let image;
 			let res;
@@ -44,6 +43,8 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			image.id = name.id;
 			setImages((prev) => [...prev, image]);
 		});
+
+		return () => setImages([]);
 	}, []);
 
 	const handleSubmit = async (e) => {

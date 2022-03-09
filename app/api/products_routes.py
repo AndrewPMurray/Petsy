@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import User, Product, db
 from app.forms.product_form import ProductForm
+from app.aws import delete_image_from_s3
 
 
 products_routes = Blueprint('products_routes', __name__)
@@ -71,4 +72,14 @@ def edit_products_listing(id):
 @products_routes.route('/<int:id>', methods=["DELETE"])
 @login_required
 def delete_products_listing(id):
-  pass
+  product = Product.query.get(id)
+  for image in product.images:
+    if not 'etsystatic' in image.url:
+      delete_image_from_s3(str(image.url).split('/')[-1])
+  
+  deleted_product = product.to_dict()
+  
+  db.session.delete(product)
+  db.session.commit()
+  
+  return deleted_product
