@@ -1,7 +1,8 @@
 import './ListingForm.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { createProduct } from '../../store/products';
+import UploadPicture from './UploadPicture';
 
 export default function ListingForm({ product, userId, setShowForm }) {
 	const dispatch = useDispatch();
@@ -10,14 +11,19 @@ export default function ListingForm({ product, userId, setShowForm }) {
 	const [detailFields, setDetailFields] = useState(product?.details.length - 2 || 0);
 	const [details, setDetails] = useState({
 		handmade: product?.details[0] === 'Handmade' ? true : false,
-		materials: product?.details[1].slice(11, product.details[1].length) || '',
+		materials: product?.details[0].startsWith('Materials')
+			? product?.details[0]?.slice(11, product.details[1]?.length)
+			: product?.details[1]?.startsWith('Materials')
+			? product?.details[1]?.slice(11, product.details[1]?.length)
+			: '',
 	});
 	const [description, setDescription] = useState(product?.description || '');
 	const [quantity, setQuantity] = useState(product?.quantity || 1);
 	const [productType, setProductType] = useState(product?.product_type_id || 1);
 	const [petType, setPetType] = useState(product?.pet_type_id || 1);
+	const [images, setImages] = useState([]);
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		const detailsArr = [];
@@ -39,7 +45,32 @@ export default function ListingForm({ product, userId, setShowForm }) {
 		};
 
 
-		dispatch(createProduct(newProduct));
+		const createdProduct = await dispatch(createProduct(newProduct));
+
+		images.forEach(async (image) => {
+			const formData = new FormData();
+			formData.append('image', image);
+			formData.append('product_id', createdProduct.id);
+
+			// aws uploads can be a bit slow—displaying
+			// some sort of loading message is a good idea
+			// setImageLoading(true);
+
+			const res = await fetch('/api/images', {
+				method: 'POST',
+				body: formData,
+			});
+			if (res.ok) {
+				await res.json();
+				// setImageLoading(false);
+			} else {
+				// setImageLoading(false);
+				// a real app would probably use more advanced
+				// error handling
+				console.log('error');
+			}
+		});
+
 		setShowForm(false);
 	};
 
@@ -68,17 +99,12 @@ export default function ListingForm({ product, userId, setShowForm }) {
 		console.log(editedProduct);
 	};
 
-	const uploadImage = (e) => {
-		console.log(e);
-	};
-
 	return (
 		<>
+			<div id='picture-preview'>
+				<UploadPicture images={images} setImages={setImages} />
+			</div>
 			<form id='listingForm' onSubmit={product ? handleEdit : handleSubmit}>
-				<label>
-					Images
-					<input type='file' onChange={uploadImage}></input>
-				</label>
 				<label>
 					Title
 					<input

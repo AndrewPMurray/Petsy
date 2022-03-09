@@ -13,6 +13,7 @@ from .api.reviews_routes import reviews_routes
 from .api.product_types_routes import product_types_routes
 from .api.pet_type_routes import pet_type_routes
 from .api.purchases_routes import purchases_routes;
+from .api.image_routes import image_routes
 
 from .seeds import seed_commands
 
@@ -40,7 +41,11 @@ app.register_blueprint(reviews_routes, url_prefix='/api/reviews')
 app.register_blueprint(products_routes, url_prefix='/api/products')
 app.register_blueprint(product_types_routes, url_prefix='/api/product_types')
 app.register_blueprint(pet_type_routes, url_prefix='/api/pet_types')
+<<<<<<< HEAD
 app.register_blueprint(purchases_routes, url_prefix='/api/purchases')
+=======
+app.register_blueprint(image_routes, url_prefix='/api/images')
+>>>>>>> 5a918db1a04ed4c478ddba732d1c025c7fef37db
 
 db.init_app(app)
 Migrate(app, db)
