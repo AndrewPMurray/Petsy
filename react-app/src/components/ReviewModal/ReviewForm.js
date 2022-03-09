@@ -7,10 +7,10 @@ import UploadPicture from '../ListingForm/UploadPicture';
 import { createReview } from '../../store/reviews';
 
 
-export default function ReviewForm({ userId, purchase }) {
-    const [content, setContent] = useState('');
-    const [rating, setRating] = useState(null);
-    const [url, setUrl] = useState('');
+export default function ReviewForm({ userId, product }) {
+    const [content, setContent] = useState(product?.content || '');
+    const [rating, setRating] = useState(product?.rating || null);
+    const [url, setUrl] = useState(product?.rating || '');
     const [hover, setHover] = useState(null)
     const [errors, setErrors] = useState([]);
     const [images, setImages] = useState([]);
@@ -22,13 +22,14 @@ export default function ReviewForm({ userId, purchase }) {
         e.preventDefault();
 
         const newReview = {
-            content, rating, user_id: userId, url: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg', product_id: purchase.product.id
+            content, rating, user_id: userId, url: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg', product_id: product.id
         }
 
         dispatch(createReview(newReview));
         history.push('/purchases')
     }
 
+    console.log('...', product, userId)
     return (
         <div id='formPage'>
             <div id='formModalHeader'>

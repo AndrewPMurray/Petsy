@@ -5,7 +5,7 @@ import { Modal } from '../../context/Modal';
 import ReviewForm from './ReviewForm';
 
 
-function ReviewModal({ message }) {
+function ReviewModal({ message, product, userId }) {
     const [showModal, setShowModal] = useState(false);
 
 
@@ -14,7 +14,7 @@ function ReviewModal({ message }) {
             <button onClick={() => setShowModal(true)}>{message}</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <ReviewForm />
+                    <ReviewForm product={product} userId={userId} />
                 </Modal>
             )}
         </>
