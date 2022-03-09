@@ -1,6 +1,6 @@
 import ReviewModal from "../ReviewModal";
 
-function Review({ reviews, purchase }) {
+function Review({ reviews, purchase, userId }) {
 
     // if the purchased product already exists in the review state, then edit the form and pre propulate information. 
     // otherwise, the form will be a new form and post a a new.
@@ -8,7 +8,7 @@ function Review({ reviews, purchase }) {
 
     return (
         <div>
-            <ReviewModal message={message} reviews={reviews} purchase={purchase} />
+            <ReviewModal message={message} userId={userId} product={purchase.product} />
         </div >
     )
 };

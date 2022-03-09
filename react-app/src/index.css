@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&family=Lora:wght@400;500&display=swap');
 
 /* font-family: 'Lato', sans-serif; */
-/*  font-family: 'Lato', serif;*/
+/*  font-family: 'Lora', serif;*/
 
 /* CSS Reset */
 
@@ -234,4 +234,5 @@ button{
     outline: none;
 border: none;
 -webkit-appearance: none;
-}
+} 
+

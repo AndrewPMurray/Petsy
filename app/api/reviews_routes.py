@@ -1,8 +1,11 @@
-from flask import Blueprint, jsonify, render_template
+from flask import Blueprint, jsonify, render_template, request
 from flask_login import login_required
 from app.models import db, Review
-from app.forms.review_form import NewReview
 from flask_migrate import Migrate
+from app.forms.review_form import ReviewForm
+from datetime import date
+from app.aws import (
+    upload_file_to_s3, allowed_file, get_unique_filename)
 
 reviews_routes = Blueprint('reviews_routes', __name__)
 
@@ -15,32 +18,51 @@ def reviews_by_user(id):
   return {"userReviews": [review.to_dict() for review in reviews]}
 
 # GET AND POST Route | create new review form
-@reviews_routes.route('/reviews', methods=["GET","POST"])
+@reviews_routes.route('/', methods=["POST"])
 @login_required
 def create_review():
-  form = NewReview()
+  form = ReviewForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+  data = form.data
+  
   if form.validate_on_submit():
-    data = form.data
     new_review = Review(
       content=data["content"],
       rating=data["rating"],
       url=data["url"],
       user_id=data["user_id"],
       product_id=data["product_id"],
-      # created_at=data["created_at"],
-      # updated_at=data["updated_at"],
-    )
+      )
     db.session.add(new_review)
-    db.session.commit()
-    # TODO: figure out closing modal from here
-  # return new_review to dict
+    db.session.commit() 
+  else:
+    print('****',form.errors)
+    
+  return new_review.to_dict()
 
 
 # PUT Route
-@reviews_routes.route('/reviews/<int:id>', methods=["PUT"])
+@reviews_routes.route('/<int:id>', methods=["PUT"])
 @login_required
 def edit_review(id):
-  pass
+  form = ReviewForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+  data = form.data
+  
+  if form.validate_on_submit():
+    edited_review = Review(
+      content=data["content"],
+      rating=data["rating"],
+      url=data["url"],
+      user_id=data["user_id"],
+      product_id=data["product_id"],
+      )
+    db.session.add(edited_review)
+    db.session.commit() 
+  else:
+    print('****',form.errors)
+    
+  return edited_review.to_dict()
 
 
 # DELETE Route
