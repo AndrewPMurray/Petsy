@@ -15,7 +15,7 @@ const create = (newProduct) => ({
 
 const edit = (product) => ({
 	type: EDIT_PRODUCT,
-	product,
+	editedProduct: product,
 });
 
 const remove = (product) => ({
