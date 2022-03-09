@@ -29,7 +29,7 @@ const UploadPicture = ({ images, setImages, imagesToDelete, setImagesToDelete })
 						<img
 							key={i}
 							src={
-								image.url.includes('etsystatic')
+								image?.url?.includes('etsystatic')
 									? image.url
 									: URL.createObjectURL(image)
 							}
