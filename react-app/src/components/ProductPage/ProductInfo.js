@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux'
 import Highlight from "./Highlight";
+import { addToCart, updateCount } from "../../store/cart";
 import "./Description.css";
 
 function ProductInfo({ product }) {
+  const dispatch = useDispatch();
+  const cartItem = useSelector(state => state.cart[product.id]);
   const [hiddenHighlights, setHiddenHighlights] = useState(false);
   const [hiddenDes, setHiddenDes] = useState(false);
   const [hiddenSeller, setHiddenSeller] = useState(false);
@@ -33,10 +37,10 @@ function ProductInfo({ product }) {
     setHiddenSeller(!hiddenSeller);
   };
 
-  //  main button (Highlights/Description) changes display: hidden
-  // two CSS class names <button>...</button>
-  //     1. overflow: hidden, text-overflow: ellipsis !important
-  //      2. regular css, not hidden
+  const cartAdd = (e) => {
+    if (cartItem) dispatch(updateCount(product.id, cartItem.count + 1))
+    else dispatch(addToCart(product.id))
+  }
 
   return (
     <>
@@ -45,7 +49,9 @@ function ProductInfo({ product }) {
         <h3>${product.price.toFixed(2)}</h3>
       </div>
       <div className="info-button-quantity">
-        <button>Add to cart</button>
+        <button
+          onClick={cartAdd}
+        >Add to cart</button>
         <div className="info-icons">
           <div className="one-line">
             <i className="fa-solid fa-hourglass"></i>

@@ -16,6 +16,7 @@ import SearchResults from './components/SearchResults';
 import ProductTypePage from './components/ProductTypePage';
 import ManageListings from './components/ManageListings';
 import Purchases from './components/PurchasesPage';
+import Cart from './components/Cart';
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -68,6 +69,9 @@ function App() {
 				</Route>
 				<Route path='/purchases'>
 					<Purchases />
+				</Route>
+				<Route path='/cart'>
+					<Cart />
 				</Route>
 			</Switch>
 			<Footer />

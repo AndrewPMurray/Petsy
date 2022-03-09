@@ -19,6 +19,12 @@ const SignUpForm = () => {
       const data = await dispatch(signUp(username, email, password));
       if (data) setErrors(data)
     }
+    // else {
+    //   const validationErrors = {};
+    //   errors["password"] = "Passwords must match.";
+    //   setErrors(validationErrors);
+    //   return;
+    // }
   };
 
   console.log("ERRORS", errors)
