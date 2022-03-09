@@ -29,8 +29,8 @@ const UploadPicture = ({ images, setImages, imagesToDelete, setImagesToDelete })
 						<img
 							key={i}
 							src={
-								image.name.includes('etsystatic')
-									? image.name
+								image.url.includes('etsystatic')
+									? image.url
 									: URL.createObjectURL(image)
 							}
 							style={{ maxWidth: '300px' }}

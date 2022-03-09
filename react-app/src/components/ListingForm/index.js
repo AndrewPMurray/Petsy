@@ -23,24 +23,24 @@ export default function ListingForm({ product, userId, setShowForm }) {
 	const [petType, setPetType] = useState(product?.pet_type_id || 1);
 	const [images, setImages] = useState([]);
 	const [imagesToDelete, setImagesToDelete] = useState([]);
-	const image_names = product?.images.map((image) => ({
-		name: image.url.includes('etsystatic') ? image.url : image.url.split('/')[3],
+	const imageInfo = product?.images.map((image) => ({
+		url: image.url.includes('etsystatic') ? image.url : image.url.split('/')[3],
 		id: image.id,
 	}));
 
 	useEffect(() => {
-		image_names?.forEach(async (name) => {
+		imageInfo?.forEach(async (info) => {
 			let image;
 			let res;
-			if (name.name.includes('etsystatic')) {
+			if (info.url.includes('etsystatic')) {
 				image = {};
 			} else {
-				res = await fetch(`/api/images/${name.name}`);
+				res = await fetch(`/api/images/${info.url}`);
 				image = await res.blob();
 			}
 			image.exists = true;
-			image.name = name.name;
-			image.id = name.id;
+			image.url = info.url;
+			image.id = info.id;
 			setImages((prev) => [...prev, image]);
 		});
 
