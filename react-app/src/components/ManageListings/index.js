@@ -26,7 +26,7 @@ export default function ManageListings() {
 
 	useEffect(() => {
 		dispatch(loadProducts());
-	}, [dispatch]);
+	}, [dispatch, setShowForm]);
 
 	return showForm ? (
 		<ListingForm
