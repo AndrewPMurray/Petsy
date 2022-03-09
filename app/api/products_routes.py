@@ -63,9 +63,6 @@ def edit_products_listing(id):
     
     db.session.commit()
     return product.to_dict()
-    
-    
-    
 
 
 # DELETE Route
