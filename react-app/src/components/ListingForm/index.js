@@ -43,7 +43,6 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			image.id = info.id;
 			setImages((prev) => [...prev, image]);
 		});
-
 		return () => setImages([]);
 	}, []);
 
