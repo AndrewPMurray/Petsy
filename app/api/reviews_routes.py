@@ -7,7 +7,7 @@ from flask_migrate import Migrate
 reviews_routes = Blueprint('reviews_routes', __name__)
 
 # GET Route for reviews by user
-@reviews_routes.route('/reviews/users/<int:id>')
+@reviews_routes.route('/<int:id>')
 # @login_required
 def reviews_by_user(id):
   reviews = Review.query.filter(Review.user_id == id).all()
