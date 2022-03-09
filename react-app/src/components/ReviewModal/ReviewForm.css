@@ -81,4 +81,14 @@ input[type="radio"] {
     border-radius: 15px;
     border: solid 1px #d3d3d3
 }
-    
+
+
+#yourReview {
+    display: flex;
+    background-color: palegoldenrod;
+    gap: 10px;
+}
+
+#reviewButtonDiv{
+    background-color: blue;
+}

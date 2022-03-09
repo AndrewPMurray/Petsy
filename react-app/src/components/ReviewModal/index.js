@@ -18,7 +18,6 @@ function ReviewModal({ message, product, userId, reviews, }) {
 			{!reviewExists && <ReviewDoesNotExist setShowModal={setShowModal} />}
 			{reviewExists && <ReviewDoesExist setShowModal={setShowModal} review={reviews[product.id]} />}
 
-			{/* <button onClick={() => setShowModal(true)}>{message}</button> */}
 			{showModal && (
 				<Modal onClose={() => setShowModal(false)}>
 					<ReviewForm product={product} userId={userId} setShowModal={setShowModal} reviews={reviews} reviewExists={reviewExists} userReviews={userReviews} />
@@ -31,29 +30,30 @@ function ReviewModal({ message, product, userId, reviews, }) {
 
 function ReviewDoesNotExist({ setShowModal }) {
 	return (
-		<div id="purchasesReviewDiv">
-			<div id="yourReview">
-				<span>Review this item</span>
-				<button onClick={() => setShowModal(true)}>Add Review</button>
-			</div>
-		</div >
+		<div id="yourReview">
+			<span>Review this item</span>
+			<button onClick={() => setShowModal(true)}>Add Review</button>
+		</div>
 	)
 }
 
 function ReviewDoesExist({ setShowModal, review }) {
 	return (
-		<div id="purchasesReviewDiv">
+		<>
 			<div id="yourReview">
 				<div>Your Review</div>
 				<div>stars</div>
 			</div>
 
 			<div id="existingReview">
-				<div id="reviewImage">{review.url}</div>
+				{/* <div id="reviewImage">{review.url}</div> */}
 				<div id="reviewContent">{review.content}</div>
+			</div>
+			<div id="reviewButtonDiv">
 				<button onClick={() => setShowModal(true)}>Edit Review</button>
 			</div>
-		</div>
+		</>
+
 	)
 }
 
