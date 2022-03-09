@@ -31,8 +31,14 @@ export default function ListingForm({ product, userId, setShowForm }) {
 	useEffect(() => {
 		setImages([]);
 		image_names?.forEach(async (name) => {
-			const res = await fetch(`/api/images/${name.name}`);
-			const image = await res.blob();
+			let image;
+			let res;
+			if (name.name.includes('etsystatic')) {
+				image = {};
+			} else {
+				res = await fetch(`/api/images/${name.name}`);
+				image = await res.blob();
+			}
 			image.exists = true;
 			image.name = name.name;
 			image.id = name.id;
@@ -150,6 +156,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			}
 		});
 
+		dispatch(loadProducts());
 		setShowForm(false);
 	};
 

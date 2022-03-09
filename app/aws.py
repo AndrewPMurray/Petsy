@@ -50,3 +50,6 @@ def download_image(filename):
     print ('in the download_image')
     image = s3_response_object['Body']
     return image
+
+def delete_image_from_s3(filename):
+    s3.delete_object(Bucket=BUCKET_NAME, Key=filename)
