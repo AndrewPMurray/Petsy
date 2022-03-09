@@ -8,7 +8,7 @@ function Review({ reviews, purchase, userId }) {
 
     return (
         <div>
-            <ReviewModal message={message} userId={userId} product={purchase.product} />
+            <ReviewModal message={message} userId={userId} product={purchase.product} reviews={reviews} />
         </div >
     )
 };

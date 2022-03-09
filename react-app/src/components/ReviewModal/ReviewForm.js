@@ -3,15 +3,23 @@ import { FaStar } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import './ReviewForm.css';
-import { createReview } from '../../store/reviews';
+import { createReview, editReview } from '../../store/reviews';
 
-export default function ReviewForm({ userId, product }) {
-	const [content, setContent] = useState(product?.content || '');
-	const [rating, setRating] = useState(product?.rating || null);
+export default function ReviewForm({ userId, product, reviews }) {
+	const [content, setContent] = useState(reviews[product.id]?.content || '');
+	const [rating, setRating] = useState(reviews[product.id]?.rating || null);
 	// const [url, setUrl] = useState(product?.rating || '');
 	const [hover, setHover] = useState(null);
 	const dispatch = useDispatch();
 	const history = useHistory();
+
+	console.log('THIS IS A PRODUC', product)
+	console.log('THIS IS A reviews', reviews)
+
+	// getting the keys (prouct ids) of products that the user has reviewed.
+	const userReviews = Object.keys(reviews).map(key => parseInt(key));
+	// Checking if the product has been reviewed.
+	const reviewExists = userReviews.includes(product.id);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -28,7 +36,23 @@ export default function ReviewForm({ userId, product }) {
 		history.push('/purchases');
 	};
 
-	console.log('...', product, userId);
+
+
+	const handleEdit = (e) => {
+		e.preventDefault();
+
+		const editedReview = {
+			content,
+			rating,
+			user_id: userId,
+			url: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
+			product_id: product.id,
+		};
+
+		dispatch(editReview(editedReview));
+		history.push('/purchases');
+	};
+
 	return (
 		<div id='formPage'>
 			<div id='formModalHeader'>
@@ -49,7 +73,7 @@ export default function ReviewForm({ userId, product }) {
 				</span>
 			</div>
 			<div id='reviewForm'>
-				<form onSubmit={handleSubmit}>
+				<form onSubmit={reviewExists ? handleEdit : handleSubmit}>
 					<div id='starRating'>
 						{[...Array(5)].map((star, idx) => {
 							const ratingVal = idx + 1;
@@ -91,6 +115,6 @@ export default function ReviewForm({ userId, product }) {
 					</div>
 				</form>
 			</div>
-		</div>
+		</div >
 	);
 }
