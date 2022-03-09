@@ -1,4 +1,5 @@
 from .db import db
+from datetime import datetime
 
 class Purchase(db.Model):
     __tablename__ = 'purchases'
@@ -6,7 +7,7 @@ class Purchase(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
-    purchase_date = db.Column(db.Date, nullable=False)
+    purchase_date = db.Column(db.DateTime, nullable=False, default=datetime.now())
     quantity = db.Column(db.Integer, nullable=False)
     
     user = db.relationship("User", back_populates="purchases")

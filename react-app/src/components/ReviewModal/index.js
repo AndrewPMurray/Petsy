@@ -2,15 +2,13 @@ import './ReviewForm.css'
 import { useEffect, useState } from 'react';
 import { Modal } from '../../context/Modal';
 import ReviewForm from './ReviewForm';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom'
+// import { Modal } from '../../context/Modal';
 
 
 function ReviewModal({ message }) {
     const [showModal, setShowModal] = useState(false);
-    // const [page, setPage] = useState(1)
-    // useEffect(() => {
-
-    //     console.log(page)
-    // }, [page])
     return (
         <>
             <button onClick={() => setShowModal(true)}>{message}</button>
@@ -19,13 +17,6 @@ function ReviewModal({ message }) {
                     <ReviewForm />
                 </Modal>
             )}
-
-            {/* <button onClick={() => setPage(2)}>{message}</button>
-            {page == 2 && (
-                <Modal>
-                    <ReviewForm />
-                </Modal>
-            )} */}
         </>
     )
 }
