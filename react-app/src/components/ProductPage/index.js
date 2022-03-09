@@ -27,8 +27,8 @@ function ProductPage() {
         product && (
           <div className='product-div'>
             <div className='product-left-col'>
-            <ProductPhotos product={product} />
-            <Reviews product={product} />
+              <ProductPhotos product={product} />
+              <Reviews product={product} products={products} />
             </div>
             <div className='product-right-col'>
               <ProductInfo product={product} />

@@ -1,0 +1,15 @@
+.review-raving {
+  display: flex;
+  flex-direction: row;
+}
+
+.reviews-item-button,
+.reviews-seller-button {
+  display: flex;
+  flex-direction: row;
+}
+
+.reviews-title-bar {
+  display: flex;
+  flex-direction: row;
+}

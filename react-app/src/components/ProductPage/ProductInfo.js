@@ -79,7 +79,7 @@ function ProductInfo({ product }) {
           </div>
           {!hiddenHighlights &&
             product.details.map((highlight) => (
-              <Highlight string={highlight} />
+              <Highlight key={highlight} string={highlight} />
             ))}
         </div>
         <div className="info-description">

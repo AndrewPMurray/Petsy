@@ -21,7 +21,7 @@ def create_products_listing():
   form = ProductForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   data = form.data
-  
+
   if form.validate_on_submit():
     product = Product(
       title=data['title'],
@@ -33,12 +33,10 @@ def create_products_listing():
       product_type_id=data['product_type_id'],
       pet_type_id=data['pet_type_id']
     )
-    
+
     db.session.add(product)
     db.session.commit()
     return product.to_dict()
-
-  
 
 
 
