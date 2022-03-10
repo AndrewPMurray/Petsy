@@ -27,7 +27,7 @@ function Cart() {
 	});
 
 	if (!cartItems || !cartItems.length)
-		return <div className='cart'>No items in the cart. Start selecting items to purchase.</div>;
+		return <div className='cart-item-header'>No items in the cart. Start selecting items to purchase.</div>;
 
 
 	const onSubmit = (e) => {
@@ -44,7 +44,7 @@ function Cart() {
 			})
 		})
 		dispatch(reset());
-		history.push('/purchases')
+		history.push('/purchases');
 	};
 
 	return (

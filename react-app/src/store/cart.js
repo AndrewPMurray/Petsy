@@ -52,6 +52,7 @@ const cartReducer = (state = initialState, action) => {
 			return newState;
 		}
 		case RESET: {
+			window.localStorage.removeItem('cart')
 			return initialState;
 		}
 		default:
