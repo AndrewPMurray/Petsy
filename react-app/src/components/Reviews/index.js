@@ -11,8 +11,6 @@ function Reviews({ product, products }) {
 
     const [showItemReviews, setShowItemReviews] = useState(!!product.reviews.length)
     const [showSellerReviews, setShowSellerReviews] = useState(!!allReviews.length && !product.reviews.length)
-    
-    console.log(showItemReviews, showSellerReviews)
 
 	// Yanelys' Avg Rating!
 	const reviews = Object.values(product?.reviews);
@@ -48,7 +46,6 @@ function Reviews({ product, products }) {
 			</div>
 		);
 	}
-	console.log(product.reviews);
 
 	return (
 		<div className='reviews-container-div'>

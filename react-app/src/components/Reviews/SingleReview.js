@@ -1,11 +1,10 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useRefresh } from 'react-admin';
+import ScrollToTop from 'react-router-scroll-top'
 import dayjs from 'dayjs';
 
 function SingleReview({ review, seller, products }) {
 	const history = useHistory();
-	const refresh = useRefresh();
 	const [photoPresent, setPhotoPresent] = useState(false);
 
 	const [tooLong, setTooLong] = useState(true);
@@ -30,6 +29,12 @@ function SingleReview({ review, seller, products }) {
 			return;
 		}
 	}, []);
+
+	const handleProductChange = (e) => {
+		e.preventDefault()
+		history.push(`/products/${currentProduct.id}`)
+		
+	}
 
 	let currentProduct;
 	let sellerRevProductImg;
@@ -79,10 +84,9 @@ function SingleReview({ review, seller, products }) {
 						<p>Purchased Item:</p>
 						<div className='seller-review-product-info'>
 							<img className='tiny-seller-review-photo' src={sellerRevProductImg}></img>
-							<p onClick={() => {
-								history.push(`/products/${currentProduct.id}`)
-								refresh()
-							}}>{currentProduct.title}</p>
+							<ScrollToTop>
+							<button onClick={handleProductChange}>{currentProduct.title}</button>
+							</ScrollToTop>
 						</div>
 					</div>
 				}
