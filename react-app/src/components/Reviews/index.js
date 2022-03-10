@@ -8,13 +8,13 @@ function Reviews({ product, products }) {
 	const reviewsDivRef = useRef(0)
 
 	const [divHeight, setDivHeight] = useState()
-
     const sellerProducts = Object.values(products).filter((p) => p?.user_id === product.user?.id);
+	
     let allReviews = [];
     sellerProducts.forEach((p) => {
-        allReviews.push(...p.reviews);
+		allReviews.push(...p.reviews);
     });
-
+	
     const [showItemReviews, setShowItemReviews] = useState(!!product.reviews.length)
     const [showSellerReviews, setShowSellerReviews] = useState(!!allReviews.length && !product.reviews.length)
 
@@ -40,56 +40,71 @@ function Reviews({ product, products }) {
 	let pageNumsSeller = [];
 	let everyFourSellerItems = [];
 	let heightSellerItemsArr = [];
-
-	for (let i = 0; i < product?.reviews.length; i += 4 ) {
-		pageNumsItems.push(i)
-		everyFourItems.push(reviewsRef?.current.slice(i, i + 4))
-
-	}
-
-	for (let i = 0; i < allReviews?.length; i += 4 ) {
-		pageNumsSeller.push(i)
-		everyFourSellerItems.push(reviewsSellerRef?.current.slice(i, i + 4))
-	}
-
-	everyFourSellerItems?.forEach((range) => {
-		heightSellerItemsArr?.push(getPageHeightPer4Reviews(range))
-	})
-	console.log(heightSellerItemsArr)
-
-    // Getting combined scrollHeight of every 4 review elements to adjust the height of the review container div
+	
 	function getPageHeightPer4Reviews(reviewElements) {
-		return reviewElements?.reduce((prev, curr) => {
-			console.log(curr)
+		return reviewElements?.reduce((prev, curr, ele, i) => {
+			console.log(i, curr.scrollHeight)
 			return prev + curr.scrollHeight
 		}, 0)
 	}
 
-	if (showSellerReviews && heightSellerItemsArr.length && heightSellerItemsArr[0]) {
-		console.log(heightSellerItemsArr[0])
-		console.log(reviewsDivRef.current.style.height)
-		reviewsDivRef.current.style.height = `${heightSellerItemsArr[0]}px`
+	for (let i = 0; i < product?.reviews.length; i += 4 ) {
+		pageNumsItems.push(i)
+	}
+
+	for (let i = 0; i < allReviews?.length; i += 4 ) {
+		pageNumsSeller.push(i)
+	}
+
+	useEffect(() => {
+	if (showItemReviews) {
+		console.log(product.reviews.length)
+		for (let i = 0; i < product?.reviews.length; i += 4 ) {
+			// pageNumsItems.push(i)
+			everyFourItems?.push(reviewsRef?.current.slice(i, i + 4))		
 		}
+		everyFourItems?.forEach((range) => {
+			heightItemsArr?.push(getPageHeightPer4Reviews(range))
+		})
+		if (!divHeight) setDivHeight(heightItemsArr[0])
+	}
+	}, [showItemReviews, everyFourItems])
+	
+	useEffect(() => {
+	if (showSellerReviews) {
+		for (let i = 0; i < allReviews?.length; i += 4 ) {
+			// pageNumsSeller.push(i)
+			everyFourSellerItems?.push(reviewsSellerRef?.current.slice(i, i + 4))
+		}
+		everyFourSellerItems?.forEach((range) => {
+			heightSellerItemsArr.push(getPageHeightPer4Reviews(range))
+		})
+		if (!divHeight) setDivHeight(heightSellerItemsArr[0])
+		// console.log("pageNumsSeller", pageNumsSeller, "everyFourSellerItems", everyFourSellerItems, "heightSellerItemsArr", heightSellerItemsArr)
+	}
+	}, [showSellerReviews, everyFourSellerItems])
+	
+	let divHeightStyle;
 
-
-	console.log(reviewsDivRef?.current?.style?.height)
+	useEffect(() => {
+	
+	}, [divHeight])
+	
 	// Handling Page turn button clicks:
-	function handleBackClick(i) {
-		reviewsRef.current[i].scrollIntoView({block: 'nearest', inline: 'start'})
+	function handleBackClick(iOfReview) {
+		reviewsRef.current[iOfReview].scrollIntoView({block: 'nearest', inline: 'start'})
 	}
 
 	function handleSellerBackClick(i) {
 		reviewsSellerRef.current[i].scrollIntoView({block: 'nearest', inline: 'start'})
 	}
 
-    console.log(reviewsSellerRef)
-
 	let content;
 
 	if (product.reviews.length && allReviews.length) {
 		content = (
 			<>
-			<div ref={reviewsDivRef} className='reviews-map-div' >
+			<div ref={reviewsDivRef} className='reviews-map-div' style={{height: `${divHeight}px`}} >
 				{showItemReviews &&
                     product.reviews.map((review, i) => (
 						<SingleReview ref={el => reviewsRef.current[i] = el} i={i} review={review} />
@@ -101,14 +116,19 @@ function Reviews({ product, products }) {
 					<SingleReview ref={el => reviewsSellerRef.current[i] = el} i={i} seller="true" products={products} review={review} />
 					))}
 			</div>
-				<div className='reviews-page-buttons-div'>
-					{showItemReviews &&
-						pageNumsItems.map((ele, i) => <button className='reviews-overflow-page-buttons' onClick={() => handleBackClick(ele)}>{i + 1}</button>)
-					}
-					{showSellerReviews &&
-						pageNumsSeller.map((ele, i) => <button className='reviews-overflow-page-buttons' onClick={() => handleSellerBackClick(ele)}>{i + 1}</button>)
-					}
-				</div>
+			<div className='reviews-page-buttons-div'>
+				{showItemReviews &&
+					<>
+					{console.log(pageNumsItems)}
+					{pageNumsItems.map((ele, i) => <button className='reviews-overflow-page-buttons' onClick={() => handleBackClick(ele, i)}>{i + 1}</button>)}
+					</>
+				}
+				{showSellerReviews &&
+					<>
+					{pageNumsSeller.map((ele, i) => <button className='reviews-overflow-page-buttons' onClick={() => handleSellerBackClick(ele, i)}>{i + 1}</button>)}
+					</>
+				}
+			</div>
 			</>
 		);
 	}
@@ -145,6 +165,8 @@ function Reviews({ product, products }) {
 								<button onClick={() => {
 									setShowItemReviews(true)
 									setShowSellerReviews(false)
+									setDivHeight(0)
+									// handleBackClick(0)
 								}}>Reviews for this item</button>
 								<p className='review-total'>{product?.reviews?.length}</p>
 							</div>
@@ -153,6 +175,8 @@ function Reviews({ product, products }) {
 							<button onClick={() => {
 								setShowSellerReviews(true)
 								setShowItemReviews(false)
+								setDivHeight(0)
+								// handleSellerBackClick(0)
 							}}>Reviews for this seller</button>
 							<p className='review-seller-total'>{allReviews.length}</p>
 						</div>
