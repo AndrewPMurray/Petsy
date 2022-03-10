@@ -35,7 +35,6 @@ export const loadProducts = () => async (dispatch) => {
 };
 
 export const createProduct = (product) => async (dispatch) => {
-	console.log(product);
 	const response = await fetch('/api/products/', {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
@@ -47,7 +46,7 @@ export const createProduct = (product) => async (dispatch) => {
 		return newProduct;
 	} else {
 		const errors = await response.json();
-		console.log(errors.errors);
+		return errors;
 	}
 };
 
@@ -63,7 +62,7 @@ export const editProduct = (product) => async (dispatch) => {
 		return editedProduct;
 	} else {
 		const errors = await response.json();
-		console.log(errors.errors);
+		return errors;
 	}
 };
 
