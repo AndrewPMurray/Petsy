@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&family=Lora:wght@400;500&display=swap');
+
 #listing-form {
     width: 50vw;
     display: flex;
@@ -85,4 +87,11 @@
 
 .picture-preview-node:hover > #delete-picture {
     visibility: visible;
+}
+
+#error {
+    margin: 0;
+    font-family: Lora;
+    color: red;
+    font-size: 16px;
 }

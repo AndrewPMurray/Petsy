@@ -6,6 +6,7 @@ import UploadPicture from './UploadPicture';
 
 export default function ListingForm({ product, userId, setShowForm }) {
 	const dispatch = useDispatch();
+	const [errors, setErrors] = useState({});
 	const [title, setTitle] = useState(product?.title || '');
 	const [price, setPrice] = useState(product?.price || '');
 	const [detailFields, setDetailFields] = useState(0);
@@ -53,6 +54,18 @@ export default function ListingForm({ product, userId, setShowForm }) {
 				pet_type_id: +petType,
 			})
 		);
+
+		if (newProduct.errors) {
+			setErrors(() => {
+				const errors = {};
+				newProduct.errors.forEach((e) => {
+					const errorArr = e.split(' :');
+					errors[errorArr[0]] = errorArr[1];
+				});
+				return errors;
+			});
+			return;
+		}
 
 		if (images.length) {
 			setImageLoading(true);
@@ -172,6 +185,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			<form id='listing-form' onSubmit={product ? handleEdit : handleSubmit}>
 				<label>
 					Title
+					{errors.title && <p id='error'>{errors.title}</p>}
 					<input
 						type='text'
 						name='title'
@@ -209,6 +223,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 				</label>
 				<label>
 					Price
+					{errors.price && <p id='error'>{errors.price}</p>}
 					<input
 						type='number'
 						value={price}
@@ -251,6 +266,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 				</div>
 				<label>
 					Description
+					{errors.description && <p id='error'>{errors.description}</p>}
 					<textarea
 						id='product-description'
 						value={description}
@@ -260,6 +276,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 				</label>
 				<label>
 					Quantity
+					{errors.quantity && <p id='error'>{errors.quantity}</p>}
 					<input
 						type='number'
 						value={quantity}
