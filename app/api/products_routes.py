@@ -70,7 +70,7 @@ def edit_products_listing(id):
 def delete_products_listing(id):
   product = Product.query.get(id)
   for image in product.images:
-    if not 'etsystatic' in image.url:
+    if 'amazonaws' in image.url:
       delete_image_from_s3(str(image.url).split('/')[-1])
   
   deleted_product = product.to_dict()

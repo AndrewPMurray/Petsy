@@ -28,11 +28,7 @@ const UploadPicture = ({ images, setImages, imagesToDelete, setImagesToDelete })
 						></i>
 						<img
 							key={i}
-							src={
-								image?.url?.includes('etsystatic')
-									? image.url
-									: URL.createObjectURL(image)
-							}
+							src={image?.url ? image.url : URL.createObjectURL(image)}
 							style={{ maxHeight: '300px' }}
 							alt='preview-upload'
 						/>
