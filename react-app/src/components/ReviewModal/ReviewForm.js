@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import './ReviewForm.css';
 import { createReview, editReview } from '../../store/reviews';
 
-export default function ReviewForm({ userId, product, reviews, setShowModal, reviewExists }) {
+export default function ReviewForm({ userId, product, reviews, setShowModal, reviewExists, stars }) {
 
 	const [content, setContent] = useState(reviews[product.id]?.content || '');
 	const [rating, setRating] = useState(reviews[product.id]?.rating || null);
@@ -13,12 +13,14 @@ export default function ReviewForm({ userId, product, reviews, setShowModal, rev
 	const [hover, setHover] = useState(null);
 	const dispatch = useDispatch();
 
+	console.log('// these are starts', stars)
+
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
-
 		const newReview = {
 			content,
-			rating,
+			rating: stars,
 			user_id: userId,
 			url: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
 			product_id: product.id,
@@ -108,7 +110,7 @@ export default function ReviewForm({ userId, product, reviews, setShowModal, rev
 					</div>
 
 					<div>
-						<button onSubmit={handleSubmit}>submit</button>
+						<button>submit</button>
 						{/* <button onClick={handlePage}>cancel</button> */}
 					</div>
 				</form>

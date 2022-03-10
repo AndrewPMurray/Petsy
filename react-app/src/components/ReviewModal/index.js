@@ -6,24 +6,29 @@ import { FaStar } from 'react-icons/fa';
 
 function ReviewModal({ message, product, userId, reviews, }) {
 	const [showModal, setShowModal] = useState(false);
-
+	const [stars, setStars] = useState(0)
 
 	const userReviews = Object.keys(reviews).map(key => parseInt(key));
 
 	const reviewExists = userReviews.includes(product.id);
 
-	// if the review DOT NOT exist, then show me a form that says "leave a review with stars to select from. ON click, open modal to leave the content portion "
+	console.log('modal on?', showModal);
 
-	// if the review exits, show the reviews with an edit button below. THe edit bitton will open modal.
+	const handleClose = () => {
+		setShowModal(false)
+
+	};
 
 	return (
 		<>
-			{!reviewExists && <ReviewDoesNotExist setShowModal={setShowModal} />}
+			{!reviewExists && <ReviewDoesNotExist setStars={setStars} setShowModal={setShowModal} />}
 			{reviewExists && <ReviewDoesExist setShowModal={setShowModal} review={reviews[product.id]} />}
 
+
 			{showModal && (
-				<Modal onClose={() => setShowModal(false)}>
-					<ReviewForm product={product} userId={userId} setShowModal={setShowModal} reviews={reviews} reviewExists={reviewExists} userReviews={userReviews} />
+				// <Modal onClose={() => setShowModal(false)}>
+				<Modal onClose={handleClose}>
+					<ReviewForm product={product} userId={userId} setShowModal={setShowModal} reviews={reviews} reviewExists={reviewExists} userReviews={userReviews} stars={stars} />
 				</Modal>
 			)}
 		</>
@@ -31,13 +36,14 @@ function ReviewModal({ message, product, userId, reviews, }) {
 }
 
 
-function ReviewDoesNotExist({ setShowModal }) {
+function ReviewDoesNotExist({ setShowModal, setStars }) {
 	const [hover, setHover] = useState(null);
 	const [rating, setRating] = useState(null);
 
 
 	const handleClick = (e, ratingVal) => {
 		setRating(ratingVal)
+		setStars(ratingVal)
 		setShowModal(true)
 	}
 
