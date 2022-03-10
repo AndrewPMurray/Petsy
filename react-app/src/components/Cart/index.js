@@ -1,12 +1,16 @@
 import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadProducts } from '../../store/products';
 import CartItem from './CartItem';
 
 function Cart() {
+	const user = useSelector((state) => state.session.user)
 	const cart = useSelector((state) => state.cart);
 	const products = useSelector((state) => state.products);
 	const dispatch = useDispatch();
+
+	const history = useHistory();
 
 	useEffect(() => {
 		window.localStorage.setItem('cart', JSON.stringify(cart));
@@ -27,10 +31,18 @@ function Cart() {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		window.alert(
-			'Purchased the following:\n' +
-				`${cartItems.map((item) => `${item.count} of ${item.title}`).join('\n')}`
-		);
+		cartItems.forEach(item => {
+			fetch('/api/purchases/', {
+				method: "POST",
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					user_id: user.id,
+					product_id: item.id,
+					quantity: item.count
+				})
+			})
+		})
+		history.push('/purchases')
 	};
 
 	return (

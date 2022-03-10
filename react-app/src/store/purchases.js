@@ -1,7 +1,5 @@
 const LOAD = 'purchases/LOAD';
 
-
-
 const load = (purchases) => ({
     type: LOAD,
     purchases,
