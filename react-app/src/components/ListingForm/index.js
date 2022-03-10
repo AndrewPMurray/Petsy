@@ -21,24 +21,19 @@ export default function ListingForm({ product, userId, setShowForm }) {
 	const [quantity, setQuantity] = useState(product?.quantity || 1);
 	const [productType, setProductType] = useState(product?.product_type_id || 1);
 	const [petType, setPetType] = useState(product?.pet_type_id || 1);
-	const [images, setImages] = useState([]);
+	const [images, setImages] = useState(
+		product?.images.map((image) => ({
+			url: image.url,
+			id: image.id,
+			exists: true,
+		})) || []
+	);
 	const [imagesToDelete, setImagesToDelete] = useState([]);
 	const [imageLoading, setImageLoading] = useState(false);
 	const imageInfo = product?.images.map((image) => ({
 		url: image.url,
 		id: image.id,
 	}));
-
-	useEffect(() => {
-		imageInfo?.forEach(async (info) => {
-			const image = {};
-			image.exists = true;
-			image.url = info.url;
-			image.id = info.id;
-			setImages((prev) => [...prev, image]);
-		});
-		return () => setImages([]);
-	}, []);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -119,21 +114,21 @@ export default function ListingForm({ product, userId, setShowForm }) {
 				product_type_id: +productType,
 				pet_type_id: +petType,
 			})
-		);
+		).then(() => {
+			imagesToDelete.forEach(async (image) => {
+				const formData = new FormData();
+				formData.append('url', image.url);
 
-		imagesToDelete.forEach(async (image) => {
-			const formData = new FormData();
-			formData.append('url', image.url);
-
-			const res = await fetch(`/api/images/${image.id}`, {
-				method: 'DELETE',
-				body: formData,
+				const res = await fetch(`/api/images/${image.id}`, {
+					method: 'DELETE',
+					body: formData,
+				});
+				if (res.ok) {
+					await res.json();
+				} else {
+					console.log('error');
+				}
 			});
-			if (res.ok) {
-				await res.json();
-			} else {
-				console.log('error');
-			}
 		});
 
 		if (images.length) {
