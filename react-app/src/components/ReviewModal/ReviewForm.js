@@ -1,56 +1,117 @@
 import { useState } from 'react';
-import { FaStar } from 'react-icons/fa';
+import { FaStar, } from 'react-icons/fa';
+import { AiOutlineCheckCircle, AiTwotoneCheckCircle } from "react-icons/ai";
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import './ReviewForm.css';
-import { createReview } from '../../store/reviews';
+import { createReview, editReview } from '../../store/reviews';
+import UploadPicture from './'
+import UploadReviewImage from './UploadReviewImage';
 
-export default function ReviewForm({ userId, product }) {
-	const [content, setContent] = useState(product?.content || '');
-	const [rating, setRating] = useState(product?.rating || null);
-	// const [url, setUrl] = useState(product?.rating || '');
+export default function ReviewForm({ userId, product, reviews, setShowModal, reviewExists, stars }) {
+
+	const [content, setContent] = useState(reviews[product.id]?.content || '');
+	const [rating, setRating] = useState(reviews[product.id]?.rating || null);
+	const [url, setUrl] = useState(product?.rating || '');
 	const [hover, setHover] = useState(null);
 	const dispatch = useDispatch();
-	const history = useHistory();
+	const [active, setActive] = useState(1)
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-
 		const newReview = {
 			content,
-			rating,
+			rating: stars,
 			user_id: userId,
-			url: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
+			url: url,
 			product_id: product.id,
 		};
 
 		dispatch(createReview(newReview));
-		history.push('/purchases');
+		setShowModal(false)
 	};
 
-	console.log('...', product, userId);
+
+	const handleEdit = (e) => {
+		e.preventDefault();
+
+		let reviewId;
+		if (reviewExists) {
+			reviewId = reviews[product.id].id
+		}
+
+		const editedReview = {
+			content,
+			rating,
+			user_id: userId,
+			url: url,
+			product_id: product.id,
+		};
+
+		dispatch(editReview(editedReview, reviewId));
+		setShowModal(false)
+	};
+
+
+	const isActive = (num) => {
+		if (num === 1) {
+			return active === 1 || active === 2 || active == 3
+		}
+		if (num === 2) {
+			return active == 2 || active === 3
+		}
+		if (num === 3) {
+			return active == 3
+		}
+	};
+
+	const handlePage = (e) => {
+		e.preventDefault();
+		setActive((count) => count + 1)
+	}
+
+
 	return (
 		<div id='formPage'>
+
 			<div id='formModalHeader'>
+
 				<div>
-					<h2>Great! One more thing...</h2>
+					{active === 1 ? <h2>Great! One more thing...</h2> : <h2>Extra Credit: add a photo!</h2>}
 				</div>
 
-				<div>circles here</div>
+				<div>
+					<div id="circles">
+						<div id="circle-1">
+							{isActive(1) ? <AiOutlineCheckCircle /> : <AiTwotoneCheckCircle />}
+						</div>
+						<div id="circle-2">
+							{isActive(2) ? <AiOutlineCheckCircle /> : <AiTwotoneCheckCircle />}
+						</div>
+
+						<div id="circle-3">
+							{isActive(3) ? <AiOutlineCheckCircle /> : <AiTwotoneCheckCircle />}
+						</div>
+					</div>
+
+				</div>
 			</div>
-			<div id='reviewRecs'>
-				<span>
-					<h4>Helpful Reviews on Petsy mention:</h4>
-					<ul>
-						<li>the quality of the item</li>
-						<li>if the item of the matched description</li>
-						<li>if the item met your expectations</li>
-					</ul>
-				</span>
-			</div>
+			{/* only show on active === 1 */}
+			{active === 1 &&
+				<div id='reviewRecs'>
+					<span>
+						<h4>Helpful Reviews on Petsy mention:</h4>
+						<ul>
+							<li>the quality of the item</li>
+							<li>if the item of the matched description</li>
+							<li>if the item met your expectations</li>
+						</ul>
+					</span>
+				</div>
+			}
 			<div id='reviewForm'>
-				<form onSubmit={handleSubmit}>
-					<div id='starRating'>
+				<form onSubmit={reviewExists ? handleEdit : handleSubmit}>
+					{/* only show on active === 1 */}
+					{reviewExists && active === 1 && <div id='starRating'>
 						{[...Array(5)].map((star, idx) => {
 							const ratingVal = idx + 1;
 							return (
@@ -73,24 +134,31 @@ export default function ReviewForm({ userId, product }) {
 									/>
 								</label>
 							);
+
 						})}
 					</div>
+					}
+					{active === 1 &&
+						<div id='textarea'>
+							<textarea
+								name='content'
+								type='text'
+								value={content}
+								onChange={(e) => setContent(e.target.value)}
+							></textarea>
+						</div>
+					}
 
-					<div id='textarea'>
-						<textarea
-							name='content'
-							type='text'
-							value={content}
-							onChange={(e) => setContent(e.target.value)}
-						></textarea>
-					</div>
-
-					<div>
-						<button onSubmit={handleSubmit}>submit</button>
-						{/* <button onClick={handlePage}>cancel</button> */}
+					{active === 2 &&
+						<div id="reviewImageDiv">
+							<UploadReviewImage review={reviews[product.id]} setUrl={setUrl} />
+						</div>
+					}
+					<div id="form_button_div">
+						{active === 2 ? <button id="reviews_submitButton">submit</button> : <button id="reviews_submitButton" onClick={handlePage}>next</button>}
 					</div>
 				</form>
 			</div>
-		</div>
+		</div >
 	);
 }

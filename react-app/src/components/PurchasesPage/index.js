@@ -1,5 +1,5 @@
 import './Purchases.css';
-import { loadReviewsByUser } from '../../store/reviews';
+// import { loadReviewsByUser } from '../../store/reviews';
 import { loadPurchases } from '../../store/purchases';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
@@ -9,11 +9,10 @@ function Purchases() {
 	const dispatch = useDispatch();
 	const user = useSelector((state) => state.session?.user);
 	const purchases = useSelector((state) => Object.values(state?.purchases));
-	const reviews = useSelector((state) => state?.userReviews);
 
 	useEffect(() => {
 		dispatch(loadPurchases(user.id));
-		dispatch(loadReviewsByUser(user.id));
+		// dispatch(loadReviewsByUser(user.id));
 	}, [dispatch, user.id]);
 
 	return (
@@ -21,7 +20,6 @@ function Purchases() {
 			{purchases.map((purchase) => (
 				<PurchaseCard
 					purchase={purchase}
-					reviews={reviews}
 					key={purchase.id}
 					userId={user.id}
 				/>

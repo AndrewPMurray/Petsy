@@ -18,6 +18,7 @@ def upload_image():
         return {"errors": "image required"}, 400
 
     image = request.files["image"]
+    print('******', image)
     product_id = request.form['product_id']
     
     if not allowed_file(image.filename):

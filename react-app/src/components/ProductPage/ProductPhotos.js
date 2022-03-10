@@ -1,11 +1,17 @@
 import PhotoPreviewBlock from './PhotoPreviewBlock';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './ProductPage.css';
 
-function ProductPhotos({ product }) {
-	const [selected, setSelected] = useState(product.images[0]?.id);
+function ProductPhotos({ product, firstImage }) {
+	const [selected, setSelected] = useState(null);
 	let photoIds = {};
-	product.images.map((image) => (photoIds[image.id] = image.url));
+	product.images.forEach((image) =>{
+		photoIds[image.id] = image.url
+	});
+
+	useEffect(() => {
+		setSelected(firstImage)
+	}, [firstImage])
 
 	return (
 		<div className='product-photos-div'>

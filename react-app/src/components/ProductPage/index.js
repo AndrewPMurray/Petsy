@@ -12,8 +12,11 @@ function ProductPage() {
   const products = useSelector(state => state?.products)
 
   let product;
+  let firstImage;
+
   if (products) {
     product = products[productId]
+    firstImage = product?.images[0].id
   }
 
   useEffect(() => {
@@ -26,7 +29,7 @@ function ProductPage() {
         product && (
           <div className='product-div'>
             <div className='product-left-col'>
-              <ProductPhotos product={product} />
+              <ProductPhotos firstImage={firstImage} product={product} />
               <Reviews product={product} products={products} />
 
             </div>

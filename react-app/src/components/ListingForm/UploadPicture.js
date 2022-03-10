@@ -29,7 +29,7 @@ const UploadPicture = ({ images, setImages, imagesToDelete, setImagesToDelete })
 						<img
 							key={i}
 							src={image?.url ? image.url : URL.createObjectURL(image)}
-							style={{ maxWidth: '300px' }}
+							style={{ maxHeight: '300px' }}
 							alt='preview-upload'
 						/>
 					</div>

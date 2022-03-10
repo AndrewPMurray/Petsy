@@ -40,7 +40,6 @@ def create_products_listing():
     return product.to_dict()
 
 
-
 # PUT Route
 @products_routes.route('/<int:id>', methods=["PUT"])
 @login_required
@@ -63,9 +62,6 @@ def edit_products_listing(id):
     
     db.session.commit()
     return product.to_dict()
-    
-    
-    
 
 
 # DELETE Route
