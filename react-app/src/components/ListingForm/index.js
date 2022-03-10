@@ -1,5 +1,5 @@
 import './ListingForm.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createProduct, editProduct, loadProducts } from '../../store/products';
 import UploadPicture from './UploadPicture';
@@ -30,10 +30,6 @@ export default function ListingForm({ product, userId, setShowForm }) {
 	);
 	const [imagesToDelete, setImagesToDelete] = useState([]);
 	const [imageLoading, setImageLoading] = useState(false);
-	const imageInfo = product?.images.map((image) => ({
-		url: image.url,
-		id: image.id,
-	}));
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
