@@ -90,6 +90,11 @@ export default function ListingForm({ product, userId, setShowForm }) {
 				console.log('error');
 			}
 		});
+
+		if (!images.length) {
+			dispatch(loadProducts());
+			setShowForm(false);
+		}
 	};
 
 	const handleEdit = async (e) => {
