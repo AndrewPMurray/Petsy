@@ -1,10 +1,8 @@
+import { FileUploader } from 'react-drag-drop-files';
 import './ListingForm.css';
 
 const UploadPicture = ({ images, setImages, imagesToDelete, setImagesToDelete }) => {
-	const updateImage = (e) => {
-		const file = e.target.files[0];
-		setImages((prev) => [...prev, file]);
-	};
+	const fileTypes = ['JPG', 'PNG', 'HEIC', ' JPEG', 'jpg', 'jpeg'];
 
 	const removePhoto = (i) => {
 		const file = images[i];
@@ -16,8 +14,7 @@ const UploadPicture = ({ images, setImages, imagesToDelete, setImagesToDelete })
 
 	return (
 		<>
-			<input type='file' accept='image/*' onChange={updateImage} />
-			<div id='picture-preview-container'>
+			<div id='picture-preview'>
 				{images.map((image, i) => (
 					<div key={`picture-preview-${i}`} className='picture-preview-node'>
 						<i
@@ -29,11 +26,18 @@ const UploadPicture = ({ images, setImages, imagesToDelete, setImagesToDelete })
 						<img
 							key={i}
 							src={image?.url ? image.url : URL.createObjectURL(image)}
-							style={{ maxHeight: '300px' }}
+							style={{ maxHeight: '150px' }}
 							alt='preview-upload'
 						/>
 					</div>
 				))}
+			</div>
+			<div id='productFileUploader'>
+				<FileUploader
+					handleChange={(file) => setImages((prev) => [...prev, file])}
+					name='image'
+					types={fileTypes}
+				/>
 			</div>
 		</>
 	);

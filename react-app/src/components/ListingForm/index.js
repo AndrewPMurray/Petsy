@@ -161,7 +161,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 
 	return (
 		<>
-			<div id='picture-preview'>
+			<div id='picture-preview-container'>
 				<UploadPicture
 					images={images}
 					setImages={setImages}
@@ -169,7 +169,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 					setImagesToDelete={setImagesToDelete}
 				/>
 			</div>
-			<form id='listingForm' onSubmit={product ? handleEdit : handleSubmit}>
+			<form id='listing-form' onSubmit={product ? handleEdit : handleSubmit}>
 				<label>
 					Title
 					<input
@@ -219,6 +219,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 				<label>
 					Handmade
 					<input
+						id='handmade-checkbox'
 						type='checkbox'
 						value={details.handmade}
 						checked={details.handmade || false}
@@ -235,6 +236,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 						onChange={(e) => setDetails({ ...details, materials: e.target.value })}
 					/>
 				</label>
+				<label>Add additional details:</label>
 				{Array.apply(null, { length: detailFields }).map((el, i) => (
 					<input
 						key={i}
@@ -244,10 +246,13 @@ export default function ListingForm({ product, userId, setShowForm }) {
 						onChange={(e) => setDetails({ ...details, [i]: e.target.value })}
 					/>
 				))}
-				<div onClick={() => setDetailFields(detailFields + 1)}>Add Additional Detail</div>
+				<div id='add-additional-detail' onClick={() => setDetailFields(detailFields + 1)}>
+					Add Additional Detail
+				</div>
 				<label>
 					Description
 					<textarea
+						id='product-description'
 						value={description}
 						name='description'
 						onChange={(e) => setDescription(e.target.value)}
@@ -262,9 +267,15 @@ export default function ListingForm({ product, userId, setShowForm }) {
 						onChange={(e) => setQuantity(e.target.value)}
 					/>
 				</label>
-				<button type='submit'> Submit </button>
+				<div id='submit-buttons-container'>
+					<button id='product-submit-button' type='submit'>
+						Submit
+					</button>
+					<div id='cancel-button' onClick={() => setShowForm(false)}>
+						Cancel
+					</div>
+				</div>
 			</form>
-			<button onClick={() => setShowForm(false)}>Cancel</button>
 			{imageLoading && <p>Submitting item, please wait...</p>}
 		</>
 	);
