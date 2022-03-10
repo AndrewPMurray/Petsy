@@ -3,10 +3,10 @@ import { useHistory } from 'react-router-dom';
 import ScrollToTop from 'react-router-scroll-top'
 import dayjs from 'dayjs';
 
-const SingleReview = forwardRef(({ onBackClick, review, seller, products }, ref) => {
+const SingleReview = forwardRef(({ review, seller, products}, ref) => {
 	const history = useHistory();
-	const [photoPresent, setPhotoPresent] = useState(false);
 
+	const [photoPresent, setPhotoPresent] = useState(false);
 	const [tooLong, setTooLong] = useState(true);
 
 	const contentRef = useRef();
@@ -94,7 +94,9 @@ const SingleReview = forwardRef(({ onBackClick, review, seller, products }, ref)
 			<div className='review-right-side-photo'>
 				<img className='review-image' src={review.url} alt='user-review'></img>
 			</div>
-			<button onClick={onBackClick}>1</button>
+			{/* <div className='reviews-page-buttons-div'>
+				<button className='reviews-overflow-page-buttons' onClick={onBackClick}>{i}</button>
+			</div> */}
 		</div>
 	);
 })

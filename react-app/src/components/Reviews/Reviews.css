@@ -103,3 +103,20 @@
   height: 35px;
   border-radius: 5px;
 }
+/* 
+.reviews-page-buttons-div {
+  position: absolute;
+  top: 10px;
+}
+
+.reviews-overflow-page-buttons {
+  display: block;
+  position: static;
+  background-color: pink;
+} */
+
+.reviews-map-div {
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+}
