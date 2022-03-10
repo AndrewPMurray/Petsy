@@ -1,11 +1,15 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, send_file
 from app.models import db, Image
 from flask_login import current_user, login_required
 from app.aws import (
-    upload_file_to_s3, allowed_file, get_unique_filename)
+    delete_image_from_s3, upload_file_to_s3, allowed_file, get_unique_filename, download_image)
 
 image_routes = Blueprint("images", __name__)
 
+@image_routes.route("/<string:filename>")
+def get_image(filename):
+    image = download_image(filename)
+    return send_file(image, 'image/png')
 
 @image_routes.route("", methods=["POST"])
 @login_required
@@ -34,3 +38,17 @@ def upload_image():
     db.session.add(new_image)
     db.session.commit()
     return {"url": url}
+
+
+@image_routes.route("/<int:id>", methods=["DELETE"])
+@login_required
+def delete_image(id):
+    image = Image.query.get(id)
+    name = request.form['name']
+    
+    if not 'etsystatic' in name:
+        delete_image_from_s3(name)
+        
+    db.session.delete(image)
+    db.session.commit()
+    return {'message': 'success'}

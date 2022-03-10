@@ -15,6 +15,7 @@
 #purchaseCard{
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 60%;
     background-color: white;
     margin-top: 20px;
@@ -45,6 +46,7 @@
     display: flex;
     align-items: center;
     padding: 5px;
+
 }
 
 #purchaseItemImageDiv {
@@ -74,21 +76,31 @@
 }
 
 #purchaseReview{
-    width: 100%;
+
+    width: 95%;
     height: 40%;
     background-color: #F5F5F1;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 5px;
+
 }
 
 #buyAgainDiv{
+    margin-top: 10px;
+    box-sizing: border-box;
     width: 100%;
     display: flex;
     justify-content: flex-start;
     background-color: white;
     padding: 10px;
+    gap: 10px;
+    align-items: center;
 }
 
 #buyAgainButton {
     background-color: black;
     color: white;
-
+    padding: 8px;
 }

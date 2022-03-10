@@ -1,7 +1,7 @@
 import './ListingForm.css';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { createProduct } from '../../store/products';
+import { createProduct, editProduct, loadProducts } from '../../store/products';
 import UploadPicture from './UploadPicture';
 
 export default function ListingForm({ product, userId, setShowForm }) {
@@ -22,6 +22,29 @@ export default function ListingForm({ product, userId, setShowForm }) {
 	const [productType, setProductType] = useState(product?.product_type_id || 1);
 	const [petType, setPetType] = useState(product?.pet_type_id || 1);
 	const [images, setImages] = useState([]);
+	const [imagesToDelete, setImagesToDelete] = useState([]);
+	const imageInfo = product?.images.map((image) => ({
+		url: image.url.includes('etsystatic') ? image.url : image.url.split('/')[3],
+		id: image.id,
+	}));
+
+	useEffect(() => {
+		imageInfo?.forEach(async (info) => {
+			let image;
+			let res;
+			if (info.url.includes('etsystatic')) {
+				image = {};
+			} else {
+				res = await fetch(`/api/images/${info.url}`);
+				image = await res.blob();
+			}
+			image.exists = true;
+			image.url = info.url;
+			image.id = info.id;
+			setImages((prev) => [...prev, image]);
+		});
+		return () => setImages([]);
+	}, []);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -33,24 +56,23 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			if (i !== 'handmade' && i !== 'materials') detailsArr.push(details[i]);
 		}
 
-		const newProduct = {
-			title,
-			price: +price,
-			details: JSON.stringify(detailsArr),
-			description,
-			quantity,
-			user_id: +userId,
-			product_type_id: +productType,
-			pet_type_id: +petType,
-		};
-
-
-		const createdProduct = await dispatch(createProduct(newProduct));
+		const newProduct = await dispatch(
+			createProduct({
+				title,
+				price: +price,
+				details: JSON.stringify(detailsArr),
+				description,
+				quantity,
+				user_id: +userId,
+				product_type_id: +productType,
+				pet_type_id: +petType,
+			})
+		);
 
 		images.forEach(async (image) => {
 			const formData = new FormData();
 			formData.append('image', image);
-			formData.append('product_id', createdProduct.id);
+			formData.append('product_id', newProduct.id);
 
 			// aws uploads can be a bit slow—displaying
 			// some sort of loading message is a good idea
@@ -71,10 +93,11 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			}
 		});
 
+		dispatch(loadProducts());
 		setShowForm(false);
 	};
 
-	const handleEdit = (e) => {
+	const handleEdit = async (e) => {
 		e.preventDefault();
 
 		const detailsArr = [];
@@ -84,25 +107,68 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			if (key !== 'handmade' && key !== 'materials') detailsArr.push(details[key]);
 		}
 
-		const editedProduct = {
-			id: product?.id,
-			title,
-			price: +price,
-			details: JSON.stringify(detailsArr),
-			description,
-			quantity,
-			user_id: +userId,
-			product_type_id: +productType,
-			pet_type_id: +petType,
-		};
+		await dispatch(
+			editProduct({
+				id: product?.id,
+				title,
+				price: +price,
+				details: JSON.stringify(detailsArr),
+				description,
+				quantity,
+				user_id: +userId,
+				product_type_id: +productType,
+				pet_type_id: +petType,
+			})
+		);
 
-		console.log(editedProduct);
+		images.forEach(async (image) => {
+			if (!image.exists) {
+				const formData = new FormData();
+				formData.append('image', image);
+				formData.append('product_id', product?.id);
+
+				const res = await fetch('/api/images', {
+					method: 'POST',
+					body: formData,
+				});
+				if (res.ok) {
+					await res.json();
+				} else {
+					// a real app would probably use more advanced
+					// error handling
+					console.log('error');
+				}
+			}
+		});
+
+		imagesToDelete.forEach(async (image) => {
+			const formData = new FormData();
+			formData.append('name', image.name);
+
+			const res = await fetch(`/api/images/${image.id}`, {
+				method: 'DELETE',
+				body: formData,
+			});
+			if (res.ok) {
+				await res.json();
+			} else {
+				console.log('error');
+			}
+		});
+
+		dispatch(loadProducts());
+		setShowForm(false);
 	};
 
 	return (
 		<>
 			<div id='picture-preview'>
-				<UploadPicture images={images} setImages={setImages} />
+				<UploadPicture
+					images={images}
+					setImages={setImages}
+					imagesToDelete={imagesToDelete}
+					setImagesToDelete={setImagesToDelete}
+				/>
 			</div>
 			<form id='listingForm' onSubmit={product ? handleEdit : handleSubmit}>
 				<label>
