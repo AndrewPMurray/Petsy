@@ -15,7 +15,7 @@
  #formModalHeader {
      width: 80%;
      display: flex;
-     align-items: center;
+     align-items: flex-start;
      justify-content: space-between;
      margin-bottom: 20px;
  }
@@ -120,12 +120,17 @@ text-decoration: underline;
     /* background-color: black; */
 }
 
-
+#form_button_div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
 
 #reviews_submitButton {
     display: flex;
     justify-content: center;
     align-items: center;
+    
     text-decoration: none;
     background-color: black;
     padding: 8px;

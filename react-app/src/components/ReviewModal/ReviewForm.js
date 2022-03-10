@@ -72,8 +72,9 @@ export default function ReviewForm({ userId, product, reviews, setShowModal, rev
 		<div id='formPage'>
 
 			<div id='formModalHeader'>
+
 				<div>
-					<h2>Great! One more thing...</h2>
+					{active === 1 ? <h2>Great! One more thing...</h2> : <h2>Extra Credit: add a photo!</h2>}
 				</div>
 
 				<div>
@@ -151,7 +152,7 @@ export default function ReviewForm({ userId, product, reviews, setShowModal, rev
 							upload an image
 						</div>
 					}
-					<div id="reviewButtonDiv">
+					<div id="form_button_div">
 						{active === 2 ? <button id="reviews_submitButton">submit</button> : <button id="reviews_submitButton" onClick={handlePage}>next</button>}
 					</div>
 				</form>
