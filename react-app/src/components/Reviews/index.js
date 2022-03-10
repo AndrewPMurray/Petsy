@@ -5,6 +5,9 @@ import SingleReview from './SingleReview';
 function Reviews({ product, products }) {
 	const reviewsRef = useRef([])
 	const reviewsSellerRef = useRef([])
+	const reviewsDivRef = useRef(0)
+
+	const [divHeight, setDivHeight] = useState()
 
     const sellerProducts = Object.values(products).filter((p) => p?.user_id === product.user?.id);
     let allReviews = [];
@@ -31,27 +34,45 @@ function Reviews({ product, products }) {
 
 	// Number of "Pages" for reviews div -- four reviews per "page"
 	let pageNumsItems = [];
+	let everyFourItems = [];
+	let heightItemsArr = [];
+
 	let pageNumsSeller = [];
+	let everyFourSellerItems = [];
+	let heightSellerItemsArr = [];
 
 	for (let i = 0; i < product?.reviews.length; i += 4 ) {
 		pageNumsItems.push(i)
+		everyFourItems.push(reviewsRef?.current.slice(i, i + 4))
+
 	}
 
 	for (let i = 0; i < allReviews?.length; i += 4 ) {
 		pageNumsSeller.push(i)
+		everyFourSellerItems.push(reviewsSellerRef?.current.slice(i, i + 4))
 	}
-	
-	useEffect(() => {
-		reviewsRef.current = reviewsRef.current.slice(0, product.reviews.length)
-	}) 
+
+	everyFourSellerItems?.forEach((range) => {
+		heightSellerItemsArr?.push(getPageHeightPer4Reviews(range))
+	})
+	console.log(heightSellerItemsArr)
 
     // Getting combined scrollHeight of every 4 review elements to adjust the height of the review container div
 	function getPageHeightPer4Reviews(reviewElements) {
-		const height = reviewElements.reduce((ele) => {
-			return ele.scrollHeight
-		})
+		return reviewElements?.reduce((prev, curr) => {
+			console.log(curr)
+			return prev + curr.scrollHeight
+		}, 0)
 	}
 
+	if (showSellerReviews && heightSellerItemsArr.length && heightSellerItemsArr[0]) {
+		console.log(heightSellerItemsArr[0])
+		console.log(reviewsDivRef.current.style.height)
+		reviewsDivRef.current.style.height = `${heightSellerItemsArr[0]}px`
+		}
+
+
+	console.log(reviewsDivRef?.current?.style?.height)
 	// Handling Page turn button clicks:
 	function handleBackClick(i) {
 		reviewsRef.current[i].scrollIntoView({block: 'nearest', inline: 'start'})
@@ -68,7 +89,7 @@ function Reviews({ product, products }) {
 	if (product.reviews.length && allReviews.length) {
 		content = (
 			<>
-			<div className='reviews-map-div'>
+			<div ref={reviewsDivRef} className='reviews-map-div' >
 				{showItemReviews &&
                     product.reviews.map((review, i) => (
 						<SingleReview ref={el => reviewsRef.current[i] = el} i={i} review={review} />
