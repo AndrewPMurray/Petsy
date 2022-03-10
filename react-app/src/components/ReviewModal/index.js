@@ -103,7 +103,7 @@ function ReviewDoesExist({ setShowModal, review }) {
 				<div id="reviewContent">{review.content}</div>
 			</div>
 			<div id="reviewButtonDiv">
-				<button onClick={() => setShowModal(true)}>Edit Review</button>
+				<button onClick={() => setShowModal(true)} id="editReviewButton">Edit Review</button>
 			</div>
 		</>
 

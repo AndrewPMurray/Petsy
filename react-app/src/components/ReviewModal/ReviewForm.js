@@ -76,17 +76,20 @@ export default function ReviewForm({ userId, product, reviews, setShowModal, rev
 					<h2>Great! One more thing...</h2>
 				</div>
 
-				<div id="circles">
-					<div id="circle-1">
-						{isActive(1) ? <AiOutlineCheckCircle /> : <AiTwotoneCheckCircle />}
-					</div>
-					<div id="circle-2">
-						{isActive(2) ? <AiOutlineCheckCircle /> : <AiTwotoneCheckCircle />}
+				<div>
+					<div id="circles">
+						<div id="circle-1">
+							{isActive(1) ? <AiOutlineCheckCircle /> : <AiTwotoneCheckCircle />}
+						</div>
+						<div id="circle-2">
+							{isActive(2) ? <AiOutlineCheckCircle /> : <AiTwotoneCheckCircle />}
+						</div>
+
+						<div id="circle-3">
+							{isActive(3) ? <AiOutlineCheckCircle /> : <AiTwotoneCheckCircle />}
+						</div>
 					</div>
 
-					<div id="circle-3">
-						{isActive(3) ? <AiOutlineCheckCircle /> : <AiTwotoneCheckCircle />}
-					</div>
 				</div>
 			</div>
 			{/* only show on active === 1 */}
@@ -144,12 +147,12 @@ export default function ReviewForm({ userId, product, reviews, setShowModal, rev
 					}
 
 					{active === 2 &&
-						<div>
+						<div id="reviewImageDiv">
 							upload an image
 						</div>
 					}
-					<div>
-						{active === 3 ? <button>submit</button> : <button onClick={handlePage}>next</button>}
+					<div id="reviewButtonDiv">
+						{active === 2 ? <button id="reviews_submitButton">submit</button> : <button id="reviews_submitButton" onClick={handlePage}>next</button>}
 					</div>
 				</form>
 			</div>
