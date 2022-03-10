@@ -99,11 +99,6 @@ input[type="radio"] {
     justify-content: flex-start;
 }
 
-#reviewImageDiv {
-    height: 150px;
-    margin-bottom: 15px;
-    background-color: purple;
-}
 #editReviewButton {
     margin-top: 10px;
 text-decoration: underline;
@@ -140,4 +135,46 @@ text-decoration: underline;
     width: 70px;
     border-radius: 15px;
     margin: 10px;
+}
+
+
+
+#reviewImageDiv {
+    height: 150px;
+    margin-bottom: 15px;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#dragDropImageDiv {
+    height: 100%;
+    width: 40%;
+}
+
+#dragDropImageDiv > img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+#dragDropArea {
+    height: 100%;
+    width: 60%;
+}
+
+#dragDropDiv {
+    width: 100%;
+    border: dashed 1px #d3d3d3;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#dragDropDiv:hover {
+    background-color:#B1D4E0;
+    cursor: grabbing;
 }
