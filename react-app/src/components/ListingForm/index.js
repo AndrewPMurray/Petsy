@@ -72,7 +72,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 					await res.json();
 					if (i === images.length - 1) {
 						setImageLoading(false);
-						dispatch(loadProducts());
+						await dispatch(loadProducts());
 						setShowForm(false);
 					}
 				} else {
@@ -83,7 +83,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 				}
 			});
 		} else {
-			dispatch(loadProducts());
+			await dispatch(loadProducts());
 			setShowForm(false);
 		}
 	};
@@ -98,6 +98,21 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			if (key !== 'handmade' && key !== 'materials') detailsArr.push(details[key]);
 		}
 
+		imagesToDelete.forEach(async (image) => {
+			const formData = new FormData();
+			formData.append('url', image.url);
+
+			const res = await fetch(`/api/images/${image.id}`, {
+				method: 'DELETE',
+				body: formData,
+			});
+			if (res.ok) {
+				await res.json();
+			} else {
+				console.log('error');
+			}
+		});
+
 		await dispatch(
 			editProduct({
 				id: product?.id,
@@ -110,22 +125,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 				product_type_id: +productType,
 				pet_type_id: +petType,
 			})
-		).then(() => {
-			imagesToDelete.forEach(async (image) => {
-				const formData = new FormData();
-				formData.append('url', image.url);
-
-				const res = await fetch(`/api/images/${image.id}`, {
-					method: 'DELETE',
-					body: formData,
-				});
-				if (res.ok) {
-					await res.json();
-				} else {
-					console.log('error');
-				}
-			});
-		});
+		);
 
 		if (images.length) {
 			setImageLoading(true);
@@ -149,12 +149,12 @@ export default function ListingForm({ product, userId, setShowForm }) {
 				}
 				if (i === images.length - 1) {
 					setImageLoading(false);
-					dispatch(loadProducts());
+					await dispatch(loadProducts());
 					setShowForm(false);
 				}
 			});
 		} else {
-			dispatch(loadProducts());
+			await dispatch(loadProducts());
 			setShowForm(false);
 		}
 	};
