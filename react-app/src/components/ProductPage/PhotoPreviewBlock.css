@@ -22,10 +22,13 @@
     height: 100%;
     width: 100%;
     box-sizing: border-box;
+    position: relative;
 }
 
 .main-gallery-image {
-    position: static;
+    object-position: top;
+    position: absolute;
+    top: 0;
     height: 100%;
     width: 100%;
     object-fit: contain;

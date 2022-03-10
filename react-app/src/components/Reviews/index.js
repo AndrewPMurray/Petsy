@@ -10,7 +10,7 @@ function Reviews({ product, products }) {
     });
 
     const [showItemReviews, setShowItemReviews] = useState(!!product.reviews.length)
-    const [showSellerReviews, setSellerReviews] = useState(!!allReviews.length)
+    const [showSellerReviews, setShowSellerReviews] = useState(!!allReviews.length && !product.reviews.length)
     
     console.log(showItemReviews, showSellerReviews)
 
@@ -35,15 +35,16 @@ function Reviews({ product, products }) {
 	if (product.reviews.length && allReviews.length) {
 		content = (
 			<div className='reviews-map-div'>
-				{showItemReviews ?
+				{showItemReviews &&
                     product.reviews.map((review) => (
-					<SingleReview review={review} />
-				    )) :
-                    allReviews.map((review) => (
 					<SingleReview review={review} />
 				    ))
                     
                 }
+				{showSellerReviews &&
+				allReviews.map((review) => (
+				<SingleReview seller="true" products={products} review={review} />
+				))}
 			</div>
 		);
 	}
@@ -76,14 +77,20 @@ function Reviews({ product, products }) {
 			 : 
 				<div className='reviews-body'>
 					<div className='reviews-title-bar'>
-						{!product.reviews.length && (
+						{product.reviews.length && (
 							<div className='reviews-item-button'>
-								<p>Reviews for this item</p>
+								<button onClick={() => {
+									setShowItemReviews(true)
+									setShowSellerReviews(false)
+								}}>Reviews for this item</button>
 								<p className='review-total'>{product?.reviews?.length}</p>
 							</div>
 						)}
 						<div className='reviews-seller-button'>
-							<p>Reviews for this seller</p>
+							<button onClick={() => {
+								setShowSellerReviews(true)
+								setShowItemReviews(false)
+							}}>Reviews for this seller</button>
 							<p className='review-seller-total'>{allReviews.length}</p>
 						</div>
 					</div>
