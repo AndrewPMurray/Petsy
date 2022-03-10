@@ -68,8 +68,8 @@ def create_review():
 @reviews_routes.route('/<int:id>', methods=["PUT"])
 @login_required
 def edit_review(id):
-  print( '==========')
   form = ReviewForm()
+  print( '==========', form.data)
   form['csrf_token'].data = request.cookies['csrf_token']
   data = form.data
   image = form.image.data

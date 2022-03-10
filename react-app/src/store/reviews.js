@@ -52,7 +52,6 @@ export const createReview = (review) => async (dispatch) => {
     formData.append('user_id', user_id)
     formData.append('product_id', product_id)
 
-    console.log('THUNK', formData.keys())
     const response = await fetch('/api/reviews/', {
         method: 'POST',
         // headers: { 'Content-Type': 'application/json' },
@@ -69,10 +68,22 @@ export const createReview = (review) => async (dispatch) => {
 }
 
 export const editReview = (review, reviewId) => async (dispatch) => {
+    const { content, rating, user_id, url, product_id } = review
+
+
+    const formData = new FormData();
+    formData.append('content', content)
+    formData.append('rating', rating)
+    formData.append('image', url)
+    formData.append('user_id', user_id)
+    formData.append('product_id', product_id)
+
+
     const response = await fetch(`/api/reviews/${reviewId}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(review),
+        // headers: { 'Content-Type': 'application/json' },
+        // body: JSON.stringify(review),
+        body: formData
     });
     if (response.ok) {
         const editedReview = await response.json();
