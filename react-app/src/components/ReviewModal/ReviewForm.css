@@ -1,9 +1,9 @@
  
- 
  #formPage {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     width: 35vw;
     height: 65vh; 
     background-color: white;
@@ -15,7 +15,7 @@
  #formModalHeader {
      width: 80%;
      display: flex;
-     align-items: center;
+     align-items: flex-start;
      justify-content: space-between;
      margin-bottom: 20px;
  }
@@ -34,11 +34,11 @@
  }
 
 
+
  #reviewRecs > span > h4{
     font-family: 'Lato', sans-serif;
     margin-left: -25px;
     font-weight: 700;
-
  }
 
  #reviewRecs > span >ul > li {
@@ -55,6 +55,7 @@
     /* align-items: center; */
 
 }
+
 
 #reviewForm > form , #reviewForm > form > div {
     width: 100%;
@@ -75,11 +76,13 @@ input[type="radio"] {
 }
 
 
+
 #textarea > textarea {
     height: 175px;
     width: 100%;
     border-radius: 15px;
-    border: solid 1px #d3d3d3
+    border: solid 1px #d3d3d3;
+    padding: 15px;
 }
 
 
@@ -90,12 +93,50 @@ input[type="radio"] {
 }
 
 
-#reviewButtonDiv > button{
-    text-decoration: underline;
-} 
-
 
 #starRating {
     display: flex;
     justify-content: flex-start;
+}
+
+#reviewImageDiv {
+    height: 150px;
+    margin-bottom: 15px;
+}
+#editReviewButton {
+    margin-top: 10px;
+text-decoration: underline;
+
+}
+#circles {
+    display: flex;
+    gap: 20px;
+}
+
+#circles > div {
+    height: 25px;
+    width: 25px;
+    border-radius: 12px;
+    /* background-color: black; */
+}
+
+#form_button_div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#reviews_submitButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    text-decoration: none;
+    background-color: black;
+    padding: 8px;
+    color: white;
+    height: 30px;
+    width: 70px;
+    border-radius: 15px;
+    margin: 10px;
 }
