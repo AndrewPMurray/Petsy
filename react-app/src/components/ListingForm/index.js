@@ -34,6 +34,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setErrors({});
 
 		const detailsArr = [];
 		if (details.handmade === true) detailsArr.push('Handmade');
@@ -90,9 +91,8 @@ export default function ListingForm({ product, userId, setShowForm }) {
 					}
 				} else {
 					setImageLoading(false);
-					// a real app would probably use more advanced
-					// error handling
-					console.log('error');
+					const errors = res.json();
+					setErrors(() => errors);
 				}
 			});
 		} else {
@@ -103,12 +103,39 @@ export default function ListingForm({ product, userId, setShowForm }) {
 
 	const handleEdit = async (e) => {
 		e.preventDefault();
+		setErrors(() => {});
 
 		const detailsArr = [];
 		if (details.handmade === true) detailsArr.push('Handmade');
 		if (details.materials !== '') detailsArr.push(`Materials: ${details.materials}`);
 		for (const key in details) {
 			if (key !== 'handmade' && key !== 'materials') detailsArr.push(details[key]);
+		}
+
+		const editedProduct = await dispatch(
+			editProduct({
+				id: product?.id,
+				title,
+				price: +price,
+				details: JSON.stringify(detailsArr),
+				description,
+				quantity,
+				user_id: +userId,
+				product_type_id: +productType,
+				pet_type_id: +petType,
+			})
+		);
+
+		if (editedProduct.errors) {
+			setErrors(() => {
+				const errors = {};
+				editedProduct.errors.forEach((e) => {
+					const errorArr = e.split(' :');
+					errors[errorArr[0]] = errorArr[1];
+				});
+				return errors;
+			});
+			return;
 		}
 
 		imagesToDelete.forEach(async (image) => {
@@ -122,23 +149,12 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			if (res.ok) {
 				await res.json();
 			} else {
-				console.log('error');
+				const errors = res.json();
+				setErrors(() => errors);
 			}
 		});
 
-		await dispatch(
-			editProduct({
-				id: product?.id,
-				title,
-				price: +price,
-				details: JSON.stringify(detailsArr),
-				description,
-				quantity,
-				user_id: +userId,
-				product_type_id: +productType,
-				pet_type_id: +petType,
-			})
-		);
+		if (errors.length) return;
 
 		if (images.length) {
 			setImageLoading(true);
@@ -155,15 +171,14 @@ export default function ListingForm({ product, userId, setShowForm }) {
 					if (res.ok) {
 						await res.json();
 					} else {
-						// a real app would probably use more advanced
-						// error handling
-						console.log('error');
+						const errors = res.json();
+						setErrors(() => errors);
 					}
 				}
 				if (i === images.length - 1) {
 					setImageLoading(false);
 					await dispatch(loadProducts());
-					setShowForm(false);
+					if (!errors.length) setShowForm(false);
 				}
 			});
 		} else {

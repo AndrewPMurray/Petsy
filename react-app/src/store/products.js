@@ -62,7 +62,7 @@ export const editProduct = (product) => async (dispatch) => {
 		return editedProduct;
 	} else {
 		const errors = await response.json();
-		return errors.errors;
+		return errors;
 	}
 };
 

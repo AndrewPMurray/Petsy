@@ -61,6 +61,7 @@
 #picture-preview {
     display: flex;
     margin: 20px;
+    flex-wrap: wrap;
 }
 
 #picture-preview > * > img {

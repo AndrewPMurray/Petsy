@@ -64,6 +64,7 @@ def edit_products_listing(id):
     
     db.session.commit()
     return product.to_dict()
+  return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 # DELETE Route
