@@ -12,6 +12,10 @@ function CartItem({ item }) {
 
   return (
     <li className="cart-item">
+      <div className='amount-cart'>
+        {item.count === 1 ? `You have ${item.count} item in your cart` :
+          `You have ${item.count} items in your cart`}
+      </div>
       <div className="cart-item-header">{item.title}</div>
       <div className="cart-item-menu">
         <input
