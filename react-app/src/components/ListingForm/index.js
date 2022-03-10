@@ -63,35 +63,35 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			})
 		);
 
-		images.forEach(async (image, i) => {
-			setImageLoading(true);
-			const formData = new FormData();
-			formData.append('image', image);
-			formData.append('product_id', newProduct.id);
+		if (images.length) {
+			images.forEach(async (image, i) => {
+				setImageLoading(true);
+				const formData = new FormData();
+				formData.append('image', image);
+				formData.append('product_id', newProduct.id);
 
-			// aws uploads can be a bit slow—displaying
-			// some sort of loading message is a good idea
+				// aws uploads can be a bit slow—displaying
+				// some sort of loading message is a good idea
 
-			const res = await fetch('/api/images', {
-				method: 'POST',
-				body: formData,
-			});
-			if (res.ok) {
-				await res.json();
-				if (i === images.length - 1) {
+				const res = await fetch('/api/images', {
+					method: 'POST',
+					body: formData,
+				});
+				if (res.ok) {
+					await res.json();
+					if (i === images.length - 1) {
+						setImageLoading(false);
+						dispatch(loadProducts());
+						setShowForm(false);
+					}
+				} else {
 					setImageLoading(false);
-					dispatch(loadProducts());
-					setShowForm(false);
+					// a real app would probably use more advanced
+					// error handling
+					console.log('error');
 				}
-			} else {
-				setImageLoading(false);
-				// a real app would probably use more advanced
-				// error handling
-				console.log('error');
-			}
-		});
-
-		if (!images.length) {
+			});
+		} else {
 			dispatch(loadProducts());
 			setShowForm(false);
 		}
@@ -136,33 +136,33 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			}
 		});
 
-		images.forEach(async (image, i) => {
-			setImageLoading(true);
-			if (!image.exists) {
-				const formData = new FormData();
-				formData.append('image', image);
-				formData.append('product_id', product?.id);
+		if (images.length) {
+			images.forEach(async (image, i) => {
+				setImageLoading(true);
+				if (!image.exists) {
+					const formData = new FormData();
+					formData.append('image', image);
+					formData.append('product_id', product?.id);
 
-				const res = await fetch('/api/images', {
-					method: 'POST',
-					body: formData,
-				});
-				if (res.ok) {
-					await res.json();
-				} else {
-					// a real app would probably use more advanced
-					// error handling
-					console.log('error');
+					const res = await fetch('/api/images', {
+						method: 'POST',
+						body: formData,
+					});
+					if (res.ok) {
+						await res.json();
+					} else {
+						// a real app would probably use more advanced
+						// error handling
+						console.log('error');
+					}
 				}
-			}
-			if (i === images.length - 1) {
-				setImageLoading(false);
-				dispatch(loadProducts());
-				setShowForm(false);
-			}
-		});
-
-		if (!images.length) {
+				if (i === images.length - 1) {
+					setImageLoading(false);
+					dispatch(loadProducts());
+					setShowForm(false);
+				}
+			});
+		} else {
 			dispatch(loadProducts());
 			setShowForm(false);
 		}
