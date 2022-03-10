@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import './Reviews.css';
 import SingleReview from './SingleReview';
 
 function Reviews({ product, products }) {
+	const reviewsRef = useRef([])
+
     const sellerProducts = Object.values(products).filter((p) => p?.user_id === product.user?.id);
     let allReviews = [];
     sellerProducts.forEach((p) => {
@@ -25,7 +27,14 @@ function Reviews({ product, products }) {
 	for (let i = 0; i < averageRating; i++) {
         stars.push(i);
 	}
+
+	useEffect(() => {
+		reviewsRef.current = reviewsRef.current.slice(0, product.reviews.length)
+	})
     
+	function handleBackClick() {
+		// whichReviewRef.current.scrollIntoView()
+	}
     
 
 	let content;
@@ -34,14 +43,14 @@ function Reviews({ product, products }) {
 		content = (
 			<div className='reviews-map-div'>
 				{showItemReviews &&
-                    product.reviews.map((review) => (
-					<SingleReview review={review} />
+                    product.reviews.map((review, i) => (
+					<SingleReview ref={el => reviewsRef.current[i] = el} onBackClick={handleBackClick} review={review} />
 				    ))
                     
                 }
 				{showSellerReviews &&
-				allReviews.map((review) => (
-				<SingleReview seller="true" products={products} review={review} />
+				allReviews.map((review, i) => (
+				<SingleReview ref={el => reviewsRef.current[i] = el} onBackClick={handleBackClick} seller="true" products={products} review={review} />
 				))}
 			</div>
 		);

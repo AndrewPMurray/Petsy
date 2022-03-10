@@ -1,9 +1,9 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState, forwardRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import ScrollToTop from 'react-router-scroll-top'
 import dayjs from 'dayjs';
 
-function SingleReview({ review, seller, products }) {
+const SingleReview = forwardRef(({ onBackClick, review, seller, products }, ref) => {
 	const history = useHistory();
 	const [photoPresent, setPhotoPresent] = useState(false);
 
@@ -45,7 +45,7 @@ function SingleReview({ review, seller, products }) {
 	}
 
 	return (
-		<div className='single-review-container-div'>
+		<div ref={ref} className='single-review-container-div'>
 			<div className='review-left-side'>
 				<div className='review-buyer-header'>
 					<i className='fa-solid fa-circle-user'></i>
@@ -94,8 +94,9 @@ function SingleReview({ review, seller, products }) {
 			<div className='review-right-side-photo'>
 				<img className='review-image' src={review.url} alt='user-review'></img>
 			</div>
+			<button onClick={onBackClick}>1</button>
 		</div>
 	);
-}
+})
 
 export default SingleReview;
