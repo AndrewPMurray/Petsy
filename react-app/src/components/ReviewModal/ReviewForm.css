@@ -102,6 +102,7 @@ input[type="radio"] {
 #reviewImageDiv {
     height: 150px;
     margin-bottom: 15px;
+    background-color: purple;
 }
 #editReviewButton {
     margin-top: 10px;

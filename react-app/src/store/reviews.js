@@ -42,6 +42,19 @@ export const loadReviewsByUser = (userId) => async (dispatch) => {
 }
 
 export const createReview = (review) => async (dispatch) => {
+    // console.log('THINK', review)
+
+    const formData = new FormData();
+    formData.append('image', review.url)
+    // console.log('FORM DATA', formData)
+    // console.log('FORM DATA.GET', formData.get('image'))
+
+    review.url = formData
+    console.log('review.url', review.url.get('image'))
+
+
+
+
     const response = await fetch('/api/reviews/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
