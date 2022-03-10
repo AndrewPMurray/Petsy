@@ -4,7 +4,6 @@ import { AiOutlineCheckCircle, AiTwotoneCheckCircle } from "react-icons/ai";
 import { useDispatch } from 'react-redux';
 import './ReviewForm.css';
 import { createReview, editReview } from '../../store/reviews';
-import UploadPicture from './'
 import UploadReviewImage from './UploadReviewImage';
 
 export default function ReviewForm({ userId, product, reviews, setShowModal, reviewExists, stars }) {
