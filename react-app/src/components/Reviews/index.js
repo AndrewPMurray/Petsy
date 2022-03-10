@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import './Reviews.css';
 import SingleReview from './SingleReview';
 
 function Reviews({ product, products }) {
+	const reviewsRef = useRef([])
+
     const sellerProducts = Object.values(products).filter((p) => p?.user_id === product.user?.id);
     let allReviews = [];
     sellerProducts.forEach((p) => {
@@ -10,9 +12,7 @@ function Reviews({ product, products }) {
     });
 
     const [showItemReviews, setShowItemReviews] = useState(!!product.reviews.length)
-    const [showSellerReviews, setSellerReviews] = useState(!!allReviews.length)
-    
-    console.log(showItemReviews, showSellerReviews)
+    const [showSellerReviews, setShowSellerReviews] = useState(!!allReviews.length && !product.reviews.length)
 
 	// Yanelys' Avg Rating!
 	const reviews = Object.values(product?.reviews);
@@ -27,7 +27,14 @@ function Reviews({ product, products }) {
 	for (let i = 0; i < averageRating; i++) {
         stars.push(i);
 	}
+
+	useEffect(() => {
+		reviewsRef.current = reviewsRef.current.slice(0, product.reviews.length)
+	})
     
+	function handleBackClick() {
+		// whichReviewRef.current.scrollIntoView()
+	}
     
 
 	let content;
@@ -35,19 +42,19 @@ function Reviews({ product, products }) {
 	if (product.reviews.length && allReviews.length) {
 		content = (
 			<div className='reviews-map-div'>
-				{showItemReviews ?
-                    product.reviews.map((review) => (
-					<SingleReview review={review} />
-				    )) :
-                    allReviews.map((review) => (
-					<SingleReview review={review} />
+				{showItemReviews &&
+                    product.reviews.map((review, i) => (
+					<SingleReview ref={el => reviewsRef.current[i] = el} onBackClick={handleBackClick} review={review} />
 				    ))
                     
                 }
+				{showSellerReviews &&
+				allReviews.map((review, i) => (
+				<SingleReview ref={el => reviewsRef.current[i] = el} onBackClick={handleBackClick} seller="true" products={products} review={review} />
+				))}
 			</div>
 		);
 	}
-	console.log(product.reviews);
 
 	return (
 		<div className='reviews-container-div'>
@@ -76,14 +83,20 @@ function Reviews({ product, products }) {
 			 : 
 				<div className='reviews-body'>
 					<div className='reviews-title-bar'>
-						{!product.reviews.length && (
+						{product.reviews.length && (
 							<div className='reviews-item-button'>
-								<p>Reviews for this item</p>
+								<button onClick={() => {
+									setShowItemReviews(true)
+									setShowSellerReviews(false)
+								}}>Reviews for this item</button>
 								<p className='review-total'>{product?.reviews?.length}</p>
 							</div>
 						)}
 						<div className='reviews-seller-button'>
-							<p>Reviews for this seller</p>
+							<button onClick={() => {
+								setShowSellerReviews(true)
+								setShowItemReviews(false)
+							}}>Reviews for this seller</button>
 							<p className='review-seller-total'>{allReviews.length}</p>
 						</div>
 					</div>

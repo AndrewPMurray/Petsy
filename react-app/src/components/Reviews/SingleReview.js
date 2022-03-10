@@ -1,17 +1,18 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState, forwardRef } from 'react';
+import { useHistory } from 'react-router-dom';
+import ScrollToTop from 'react-router-scroll-top'
 import dayjs from 'dayjs';
 
-function SingleReview({ review }) {
+const SingleReview = forwardRef(({ onBackClick, review, seller, products }, ref) => {
+	const history = useHistory();
 	const [photoPresent, setPhotoPresent] = useState(false);
 
 	const [tooLong, setTooLong] = useState(true);
 
 	const contentRef = useRef();
 
-	console.log(tooLong);
 	// console.log(review.user.username, review.url)
 	function isOverflowed(e) {
-		console.log(e.scrollHeight - 1, e.clientHeight);
 		return e.scrollHeight - 1 > e.clientHeight;
 	}
 
@@ -29,8 +30,22 @@ function SingleReview({ review }) {
 		}
 	}, []);
 
+	const handleProductChange = (e) => {
+		e.preventDefault()
+		history.push(`/products/${currentProduct.id}`)
+		
+	}
+
+	let currentProduct;
+	let sellerRevProductImg;
+
+	if (products) {
+		currentProduct = products[review.product_id]
+		sellerRevProductImg = currentProduct.images[0].url
+	}
+
 	return (
-		<div className='single-review-container-div'>
+		<div ref={ref} className='single-review-container-div'>
 			<div className='review-left-side'>
 				<div className='review-buyer-header'>
 					<i className='fa-solid fa-circle-user'></i>
@@ -64,12 +79,24 @@ function SingleReview({ review }) {
 						{review.content}
 					</p>
 				)}
+				{seller &&
+					<div className='purchased-item-div'>
+						<p>Purchased Item:</p>
+						<div className='seller-review-product-info'>
+							<img className='tiny-seller-review-photo' src={sellerRevProductImg}></img>
+							<ScrollToTop>
+							<button onClick={handleProductChange}>{currentProduct.title}</button>
+							</ScrollToTop>
+						</div>
+					</div>
+				}
 			</div>
 			<div className='review-right-side-photo'>
 				<img className='review-image' src={review.url} alt='user-review'></img>
 			</div>
+			<button onClick={onBackClick}>1</button>
 		</div>
 	);
-}
+})
 
 export default SingleReview;
