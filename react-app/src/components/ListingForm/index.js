@@ -55,8 +55,8 @@ export default function ListingForm({ product, userId, setShowForm }) {
 		);
 
 		if (images.length) {
+			setImageLoading(true);
 			images.forEach(async (image, i) => {
-				setImageLoading(true);
 				const formData = new FormData();
 				formData.append('image', image);
 				formData.append('product_id', newProduct.id);
@@ -128,8 +128,8 @@ export default function ListingForm({ product, userId, setShowForm }) {
 		});
 
 		if (images.length) {
+			setImageLoading(true);
 			images.forEach(async (image, i) => {
-				setImageLoading(true);
 				if (!image.exists) {
 					const formData = new FormData();
 					formData.append('image', image);
