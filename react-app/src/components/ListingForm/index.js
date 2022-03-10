@@ -23,6 +23,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 	const [petType, setPetType] = useState(product?.pet_type_id || 1);
 	const [images, setImages] = useState([]);
 	const [imagesToDelete, setImagesToDelete] = useState([]);
+	const [imageLoading, setImageLoading] = useState(false);
 	const imageInfo = product?.images.map((image) => ({
 		url: image.url,
 		id: image.id,
@@ -62,14 +63,14 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			})
 		);
 
-		images.forEach(async (image) => {
+		images.forEach(async (image, i) => {
+			setImageLoading(true);
 			const formData = new FormData();
 			formData.append('image', image);
 			formData.append('product_id', newProduct.id);
 
 			// aws uploads can be a bit slow—displaying
 			// some sort of loading message is a good idea
-			// setImageLoading(true);
 
 			const res = await fetch('/api/images', {
 				method: 'POST',
@@ -77,17 +78,18 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			});
 			if (res.ok) {
 				await res.json();
-				// setImageLoading(false);
+				if (i === images.length - 1) {
+					setImageLoading(false);
+					dispatch(loadProducts());
+					setShowForm(false);
+				}
 			} else {
-				// setImageLoading(false);
+				setImageLoading(false);
 				// a real app would probably use more advanced
 				// error handling
 				console.log('error');
 			}
 		});
-
-		dispatch(loadProducts());
-		setShowForm(false);
 	};
 
 	const handleEdit = async (e) => {
@@ -114,7 +116,23 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			})
 		);
 
-		images.forEach(async (image) => {
+		imagesToDelete.forEach(async (image) => {
+			const formData = new FormData();
+			formData.append('url', image.url);
+
+			const res = await fetch(`/api/images/${image.id}`, {
+				method: 'DELETE',
+				body: formData,
+			});
+			if (res.ok) {
+				await res.json();
+			} else {
+				console.log('error');
+			}
+		});
+
+		images.forEach(async (image, i) => {
+			setImageLoading(true);
 			if (!image.exists) {
 				const formData = new FormData();
 				formData.append('image', image);
@@ -132,25 +150,17 @@ export default function ListingForm({ product, userId, setShowForm }) {
 					console.log('error');
 				}
 			}
-		});
-
-		imagesToDelete.forEach(async (image) => {
-			const formData = new FormData();
-			formData.append('url', image.url);
-
-			const res = await fetch(`/api/images/${image.id}`, {
-				method: 'DELETE',
-				body: formData,
-			});
-			if (res.ok) {
-				await res.json();
-			} else {
-				console.log('error');
+			if (i === images.length - 1) {
+				setImageLoading(false);
+				dispatch(loadProducts());
+				setShowForm(false);
 			}
 		});
 
-		dispatch(loadProducts());
-		setShowForm(false);
+		if (!images.length) {
+			dispatch(loadProducts());
+			setShowForm(false);
+		}
 	};
 
 	return (
@@ -259,6 +269,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 				<button type='submit'> Submit </button>
 			</form>
 			<button onClick={() => setShowForm(false)}>Cancel</button>
+			{imageLoading && <p>Submitting item, please wait...</p>}
 		</>
 	);
 }
