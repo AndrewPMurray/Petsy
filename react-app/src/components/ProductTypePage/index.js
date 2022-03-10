@@ -1,7 +1,7 @@
 import './ProductTypePage.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { loadProductTypes } from '../../store/productTypes';
+import { loadProductTypesByPet } from '../../store/productTypes';
 import { useEffect } from 'react';
 import DetailedProductGrid from '../DetailedProductGrid';
 
@@ -11,7 +11,8 @@ export default function ProductTypePage() {
 	const products = useSelector((state) => Object.values(state?.productTypes));
 
 	useEffect(() => {
-		dispatch(loadProductTypes(petTypeId, productTypeId));
+		dispatch(loadProductTypesByPet(petTypeId, productTypeId));
 	}, [dispatch, petTypeId, productTypeId]);
+
 	return <DetailedProductGrid products={products} />;
 }

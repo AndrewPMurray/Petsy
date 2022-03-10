@@ -1,8 +1,14 @@
 // import ProductsBubble from "../ProductBubbles"
-
+import { useEffect, useState } from 'react';
 import ProductTypeBubbles from '../ProductTypeBubbles';
 
 function ProductTypes({ productTypes, products, petType }) {
+	const firstProductsByType = productTypes.map((productType) => {
+		for (let i = 0; i < products.length; i++) {
+			if (productType.id === products[i].product_type.id) return products[i];
+		}
+	});
+
 	return (
 		<div id='petTypeHeader'>
 			<div id='petTypeHeaderContent'>
@@ -15,7 +21,15 @@ function ProductTypes({ productTypes, products, petType }) {
 						consequat.
 					</>
 				</div>
-				<ProductTypeBubbles products={products} productTypes={productTypes} />
+				{firstProductsByType.map(
+					(product) =>
+						product && (
+							<ProductTypeBubbles
+								product={product}
+								productType={product?.product_type}
+							/>
+						)
+				)}
 			</div>
 		</div>
 	);
