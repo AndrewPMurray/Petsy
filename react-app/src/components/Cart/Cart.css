@@ -1,0 +1,24 @@
+.cart-item-header {
+  padding: 20px 5px;
+  font-size: 27px;
+  line-height: 36px;
+}
+
+.cart-item-menu {
+  display: block;
+  font-size: 16px;
+}
+
+.amount-cart {
+  padding: 20px 5px;
+  font-size: 27px;
+  line-height: 36px;
+}
+
+.amount-item-input {
+  margin-left: 5px;
+  width: 40px;
+}
+
+/* .item-header{
+} */

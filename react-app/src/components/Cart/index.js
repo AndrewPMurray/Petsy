@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { loadProducts } from '../../store/products';
 import { reset } from '../../store/cart';
 import CartItem from './CartItem';
+import './Cart.css'
 
 function Cart() {
 	const user = useSelector((state) => state.session.user)
