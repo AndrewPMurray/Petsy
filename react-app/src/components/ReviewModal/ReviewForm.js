@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { FaStar } from 'react-icons/fa';
+import { FaStar, } from 'react-icons/fa';
+import { AiOutlineCheckCircle, AiTwotoneCheckCircle } from "react-icons/ai";
 import { useDispatch } from 'react-redux';
-// import { useHistory } from 'react-router-dom';
 import './ReviewForm.css';
 import { createReview, editReview } from '../../store/reviews';
 
@@ -12,9 +12,7 @@ export default function ReviewForm({ userId, product, reviews, setShowModal, rev
 	const [url, setUrl] = useState(product?.rating || '');
 	const [hover, setHover] = useState(null);
 	const dispatch = useDispatch();
-
-	console.log('// these are starts', stars)
-
+	const [active, setActive] = useState(1)
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -29,7 +27,6 @@ export default function ReviewForm({ userId, product, reviews, setShowModal, rev
 		dispatch(createReview(newReview));
 		setShowModal(false)
 	};
-
 
 
 	const handleEdit = (e) => {
@@ -52,29 +49,63 @@ export default function ReviewForm({ userId, product, reviews, setShowModal, rev
 		setShowModal(false)
 	};
 
+
+	const isActive = (num) => {
+		if (num === 1) {
+			return active === 1 || active === 2 || active == 3
+		}
+		if (num === 2) {
+			return active == 2 || active === 3
+		}
+		if (num === 3) {
+			return active == 3
+		}
+	};
+
+	const handlePage = (e) => {
+		e.preventDefault();
+		setActive((count) => count + 1)
+	}
+
+
 	return (
 		<div id='formPage'>
+
 			<div id='formModalHeader'>
 				<div>
 					<h2>Great! One more thing...</h2>
 				</div>
 
-				<div>circles here</div>
+				<div id="circles">
+					<div id="circle-1">
+						{isActive(1) ? <AiOutlineCheckCircle /> : <AiTwotoneCheckCircle />}
+					</div>
+					<div id="circle-2">
+						{isActive(2) ? <AiOutlineCheckCircle /> : <AiTwotoneCheckCircle />}
+					</div>
+
+					<div id="circle-3">
+						{isActive(3) ? <AiOutlineCheckCircle /> : <AiTwotoneCheckCircle />}
+					</div>
+				</div>
 			</div>
-			<div id='reviewRecs'>
-				<span>
-					<h4>Helpful Reviews on Petsy mention:</h4>
-					<ul>
-						<li>the quality of the item</li>
-						<li>if the item of the matched description</li>
-						<li>if the item met your expectations</li>
-					</ul>
-				</span>
-			</div>
+			{/* only show on active === 1 */}
+			{active === 1 &&
+				<div id='reviewRecs'>
+					<span>
+						<h4>Helpful Reviews on Petsy mention:</h4>
+						<ul>
+							<li>the quality of the item</li>
+							<li>if the item of the matched description</li>
+							<li>if the item met your expectations</li>
+						</ul>
+					</span>
+				</div>
+			}
 			<div id='reviewForm'>
 				<form onSubmit={reviewExists ? handleEdit : handleSubmit}>
-
-					{reviewExists && <div id='starRating'>
+					{/* only show on active === 1 */}
+					{reviewExists && active === 1 && <div id='starRating'>
 						{[...Array(5)].map((star, idx) => {
 							const ratingVal = idx + 1;
 							return (
@@ -97,21 +128,28 @@ export default function ReviewForm({ userId, product, reviews, setShowModal, rev
 									/>
 								</label>
 							);
+
 						})}
 					</div>
 					}
-					<div id='textarea'>
-						<textarea
-							name='content'
-							type='text'
-							value={content}
-							onChange={(e) => setContent(e.target.value)}
-						></textarea>
-					</div>
+					{active === 1 &&
+						<div id='textarea'>
+							<textarea
+								name='content'
+								type='text'
+								value={content}
+								onChange={(e) => setContent(e.target.value)}
+							></textarea>
+						</div>
+					}
 
+					{active === 2 &&
+						<div>
+							upload an image
+						</div>
+					}
 					<div>
-						<button>submit</button>
-						{/* <button onClick={handlePage}>cancel</button> */}
+						{active === 3 ? <button>submit</button> : <button onClick={handlePage}>next</button>}
 					</div>
 				</form>
 			</div>

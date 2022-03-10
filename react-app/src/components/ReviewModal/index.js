@@ -16,7 +16,6 @@ function ReviewModal({ message, product, userId, reviews, }) {
 
 	const handleClose = () => {
 		setShowModal(false)
-
 	};
 
 	return (
@@ -52,8 +51,6 @@ function ReviewDoesNotExist({ setShowModal, setStars }) {
 		<>
 			<div id="yourReview">
 				<div>Review this item</div>
-				{/* <button onClick={() => setShowModal(true)}>Add Review</button> */}
-
 
 				<div id='starRating'>
 					{[...Array(5)].map((star, idx) => {
