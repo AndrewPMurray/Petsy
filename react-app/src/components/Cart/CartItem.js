@@ -17,9 +17,10 @@ function CartItem({ item }) {
         {item.count === 1 ? `You have ${item.count} item in your cart` :
           `You have ${item.count} items in your cart`}
       </div>
-      <div className="cart-item-header">{item.title}</div>
+      <div className="item-header">{item.title}</div>
       <div className="cart-item-menu">
         <input
+          className='amount-item-input'
           type="number"
           value={count}
           onChange={(e) => setCount(e.target.value)}
