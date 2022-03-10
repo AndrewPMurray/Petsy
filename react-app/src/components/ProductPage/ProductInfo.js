@@ -23,10 +23,6 @@ function ProductInfo({ product }) {
 		setRandomNum(Math.floor(rand));
 	}, []);
 
-	useEffect(() => {
-		window.localStorage.setItem('cart', JSON.stringify(cart));
-	}, [cart]);
-
 	const handleHiddenHighlights = (e) => {
 		e.preventDefault();
 		setHiddenHighlights(!hiddenHighlights);

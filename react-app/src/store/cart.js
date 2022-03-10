@@ -28,16 +28,19 @@ const cartReducer = (state = initialState, action) => {
 		case ADD: {
 			const newState = { ...state };
 			newState[action.id] = { id: action.id, count: 1 };
+			window.localStorage.setItem('cart', JSON.stringify(newState));
 			return newState;
 		}
 		case REMOVE: {
 			const newState = { ...state };
 			delete newState[action.id];
+			window.localStorage.setItem('cart', JSON.stringify(newState));
 			return newState;
 		}
 		case UPDATE_COUNT: {
 			const newState = { ...state };
 			newState[action.id].count = action.count;
+			window.localStorage.setItem('cart', JSON.stringify(newState));
 			return newState;
 		}
 		default:
