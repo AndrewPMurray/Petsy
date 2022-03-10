@@ -69,7 +69,7 @@ def create_review():
 @login_required
 def edit_review(id):
   form = ReviewForm()
-  print( '==========', form.data)
+
   form['csrf_token'].data = request.cookies['csrf_token']
   data = form.data
   image = form.image.data

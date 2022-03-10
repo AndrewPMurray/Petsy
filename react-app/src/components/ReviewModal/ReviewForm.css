@@ -151,7 +151,7 @@ text-decoration: underline;
 
 #dragDropImageDiv {
     height: 100%;
-    width: 40%;
+    width: 30%;
 }
 
 #dragDropImageDiv > img {
@@ -163,18 +163,25 @@ text-decoration: underline;
 #dragDropArea {
     height: 100%;
     width: 60%;
-}
-
-#dragDropDiv {
-    width: 100%;
+    display: flex;
+    justify-content: center;
     border: dashed 1px #d3d3d3;
+
+    /* background-color: palevioletred; */
+
+}
+#dragDropDiv {
+    /* border: dashed 1px #d3d3d3; */
     height: 100%;
+    width: fit-content;
     display: flex;
     justify-content: center;
     align-items: center;
+    /* background-color: red; */
+
 }
 
-#dragDropDiv:hover {
-    background-color:#B1D4E0;
+ #dragDropArea:hover {
+    border: dashed 1px #5DADE2;
     cursor: grabbing;
 }
