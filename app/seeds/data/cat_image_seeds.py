@@ -38,11 +38,11 @@ cat_images = [
         "url": "https://i.etsystatic.com/5376178/r/il/5fb75f/2871695901/il_794xN.2871695901_aya7.jpg"
     },
     {
-        "product_id": 4,
+        "product_id": 3,
         "url": "https://i.etsystatic.com/5376178/r/il/ec1ed1/2454259470/il_794xN.2454259470_q8gq.jpg"
     },
     {
-        "product_id": 4,
+        "product_id": 3,
         "url": "https://i.etsystatic.com/5376178/r/il/e0193c/2454259064/il_794xN.2454259064_c48u.jpg"
     },
     {
@@ -50,11 +50,11 @@ cat_images = [
         "url": "https://i.etsystatic.com/27752622/r/il/e0202b/3238848903/il_794xN.3238848903_5odu.jpg"
     },
     {
-        "product_id": 5,
+        "product_id": 4,
         "url": "https://i.etsystatic.com/27752622/r/il/a45b35/3056695774/il_794xN.3056695774_cy00.jpg"
     },
     {
-        "product_id": 5,
+        "product_id": 4,
         "url": "https://i.etsystatic.com/27752622/r/il/09dfce/3104439135/il_794xN.3104439135_22nc.jpg"
     },
     {
