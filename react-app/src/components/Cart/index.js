@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadProducts } from '../../store/products';
+import { reset } from '../../store/cart';
 import CartItem from './CartItem';
 
 function Cart() {
@@ -27,7 +28,6 @@ function Cart() {
 	if (!cartItems || !cartItems.length)
 		return <div className='cart'>No items in the cart. Start selecting items to purchase.</div>;
 
-	console.log('CART', cartItems);
 
 	const onSubmit = (e) => {
 		e.preventDefault();
@@ -42,6 +42,7 @@ function Cart() {
 				})
 			})
 		})
+		dispatch(reset());
 		history.push('/purchases')
 	};
 

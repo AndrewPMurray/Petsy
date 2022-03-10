@@ -1,6 +1,7 @@
 const ADD = 'cart/ADD';
 const REMOVE = 'cart/REMOVE';
 const UPDATE_COUNT = 'cart/UPDATE_COUNT';
+const RESET = 'cart/RESET';
 
 export const addToCart = (id) => ({
 	type: ADD,
@@ -20,6 +21,13 @@ export const updateCount = (id, count) => {
 		count,
 	};
 };
+
+export const reset = () => {
+	return {
+		type: RESET
+	};
+};
+
 
 const initialState = JSON.parse(window.localStorage.getItem('cart')) || {};
 
@@ -42,6 +50,9 @@ const cartReducer = (state = initialState, action) => {
 			newState[action.id].count = action.count;
 			window.localStorage.setItem('cart', JSON.stringify(newState));
 			return newState;
+		}
+		case RESET: {
+			return initialState;
 		}
 		default:
 			return state;
