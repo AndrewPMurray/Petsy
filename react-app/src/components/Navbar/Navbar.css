@@ -1,129 +1,122 @@
 nav {
-    border-bottom: #D3D3D3 solid 1px;
-
+  border-bottom: #d3d3d3 solid 1px;
 }
 
-nav > ul > li, a {
-    list-style: none;
-    text-decoration: none;
+nav > ul > li,
+a {
+  list-style: none;
+  text-decoration: none;
 }
 
-
-#logo{
-    height: 55px;
+#logo {
+  height: 55px;
 }
-
-
 
 #navbarComponents {
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
-   margin-bottom: 10px;
-    width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  width: 70%;
 }
-
 
 #NavBarIcons {
-    display: flex;
-    list-style: none;
-    justify-content: space-around;
-    align-items: center;
-    font-family: 'Lato', sans-serif;
-    font-weight: 300;
+  display: flex;
+  list-style: none;
+  justify-content: space-around;
+  align-items: center;
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
 }
 
-
-#NavBarIcons > li > a > div  {
- margin: 5px;
- display: flex;
- justify-content: center;
- align-items: center;
+#NavBarIcons > li > a > div {
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-#NotLoggedNavButtons{
-    display: flex;
-
+#NotLoggedNavButtons {
+  display: flex;
 }
 
 #accountMenu {
-    border-radius: 20px;
-    border: none;
-    padding: 10px;
-    width: 60px;
-    color: #D3D3D3;
-    background-color: white;
-    display: flex;
-    justify-content: space-around;
+  border-radius: 20px;
+  border: none;
+  padding: 10px;
+  width: 60px;
+  color: #d3d3d3;
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
 }
-
 
 #accountMenu:hover {
-    background-color: #EFEFEF;
+  background-color: #efefef;
 }
 
-
-
-.fa-caret-down  {
-    color: #D3D3D3;
-    font-size: 15px;
-
+.fa-caret-down {
+  color: #d3d3d3;
+  font-size: 15px;
 }
 
 .fa-user-circle {
-    color: gray;
-    font-size: 20px;
-
+  color: gray;
+  font-size: 20px;
 }
 
-.fa-cart-shopping, .fa-heart, .fa-store {
-font-size: 20px;
+.fa-cart-shopping,
+.fa-heart,
+.fa-store {
+  font-size: 20px;
 }
 
 .faIcons {
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
 }
 
 .faIcons:hover {
-    background-color: #EFEFEF;
-
+  background-color: #efefef;
 }
-
 
 #dropdownList {
-    list-style: none;
-    padding-left: 0;
-    position: absolute;
-    background-color: white;
-    margin: 0 0 0 -170px;
-    border-radius: 10px;
-    border: #D3D3D3;
-    width: 200px;
-    padding: 10px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  list-style: none;
+  padding-left: 0;
+  position: absolute;
+  background-color: white;
+  margin: 0 0 0 -170px;
+  border-radius: 10px;
+  border: #d3d3d3;
+  width: 200px;
+  padding: 10px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-
-
 #dropdownList > li {
-    padding: 5px;
+  padding: 5px;
 }
 
 #dropdownList > li:hover {
-    background-color: #D3D3D3;
-    cursor: pointer;
+  background-color: #d3d3d3;
+  cursor: pointer;
 }
 
-
-#petTypes{
-    display: flex;
-    justify-content: space-around;
-    font-family: 'Lato', sans-serif;
-    font-weight: 300;
-    width: 70%;
-    padding-bottom: 10px;
+#petTypes {
+  display: flex;
+  justify-content: space-around;
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  width: 70%;
+  padding-bottom: 10px;
 }
 
+#login,
+#signup {
+  padding: 10px;
+  width: 75px;
+  background-color: white;
+  font-size: medium;
+}
 

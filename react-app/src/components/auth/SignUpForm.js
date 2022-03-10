@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 import Demo from '../Demo';
+import './auth.css'
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -18,16 +19,11 @@ const SignUpForm = () => {
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
       if (data) setErrors(data)
+    } else {
+      setErrors(["password: Passwords must match."])
     }
-    // else {
-    //   const validationErrors = {};
-    //   errors["password"] = "Passwords must match.";
-    //   setErrors(validationErrors);
-    //   return;
-    // }
   };
 
-  console.log("ERRORS", errors)
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
@@ -51,10 +47,12 @@ const SignUpForm = () => {
 
 
   return (
-    <form onSubmit={onSignUp}>
-      <div>
+    <form className="main-auth-user-container" onSubmit={onSignUp}>
+      <h2 className='form-title'>Create your account</h2>
+      <h2 className="form-title">Registration is easy.</h2>
+      <div className='errors-div'>
         {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
+          <div className='single-error-div' key={ind}>{error}</div>
         ))}
       </div>
       <div>
@@ -68,7 +66,7 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div>
-        <label>Email</label>
+        <label className='email-input'>Email</label>
         <input
           type='text'
           name='email'
@@ -90,6 +88,7 @@ const SignUpForm = () => {
       <div>
         <label>Repeat Password</label>
         <input
+          className='repeat-password-input'
           type='password'
           name='repeat_password'
           onChange={updateRepeatPassword}
@@ -97,8 +96,10 @@ const SignUpForm = () => {
           required={true}
         ></input>
       </div>
-      <button type='submit'>Sign Up</button>
-      <Demo />
+      <div className='auth-user-div'>
+        <button className='auth-user-buttons' type='submit'>Sign Up</button>
+        <Demo />
+      </div>
     </form>
   );
 };

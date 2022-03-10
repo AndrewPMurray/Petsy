@@ -31,7 +31,7 @@ function Cart() {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		cartItems.forEach(item => {
+		cartItems?.forEach(item => {
 			fetch('/api/purchases/', {
 				method: "POST",
 				headers: { 'Content-Type': 'application/json' },

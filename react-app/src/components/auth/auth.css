@@ -1,0 +1,81 @@
+.main-auth-user-container {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  background-color: white;
+  height: fit-content;
+  padding: 70px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.auth-user-buttons,
+.demo-button {
+  padding: 12px 95px;
+  border-radius: 8px;
+  margin: 5px;
+  background-color: black;
+  color: white;
+  font-weight: 600;
+}
+
+.auth-user-buttons:hover,
+.demo-button:hover {
+  background-color: rgb(214, 199, 178);
+}
+
+.auth-input-containers {
+  width: fit-content;
+  padding: 10px;
+}
+
+.errors-div {
+  padding-bottom: 12px;
+  color: red;
+}
+
+.single-error-div {
+  padding-bottom: 10px;
+}
+
+input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  /* box-sizing: border-box; */
+}
+
+.auth-user-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.repeat-password-input {
+  margin-right: -42px;
+}
+
+.email-input {
+  margin-right: 22px;
+}
+
+.auth-email-container {
+  padding-bottom: 5px;
+}
+
+.form-title {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 500;
+  font-family: "Graphik Webfont", -apple-system, "Helvetica Neue", "Droid Sans",
+    Arial, sans-serif;
+}
+
+/* .signup-button {
+  border: 2px solid black;
+  border-radius: 8px;
+  padding: 2px;
+} */
