@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import Demo from '../Demo';
+import SignupFormModal from '../SignupFormModal';
 import './auth.css'
 
 const LoginForm = () => {
@@ -34,6 +35,12 @@ const LoginForm = () => {
 
   return (
     <form className='main-auth-user-container' onSubmit={onLogin}>
+      <h2 className='form-title'>Login</h2>
+      {/* <div className='signup-button'>
+        {/* <button onClick={(e)=> e.preventDefault()}> */}
+          {/* <SignupFormModal /> */}
+        {/* </button> */}
+      {/* </div> */}
       <div className='errors-div'>
         {errors.map((error, ind) => (
           <div className='single-error-div' key={ind}>{error}</div>

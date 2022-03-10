@@ -35,7 +35,7 @@
   color: red;
 }
 
-.single-error-div{
+.single-error-div {
   padding-bottom: 10px;
 }
 
@@ -54,10 +54,6 @@ input {
   flex-direction: column;
 }
 
-/* label {
-  font-weight: 600;
-} */
-
 .repeat-password-input {
   margin-right: -42px;
 }
@@ -69,3 +65,17 @@ input {
 .auth-email-container {
   padding-bottom: 5px;
 }
+
+.form-title {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 500;
+  font-family: "Graphik Webfont", -apple-system, "Helvetica Neue", "Droid Sans",
+    Arial, sans-serif;
+}
+
+/* .signup-button {
+  border: 2px solid black;
+  border-radius: 8px;
+  padding: 2px;
+} */
