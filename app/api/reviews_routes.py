@@ -5,7 +5,7 @@ from flask_migrate import Migrate
 from app.forms.review_form import ReviewForm
 from datetime import date
 from app.aws import (
-    delete_image_from_s3, upload_file_to_s3, allowed_file, get_unique_filename, download_image)
+    delete_image_from_s3, upload_file_to_s3, allowed_file, get_unique_filename)
 
 reviews_routes = Blueprint('reviews_routes', __name__)
 
