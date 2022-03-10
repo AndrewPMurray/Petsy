@@ -24,20 +24,13 @@ export default function ListingForm({ product, userId, setShowForm }) {
 	const [images, setImages] = useState([]);
 	const [imagesToDelete, setImagesToDelete] = useState([]);
 	const imageInfo = product?.images.map((image) => ({
-		url: image.url.includes('etsystatic') ? image.url : image.url.split('/')[3],
+		url: image.url,
 		id: image.id,
 	}));
 
 	useEffect(() => {
 		imageInfo?.forEach(async (info) => {
-			let image;
-			let res;
-			if (info.url.includes('etsystatic')) {
-				image = {};
-			} else {
-				res = await fetch(`/api/images/${info.url}`);
-				image = await res.blob();
-			}
+			const image = {};
 			image.exists = true;
 			image.url = info.url;
 			image.id = info.id;
@@ -143,7 +136,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 
 		imagesToDelete.forEach(async (image) => {
 			const formData = new FormData();
-			formData.append('name', image.name);
+			formData.append('url', image.url);
 
 			const res = await fetch(`/api/images/${image.id}`, {
 				method: 'DELETE',

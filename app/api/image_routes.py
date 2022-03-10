@@ -6,10 +6,10 @@ from app.aws import (
 
 image_routes = Blueprint("images", __name__)
 
-@image_routes.route("/<string:filename>")
-def get_image(filename):
-    image = download_image(filename)
-    return send_file(image, 'image/png')
+# @image_routes.route("/<string:filename>")
+# def get_image(filename):
+#     image = download_image(filename)
+#     return send_file(image, 'image/png')
 
 @image_routes.route("", methods=["POST"])
 @login_required
@@ -44,9 +44,9 @@ def upload_image():
 @login_required
 def delete_image(id):
     image = Image.query.get(id)
-    name = request.form['name']
+    name = request.form['url'].split('/')[-1]
     
-    if not 'etsystatic' in name:
+    if 'amazonaws' in request.form['url']:
         delete_image_from_s3(name)
         
     db.session.delete(image)
