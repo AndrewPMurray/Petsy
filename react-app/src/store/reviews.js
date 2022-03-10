@@ -42,23 +42,21 @@ export const loadReviewsByUser = (userId) => async (dispatch) => {
 }
 
 export const createReview = (review) => async (dispatch) => {
-    // console.log('THINK', review)
+    const { content, rating, user_id, url, product_id } = review
+
 
     const formData = new FormData();
-    formData.append('image', review.url)
-    // console.log('FORM DATA', formData)
-    // console.log('FORM DATA.GET', formData.get('image'))
+    formData.append('image', url)
+    formData.append('rating', rating)
+    formData.append('content', content)
+    formData.append('user_id', user_id)
+    formData.append('product_id', product_id)
 
-    review.url = formData
-    console.log('review.url', review.url.get('image'))
-
-
-
-
+    console.log('THUNK', formData.keys())
     const response = await fetch('/api/reviews/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(review),
+        // headers: { 'Content-Type': 'application/json' },
+        body: formData,
     });
     if (response.ok) {
         const newReview = await response.json();

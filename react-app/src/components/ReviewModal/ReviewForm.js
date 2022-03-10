@@ -18,10 +18,6 @@ export default function ReviewForm({ userId, product, reviews, setShowModal, rev
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// const formData = new FormData();
-
-		// formData.append('image', url)
-		console.log(url, 'FROM HANDLE SUBMIT:')
 		const newReview = {
 			content,
 			rating: stars,
