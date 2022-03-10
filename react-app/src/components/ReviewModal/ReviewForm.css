@@ -99,10 +99,6 @@ input[type="radio"] {
     justify-content: flex-start;
 }
 
-#reviewImageDiv {
-    height: 150px;
-    margin-bottom: 15px;
-}
 #editReviewButton {
     margin-top: 10px;
 text-decoration: underline;
@@ -139,4 +135,53 @@ text-decoration: underline;
     width: 70px;
     border-radius: 15px;
     margin: 10px;
+}
+
+
+
+#reviewImageDiv {
+    height: 150px;
+    margin-bottom: 15px;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#dragDropImageDiv {
+    height: 100%;
+    width: 30%;
+}
+
+#dragDropImageDiv > img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+#dragDropArea {
+    height: 100%;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    border: dashed 1px #d3d3d3;
+
+    /* background-color: palevioletred; */
+
+}
+#dragDropDiv {
+    /* border: dashed 1px #d3d3d3; */
+    height: 100%;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: red; */
+
+}
+
+ #dragDropArea:hover {
+    border: dashed 1px #5DADE2;
+    cursor: grabbing;
 }

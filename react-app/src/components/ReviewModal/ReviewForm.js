@@ -4,6 +4,8 @@ import { AiOutlineCheckCircle, AiTwotoneCheckCircle } from "react-icons/ai";
 import { useDispatch } from 'react-redux';
 import './ReviewForm.css';
 import { createReview, editReview } from '../../store/reviews';
+import UploadPicture from './'
+import UploadReviewImage from './UploadReviewImage';
 
 export default function ReviewForm({ userId, product, reviews, setShowModal, reviewExists, stars }) {
 
@@ -20,7 +22,7 @@ export default function ReviewForm({ userId, product, reviews, setShowModal, rev
 			content,
 			rating: stars,
 			user_id: userId,
-			url: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
+			url: url,
 			product_id: product.id,
 		};
 
@@ -41,7 +43,7 @@ export default function ReviewForm({ userId, product, reviews, setShowModal, rev
 			content,
 			rating,
 			user_id: userId,
-			url: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
+			url: url,
 			product_id: product.id,
 		};
 
@@ -149,7 +151,7 @@ export default function ReviewForm({ userId, product, reviews, setShowModal, rev
 
 					{active === 2 &&
 						<div id="reviewImageDiv">
-							upload an image
+							<UploadReviewImage review={reviews[product.id]} setUrl={setUrl} />
 						</div>
 					}
 					<div id="form_button_div">
