@@ -7,7 +7,7 @@ import UploadPicture from './UploadPicture';
 export default function ListingForm({ product, userId, setShowForm }) {
 	const dispatch = useDispatch();
 	const [title, setTitle] = useState(product?.title || '');
-	const [price, setPrice] = useState(product?.price || 0);
+	const [price, setPrice] = useState(product?.price || '');
 	const [detailFields, setDetailFields] = useState(product?.details.length - 2 || 0);
 	const [details, setDetails] = useState({
 		handmade: product?.details[0] === 'Handmade' ? true : false,
