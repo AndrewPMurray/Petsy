@@ -27,6 +27,7 @@ function ProductTypes({ productTypes, products, petType }) {
 							<ProductTypeBubbles
 								product={product}
 								productType={product?.product_type}
+								key={product.id}
 							/>
 						)
 				)}
