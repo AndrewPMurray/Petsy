@@ -10,6 +10,11 @@ function Reviews({ product, products }) {
 	const [divHeight, setDivHeight] = useState()
     const sellerProducts = Object.values(products).filter((p) => p?.user_id === product.user?.id);
 	
+	let roundedProductReviews = [...product?.reviews];
+	while (roundedProductReviews.length % 4 !== 0) {
+		roundedProductReviews.push({})
+	}
+
     let allReviews = [];
     sellerProducts.forEach((p) => {
 		allReviews.push(...p.reviews);
@@ -37,6 +42,7 @@ function Reviews({ product, products }) {
 	let everyFourItems = [];
 	let heightItemsArr = [];
 
+	
 	let pageNumsSeller = [];
 	let everyFourSellerItems = [];
 	let heightSellerItemsArr = [];
@@ -44,10 +50,12 @@ function Reviews({ product, products }) {
 	function getPageHeightPer4Reviews(reviewElements) {
 		return reviewElements?.reduce((prev, curr, ele, i) => {
 			// console.log(i, curr.scrollHeight)
-			return prev + curr.scrollHeight
+			if (curr) {
+				return prev + curr.scrollHeight
+			}
 		}, 0)
 	}
-
+	
 	for (let i = 0; i < product?.reviews.length; i += 4 ) {
 		pageNumsItems.push(i)
 	}
@@ -60,12 +68,15 @@ function Reviews({ product, products }) {
 	if (showItemReviews) {
 		// console.log(product.reviews.length)
 		for (let i = 0; i < product?.reviews.length; i += 4 ) {
-			// pageNumsItems.push(i)
-			everyFourItems?.push(reviewsRef?.current.slice(i, i + 4))		
+				everyFourItems?.push(reviewsRef?.current.slice(i, i + 4))
 		}
+
+		console.log("Lookie here", everyFourItems)
+
 		everyFourItems?.forEach((range) => {
 			heightItemsArr?.push(getPageHeightPer4Reviews(range))
 		})
+
 		if (!divHeight) setDivHeight(heightItemsArr[0])
 	}
 }, [showItemReviews, everyFourItems, products.length])
@@ -73,9 +84,16 @@ function Reviews({ product, products }) {
 useEffect(() => {
 	if (showSellerReviews) {
 		for (let i = 0; i < allReviews?.length; i += 4 ) {
-			console.log("hello?", reviewsSellerRef)
+			// console.log("hello?", reviewsSellerRef)
 			everyFourSellerItems?.push(reviewsSellerRef?.current.slice(i, i + 4))
 		}
+		console.log(everyFourSellerItems)
+		let lastEle = everyFourSellerItems[everyFourSellerItems.length -1]
+
+		// while (lastEle.length !== 4) {
+		// 	lastEle.push(null)
+		// }
+
 		everyFourSellerItems?.forEach((range) => {
 			heightSellerItemsArr.push(getPageHeightPer4Reviews(range))
 		})
@@ -105,7 +123,7 @@ useEffect(() => {
 			<div ref={reviewsDivRef} className='reviews-map-div' style={{height: `${divHeight}px`}} >
 				{product.reviews.length > 0 && showItemReviews &&
 						<>
-                    {product.reviews.map((review, i) => (
+                    {roundedProductReviews.map((review, i) => (
 						<SingleReview ref={el => reviewsRef.current[i] = el} i={i} review={review} />
 						))}
 						</>
