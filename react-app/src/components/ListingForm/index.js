@@ -12,7 +12,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 	const [detailFields, setDetailFields] = useState(0);
 	const [details, setDetails] = useState({
 		handmade: product?.details[0] === 'Handmade' ? true : false,
-		materials: product?.details[0].startsWith('Materials')
+		materials: product?.details[0]?.startsWith('Materials')
 			? product?.details[0]?.slice(11, product.details[1]?.length)
 			: product?.details[1]?.startsWith('Materials')
 			? product?.details[1]?.slice(11, product.details[1]?.length)
@@ -200,7 +200,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			<form id='listing-form' onSubmit={product ? handleEdit : handleSubmit}>
 				<label>
 					Title
-					{errors.title && <p id='error'>{errors.title}</p>}
+					{errors?.title && <p id='error'>{errors.title}</p>}
 					<input
 						type='text'
 						name='title'
@@ -238,7 +238,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 				</label>
 				<label>
 					Price
-					{errors.price && <p id='error'>{errors.price}</p>}
+					{errors?.price && <p id='error'>{errors.price}</p>}
 					<input
 						type='number'
 						value={price}
@@ -281,7 +281,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 				</div>
 				<label>
 					Description
-					{errors.description && <p id='error'>{errors.description}</p>}
+					{errors?.description && <p id='error'>{errors.description}</p>}
 					<textarea
 						id='product-description'
 						value={description}
@@ -291,7 +291,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 				</label>
 				<label>
 					Quantity
-					{errors.quantity && <p id='error'>{errors.quantity}</p>}
+					{errors?.quantity && <p id='error'>{errors.quantity}</p>}
 					<input
 						type='number'
 						value={quantity}

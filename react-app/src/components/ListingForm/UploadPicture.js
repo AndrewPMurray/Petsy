@@ -2,7 +2,7 @@ import { FileUploader } from 'react-drag-drop-files';
 import './ListingForm.css';
 
 const UploadPicture = ({ images, setImages, imagesToDelete, setImagesToDelete }) => {
-	const fileTypes = ['JPG', 'PNG', 'HEIC', ' JPEG', 'GIF'];
+	const fileTypes = ['JPG', 'PNG', ' JPEG', 'jpg', 'jpeg', 'GIF'];
 
 	const removePhoto = (i) => {
 		const file = images[i];

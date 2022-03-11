@@ -5,7 +5,7 @@ import { signUp } from '../../store/session';
 import Demo from '../Demo';
 import './auth.css'
 
-const SignUpForm = () => {
+const SignUpForm = ({ setPage }) => {
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -47,9 +47,14 @@ const SignUpForm = () => {
 
 
   return (
-    <form className="main-auth-user-container" onSubmit={onSignUp}>
+    < form className="main-auth-user-container" onSubmit={onSignUp}>
       <h2 className='form-title'>Create your account</h2>
       <h2 className="form-title">Registration is easy.</h2>
+      <div>
+        <button
+          onClick={() => setPage(1)}
+        >Login</button>
+      </div>
       <div className='errors-div'>
         {errors.map((error, ind) => (
           <div className='single-error-div' key={ind}>{error}</div>
@@ -58,6 +63,7 @@ const SignUpForm = () => {
       <div>
         <label>Username</label>
         <input
+          className='auth-form-input'
           type='text'
           name='username'
           onChange={updateUsername}
@@ -66,8 +72,9 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div>
-        <label className='email-input'>Email</label>
+        <label className='email-label'>Email</label>
         <input
+          className='auth-form-input'
           type='text'
           name='email'
           onChange={updateEmail}
@@ -78,6 +85,7 @@ const SignUpForm = () => {
       <div>
         <label>Password</label>
         <input
+          className='auth-form-input'
           type='password'
           name='password'
           onChange={updatePassword}
@@ -88,7 +96,8 @@ const SignUpForm = () => {
       <div>
         <label>Repeat Password</label>
         <input
-          className='repeat-password-input'
+          className='auth-form-input'
+          id='repeat-password-input'
           type='password'
           name='repeat_password'
           onChange={updateRepeatPassword}
@@ -101,6 +110,7 @@ const SignUpForm = () => {
         <Demo />
       </div>
     </form>
+
   );
 };
 

@@ -4,30 +4,34 @@ import { Modal } from '../../context/Modal';
 import ReviewForm from './ReviewForm';
 import { FaStar } from 'react-icons/fa';
 
-function ReviewModal({ message, product, userId, reviews, }) {
+function ReviewModal({ message, product, userId, reviews, review, purchaseId }) {
 	const [showModal, setShowModal] = useState(false);
 	const [stars, setStars] = useState(0)
 
-	const userReviews = Object.keys(reviews).map(key => parseInt(key));
+	// const userReviews = Object.keys(reviews).map(key => parseInt(key));
 
-	const reviewExists = userReviews.includes(product.id);
+	// const reviewExists = userReviews.includes(product.id);
 
-	console.log('modal on?', showModal);
+	console.log('REVIEW', review)
+	// const newReview = product.reviews.filter(review => review.purchase_id === purchaseId)[0]
+	// console.log('NEW REVIEW', newReview)
 
+	// console.log('NEW REVIEW', newReview.content)
 	const handleClose = () => {
 		setShowModal(false)
 	};
 
+	// console.log('MODAL', product.review)
+
 	return (
 		<>
-			{!reviewExists && <ReviewDoesNotExist setStars={setStars} setShowModal={setShowModal} />}
-			{reviewExists && <ReviewDoesExist setShowModal={setShowModal} review={reviews[product.id]} />}
+			{!review && <ReviewDoesNotExist setStars={setStars} setShowModal={setShowModal} />}
+			{review && <ReviewDoesExist setShowModal={setShowModal} review={review} review2={review} />}
 
 
 			{showModal && (
-				// <Modal onClose={() => setShowModal(false)}>
 				<Modal onClose={handleClose}>
-					<ReviewForm product={product} userId={userId} setShowModal={setShowModal} reviews={reviews} reviewExists={reviewExists} userReviews={userReviews} stars={stars} />
+					<ReviewForm product={product} userId={userId} setShowModal={setShowModal} reviews={reviews} reviewExists={review} stars={stars} review={review} purchaseId={purchaseId} />
 				</Modal>
 			)}
 		</>
@@ -83,7 +87,7 @@ function ReviewDoesNotExist({ setShowModal, setStars }) {
 }
 
 function ReviewDoesExist({ setShowModal, review }) {
-
+	console.log('IN THE REVIEW EXISTS', review)
 	const stars = [];
 	for (let i = 0; i < review.rating; i++) {
 		stars.push(i)
@@ -99,7 +103,6 @@ function ReviewDoesExist({ setShowModal, review }) {
 			</div>
 
 			<div id="existingReview">
-				{/* <div id="reviewImage">{review.url}</div> */}
 				<div id="reviewContent">{review.content}</div>
 			</div>
 			<div id="reviewButtonDiv">
