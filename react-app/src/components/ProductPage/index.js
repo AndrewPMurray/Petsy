@@ -5,6 +5,7 @@ import { loadProducts } from '../../store/products';
 import ProductPhotos from './ProductPhotos';
 import ProductInfo from './ProductInfo';
 import Reviews from '../Reviews/index'
+import './ProductPage.css'
 
 function ProductPage() {
   const dispatch = useDispatch();

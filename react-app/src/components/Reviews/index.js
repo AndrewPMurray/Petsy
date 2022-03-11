@@ -68,23 +68,26 @@ function Reviews({ product, products }) {
 		})
 		if (!divHeight) setDivHeight(heightItemsArr[0])
 	}
-	}, [showItemReviews, everyFourItems])
-	
-	useEffect(() => {
+}, [showItemReviews, everyFourItems])
+
+useEffect(() => {
 	if (showSellerReviews) {
 		for (let i = 0; i < allReviews?.length; i += 4 ) {
 			// pageNumsSeller.push(i)
+			console.log("hello?", reviewsSellerRef)
 			everyFourSellerItems?.push(reviewsSellerRef?.current.slice(i, i + 4))
 		}
 		everyFourSellerItems?.forEach((range) => {
 			heightSellerItemsArr.push(getPageHeightPer4Reviews(range))
 		})
 		if (!divHeight) setDivHeight(heightSellerItemsArr[0])
+		// console.log("reviewsSellerRef",reviewsSellerRef)
+		// console.log(heightSellerItemsArr)
+		// console.log("allreviews",allReviews)
 		// console.log("pageNumsSeller", pageNumsSeller, "everyFourSellerItems", everyFourSellerItems, "heightSellerItemsArr", heightSellerItemsArr)
 	}
 	}, [showSellerReviews, everyFourSellerItems])
 	
-	let divHeightStyle;
 
 	useEffect(() => {
 	
@@ -101,37 +104,36 @@ function Reviews({ product, products }) {
 
 	let content;
 
-	if (product.reviews.length && allReviews.length) {
+
 		content = (
 			<>
 			<div ref={reviewsDivRef} className='reviews-map-div' style={{height: `${divHeight}px`}} >
-				{showItemReviews &&
+				{product.reviews.length && showItemReviews &&
                     product.reviews.map((review, i) => (
 						<SingleReview ref={el => reviewsRef.current[i] = el} i={i} review={review} />
 						))
-                    
+						
 					}
-				{showSellerReviews &&
+				{allReviews.length && showSellerReviews &&
 				allReviews.map((review, i) => (
 					<SingleReview ref={el => reviewsSellerRef.current[i] = el} i={i} seller="true" products={products} review={review} />
 					))}
 			</div>
 			<div className='reviews-page-buttons-div'>
-				{showItemReviews &&
+				{ showItemReviews &&
 					<>
-					{console.log(pageNumsItems)}
 					{pageNumsItems.map((ele, i) => <button className='reviews-overflow-page-buttons' onClick={() => handleBackClick(ele, i)}>{i + 1}</button>)}
 					</>
 				}
 				{showSellerReviews &&
 					<>
+					{console.log("allreviews",allReviews)}
 					{pageNumsSeller.map((ele, i) => <button className='reviews-overflow-page-buttons' onClick={() => handleSellerBackClick(ele, i)}>{i + 1}</button>)}
 					</>
 				}
 			</div>
 			</>
 		);
-	}
 
 	return (
 		<div className='reviews-container-div'>
@@ -145,8 +147,8 @@ function Reviews({ product, products }) {
 					</span>
 				</div>
 				<div className='review-raving'>
-					<i className='fa-solid fa-medal'></i>
-					<p>
+					<i className='fa-solid fa-medal raving-icon'></i>
+					<p className='review-raving-text'>
 						Buyers are raving! Multiple people gave 5-star reviews to this shop in the
 						past 7 days.
 					</p>
@@ -161,8 +163,8 @@ function Reviews({ product, products }) {
 				<div className='reviews-body'>
 					<div className='reviews-title-bar'>
 						{product.reviews.length && (
-							<div className='reviews-item-button'>
-								<button onClick={() => {
+							<div className={`reviews-item-button show-reviews-title-${showItemReviews}`}>
+								<button className='show-buttons' onClick={() => {
 									setShowItemReviews(true)
 									setShowSellerReviews(false)
 									setDivHeight(0)
@@ -171,8 +173,8 @@ function Reviews({ product, products }) {
 								<p className='review-total'>{product?.reviews?.length}</p>
 							</div>
 						)}
-						<div className='reviews-seller-button'>
-							<button onClick={() => {
+						<div className={`reviews-seller-button show-reviews-title-${showSellerReviews}`}>
+							<button className='show-buttons' onClick={() => {
 								setShowSellerReviews(true)
 								setShowItemReviews(false)
 								setDivHeight(0)
