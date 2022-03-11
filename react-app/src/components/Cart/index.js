@@ -2,22 +2,27 @@ import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadProducts } from '../../store/products';
-import { reset } from '../../store/cart';
+import { makePurchase } from '../../store/cart';
 import CartItem from './CartItem';
 import { Modal } from '../../context/Modal';
 import LoginForm from '../auth/LoginForm';
 import './Cart.css'
 
 function Cart() {
-	const user = useSelector((state) => state.session.user)
+	const [errors, setErrors] = useState('');
+	const user = useSelector((state) => state.session.user);
 	const cart = useSelector((state) => state.cart);
+	const [cartCount, setCartCount] = useState(0);
 	const products = useSelector((state) => state.products);
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const [showModal, setShowModal] = useState(false);
 
 	useEffect(() => {
-		window.localStorage.setItem('cart', JSON.stringify(cart));
+		setCartCount(0);
+		for (const object in cart) {
+			setCartCount((prev) => prev + cart[object].count);
+		}
 	}, [cart]);
 
 	useEffect(() => {
@@ -28,29 +33,44 @@ function Cart() {
 		return { ...item, ...products[item.id] };
 	});
 
-	if (!cartItems || !cartItems.length)
-		return <div className='cart-item-header'>No items in the cart. Start selecting items to purchase.</div>;
-
-
 	const onSubmit = (e) => {
 		e.preventDefault();
-		cartItems?.forEach(item => {
-			fetch('/api/purchases/', {
-				method: "POST",
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({
+		setErrors('');
+		let cartErrors;
+
+		cartItems?.forEach(async (item, i) => {
+			const newPurchase = await dispatch(
+				makePurchase({
 					user_id: user.id,
 					product_id: item.id,
-					quantity: item.count
+					quantity: item.count,
 				})
-			})
-		})
-		dispatch(reset());
-		history.push('/purchases');
+			);
+			if (newPurchase.errors) {
+				cartErrors = newPurchase.errors;
+				setErrors(() => cartErrors);
+				return;
+			} else if (!cartErrors && i === cartItems.length - 1) {
+				history.push('/purchases');
+			}
+		});
 	};
+
+	if (!cartItems || !cartItems.length)
+		return (
+			<div className='cart-item-header'>
+				No items in the cart. Start selecting items to purchase.
+			</div>
+		);
 
 	return (
 		<div className='cart'>
+			<div className='amount-cart'>
+				{cartCount === 1
+					? `You have ${cartCount} item in your cart`
+					: `You have ${cartCount} items in your cart`}
+			</div>
+			{errors.length > 0 && <p id='error'>{errors}</p>}
 			<ul>
 				{cartItems.map((item) => (
 					<CartItem key={item.id} item={item} />
