@@ -188,7 +188,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 	};
 
 	return (
-		<>
+		<div id='form-container'>
 			<div id='picture-preview-container'>
 				<UploadPicture
 					images={images}
@@ -266,7 +266,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 						onChange={(e) => setDetails({ ...details, materials: e.target.value })}
 					/>
 				</label>
-				<label>Add additional details:</label>
+				<label>Additional details</label>
 				{Array.apply(null, { length: detailFields }).map((el, i) => (
 					<input
 						key={i}
@@ -309,6 +309,6 @@ export default function ListingForm({ product, userId, setShowForm }) {
 				</div>
 			</form>
 			{imageLoading && <p>Submitting item, please wait...</p>}
-		</>
+		</div>
 	);
 }

@@ -10,6 +10,7 @@ function NavBarIcons({ user }) {
 	const cartObj = useSelector((state) => state.cart);
 	const cart = Object.values(cartObj);
 	const [cartCount, setCartCount] = useState(0);
+	const [imageToDelete, setImageToDelete] = useState('');
 
 	useEffect(() => {
 		setCartCount(0);
