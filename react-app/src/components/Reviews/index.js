@@ -153,12 +153,13 @@ useEffect(() => {
 					</p>
 				</div>
 			</div>
-			{(!product.reviews.length && !allReviews.length) ? 
+			{(product.reviews.length <= 0 && allReviews.length <= 0) ? 
 				<div>
 					<h3>No reviews yet for this seller</h3>
-					<p>Buy this item to leave the first review</p>
+					<p>Buy this item to leave the first review!</p>
 				</div>
 			 : 
+			 <>
 				<div className='reviews-body'>
 					<div className='reviews-title-bar'>
 						{product.reviews.length > 0 && (
@@ -183,8 +184,9 @@ useEffect(() => {
 						</div>
 					</div>
 				</div>
-			}
 			<div className='reviews-body-div'>{content}</div>
+			</>
+			}
 		</div>
 	);
 }
