@@ -89,8 +89,6 @@ def edit_review(id):
   data = form.data
   image = form.image.data
 
-
-  print('=====', isinstance(image, str))
   if not isinstance(image, str):
     if "image" not in request.files:
         return {"errors": "image required"}, 400
