@@ -43,7 +43,7 @@ function Reviews({ product, products }) {
 	
 	function getPageHeightPer4Reviews(reviewElements) {
 		return reviewElements?.reduce((prev, curr, ele, i) => {
-			console.log(i, curr.scrollHeight)
+			// console.log(i, curr.scrollHeight)
 			return prev + curr.scrollHeight
 		}, 0)
 	}
@@ -58,7 +58,7 @@ function Reviews({ product, products }) {
 
 	useEffect(() => {
 	if (showItemReviews) {
-		console.log(product.reviews.length)
+		// console.log(product.reviews.length)
 		for (let i = 0; i < product?.reviews.length; i += 4 ) {
 			// pageNumsItems.push(i)
 			everyFourItems?.push(reviewsRef?.current.slice(i, i + 4))		
@@ -103,16 +103,20 @@ useEffect(() => {
 		content = (
 			<>
 			<div ref={reviewsDivRef} className='reviews-map-div' style={{height: `${divHeight}px`}} >
-				{product.reviews.length && showItemReviews &&
-                    product.reviews.map((review, i) => (
+				{product.reviews.length > 0 && showItemReviews &&
+						<>
+                    {product.reviews.map((review, i) => (
 						<SingleReview ref={el => reviewsRef.current[i] = el} i={i} review={review} />
-						))
-						
+						))}
+						</>
 					}
 				{allReviews.length && showSellerReviews &&
-				allReviews.map((review, i) => (
+					<>
+				{allReviews.map((review, i) => (
 					<SingleReview ref={el => reviewsSellerRef.current[i] = el} i={i} seller="true" products={products} review={review} />
 					))}
+					</>
+				}
 			</div>
 			<div className='reviews-page-buttons-div'>
 				{ showItemReviews &&
@@ -157,7 +161,7 @@ useEffect(() => {
 			 : 
 				<div className='reviews-body'>
 					<div className='reviews-title-bar'>
-						{product.reviews.length && (
+						{product.reviews.length > 0 && (
 							<div className={`reviews-item-button show-reviews-title-${showItemReviews}`}>
 								<button className='show-buttons' onClick={() => {
 									setShowItemReviews(true)

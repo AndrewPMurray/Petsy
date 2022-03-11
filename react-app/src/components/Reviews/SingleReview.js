@@ -15,13 +15,17 @@ const SingleReview = forwardRef(({ review, seller, products }, ref) => {
 	const [photoPresent, setPhotoPresent] = useState(false);
 	const [tooLong, setTooLong] = useState(true);
 
-	const [changeHeight, setChangeHeight] = useState();
+	const [heightDifference, setHeightDifference] = useState();
 
 	const contentRef = useRef();
 
 	// console.log(review.user.username, review.url)
 	function isOverflowed(e) {
-		return e.scrollHeight - 1 > e.clientHeight;
+		console.log(e, "button clicked", heightDifference)
+		const difference = e.scrollHeight - e.clientHeight;
+		setHeightDifference(difference)
+		console.log("difference", difference)
+		return e.scrollHeight - 1 > e.clientHeight
 	}
 
 	// const reviewContentDiv = document.querySelector('.overflow-review')
@@ -31,13 +35,20 @@ const SingleReview = forwardRef(({ review, seller, products }, ref) => {
 		if (review?.url) setPhotoPresent(true);
 	}, [review?.url]);
 
-	useLayoutEffect(() => {
 	
+	useEffect(() => {
+		console.log("wtf")
 		if (!isOverflowed(contentRef.current)) {
 			setTooLong(false);
-			return;
 		}
-	}, [products.length, tooLong]);
+	}, [products?.length, heightDifference]);
+
+	const handleExpandContent = (e) => {
+		e.preventDefault();
+		setTooLong(false);
+		console.log("click", contentRef.current.clientHeight, contentRef.current.scrollHeight)
+		isOverflowed(contentRef.current)
+	}
 
 	const handleProductChange = (e) => {
 		e.preventDefault();
@@ -79,10 +90,7 @@ const SingleReview = forwardRef(({ review, seller, products }, ref) => {
 						</p>
 						<button
 							className="review-ellipsis-button"
-							onClick={() => {
-								setTooLong(false);
-								isOverflowed(contentRef.current)
-							}}
+							onClick={handleExpandContent}
 						>
 							•••
 						</button>
