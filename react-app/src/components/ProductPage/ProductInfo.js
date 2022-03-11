@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Highlight from './Highlight';
 import { addToCart, updateCount } from '../../store/cart';
 import './Description.css';
+import { useHistory } from 'react-router-dom';
 
 function ProductInfo({ product }) {
 	const dispatch = useDispatch();
@@ -11,11 +12,11 @@ function ProductInfo({ product }) {
 	const [hiddenHighlights, setHiddenHighlights] = useState(false);
 	const [hiddenDes, setHiddenDes] = useState(false);
 	const [hiddenSeller, setHiddenSeller] = useState(false);
-
 	const [showDesp, setShowDesp] = useState(false);
-
 	const [randomNum, setRandomNum] = useState(1);
 
+	const history = useHistory();
+	
 	useEffect(() => {
 		const min = 3;
 		const max = 25;
@@ -41,6 +42,7 @@ function ProductInfo({ product }) {
 	const cartAdd = async (e) => {
 		if (cartItem) await dispatch(updateCount(product.id, cartItem.count + 1));
 		else await dispatch(addToCart(product.id));
+		history.push('/cart');
 	};
 
 	return (
