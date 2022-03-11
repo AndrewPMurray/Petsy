@@ -56,12 +56,12 @@ function App() {
 				<Route path='/pets/:petTypeId/:productTypeId'>
 					<ProductTypePage />
 				</Route>
-				<Route path='/manage-listings'>
+				<ProtectedRoute path='/manage-listings'>
 					<ManageListings />
-				</Route>
-				<Route path='/purchases'>
+				</ProtectedRoute>
+				<ProtectedRoute path='/purchases'>
 					<Purchases />
-				</Route>
+				</ProtectedRoute>
 				<Route path='/cart'>
 					<Cart />
 				</Route>
