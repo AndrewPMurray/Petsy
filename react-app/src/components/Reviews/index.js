@@ -68,23 +68,26 @@ function Reviews({ product, products }) {
 		})
 		if (!divHeight) setDivHeight(heightItemsArr[0])
 	}
-	}, [showItemReviews, everyFourItems])
-	
-	useEffect(() => {
+}, [showItemReviews, everyFourItems])
+
+useEffect(() => {
 	if (showSellerReviews) {
 		for (let i = 0; i < allReviews?.length; i += 4 ) {
 			// pageNumsSeller.push(i)
+			console.log("hello?", reviewsSellerRef)
 			everyFourSellerItems?.push(reviewsSellerRef?.current.slice(i, i + 4))
 		}
 		everyFourSellerItems?.forEach((range) => {
 			heightSellerItemsArr.push(getPageHeightPer4Reviews(range))
 		})
 		if (!divHeight) setDivHeight(heightSellerItemsArr[0])
+		// console.log("reviewsSellerRef",reviewsSellerRef)
+		// console.log(heightSellerItemsArr)
+		// console.log("allreviews",allReviews)
 		// console.log("pageNumsSeller", pageNumsSeller, "everyFourSellerItems", everyFourSellerItems, "heightSellerItemsArr", heightSellerItemsArr)
 	}
 	}, [showSellerReviews, everyFourSellerItems])
 	
-	let divHeightStyle;
 
 	useEffect(() => {
 	
@@ -101,37 +104,36 @@ function Reviews({ product, products }) {
 
 	let content;
 
-	if (product.reviews.length && allReviews.length) {
+
 		content = (
 			<>
 			<div ref={reviewsDivRef} className='reviews-map-div' style={{height: `${divHeight}px`}} >
-				{showItemReviews &&
+				{product.reviews.length && showItemReviews &&
                     product.reviews.map((review, i) => (
 						<SingleReview ref={el => reviewsRef.current[i] = el} i={i} review={review} />
 						))
-                    
+						
 					}
-				{showSellerReviews &&
+				{allReviews.length && showSellerReviews &&
 				allReviews.map((review, i) => (
 					<SingleReview ref={el => reviewsSellerRef.current[i] = el} i={i} seller="true" products={products} review={review} />
 					))}
 			</div>
 			<div className='reviews-page-buttons-div'>
-				{showItemReviews &&
+				{ showItemReviews &&
 					<>
-					{console.log(pageNumsItems)}
 					{pageNumsItems.map((ele, i) => <button className='reviews-overflow-page-buttons' onClick={() => handleBackClick(ele, i)}>{i + 1}</button>)}
 					</>
 				}
 				{showSellerReviews &&
 					<>
+					{console.log("allreviews",allReviews)}
 					{pageNumsSeller.map((ele, i) => <button className='reviews-overflow-page-buttons' onClick={() => handleSellerBackClick(ele, i)}>{i + 1}</button>)}
 					</>
 				}
 			</div>
 			</>
 		);
-	}
 
 	return (
 		<div className='reviews-container-div'>

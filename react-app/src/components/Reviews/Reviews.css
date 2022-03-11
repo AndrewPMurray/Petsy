@@ -119,4 +119,18 @@
 .reviews-map-div {
   width: 100%;
   overflow: hidden;
+  /* min-height: 40px; */
+}
+
+.seller-review-product-info {
+  height: 100%;
+  width: 100%
+}
+
+.button-to-other-product {
+  margin-left: 5px;
+  width: 80%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
