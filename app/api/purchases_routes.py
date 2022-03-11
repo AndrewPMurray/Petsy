@@ -25,6 +25,7 @@ def make_purchase():
   else:
     new_quantity = product.quantity - quantity
     product.quantity = new_quantity
+    
     if product.quantity == 0: 
       for image in product.images:
         if 'amazonaws' in image.url:
@@ -42,4 +43,4 @@ def make_purchase():
       db.session.add(new_purchase)
       db.session.commit()
       return new_purchase.to_dict()
-    return 'omg error!'
+    return {"errors": "Server error. Unable to make purchase"}
