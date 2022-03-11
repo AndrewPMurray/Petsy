@@ -58,6 +58,7 @@ const SignUpForm = () => {
       <div>
         <label>Username</label>
         <input
+          className='auth-form-input'
           type='text'
           name='username'
           onChange={updateUsername}
@@ -66,8 +67,9 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div>
-        <label className='email-input'>Email</label>
+        <label className='email-label'>Email</label>
         <input
+          className='auth-form-input'
           type='text'
           name='email'
           onChange={updateEmail}
@@ -78,6 +80,7 @@ const SignUpForm = () => {
       <div>
         <label>Password</label>
         <input
+          className='auth-form-input'
           type='password'
           name='password'
           onChange={updatePassword}
@@ -88,7 +91,8 @@ const SignUpForm = () => {
       <div>
         <label>Repeat Password</label>
         <input
-          className='repeat-password-input'
+          className='auth-form-input'
+          id='repeat-password-input'
           type='password'
           name='repeat_password'
           onChange={updateRepeatPassword}

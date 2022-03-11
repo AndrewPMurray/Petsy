@@ -2,7 +2,10 @@ import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadProducts } from '../../store/products';
+import { reset } from '../../store/cart';
 import CartItem from './CartItem';
+// import { test } from '../LoginFormModal';
+import './Cart.css'
 
 function Cart() {
 	const user = useSelector((state) => state.session.user)
@@ -25,12 +28,14 @@ function Cart() {
 	});
 
 	if (!cartItems || !cartItems.length)
-		return <div className='cart'>No items in the cart. Start selecting items to purchase.</div>;
+		return <div className='cart-item-header'>No items in the cart. Start selecting items to purchase.</div>;
 
-	console.log('CART', cartItems);
 
 	const onSubmit = (e) => {
 		e.preventDefault();
+		if (!user) {
+			test()
+		}
 		cartItems?.forEach(item => {
 			fetch('/api/purchases/', {
 				method: "POST",
@@ -42,7 +47,8 @@ function Cart() {
 				})
 			})
 		})
-		history.push('/purchases')
+		dispatch(reset());
+		history.push('/purchases');
 	};
 
 	return (
@@ -53,6 +59,7 @@ function Cart() {
 				))}
 			</ul>
 			<hr />
+			{/* TODO prompt user to login/signup if not already */}
 			<form onSubmit={onSubmit}>
 				<button type='submit'>Purchase</button>
 			</form>

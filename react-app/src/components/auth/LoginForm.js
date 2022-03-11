@@ -36,11 +36,6 @@ const LoginForm = () => {
   return (
     <form className='main-auth-user-container' onSubmit={onLogin}>
       <h2 className='form-title'>Login</h2>
-      {/* <div className='signup-button'>
-        {/* <button onClick={(e)=> e.preventDefault()}> */}
-          {/* <SignupFormModal /> */}
-        {/* </button> */}
-      {/* </div> */}
       <div className='errors-div'>
         {errors.map((error, ind) => (
           <div className='single-error-div' key={ind}>{error}</div>
@@ -48,8 +43,9 @@ const LoginForm = () => {
       </div>
       <div className='auth-input-containers'>
         <div className='auth-email-container'>
-          <label className='email-input' htmlFor='email'>Email </label>
+          <label className='email-label' htmlFor='email'>Email </label>
           <input
+            className='auth-form-input'
             name='email'
             type='text'
             value={email}
@@ -59,6 +55,7 @@ const LoginForm = () => {
         <div>
           <label htmlFor='password'>Password </label>
           <input
+            className='auth-form-input'
             name='password'
             type='password'
             value={password}

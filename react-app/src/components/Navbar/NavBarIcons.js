@@ -1,10 +1,30 @@
 import { NavLink, Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import './Navbar.css'
 import Account from './Account'
 import SignupFormModal from '../SignupFormModal';
 import LoginFormModal from '../LoginFormModal';
 
+
+
 function NavBarIcons({ user }) {
+    const cartObj = useSelector((state) => state.cart);
+    const cart = Object.values(cartObj)
+
+    // console.log('CART++++', cart);
+
+    cart.map(element => {
+        const value = Object.values(element)
+        console.log('ELEMENT', value);
+        let total = 0
+        for (let i = 0; i < value.length; i++) {
+            const item = value[1];
+            total += item
+            console.log("ITEM", total)
+        }
+    })
+
+
     return (
         <>
             <ul id="NavBarIcons">
@@ -34,6 +54,9 @@ function NavBarIcons({ user }) {
                     <Link to="/cart">
                         <div className="faIcons">
                             <i className="fa-solid fa-cart-shopping"></i>
+                            <div className="cart-icon">
+                                <div className='amount-cart-small'>4</div>
+                            </div>
                         </div>
                     </Link>
                 </li>
@@ -45,24 +68,8 @@ function NavBarIcons({ user }) {
                         <li>
                             <SignupFormModal />
                         </li>
-
-                        {/* <li>
-                            <NavLink to='/login' exact={true} activeClassName='active'>
-                                Login
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to='/sign-up' exact={true} activeClassName='active'>
-                                Sign Up
-                            </NavLink>
-                        </li> */}
                     </div>
                 )}
-                {/* <li>
-                    <NavLink to='/users' exact={true} activeClassName='active'>
-                        Users
-                    </NavLink>
-                </li> */}
             </ul>
         </>
     )
