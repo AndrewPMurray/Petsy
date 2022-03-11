@@ -33,6 +33,7 @@ function Cart() {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
+		setErrors('');
 		let cartErrors;
 
 		cartItems?.forEach(async (item, i) => {
