@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { loadProducts } from '../../store/products';
 import { reset } from '../../store/cart';
 import CartItem from './CartItem';
+// import { test } from '../LoginFormModal';
 import './Cart.css'
 
 function Cart() {
@@ -32,6 +33,9 @@ function Cart() {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
+		if (!user) {
+			test()
+		}
 		cartItems?.forEach(item => {
 			fetch('/api/purchases/', {
 				method: "POST",

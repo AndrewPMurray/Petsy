@@ -11,11 +11,17 @@ function NavBarIcons({ user }) {
     const cartObj = useSelector((state) => state.cart);
     const cart = Object.values(cartObj)
 
-    console.log('CART++++', cart);
+    // console.log('CART++++', cart);
 
     cart.map(element => {
         const value = Object.values(element)
-        console.log('ELEMENT', value[1]);
+        console.log('ELEMENT', value);
+        let total = 0
+        for (let i = 0; i < value.length; i++) {
+            const item = value[1];
+            total += item
+            console.log("ITEM", total)
+        }
     })
 
 
