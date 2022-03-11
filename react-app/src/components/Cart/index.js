@@ -64,32 +64,37 @@ function Cart() {
 		);
 
 	return (
-		<div className='cart'>
-			<div className='amount-cart'>
-				{cartCount === 1
-					? `You have ${cartCount} item in your cart`
-					: `You have ${cartCount} items in your cart`}
+		<div id='cart-page'>
+			<div id="main-content">
+				<div id="cart-left-side">
+					<div className='amount-cart'>
+						{cartCount === 1
+							? `You have ${cartCount} item in your cart`
+							: `You have ${cartCount} items in your cart`}
+					</div>
+					{errors.length > 0 && <p id='error'>{errors}</p>}
+					<ul>
+						{cartItems.map((item) => (
+							<CartItem key={item.id} item={item} cart={products[`${item.id}`]} />
+						))}
+					</ul>
+				</div>
+				<div id="cart-right-side">
+					{user ?
+						<form onSubmit={onSubmit}>
+							<button type='submit'>Purchase</button>
+						</form> :
+						<>
+							<button id='purchase-button' onClick={() => setShowModal(true)}>Purchase</button>
+							{showModal && (
+								<Modal onClose={() => setShowModal(false)}>
+									<LoginForm />
+								</Modal>
+							)}
+						</>
+					}
+				</div>
 			</div>
-			{errors.length > 0 && <p id='error'>{errors}</p>}
-			<ul>
-				{cartItems.map((item) => (
-					<CartItem key={item.id} item={item} />
-				))}
-			</ul>
-			<hr />
-			{user ?
-				<form onSubmit={onSubmit}>
-					<button type='submit'>Purchase</button>
-				</form> :
-				<>
-					<button id='purchase-button' onClick={() => setShowModal(true)}>Purchase</button>
-					{showModal && (
-						<Modal onClose={() => setShowModal(false)}>
-							<LoginForm />
-						</Modal>
-					)}
-				</>
-			}
 		</div>
 	);
 }
