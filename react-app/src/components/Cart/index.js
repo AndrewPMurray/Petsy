@@ -11,10 +11,17 @@ function Cart() {
 	const [errors, setErrors] = useState('');
 	const user = useSelector((state) => state.session.user);
 	const cart = useSelector((state) => state.cart);
+	const [cartCount, setCartCount] = useState(0);
 	const products = useSelector((state) => state.products);
 	const dispatch = useDispatch();
-
 	const history = useHistory();
+
+	useEffect(() => {
+		setCartCount(0);
+		for (const object in cart) {
+			setCartCount((prev) => prev + cart[object].count);
+		}
+	}, [cart]);
 
 	useEffect(() => {
 		dispatch(loadProducts());
@@ -23,13 +30,6 @@ function Cart() {
 	const cartItems = Object.values(cart).map((item) => {
 		return { ...item, ...products[item.id] };
 	});
-
-	if (!cartItems || !cartItems.length)
-		return (
-			<div className='cart-item-header'>
-				No items in the cart. Start selecting items to purchase.
-			</div>
-		);
 
 	const onSubmit = (e) => {
 		e.preventDefault();
@@ -53,8 +53,20 @@ function Cart() {
 		});
 	};
 
+	if (!cartItems || !cartItems.length)
+		return (
+			<div className='cart-item-header'>
+				No items in the cart. Start selecting items to purchase.
+			</div>
+		);
+
 	return (
 		<div className='cart'>
+			<div className='amount-cart'>
+				{cartCount === 1
+					? `You have ${cartCount} item in your cart`
+					: `You have ${cartCount} items in your cart`}
+			</div>
 			{errors.length > 0 && <p id='error'>{errors}</p>}
 			<ul>
 				{cartItems.map((item) => (
