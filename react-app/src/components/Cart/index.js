@@ -1,23 +1,20 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadProducts } from '../../store/products';
-import { reset } from '../../store/cart';
+import { makePurchase } from '../../store/cart';
 import CartItem from './CartItem';
 // import { test } from '../LoginFormModal';
-import './Cart.css'
+import './Cart.css';
 
 function Cart() {
-	const user = useSelector((state) => state.session.user)
+	const [errors, setErrors] = useState('');
+	const user = useSelector((state) => state.session.user);
 	const cart = useSelector((state) => state.cart);
 	const products = useSelector((state) => state.products);
 	const dispatch = useDispatch();
 
 	const history = useHistory();
-
-	useEffect(() => {
-		window.localStorage.setItem('cart', JSON.stringify(cart));
-	}, [cart]);
 
 	useEffect(() => {
 		dispatch(loadProducts());
@@ -28,31 +25,37 @@ function Cart() {
 	});
 
 	if (!cartItems || !cartItems.length)
-		return <div className='cart-item-header'>No items in the cart. Start selecting items to purchase.</div>;
-
+		return (
+			<div className='cart-item-header'>
+				No items in the cart. Start selecting items to purchase.
+			</div>
+		);
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		// if (!user) {
-		// 	test()
-		// }
-		cartItems?.forEach(item => {
-			fetch('/api/purchases/', {
-				method: "POST",
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({
+		let cartErrors;
+
+		cartItems?.forEach(async (item, i) => {
+			const newPurchase = await dispatch(
+				makePurchase({
 					user_id: user.id,
 					product_id: item.id,
-					quantity: item.count
+					quantity: item.count,
 				})
-			})
-		})
-		dispatch(reset());
-		history.push('/purchases');
+			);
+			if (newPurchase.errors) {
+				cartErrors = newPurchase.errors;
+				setErrors(() => cartErrors);
+				return;
+			} else if (!cartErrors && i === cartItems.length - 1) {
+				history.push('/purchases');
+			}
+		});
 	};
 
 	return (
 		<div className='cart'>
+			{errors.length > 0 && <p id='error'>{errors}</p>}
 			<ul>
 				{cartItems.map((item) => (
 					<CartItem key={item.id} item={item} />
