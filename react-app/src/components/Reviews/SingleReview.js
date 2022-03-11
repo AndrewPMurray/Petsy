@@ -15,6 +15,8 @@ const SingleReview = forwardRef(({ review, seller, products }, ref) => {
 	const [photoPresent, setPhotoPresent] = useState(false);
 	const [tooLong, setTooLong] = useState(true);
 
+	const [changeHeight, setChangeHeight] = useState();
+
 	const contentRef = useRef();
 
 	// console.log(review.user.username, review.url)
@@ -30,11 +32,12 @@ const SingleReview = forwardRef(({ review, seller, products }, ref) => {
 	}, [review?.url]);
 
 	useLayoutEffect(() => {
+	
 		if (!isOverflowed(contentRef.current)) {
 			setTooLong(false);
 			return;
 		}
-	}, []);
+	}, [products.length, tooLong]);
 
 	const handleProductChange = (e) => {
 		e.preventDefault();
@@ -76,7 +79,10 @@ const SingleReview = forwardRef(({ review, seller, products }, ref) => {
 						</p>
 						<button
 							className="review-ellipsis-button"
-							onClick={() => setTooLong(false)}
+							onClick={() => {
+								setTooLong(false);
+								isOverflowed(contentRef.current)
+							}}
 						>
 							•••
 						</button>

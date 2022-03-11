@@ -68,12 +68,11 @@ function Reviews({ product, products }) {
 		})
 		if (!divHeight) setDivHeight(heightItemsArr[0])
 	}
-}, [showItemReviews, everyFourItems])
+}, [showItemReviews, everyFourItems, products.length])
 
 useEffect(() => {
 	if (showSellerReviews) {
 		for (let i = 0; i < allReviews?.length; i += 4 ) {
-			// pageNumsSeller.push(i)
 			console.log("hello?", reviewsSellerRef)
 			everyFourSellerItems?.push(reviewsSellerRef?.current.slice(i, i + 4))
 		}
@@ -81,12 +80,8 @@ useEffect(() => {
 			heightSellerItemsArr.push(getPageHeightPer4Reviews(range))
 		})
 		if (!divHeight) setDivHeight(heightSellerItemsArr[0])
-		// console.log("reviewsSellerRef",reviewsSellerRef)
-		// console.log(heightSellerItemsArr)
-		// console.log("allreviews",allReviews)
-		// console.log("pageNumsSeller", pageNumsSeller, "everyFourSellerItems", everyFourSellerItems, "heightSellerItemsArr", heightSellerItemsArr)
 	}
-	}, [showSellerReviews, everyFourSellerItems])
+	}, [showSellerReviews, everyFourSellerItems, products.length])
 	
 
 	useEffect(() => {
