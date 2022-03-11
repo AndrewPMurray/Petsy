@@ -147,8 +147,8 @@ useEffect(() => {
 					</span>
 				</div>
 				<div className='review-raving'>
-					<i className='fa-solid fa-medal'></i>
-					<p>
+					<i className='fa-solid fa-medal raving-icon'></i>
+					<p className='review-raving-text'>
 						Buyers are raving! Multiple people gave 5-star reviews to this shop in the
 						past 7 days.
 					</p>
@@ -163,8 +163,8 @@ useEffect(() => {
 				<div className='reviews-body'>
 					<div className='reviews-title-bar'>
 						{product.reviews.length && (
-							<div className='reviews-item-button'>
-								<button onClick={() => {
+							<div className={`reviews-item-button show-reviews-title-${showItemReviews}`}>
+								<button className='show-buttons' onClick={() => {
 									setShowItemReviews(true)
 									setShowSellerReviews(false)
 									setDivHeight(0)
@@ -173,8 +173,8 @@ useEffect(() => {
 								<p className='review-total'>{product?.reviews?.length}</p>
 							</div>
 						)}
-						<div className='reviews-seller-button'>
-							<button onClick={() => {
+						<div className={`reviews-seller-button show-reviews-title-${showSellerReviews}`}>
+							<button className='show-buttons' onClick={() => {
 								setShowSellerReviews(true)
 								setShowItemReviews(false)
 								setDivHeight(0)

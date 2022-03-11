@@ -10,16 +10,21 @@
 }
 
 .product-preview-block-img {
+    box-sizing: border-box;
+    border-radius: 5px;
     width: 60px;
     height: 60px;
+    object-fit: cover;
 }
 
 .selected-image-true {
+    box-sizing: border-box;
     border: 2px solid black;
+    border-radius: 5px;
+    object-fit: cover;
 }
 
 .photo-gallery-view {
-    height: 100%;
     width: 100%;
     box-sizing: border-box;
     position: relative;
@@ -27,10 +32,10 @@
 
 .main-gallery-image {
     object-position: top;
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 100%;
+    border-radius: 15px;
+    max-height: 100%;
+    max-width: 100%;
+    margin: auto;
     object-fit: contain;
     box-sizing: border-box;
 }

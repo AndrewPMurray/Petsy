@@ -1,9 +1,16 @@
-/* .highlight-div{
-  width: 250px;
-  height: 30px;
-} */
+.highlight-div{
+  margin: auto;
+  width: 90%;
+  margin-top: 5px;
+}
+.highlight-text {
+  font-weight: 500;
+  font-size: 16px;
+  padding: 5px 0px;
+}
 
 .overflow{
+  width: 100%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -14,12 +21,43 @@
   flex-direction: row;
 }
 
+.close-button-div:hover {
+  background-color: rgba(216, 216, 216, 0.596);
+}
+
 .close-button-div {
   display: flex;
   flex-direction: row;
   width: 100%;
-  background-color: grey;
+  padding: 0px 10px;
+  background-color: white;
+  border-radius: 20px;
+  height: 47px;
   justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.close-button-div p {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.45px;
+  /* line-height: 32px; */
+}
+
+.icon-text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* padding: 10px 0px; */
+}
+
+.icon-text p {
+  font-size: 16px;
+}
+
+.highlight-icon-div {
+  margin-right: 10px;
 }
 
 /* .close-button-div i:active {

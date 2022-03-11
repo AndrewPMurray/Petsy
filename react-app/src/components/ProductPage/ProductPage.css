@@ -1,7 +1,42 @@
+/* .product-div i {
+  font-size: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 20px;
+} */
+
+.product-div button {
+  /* font-weight: bold; */
+  /* font-size: 18px; */
+  font-family: "Graphik Webfont",-apple-system,"Helvetica Neue","Droid Sans",Arial,sans-serif;
+}
+
+.product-div p {
+  font-family: 'Lato', sans-serif;
+  /* padding: 10px 0px; */
+}
+
+.product-div h2 {
+  font-size: 26px;
+  letter-spacing: 0.35px;
+  font-weight: lighter;
+  line-height: 42px;
+  font-family: "Guardian-EgypTT",Charter,"Charter Bitstream",Cambria,"Noto Serif Light","Droid Serif",Georgia,serif
+}
+
+.product-div h3 {
+  font-size: 26px;
+  padding: 20px 0px;
+  /* letter-spacing: 0.35px; */
+  font-weight: 600;
+  /* line-height: 32px; */
+  font-family: "Graphik Webfont",-apple-system,"Helvetica Neue","Droid Sans",Arial,sans-serif;
+}
+
 .product-div {
   display: flex;
   flex-direction: row;
-  width: 80vw;
+  width: 90vw;
   margin: auto;
   margin-top: 20px;
 }
@@ -11,30 +46,25 @@
   flex-direction: row;
   width: 100%;
   /* max-width: 300px; */
-  height: 60vh;
-  min-height: 50%;
+  height: 80vh;
   margin: 0px;
 }
 
 .product-left-col {
-  width: 70%;
+  width: 65%;
   height: 100%;
+  margin-right: 30px;
 }
 
 .product-right-col {
-  width: 30%;
-}
-
-.one-line {
-  display: flex;
-  flex-direction: row;
+  width: 35%;
 }
 
 .info-details-description-div {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 80vh;
+  height: 100%
 }
 
 .info-highlights {
@@ -42,4 +72,17 @@
   padding-bottom: 10px;
   width: 100%;
   position: static;
+}
+
+.info-button-quantity button {
+  width: 100%;
+  height: 45px;
+  border-radius: 25px;
+  background-color: black;
+  color: white;
+}
+
+.add-cart-button {
+  font-size: 16px;
+  font-weight: bold;
 }

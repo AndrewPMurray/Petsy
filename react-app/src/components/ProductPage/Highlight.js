@@ -13,16 +13,19 @@ function Highlight({ string }) {
 
 	return (
 		<div className='highlight-div'>
-			<div dangerouslySetInnerHTML={{ __html: icon }}></div>
 			{tooLong ? (
-				<div className='overflow-div'>
+				<div className='overflow-div icon-text'>
+					<div className='highlight-icon-div' dangerouslySetInnerHTML={{ __html: icon }}></div>
 					<p className='overflow'>{string} </p>
 					<button className='ellipsis-button' onClick={() => setTooLong(false)}>
 						...
 					</button>
 				</div>
 			) : (
+				<div className='icon-text highlight-text-div'>
+				<div className='highlight-icon-div' dangerouslySetInnerHTML={{ __html: icon }}></div>
 				<p className='highlight-text'>{string}</p>
+				</div>
 			)}
 		</div>
 	);

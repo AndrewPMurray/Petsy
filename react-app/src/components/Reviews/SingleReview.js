@@ -53,22 +53,24 @@ const SingleReview = forwardRef(({ review, seller, products }, ref) => {
 		<div ref={ref} className="single-review-container-div">
 			<div className="review-left-side">
 				<div className="review-buyer-header">
-					<i className="fa-solid fa-circle-user"></i>
+					<i className="fa-solid fa-circle-user review-buyer-icon"></i>
+					<div className="review-name-date-div">
 					<p className="buyer-username">{review.user.username}</p>
 					<div className="date-review">
 						{dayjs(review.created_at).format("MMM D, YYYY")}{" "}
 					</div>
+					</div>
 				</div>
 				<div className="review-star-div">
 					{[...Array(review.rating)].map((ele, idx) => (
-						<i className="fas fa-star" key={idx}></i>
+						<i className="fas fa-star review-star" key={idx}></i>
 					))}
 				</div>
 				{tooLong ? (
 					<div className="review-content-div overflow-div">
 						<p
 							ref={contentRef}
-							className={`overflow-review review-content-${photoPresent}`}
+							className={`overflow-review content-style review-content-${photoPresent}`}
 						>
 							{review.content}
 						</p>
@@ -76,17 +78,19 @@ const SingleReview = forwardRef(({ review, seller, products }, ref) => {
 							className="review-ellipsis-button"
 							onClick={() => setTooLong(false)}
 						>
-							...
+							•••
 						</button>
 					</div>
 				) : (
-					<p ref={contentRef} className="review-content-text">
+					<div className="review-content-div">
+					<p ref={contentRef} className="content-style review-content-text">
 						{review.content}
 					</p>
+					</div>
 				)}
 				{seller && (
 					<div className="purchased-item-div">
-						<p>Purchased Item:</p>
+						<p className="purchased">Purchased Item:</p>
 						<div className="seller-review-product-info">
 							<img
 								className="tiny-seller-review-photo"

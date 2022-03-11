@@ -47,27 +47,27 @@ function ProductInfo({ product }) {
 		<>
 			<div className='info-title-price'>
 				<h2>{product.title}</h2>
-				<h3>${product.price.toFixed(2)}</h3>
+				<h3>${product.price.toFixed(2)}+</h3>
 			</div>
 			<div className='info-button-quantity'>
-				<button onClick={cartAdd}>Add to cart</button>
+				<button className='add-cart-button' onClick={cartAdd}>Add to cart</button>
 				<div className='info-icons'>
 					<div className='one-line'>
-						<i className='fa-solid fa-hourglass'></i>
+						<i id='info-icon1' className='fa-solid fa-hourglass info-icon1'></i>
 						<p>
 							Selling fast! Only {product.quantity} left, {randomNum} people have it
 							in their carts.
 						</p>
 					</div>
 					<div className='one-line'>
-						<i class='fa-solid fa-square-check'></i>
+						<i id='info-icon2' className='fa-solid fa-square-check info-icon2'></i>
 						<p>
 							Star Seller. This seller has a history of 5-star reviews and shipping on
 							time.
 						</p>
 					</div>
 					<div className='one-line'>
-						<i class='fa-solid fa-truck-fast'></i>
+						<i id='info-icon3' className='fa-solid fa-truck-fast'></i>
 						<p>Hooray! This item ships free to the US.</p>
 					</div>
 				</div>
@@ -105,7 +105,7 @@ function ProductInfo({ product }) {
 											{product.description}
 										</pre>
 									</div>
-									<button onClick={() => setShowDesp(true)}>
+									<button className='learn-more' onClick={() => setShowDesp(true)}>
 										Learn more about this item
 									</button>
 								</>
