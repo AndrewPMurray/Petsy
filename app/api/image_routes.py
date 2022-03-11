@@ -52,3 +52,13 @@ def delete_image(id):
     db.session.delete(image)
     db.session.commit()
     return {'message': 'success'}
+
+@image_routes.route("/", methods=["DELETE"])
+@login_required
+def delete_image_from_review():
+    name = request.form['url'].split('/')[-1]
+    
+    if 'amazonaws' in request.form['url']:
+        delete_image_from_s3(name)
+
+    return {'message': 'success'}
