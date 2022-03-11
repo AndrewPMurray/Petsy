@@ -6,6 +6,7 @@ import UploadPicture from './UploadPicture';
 
 export default function ListingForm({ product, userId, setShowForm }) {
 	const dispatch = useDispatch();
+	const [errors, setErrors] = useState({});
 	const [title, setTitle] = useState(product?.title || '');
 	const [price, setPrice] = useState(product?.price || '');
 	const [detailFields, setDetailFields] = useState(0);
@@ -33,6 +34,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setErrors({});
 
 		const detailsArr = [];
 		if (details.handmade === true) detailsArr.push('Handmade');
@@ -53,6 +55,18 @@ export default function ListingForm({ product, userId, setShowForm }) {
 				pet_type_id: +petType,
 			})
 		);
+
+		if (newProduct.errors) {
+			setErrors(() => {
+				const errors = {};
+				newProduct.errors.forEach((e) => {
+					const errorArr = e.split(' :');
+					errors[errorArr[0]] = errorArr[1];
+				});
+				return errors;
+			});
+			return;
+		}
 
 		if (images.length) {
 			setImageLoading(true);
@@ -77,9 +91,8 @@ export default function ListingForm({ product, userId, setShowForm }) {
 					}
 				} else {
 					setImageLoading(false);
-					// a real app would probably use more advanced
-					// error handling
-					console.log('error');
+					const errors = res.json();
+					setErrors(() => errors);
 				}
 			});
 		} else {
@@ -90,12 +103,39 @@ export default function ListingForm({ product, userId, setShowForm }) {
 
 	const handleEdit = async (e) => {
 		e.preventDefault();
+		setErrors(() => {});
 
 		const detailsArr = [];
 		if (details.handmade === true) detailsArr.push('Handmade');
 		if (details.materials !== '') detailsArr.push(`Materials: ${details.materials}`);
 		for (const key in details) {
 			if (key !== 'handmade' && key !== 'materials') detailsArr.push(details[key]);
+		}
+
+		const editedProduct = await dispatch(
+			editProduct({
+				id: product?.id,
+				title,
+				price: +price,
+				details: JSON.stringify(detailsArr),
+				description,
+				quantity,
+				user_id: +userId,
+				product_type_id: +productType,
+				pet_type_id: +petType,
+			})
+		);
+
+		if (editedProduct.errors) {
+			setErrors(() => {
+				const errors = {};
+				editedProduct.errors.forEach((e) => {
+					const errorArr = e.split(' :');
+					errors[errorArr[0]] = errorArr[1];
+				});
+				return errors;
+			});
+			return;
 		}
 
 		imagesToDelete.forEach(async (image) => {
@@ -109,23 +149,12 @@ export default function ListingForm({ product, userId, setShowForm }) {
 			if (res.ok) {
 				await res.json();
 			} else {
-				console.log('error');
+				const errors = res.json();
+				setErrors(() => errors);
 			}
 		});
 
-		await dispatch(
-			editProduct({
-				id: product?.id,
-				title,
-				price: +price,
-				details: JSON.stringify(detailsArr),
-				description,
-				quantity,
-				user_id: +userId,
-				product_type_id: +productType,
-				pet_type_id: +petType,
-			})
-		);
+		if (errors.length) return;
 
 		if (images.length) {
 			setImageLoading(true);
@@ -142,15 +171,14 @@ export default function ListingForm({ product, userId, setShowForm }) {
 					if (res.ok) {
 						await res.json();
 					} else {
-						// a real app would probably use more advanced
-						// error handling
-						console.log('error');
+						const errors = res.json();
+						setErrors(() => errors);
 					}
 				}
 				if (i === images.length - 1) {
 					setImageLoading(false);
 					await dispatch(loadProducts());
-					setShowForm(false);
+					if (!errors.length) setShowForm(false);
 				}
 			});
 		} else {
@@ -161,7 +189,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 
 	return (
 		<>
-			<div id='picture-preview'>
+			<div id='picture-preview-container'>
 				<UploadPicture
 					images={images}
 					setImages={setImages}
@@ -169,9 +197,10 @@ export default function ListingForm({ product, userId, setShowForm }) {
 					setImagesToDelete={setImagesToDelete}
 				/>
 			</div>
-			<form id='listingForm' onSubmit={product ? handleEdit : handleSubmit}>
+			<form id='listing-form' onSubmit={product ? handleEdit : handleSubmit}>
 				<label>
 					Title
+					{errors.title && <p id='error'>{errors.title}</p>}
 					<input
 						type='text'
 						name='title'
@@ -209,6 +238,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 				</label>
 				<label>
 					Price
+					{errors.price && <p id='error'>{errors.price}</p>}
 					<input
 						type='number'
 						value={price}
@@ -219,6 +249,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 				<label>
 					Handmade
 					<input
+						id='handmade-checkbox'
 						type='checkbox'
 						value={details.handmade}
 						checked={details.handmade || false}
@@ -235,6 +266,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 						onChange={(e) => setDetails({ ...details, materials: e.target.value })}
 					/>
 				</label>
+				<label>Add additional details:</label>
 				{Array.apply(null, { length: detailFields }).map((el, i) => (
 					<input
 						key={i}
@@ -244,10 +276,14 @@ export default function ListingForm({ product, userId, setShowForm }) {
 						onChange={(e) => setDetails({ ...details, [i]: e.target.value })}
 					/>
 				))}
-				<div onClick={() => setDetailFields(detailFields + 1)}>Add Additional Detail</div>
+				<div id='add-additional-detail' onClick={() => setDetailFields(detailFields + 1)}>
+					Add Additional Detail
+				</div>
 				<label>
 					Description
+					{errors.description && <p id='error'>{errors.description}</p>}
 					<textarea
+						id='product-description'
 						value={description}
 						name='description'
 						onChange={(e) => setDescription(e.target.value)}
@@ -255,6 +291,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 				</label>
 				<label>
 					Quantity
+					{errors.quantity && <p id='error'>{errors.quantity}</p>}
 					<input
 						type='number'
 						value={quantity}
@@ -262,9 +299,15 @@ export default function ListingForm({ product, userId, setShowForm }) {
 						onChange={(e) => setQuantity(e.target.value)}
 					/>
 				</label>
-				<button type='submit'> Submit </button>
+				<div id='submit-buttons-container'>
+					<button id='product-submit-button' type='submit'>
+						Submit
+					</button>
+					<div id='cancel-button' onClick={() => setShowForm(false)}>
+						Cancel
+					</div>
+				</div>
 			</form>
-			<button onClick={() => setShowForm(false)}>Cancel</button>
 			{imageLoading && <p>Submitting item, please wait...</p>}
 		</>
 	);

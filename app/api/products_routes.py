@@ -3,6 +3,7 @@ from flask_login import login_required
 from app.models import User, Product, db
 from app.forms.product_form import ProductForm
 from app.aws import delete_image_from_s3
+from app.api.auth_routes import validation_errors_to_error_messages
 
 
 products_routes = Blueprint('products_routes', __name__)
@@ -38,6 +39,7 @@ def create_products_listing():
     db.session.add(product)
     db.session.commit()
     return product.to_dict()
+  return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 # PUT Route
@@ -62,6 +64,7 @@ def edit_products_listing(id):
     
     db.session.commit()
     return product.to_dict()
+  return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 # DELETE Route
