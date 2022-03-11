@@ -14,6 +14,7 @@ function Reviews({ product, products }) {
 	while (roundedProductReviews.length % 4 !== 0) {
 		roundedProductReviews.push({})
 	}
+	console.log("sellerProducts", sellerProducts)
 
     let allReviews = [];
     sellerProducts.forEach((p) => {
