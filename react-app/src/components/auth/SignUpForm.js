@@ -5,7 +5,7 @@ import { signUp } from '../../store/session';
 import Demo from '../Demo';
 import './auth.css'
 
-const SignUpForm = () => {
+const SignUpForm = ({ setPage }) => {
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -47,9 +47,14 @@ const SignUpForm = () => {
 
 
   return (
-    <form className="main-auth-user-container" onSubmit={onSignUp}>
+    < form className="main-auth-user-container" onSubmit={onSignUp}>
       <h2 className='form-title'>Create your account</h2>
       <h2 className="form-title">Registration is easy.</h2>
+      <div>
+        <button
+          onClick={() => setPage(1)}
+        >Login</button>
+      </div>
       <div className='errors-div'>
         {errors.map((error, ind) => (
           <div className='single-error-div' key={ind}>{error}</div>
@@ -105,6 +110,7 @@ const SignUpForm = () => {
         <Demo />
       </div>
     </form>
+
   );
 };
 

@@ -11,30 +11,28 @@ function NavBarIcons({ user }) {
     const cartObj = useSelector((state) => state.cart);
     const cart = Object.values(cartObj)
 
-    // console.log('CART++++', cart);
-
-    // cart.map(element => {
-    //     const value = Object.values(element)
-    //     console.log('ELEMENT', value);
-    //     let total = 0
-    //     for (let i = 0; i < value.length; i++) {
-    //         const item = value[1];
-    //         total += item
-    //         console.log("ITEM", total)
-    //     }
-    // })
-
-
     return (
         <>
             <ul id="NavBarIcons">
-                <li>
-                    <Link to="/favorites" id="favorites">
-                        <div className="faIcons">
-                            <i className="far fa-heart"></i>
-                        </div>
-                    </Link>
-                </li>
+                {!user && (
+                    <div id="NotLoggedNavButtons">
+                        <li>
+                            <LoginFormModal />
+                        </li>
+                        {/* <li>
+                            <SignupFormModal />
+                        </li> */}
+                    </div>
+                )}
+                {user &&
+                    <li>
+                        <Link to="/favorites" id="favorites">
+                            <div className="faIcons">
+                                <i className="far fa-heart"></i>
+                            </div>
+                        </Link>
+                    </li>
+                }
 
                 {user &&
                     <li>
@@ -60,16 +58,6 @@ function NavBarIcons({ user }) {
                         </div>
                     </Link>
                 </li>
-                {!user && (
-                    <div id="NotLoggedNavButtons">
-                        <li>
-                            <LoginFormModal />
-                        </li>
-                        <li>
-                            <SignupFormModal />
-                        </li>
-                    </div>
-                )}
             </ul>
         </>
     )

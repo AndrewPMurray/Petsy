@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadProducts } from '../../store/products';
 import { reset } from '../../store/cart';
 import CartItem from './CartItem';
-// import { test } from '../LoginFormModal';
+import { Modal } from '../../context/Modal';
+import LoginForm from '../auth/LoginForm';
 import './Cart.css'
 
 function Cart() {
@@ -12,8 +13,8 @@ function Cart() {
 	const cart = useSelector((state) => state.cart);
 	const products = useSelector((state) => state.products);
 	const dispatch = useDispatch();
-
 	const history = useHistory();
+	const [showModal, setShowModal] = useState(false);
 
 	useEffect(() => {
 		window.localStorage.setItem('cart', JSON.stringify(cart));
@@ -33,9 +34,6 @@ function Cart() {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		// if (!user) {
-		// 	test()
-		// }
 		cartItems?.forEach(item => {
 			fetch('/api/purchases/', {
 				method: "POST",
@@ -59,10 +57,19 @@ function Cart() {
 				))}
 			</ul>
 			<hr />
-			{/* TODO prompt user to login/signup if not already */}
-			<form onSubmit={onSubmit}>
-				<button type='submit'>Purchase</button>
-			</form>
+			{user ?
+				<form onSubmit={onSubmit}>
+					<button type='submit'>Purchase</button>
+				</form> :
+				<>
+					<button id='purchase-button' onClick={() => setShowModal(true)}>Purchase</button>
+					{showModal && (
+						<Modal onClose={() => setShowModal(false)}>
+							<LoginForm />
+						</Modal>
+					)}
+				</>
+			}
 		</div>
 	);
 }
