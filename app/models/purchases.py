@@ -13,7 +13,8 @@ class Purchase(db.Model):
 
     user = db.relationship("User", back_populates="purchases")
     single_product = db.relationship("Product", back_populates="purchases")
-
+    reviews = db.relationship("Review", back_populates="purchase", cascade="all, delete")
+  
     def to_dict(self):
         return {
             "id": self.id,
