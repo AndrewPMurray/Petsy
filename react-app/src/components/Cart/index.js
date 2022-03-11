@@ -55,6 +55,7 @@ function Cart() {
 				))}
 			</ul>
 			<hr />
+			{/* TODO prompt user to login/signup if not already */}
 			<form onSubmit={onSubmit}>
 				<button type='submit'>Purchase</button>
 			</form>

@@ -7,6 +7,8 @@ function CartItem({ item }) {
   const dispatch = useDispatch();
   const [count, setCount] = useState(item.count);
 
+  // console.log('****', item)
+
   useEffect(() => {
     setCount(item.count);
   }, [item.count]);
