@@ -32,7 +32,6 @@ function ProductPage() {
             <div className='product-left-col'>
               <ProductPhotos firstImage={firstImage} product={product} />
               <Reviews product={product} products={products} />
-
             </div>
             <div className='product-right-col'>
               <ProductInfo product={product} />

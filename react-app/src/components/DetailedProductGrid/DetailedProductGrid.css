@@ -10,7 +10,7 @@
   display: flex;
   width: 90%;
   height: 100%;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   padding-top: 20px;
   margin-bottom: 20px;
@@ -20,11 +20,11 @@
 
 #productCard {
   margin-bottom: 10px;
-  flex: 1 0 21%;
+  /* flex: 1 0 21%; */
   display: flex;
   flex-direction: column;
   height: 360px;
-  width: 25%;
+  width: calc(100% * (1/4) - 10px - 1px);
 }
 
 .detailedCard {
@@ -48,4 +48,8 @@ div {
 #averageRating {
   color: gray;
   font-size: 14px;
+}
+
+#product-card-div {
+  width: 100%;
 }
