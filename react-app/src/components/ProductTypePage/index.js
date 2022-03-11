@@ -14,5 +14,16 @@ export default function ProductTypePage() {
 		dispatch(loadProductTypesByPet(petTypeId, productTypeId));
 	}, [dispatch, petTypeId, productTypeId]);
 
-	return <DetailedProductGrid products={products} />;
+	return (
+		<>
+			<div id="product-type-header">
+				<div id='main-titles'>
+					<div id="pet-type-title">{products[0].pet_type?.title} {products[0].product_type?.title}</div>
+				</div>
+			</div>
+			<div id="product-type-page">
+				<DetailedProductGrid products={products} />
+			</div>
+		</>
+	)
 }

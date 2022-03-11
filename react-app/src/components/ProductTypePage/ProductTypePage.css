@@ -1,0 +1,27 @@
+#product-type-page {
+  display: flex;
+  margin-top: 50px;
+  justify-content: center;
+  height: 100vh;
+}
+
+#product-type-header {
+  display: flex;
+  justify-content: center;
+  background-color: #f8ebe6;
+  height: 100px;
+  margin-bottom: 50px;
+  width: 100%;
+}
+
+#pet-type-title {
+  font-size: 4vh;
+  font-family: "Lora", serif;
+}
+
+#main-titles {
+  width: 90%;
+  display: flex;
+  align-items: flex-start;
+  margin-top: 10px;
+}

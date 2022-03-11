@@ -4,8 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { loadProducts } from '../../store/products';
 import { makePurchase } from '../../store/cart';
 import CartItem from './CartItem';
-// import { test } from '../LoginFormModal';
-import './Cart.css';
+import { Modal } from '../../context/Modal';
+import LoginForm from '../auth/LoginForm';
+import './Cart.css'
 
 function Cart() {
 	const [errors, setErrors] = useState('');
@@ -15,6 +16,7 @@ function Cart() {
 	const products = useSelector((state) => state.products);
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const [showModal, setShowModal] = useState(false);
 
 	useEffect(() => {
 		setCartCount(0);
@@ -75,10 +77,19 @@ function Cart() {
 				))}
 			</ul>
 			<hr />
-			{/* TODO prompt user to login/signup if not already */}
-			<form onSubmit={onSubmit}>
-				<button type='submit'>Purchase</button>
-			</form>
+			{user ?
+				<form onSubmit={onSubmit}>
+					<button type='submit'>Purchase</button>
+				</form> :
+				<>
+					<button id='purchase-button' onClick={() => setShowModal(true)}>Purchase</button>
+					{showModal && (
+						<Modal onClose={() => setShowModal(false)}>
+							<LoginForm />
+						</Modal>
+					)}
+				</>
+			}
 		</div>
 	);
 }

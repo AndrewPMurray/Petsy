@@ -37,8 +37,8 @@
   display: flex;
   flex-direction: row;
   width: 90vw;
-  margin: auto;
-  margin-top: 20px;
+  margin: 20px auto 100px auto;
+  /* margin-top: 20px; */
 }
 
 .product-photos-div {
