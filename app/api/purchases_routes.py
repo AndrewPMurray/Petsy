@@ -21,16 +21,18 @@ def make_purchase():
   product = Product.query.get(product_id)
   
   if product.quantity < quantity:
+    if product.quantity == 0:
+      return {"errors": f'{product.title} is currently out of stock, please remove this item from your cart to complete purchase'}, 400
     return {"errors": f'only {product.quantity} of {product.title} available, unable to complete purchase with requested quantity'}, 400
   else:
     new_quantity = product.quantity - quantity
     product.quantity = new_quantity
     
-    if product.quantity == 0: 
-      for image in product.images:
-        if 'amazonaws' in image.url:
-          delete_image_from_s3(str(image.url).split('/')[-1])
-      db.session.delete(product)
+    # if product.quantity == 0: 
+    #   for image in product.images:
+    #     if 'amazonaws' in image.url:
+    #       delete_image_from_s3(str(image.url).split('/')[-1])
+    #   db.session.delete(product)
       
     db.session.commit()
     
