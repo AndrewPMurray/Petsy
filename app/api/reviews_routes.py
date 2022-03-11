@@ -25,9 +25,9 @@ def create_review():
   form['csrf_token'].data = request.cookies['csrf_token']
   data = form.data
   image = form.image.data
-
+  
   if "image" not in request.files:
-      return {"errors": "image required"}, 400
+    return {"errors": "image required"}, 400
 
   image = request.files["image"]
   # product_id = request.form['product_id']
@@ -47,7 +47,6 @@ def create_review():
 
   image_url = upload["url"] 
 
-  #NOTE code from before
   if form.validate_on_submit():
     new_review = Review(
       content=data["content"],
@@ -55,6 +54,7 @@ def create_review():
       url=image_url,
       user_id=data["user_id"],
       product_id=data["product_id"],
+      purchase_id=data["purchase_id"],
       )
   else:
     print('*******', form.errors)
@@ -69,45 +69,62 @@ def create_review():
 @login_required
 def edit_review(id):
   form = ReviewForm()
-
   form['csrf_token'].data = request.cookies['csrf_token']
   data = form.data
   image = form.image.data
 
-  if "image" not in request.files:
-      return {"errors": "image required"}, 400
 
-  image = request.files["image"]
-  # product_id = request.form['product_id']
-  
-  if not allowed_file(image.filename):
-      return {"errors": "file type not permitted"}, 400
-  
-  image.filename = get_unique_filename(image.filename)
-  
-  upload = upload_file_to_s3(image)
-  
-  if "url" not in upload:
-      # if the dictionary doesn't have a url key
-      # it means that there was an error when we tried to upload
-      # so we send back that error message
-      return upload, 400
+  print('=====', isinstance(image, str))
+  if not isinstance(image, str):
+    if "image" not in request.files:
+        return {"errors": "image required"}, 400
 
-  image_url = upload["url"] 
+    image = request.files["image"]
+    # product_id = request.form['product_id']
+    
+    if not allowed_file(image.filename):
+        return {"errors": "file type not permitted"}, 400
+    
+    image.filename = get_unique_filename(image.filename)
+    
+    upload = upload_file_to_s3(image)
+    
+    if "url" not in upload:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message
+        return upload, 400
+
+    image_url = upload["url"] 
   
-  if form.validate_on_submit():
-    review = Review.query.get(id)
+    if form.validate_on_submit():
+      review = Review.query.get(id)
+      
+      review.content=data["content"],
+      review.rating=data["rating"],
+      review.url=image_url,
+      review.user_id=data["user_id"],
+      review.product_id=data["product_id"],
+      review.purchase_id=data["purchase_id"],
+      
+      db.session.commit() 
+    else:
+      print('****',form.errors)
     
-    review.content=data["content"],
-    review.rating=data["rating"],
-    review.url=image_url,
-    review.user_id=data["user_id"],
-    review.product_id=data["product_id"],
-    
-    db.session.commit() 
   else:
-    print('****',form.errors)
-    
+    if form.validate_on_submit():
+      review = Review.query.get(id)
+      
+      review.content=data["content"],
+      review.rating=data["rating"],
+      review.url=data["image"],
+      review.user_id=data["user_id"],
+      review.product_id=data["product_id"],
+      review.purchase_id=data["purchase_id"],
+      
+      db.session.commit() 
+      
+      
   return review.to_dict()
 
 

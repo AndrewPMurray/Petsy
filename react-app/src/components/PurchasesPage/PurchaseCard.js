@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import ReviewModal from "../ReviewModal";
 
 
-function PurchaseCard({ purchase, userId, reviews, review }) {
+function PurchaseCard({ purchaseId, purchase, userId, reviews, review }) {
 	// const dispatch = useDispatch();
 	let message = reviews[purchase.product_id] ? 'Edit Review' : 'Add Review'
 	console.log('=====', review?.rating)
@@ -41,7 +41,7 @@ function PurchaseCard({ purchase, userId, reviews, review }) {
 			</div>
 			<div id='purchaseReview'>
 				<div>
-					<ReviewModal message={message} userId={userId} product={purchase.product} reviews={reviews} review={review} />
+					<ReviewModal purchaseId={purchaseId} message={message} userId={userId} product={purchase.product} reviews={reviews} review={review} />
 				</div>
 			</div>
 			<div id='buyAgainDiv'>

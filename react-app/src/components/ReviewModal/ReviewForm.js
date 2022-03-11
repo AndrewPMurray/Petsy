@@ -3,14 +3,16 @@ import { FaStar, } from 'react-icons/fa';
 import { AiOutlineCheckCircle, AiTwotoneCheckCircle } from "react-icons/ai";
 import { useDispatch } from 'react-redux';
 import './ReviewForm.css';
-import { createReview, editReview } from '../../store/reviews';
+import { createReview, editReview, loadReviewsByUser } from '../../store/reviews';
 import UploadReviewImage from './UploadReviewImage';
 
-export default function ReviewForm({ userId, product, reviews, setShowModal, reviewExists, stars }) {
+export default function ReviewForm({ userId, product, reviews, setShowModal, reviewExists, stars, review, purchaseId }) {
 
-	const [content, setContent] = useState(reviews[product.id]?.content || '');
-	const [rating, setRating] = useState(reviews[product.id]?.rating || null);
-	const [url, setUrl] = useState(product?.rating || '');
+	console.log('Entering Review Form', review)
+
+	const [content, setContent] = useState(review?.content || '');
+	const [rating, setRating] = useState(review?.rating || null);
+	const [url, setUrl] = useState(review?.url || '');
 	const [hover, setHover] = useState(null);
 	const dispatch = useDispatch();
 	const [active, setActive] = useState(1)
@@ -23,6 +25,7 @@ export default function ReviewForm({ userId, product, reviews, setShowModal, rev
 			user_id: userId,
 			url: url,
 			product_id: product.id,
+			purchase_id: purchaseId
 		};
 
 		dispatch(createReview(newReview));
@@ -30,13 +33,13 @@ export default function ReviewForm({ userId, product, reviews, setShowModal, rev
 	};
 
 
-	const handleEdit = (e) => {
+	const handleEdit = async (e) => {
 		e.preventDefault();
 
-		let reviewId;
-		if (reviewExists) {
-			reviewId = reviews[product.id].id
-		}
+		// let reviewId;
+		// if (reviewExists) {
+		// 	reviewId = reviews[product.id].id
+		// }
 
 		const editedReview = {
 			content,
@@ -44,9 +47,15 @@ export default function ReviewForm({ userId, product, reviews, setShowModal, rev
 			user_id: userId,
 			url: url,
 			product_id: product.id,
+			purchase_id: purchaseId
 		};
 
-		dispatch(editReview(editedReview, reviewId));
+		console.log('HANDLE EDIT', review?.id)
+
+
+		await dispatch(editReview(editedReview, review?.id))
+		await dispatch(loadReviewsByUser(userId));
+
 		setShowModal(false)
 	};
 
@@ -150,7 +159,7 @@ export default function ReviewForm({ userId, product, reviews, setShowModal, rev
 
 					{active === 2 &&
 						<div id="reviewImageDiv">
-							<UploadReviewImage review={reviews[product.id]} setUrl={setUrl} />
+							<UploadReviewImage review={review} setUrl={setUrl} />
 						</div>
 					}
 					<div id="form_button_div">

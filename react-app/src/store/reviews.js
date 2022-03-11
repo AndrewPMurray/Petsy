@@ -42,8 +42,7 @@ export const loadReviewsByUser = (userId) => async (dispatch) => {
 }
 
 export const createReview = (review) => async (dispatch) => {
-    const { content, rating, user_id, url, product_id } = review
-
+    const { content, rating, user_id, url, product_id, purchase_id } = review
 
     const formData = new FormData();
     formData.append('image', url)
@@ -51,6 +50,8 @@ export const createReview = (review) => async (dispatch) => {
     formData.append('content', content)
     formData.append('user_id', user_id)
     formData.append('product_id', product_id)
+    formData.append('purchase_id', purchase_id)
+
 
     const response = await fetch('/api/reviews/', {
         method: 'POST',
@@ -68,16 +69,16 @@ export const createReview = (review) => async (dispatch) => {
 }
 
 export const editReview = (review, reviewId) => async (dispatch) => {
-    const { content, rating, user_id, url, product_id } = review
+    const { content, rating, user_id, url, product_id, purchase_id } = review
 
-
+    console.log('THUNK', reviewId, review)
     const formData = new FormData();
     formData.append('content', content)
     formData.append('rating', rating)
     formData.append('image', url)
     formData.append('user_id', user_id)
     formData.append('product_id', product_id)
-
+    formData.append('purchase_id', purchase_id)
 
     const response = await fetch(`/api/reviews/${reviewId}`, {
         method: 'PUT',
@@ -117,7 +118,7 @@ const reviewReducer = (state = {}, action) => {
             // will return reviews with a key of the product_id
             newState = {};
             action.reviews.forEach(review => {
-                newState[review.product_id] = review
+                newState[review.id] = review
             })
             return newState;
         }

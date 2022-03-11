@@ -10,3 +10,4 @@ class ReviewForm(FlaskForm):
     product_id = IntegerField('Product Id', validators=[DataRequired()])
     created_at = DateField('Created at')   
     updated_at = DateField('Updated At')
+    purchase_id = IntegerField('Purchase Id',validators=[DataRequired()] )

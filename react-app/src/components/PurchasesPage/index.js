@@ -29,6 +29,7 @@ function Purchases() {
 					review={findReview(purchase.id, purchase.product_id)}
 					purchase={purchase}
 					key={purchase.id}
+					purchaseId={purchase.id}
 					userId={user.id}
 				/>
 			))}
