@@ -33,6 +33,7 @@
 
 #product-description {
     resize: none;
+    height: 500px;
 }
 
 #submit-buttons-container {
