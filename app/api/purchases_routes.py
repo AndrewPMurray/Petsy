@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import User, Purchase,db
+from app.models import User, Purchase, Product, db
 
 purchases_routes = Blueprint('purchases_routes', __name__)
 
@@ -15,12 +15,21 @@ def all_purchases(user_id):
 @purchases_routes.route('/', methods=["POST"])
 @login_required
 def make_purchase():
-  new_purchase = Purchase(
-    user_id = request.json['user_id'],
-    product_id = request.json['product_id'],
-    quantity = request.json['quantity']
-  )
-  if new_purchase:
-    db.session.add(new_purchase)
+  product_id = request.json['product_id']
+  quantity = request.json['quantity']
+  product = Product.query.filter(Product.id == product_id)
+  if product.quantity < quantity:
+    return "error", 400
+  else:
+    new_quantity = product.quantity - quantity
+    product.quantity = new_quantity
     db.session.commit()
-  return new_purchase.to_dict()
+    new_purchase = Purchase(
+      user_id = request.json['user_id'],
+      product_id = request.json['product_id'],
+      quantity = request.json['quantity']
+  )
+    if new_purchase:
+      db.session.add(new_purchase)
+      db.session.commit()
+    return new_purchase.to_dict()

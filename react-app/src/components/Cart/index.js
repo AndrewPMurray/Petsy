@@ -33,9 +33,9 @@ function Cart() {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		if (!user) {
-			test()
-		}
+		// if (!user) {
+		// 	test()
+		// }
 		cartItems?.forEach(item => {
 			fetch('/api/purchases/', {
 				method: "POST",
