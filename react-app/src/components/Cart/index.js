@@ -93,8 +93,8 @@ function Cart() {
 							/>
 							<img src="https://images.squarespace-cdn.com/content/v1/5cdac02165019ff805c12bd3/1563273051742-QSUPRDFV6OEVTGYIDDHG/visa-mastercard-american-express-discover-logo-12000-25968.png?format=1000w" alt="cards" />
 						</div>
-						<div>Item(s) total ${total.toFixed(2)}</div>
-						<div>Subtotal ${(total * 1.07).toFixed(2)}</div>
+						<div id='total-div'>Item(s) total: ${total.toFixed(2)}</div>
+						<div id='subtotal-div'>Subtotal: ${(total * 1.07).toFixed(2)}</div>
 					</div>
 					<div>
 						{user ?
