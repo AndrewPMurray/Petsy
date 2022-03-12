@@ -20,7 +20,7 @@ function ProductCard({ product }) {
 	return (
 		<div id='productCard'>
 			<Link to={`/products/${product.id}`}>
-				<div id="product-card-div">
+				<div id='product-card-div'>
 					<img className='detailedCard' src={product?.images[0]?.url} alt={product}></img>
 				</div>
 				<div>
