@@ -10,16 +10,31 @@ function Reviews({ product, products }) {
 	const [divHeight, setDivHeight] = useState()
     const sellerProducts = Object.values(products).filter((p) => p?.user_id === product.user?.id);
 	
+	let allReviews = [];
+
+	sellerProducts.forEach((p) => {
+		if (p.reviews) {
+			allReviews.push(...p.reviews);
+		} else allReviews.push(p)
+	});
+
+	let roundedSellerProductReviews;
+
 	let roundedProductReviews = [...product?.reviews];
+
+	if (allReviews) {
+		roundedSellerProductReviews = [...allReviews];
+	}
+
+	
 	while (roundedProductReviews.length % 4 !== 0) {
 		roundedProductReviews.push({})
 	}
-	console.log("sellerProducts", sellerProducts)
 
-    let allReviews = [];
-    sellerProducts.forEach((p) => {
-		allReviews.push(...p.reviews);
-	});
+	while (roundedSellerProductReviews.length % 4 !== 0) {
+		roundedSellerProductReviews.push({})
+	}
+
 
 	const [showItemReviews, setShowItemReviews] = useState(!!product.reviews.length);
 	const [showSellerReviews, setShowSellerReviews] = useState(
@@ -59,79 +74,52 @@ function Reviews({ product, products }) {
 		}, 0)
 	}
 	
-	for (let i = 0; i < product?.reviews.length; i += 4 ) {
+	for (let i = 0; i < roundedProductReviews.length; i += 4 ) {
 		pageNumsItems.push(i)
 	}
+	console.log("pageNumsItems:", pageNumsItems)
 
-	for (let i = 0; i < allReviews?.length; i += 4) {
+	for (let i = 0; i < roundedSellerProductReviews.length; i += 4) {
 		pageNumsSeller.push(i);
 	}
 
 	useEffect(() => {
 	if (showItemReviews) {
-		// console.log(product.reviews.length)
-		for (let i = 0; i < product?.reviews.length; i += 4 ) {
+		for (let i = 0; i < roundedProductReviews.length; i += 4 ) {
 				everyFourItems?.push(reviewsRef?.current.slice(i, i + 4))
+				// console.log("everyItem", everyFourItems)
 		}
 
-		console.log("Lookie here", everyFourItems)
-
+		
 		everyFourItems?.forEach((range) => {
 			heightItemsArr?.push(getPageHeightPer4Reviews(range))
 		})
-
+		
 		if (!divHeight) setDivHeight(heightItemsArr[0])
 	}
 }, [showItemReviews, everyFourItems, products.length])
-
-useEffect(() => {
-	if (showSellerReviews) {
-		for (let i = 0; i < allReviews?.length; i += 4 ) {
-			// console.log("hello?", reviewsSellerRef)
-			everyFourSellerItems?.push(reviewsSellerRef?.current.slice(i, i + 4))
-		}
-		console.log(everyFourSellerItems)
-		let lastEle = everyFourSellerItems[everyFourSellerItems.length -1]
-
-		// while (lastEle.length !== 4) {
-		// 	lastEle.push(null)
-		// }
-
-		everyFourSellerItems?.forEach((range) => {
-			heightSellerItemsArr.push(getPageHeightPer4Reviews(range))
-		})
-		if (!divHeight) setDivHeight(heightSellerItemsArr[0])
-	}
-	}, [showSellerReviews, everyFourSellerItems, products.length])
-	
-
-	useEffect(() => {
-		if (showSellerReviews) {
-			for (let i = 0; i < allReviews?.length; i += 4) {
-				// pageNumsSeller.push(i)
-				console.log('hello?', reviewsSellerRef);
-				everyFourSellerItems?.push(reviewsSellerRef?.current.slice(i, i + 4));
+		
+		useEffect(() => {
+			if (showSellerReviews) {
+				for (let i = 0; i < roundedSellerProductReviews?.length; i += 4) {
+					everyFourSellerItems?.push(reviewsSellerRef?.current.slice(i, i + 4));
+				}
+				everyFourSellerItems?.forEach((range) => {
+					heightSellerItemsArr.push(getPageHeightPer4Reviews(range));
+				});
+				if (!divHeight) setDivHeight(heightSellerItemsArr[0]);
 			}
-			everyFourSellerItems?.forEach((range) => {
-				heightSellerItemsArr.push(getPageHeightPer4Reviews(range));
-			});
-			if (!divHeight) setDivHeight(heightSellerItemsArr[0]);
-			// console.log("reviewsSellerRef",reviewsSellerRef)
-			// console.log(heightSellerItemsArr)
-			// console.log("allreviews",allReviews)
-			// console.log("pageNumsSeller", pageNumsSeller, "everyFourSellerItems", everyFourSellerItems, "heightSellerItemsArr", heightSellerItemsArr)
-		}
-	}, [showSellerReviews, everyFourSellerItems]);
+		}, [showSellerReviews, everyFourSellerItems]);
 
 	useEffect(() => {}, [divHeight]);
 
 	// Handling Page turn button clicks:
 	function handleBackClick(iOfReview) {
-		reviewsRef.current[iOfReview].scrollIntoView({ block: 'nearest', inline: 'start' });
+		reviewsRef.current[iOfReview].scrollIntoView({ block: 'start', inline: 'nearest' });
 	}
 
 	function handleSellerBackClick(i) {
-		reviewsSellerRef.current[i].scrollIntoView({ block: 'nearest', inline: 'start' });
+		reviewsSellerRef.current[i].scrollIntoView({ block: 'start', inline: 'nearest' });
 	}
 
 	let content;
@@ -149,7 +137,7 @@ useEffect(() => {
 					}
 				{allReviews.length && showSellerReviews &&
 					<>
-				{allReviews.map((review, i) => (
+				{roundedSellerProductReviews.map((review, i) => (
 					<SingleReview ref={el => reviewsSellerRef.current[i] = el} i={i} seller="true" products={products} review={review} />
 					))}
 					</>
@@ -170,7 +158,7 @@ useEffect(() => {
 				)}
 				{showSellerReviews && (
 					<>
-						{console.log('allreviews', allReviews)}
+					
 						{pageNumsSeller.map((ele, i) => (
 							<button
 								className='reviews-overflow-page-buttons'

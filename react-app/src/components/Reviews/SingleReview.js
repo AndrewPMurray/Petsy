@@ -1,6 +1,5 @@
 import {
 	useEffect,
-	useLayoutEffect,
 	useRef,
 	useState,
 	forwardRef,
@@ -19,17 +18,12 @@ const SingleReview = forwardRef(({ review, seller, products }, ref) => {
 
 	const contentRef = useRef();
 
-	// console.log(review.user.username, review.url)
 	function isOverflowed(e) {
-		console.log(e, "button clicked", heightDifference)
 		const difference = e?.scrollHeight - e?.clientHeight;
 		setHeightDifference(difference)
-		console.log("difference", difference)
 		return e?.scrollHeight - 1 > e?.clientHeight
 	}
 
-	// const reviewContentDiv = document.querySelector('.overflow-review')
-	// console.log(reviewContentDiv)
 
 	useEffect(() => {
 		if (review?.url) setPhotoPresent(true);
@@ -37,7 +31,7 @@ const SingleReview = forwardRef(({ review, seller, products }, ref) => {
 
 	
 	useEffect(() => {
-		console.log("wtf")
+		// console.log("wtf")
 		if (!isOverflowed(contentRef.current)) {
 			setTooLong(false);
 		}
@@ -46,7 +40,7 @@ const SingleReview = forwardRef(({ review, seller, products }, ref) => {
 	const handleExpandContent = (e) => {
 		e.preventDefault();
 		setTooLong(false);
-		console.log("click", contentRef.current.clientHeight, contentRef.current.scrollHeight)
+		// console.log("click", contentRef.current.clientHeight, contentRef.current.scrollHeight)
 		isOverflowed(contentRef.current)
 	}
 
@@ -60,9 +54,9 @@ const SingleReview = forwardRef(({ review, seller, products }, ref) => {
 
 	if (products) {
 		currentProduct = products[review.product_id];
-		sellerRevProductImg = currentProduct.images[0].url;
+		sellerRevProductImg = currentProduct?.images[0].url;
 	}
-	console.log(review)
+	// console.log(review)
 
 	const reviewLength = Object.keys(review).length
 
@@ -72,7 +66,7 @@ const SingleReview = forwardRef(({ review, seller, products }, ref) => {
 			</div>
 		:
 		<div ref={ref} className="single-review-container-div">
-		<div className="review-left-side">
+		<div className={`review-left-side-${photoPresent}`}>
 		<div className="review-buyer-header">
 		<i className="fa-solid fa-circle-user review-buyer-icon"></i>
 					<div className="review-name-date-div">
@@ -119,7 +113,7 @@ const SingleReview = forwardRef(({ review, seller, products }, ref) => {
 								></img>
 								<ScrollToTop>
 								<button className="button-to-other-product" onClick={handleProductChange}>
-									{currentProduct.title}
+									{currentProduct?.title}
 								</button>
 								</ScrollToTop>
 								</div>
@@ -127,7 +121,9 @@ const SingleReview = forwardRef(({ review, seller, products }, ref) => {
 								)}
 								</div>
 								<div className="review-right-side-photo">
+								{photoPresent &&
 								<img className="review-image" src={review.url} alt="user-review"></img>
+								}
 								</div>
 								{/* <div className='reviews-page-buttons-div'>
 								<button className='reviews-overflow-page-buttons' onClick={onBackClick}>{i}</button>
