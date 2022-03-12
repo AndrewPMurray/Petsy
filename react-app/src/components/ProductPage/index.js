@@ -22,11 +22,9 @@ function ProductPage() {
 	}
 
 	useEffect(() => {
-		dispatch(loadProducts()).then((res) => {
-			let productExists = false;
-			res.forEach((p) => (+productId === p.id ? (productExists = true) : null));
-			if (!productExists) history.push('/not-found');
-		});
+		dispatch(loadProducts()).then((res) =>
+			!res[productId - 1] ? history.push('/not-found') : null
+		);
 	}, [dispatch]);
 
 	return (
