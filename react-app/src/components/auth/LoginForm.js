@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import Demo from '../Demo';
-import SignupFormModal from '../SignupFormModal';
 import SignUpForm from './SignUpForm';
 import './auth.css'
 
@@ -39,16 +38,19 @@ const LoginForm = () => {
     <>
       {page === 1 &&
         <form className='main-auth-user-container' onSubmit={onLogin}>
-          <h2 className='form-title'>Login</h2>
-          <div>
-            <button
-              onClick={() => setPage(2)}
-            >Sign Up</button>
-          </div>
           <div className='errors-div'>
             {errors.map((error, ind) => (
               <div className='single-error-div' key={ind}>{error}</div>
             ))}
+          </div>
+          <div id="sub-auth-div">
+            <h2 className='form-title'>Login</h2>
+            <div >
+              <button
+                id="auth-button"
+                onClick={() => setPage(2)}
+              >Sign Up</button>
+            </div>
           </div>
           <div className='auth-input-containers'>
             <div className='auth-email-container'>
