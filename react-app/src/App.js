@@ -15,6 +15,7 @@ import ProductTypePage from './components/ProductTypePage';
 import ManageListings from './components/ManageListings';
 import Purchases from './components/PurchasesPage';
 import Cart from './components/Cart';
+import NotFound from './components/NotFound';
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -64,6 +65,9 @@ function App() {
 				</Route>
 				<Route path='/cart'>
 					<Cart />
+				</Route>
+				<Route>
+					<NotFound />
 				</Route>
 			</Switch>
 			<Footer />

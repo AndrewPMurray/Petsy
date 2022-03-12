@@ -5,7 +5,7 @@ import ProductTypeBubbles from '../ProductTypeBubbles';
 function ProductTypes({ productTypes, products, petType }) {
 	const firstProductsByType = productTypes.map((productType) => {
 		for (let i = 0; i < products.length; i++) {
-			if (productType.id === products[i].product_type.id) return products[i];
+			if (productType.id === products[i]?.product_type.id) return products[i];
 		}
 	});
 

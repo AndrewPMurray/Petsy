@@ -10,7 +10,7 @@ export const loadPetTypes = (id) => async (dispatch) => {
 	if (response.ok) {
 		const products = await response.json();
 		dispatch(load(products.products));
-		return products.products;
+		return products.pet_types;
 	} else {
 		const errors = await response.json();
 		console.log(errors.errors);
