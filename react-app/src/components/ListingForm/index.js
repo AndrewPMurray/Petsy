@@ -299,6 +299,7 @@ export default function ListingForm({ product, userId, setShowForm }) {
 						onChange={(e) => setQuantity(e.target.value)}
 					/>
 				</label>
+				{imageLoading && <p>Submitting item, please wait...</p>}
 				<div id='submit-buttons-container'>
 					<button id='product-submit-button' type='submit'>
 						Submit
@@ -308,7 +309,6 @@ export default function ListingForm({ product, userId, setShowForm }) {
 					</div>
 				</div>
 			</form>
-			{imageLoading && <p>Submitting item, please wait...</p>}
 		</div>
 	);
 }
