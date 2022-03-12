@@ -63,33 +63,56 @@ function Cart() {
 			</div>
 		);
 
+
+	let total = 0;
+
+	const findTotal = cartItems.map(item => total += (item.price * item.count))
+
 	return (
-		<div className='cart'>
-			<div className='amount-cart'>
-				{cartCount === 1
-					? `You have ${cartCount} item in your cart`
-					: `You have ${cartCount} items in your cart`}
+		<div id='cart-page'>
+			<div id="main-content">
+				<div id="cart-left-side">
+					<div className='amount-cart'>
+						{cartCount === 1
+							? `You have ${cartCount} item in your cart`
+							: `You have ${cartCount} items in your cart`}
+					</div>
+					{errors.length > 0 && <p id='error'>{errors}</p>}
+					<ul>
+						{cartItems.map((item) => (
+							<CartItem key={item.id} item={item} cart={products[`${item.id}`]} />
+						))}
+					</ul>
+				</div>
+				<div id="cart-right-side">
+					<div id="checkout">
+						<div>How you'll pay</div>
+						<div id="cards">
+							<input
+								type="radio"
+							/>
+							<img src="https://images.squarespace-cdn.com/content/v1/5cdac02165019ff805c12bd3/1563273051742-QSUPRDFV6OEVTGYIDDHG/visa-mastercard-american-express-discover-logo-12000-25968.png?format=1000w" alt="cards" />
+						</div>
+						<div id='total-div'>Item(s) total: ${total.toFixed(2)}</div>
+						<div id='subtotal-div'>Subtotal: ${(total * 1.07).toFixed(2)}</div>
+					</div>
+					<div>
+						{user ?
+							<form onSubmit={onSubmit}>
+								<button type='submit'>Purchase</button>
+							</form> :
+							<>
+								<button id='purchase-button' onClick={() => setShowModal(true)}>Purchase</button>
+								{showModal && (
+									<Modal onClose={() => setShowModal(false)}>
+										<LoginForm />
+									</Modal>
+								)}
+							</>
+						}
+					</div>
+				</div>
 			</div>
-			{errors.length > 0 && <p id='error'>{errors}</p>}
-			<ul>
-				{cartItems.map((item) => (
-					<CartItem key={item.id} item={item} />
-				))}
-			</ul>
-			<hr />
-			{user ?
-				<form onSubmit={onSubmit}>
-					<button type='submit'>Purchase</button>
-				</form> :
-				<>
-					<button id='purchase-button' onClick={() => setShowModal(true)}>Purchase</button>
-					{showModal && (
-						<Modal onClose={() => setShowModal(false)}>
-							<LoginForm />
-						</Modal>
-					)}
-				</>
-			}
 		</div>
 	);
 }
