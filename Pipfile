@@ -27,6 +27,7 @@ greenlet = "==1.1.0"
 Mako = "==1.1.4"
 boto3 = "*"
 email-validator = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 psycopg2-binary = "==2.8.6"
