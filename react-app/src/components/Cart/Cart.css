@@ -38,6 +38,8 @@
   padding: 20px 5px;
   font-size: 27px;
   line-height: 36px;
+  display: flex;
+  flex-direction: column;
 }
 
 .cart-item {

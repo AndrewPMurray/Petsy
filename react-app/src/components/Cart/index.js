@@ -59,7 +59,8 @@ function Cart() {
 	if (!cartItems || !cartItems.length)
 		return (
 			<div className='cart-item-header'>
-				No items in the cart. Start selecting items to purchase.
+				No items in the cart.
+				Start selecting items to purchase.
 			</div>
 		);
 
