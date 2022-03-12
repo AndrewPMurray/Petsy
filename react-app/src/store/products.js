@@ -28,6 +28,7 @@ export const loadProducts = () => async (dispatch) => {
 	if (response.ok) {
 		const products = await response.json();
 		dispatch(load(products.all_products));
+		return products.all_products;
 	} else {
 		const errors = await response.json();
 		console.log(errors.errors);
