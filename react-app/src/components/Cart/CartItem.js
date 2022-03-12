@@ -11,8 +11,6 @@ function CartItem({ item, cart }) {
 		setCount(item.count);
 	}, [item.count]);
 
-	console.log('CART', cart);
-
 	return (
 		<li className='cart-item'>
 			<div id="cart-item-user">
@@ -23,14 +21,14 @@ function CartItem({ item, cart }) {
 				<div id="cart-item-image"><img src={cart?.images[0]?.url} alt="item-image" /></div>
 				<div id='cart-item-title'>{item?.title}</div>
 				<div id='cart-item-count'>
-					<div className='cart-item-menu'>
+					<div className='cart-item-buttons'>
 						<button
 							onClick={() => dispatch(updateCount(item.id, item.count - 1))}
-							className='cart-item-button'
+							className='cart-button'
 						>
 							-
 						</button>
-						<div>{count}</div>
+						<div id="count-text">{count}</div>
 						{/* <input
 							className='amount-item-input'
 							type='number'
@@ -40,7 +38,7 @@ function CartItem({ item, cart }) {
 						/> */}
 						<button
 							onClick={() => dispatch(updateCount(item.id, item.count + 1))}
-							className='cart-item-button'
+							className='cart-button'
 						>
 							+
 						</button>

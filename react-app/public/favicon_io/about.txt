@@ -1,0 +1,6 @@
+This favicon was generated using the following font:
+
+- Font Title: Luxurious Roman
+- Font Author: Copyright 2015-2021 The Luxurious Roman Project Authors (https://github.com/googlefonts/luxurious-roman)
+- Font Source: http://fonts.gstatic.com/s/luxuriousroman/v1/buEupou_ZcP1w0yTKxJJokVSmbpqYgckeo9RMw.ttf
+- Font License: SIL Open Font License, 1.1 (http://scripts.sil.org/OFL))
