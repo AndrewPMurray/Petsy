@@ -11,9 +11,9 @@ function Reviews({ product, products }) {
 
 
 	const [divHeight, setDivHeight] = useState()
-	const sellerProducts = Object.values(products).filter((p) => p?.user_id === product.user?.id);
-
-	console.log(heightDifference, divHeight)
+	const sellerProducts = Object.values(products).filter((p) => p?.user_id === product.user?.id).reverse();
+               
+	// console.log(heightDifference, divHeight)
 
 	let allReviews = [];
 
@@ -25,12 +25,12 @@ function Reviews({ product, products }) {
 
 	let roundedSellerProductReviews;
 
-	let roundedProductReviews = [...product?.reviews];
+	let roundedProductReviews = [...product?.reviews].reverse()
 
 	if (allReviews) {
 		roundedSellerProductReviews = [...allReviews];
 	}
-
+	console.log(roundedProductReviews)
 
 	while (roundedProductReviews.length % 4 !== 0) {
 		roundedProductReviews.push({})

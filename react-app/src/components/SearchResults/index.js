@@ -24,9 +24,9 @@ function SearchResults() {
 	}, [dispatch]);
 
 	return (
-		<>
+		<div className='search-results-container-div'>
 			<DetailedProductGrid products={results} />
-		</>
+		</div>
 	);
 }
 
