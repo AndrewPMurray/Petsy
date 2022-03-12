@@ -6,10 +6,15 @@ function Reviews({ product, products }) {
 	const reviewsRef = useRef([])
 	const reviewsSellerRef = useRef([])
 	const reviewsDivRef = useRef(0)
+	const [heightDifference, setHeightDifference] = useState(0);
+	const [pageNum, setPageNum] = useState(0)
+
 
 	const [divHeight, setDivHeight] = useState()
-    const sellerProducts = Object.values(products).filter((p) => p?.user_id === product.user?.id);
-	
+	const sellerProducts = Object.values(products).filter((p) => p?.user_id === product.user?.id);
+
+	console.log(heightDifference, divHeight)
+
 	let allReviews = [];
 
 	sellerProducts.forEach((p) => {
@@ -26,7 +31,7 @@ function Reviews({ product, products }) {
 		roundedSellerProductReviews = [...allReviews];
 	}
 
-	
+
 	while (roundedProductReviews.length % 4 !== 0) {
 		roundedProductReviews.push({})
 	}
@@ -60,7 +65,7 @@ function Reviews({ product, products }) {
 	let everyFourItems = [];
 	let heightItemsArr = [];
 
-	
+
 	let pageNumsSeller = [];
 	let everyFourSellerItems = [];
 	let heightSellerItemsArr = [];
@@ -73,8 +78,8 @@ function Reviews({ product, products }) {
 			}
 		}, 0)
 	}
-	
-	for (let i = 0; i < roundedProductReviews.length; i += 4 ) {
+
+	for (let i = 0; i < roundedProductReviews.length; i += 4) {
 		pageNumsItems.push(i)
 	}
 	console.log("pageNumsItems:", pageNumsItems)
@@ -84,62 +89,65 @@ function Reviews({ product, products }) {
 	}
 
 	useEffect(() => {
-	if (showItemReviews) {
-		for (let i = 0; i < roundedProductReviews.length; i += 4 ) {
+		if (showItemReviews) {
+			for (let i = 0; i < roundedProductReviews.length; i += 4) {
 				everyFourItems?.push(reviewsRef?.current.slice(i, i + 4))
 				// console.log("everyItem", everyFourItems)
-		}
-
-		
-		everyFourItems?.forEach((range) => {
-			heightItemsArr?.push(getPageHeightPer4Reviews(range))
-		})
-		
-		if (!divHeight) setDivHeight(heightItemsArr[0])
-	}
-}, [showItemReviews, everyFourItems, products.length])
-		
-		useEffect(() => {
-			if (showSellerReviews) {
-				for (let i = 0; i < roundedSellerProductReviews?.length; i += 4) {
-					everyFourSellerItems?.push(reviewsSellerRef?.current.slice(i, i + 4));
-				}
-				everyFourSellerItems?.forEach((range) => {
-					heightSellerItemsArr.push(getPageHeightPer4Reviews(range));
-				});
-				if (!divHeight) setDivHeight(heightSellerItemsArr[0]);
 			}
-		}, [showSellerReviews, everyFourSellerItems]);
 
-	useEffect(() => {}, [divHeight]);
+
+			everyFourItems?.forEach((range) => {
+				heightItemsArr?.push(getPageHeightPer4Reviews(range))
+			})
+
+			if (!divHeight) setDivHeight(heightItemsArr[0])
+		}
+	}, [showItemReviews, everyFourItems, products.length, heightDifference])
+
+	useEffect(() => {
+		if (showSellerReviews) {
+			for (let i = 0; i < roundedSellerProductReviews?.length; i += 4) {
+				everyFourSellerItems?.push(reviewsSellerRef?.current.slice(i, i + 4));
+			}
+			everyFourSellerItems?.forEach((range) => {
+				heightSellerItemsArr.push(getPageHeightPer4Reviews(range));
+			});
+			if (!divHeight) setDivHeight(heightSellerItemsArr[0]);
+		}
+	}, [showSellerReviews, everyFourSellerItems, heightDifference]);
+
+	// useEffect(() => {}, [divHeight]);
 
 	// Handling Page turn button clicks:
 	function handleBackClick(iOfReview) {
 		reviewsRef.current[iOfReview].scrollIntoView({ block: 'start', inline: 'nearest' });
+		setPageNum()
+		setDivHeight(0);
 	}
 
 	function handleSellerBackClick(i) {
 		reviewsSellerRef.current[i].scrollIntoView({ block: 'start', inline: 'nearest' });
+		setDivHeight(0);
 	}
 
 	let content;
 
 
-		content = (
-			<>
-			<div ref={reviewsDivRef} className='reviews-map-div' style={{height: `${divHeight}px`}} >
+	content = (
+		<>
+			<div ref={reviewsDivRef} className='reviews-map-div' style={{ height: `${divHeight}px` }} >
 				{product.reviews.length > 0 && showItemReviews &&
-						<>
-                    {roundedProductReviews.map((review, i) => (
-						<SingleReview ref={el => reviewsRef.current[i] = el} i={i} review={review} />
+					<>
+						{roundedProductReviews.map((review, i) => (
+							<SingleReview ref={el => reviewsRef.current[i] = el} i={i} heightDifference={heightDifference} setHeightDifference={setHeightDifference} review={review} />
 						))}
-						</>
-					}
+					</>
+				}
 				{allReviews.length && showSellerReviews &&
 					<>
-				{roundedSellerProductReviews.map((review, i) => (
-					<SingleReview ref={el => reviewsSellerRef.current[i] = el} i={i} seller="true" products={products} review={review} />
-					))}
+						{roundedSellerProductReviews.map((review, i) => (
+							<SingleReview ref={el => reviewsSellerRef.current[i] = el} i={i} heightDifference={heightDifference} setHeightDifference={setHeightDifference} seller="true" products={products} review={review} />
+						))}
 					</>
 				}
 			</div>
@@ -158,7 +166,7 @@ function Reviews({ product, products }) {
 				)}
 				{showSellerReviews && (
 					<>
-					
+
 						{pageNumsSeller.map((ele, i) => (
 							<button
 								className='reviews-overflow-page-buttons'
@@ -192,46 +200,46 @@ function Reviews({ product, products }) {
 					</p>
 				</div>
 			</div>
-			{(product.reviews.length <= 0 && allReviews.length <= 0) ? 
+			{(product.reviews.length <= 0 && allReviews.length <= 0) ?
 				<div>
 					<h3>No reviews yet for this seller</h3>
 					<p>Buy this item to leave the first review!</p>
 				</div>
-			 : 
-			 <>
-				<div className='reviews-body'>
-					<div className='reviews-title-bar'>
-						{product.reviews.length > 0 && (
-							<div className={`reviews-item-button show-reviews-title-${showItemReviews}`}>
-								<button className='show-buttons' onClick={() => {
-									setShowItemReviews(true)
-									setShowSellerReviews(false)
-									setDivHeight(0)
-									// handleBackClick(0)
-								}}>Reviews for this item</button>
-								<p className='review-total'>{product?.reviews?.length}</p>
-							</div>
-						)}
-						<div
-							className={`reviews-seller-button show-reviews-title-${showSellerReviews}`}
-						>
-							<button
-								className='show-buttons'
-								onClick={() => {
-									setShowSellerReviews(true);
-									setShowItemReviews(false);
-									setDivHeight(0);
-									// handleSellerBackClick(0)
-								}}
+				:
+				<>
+					<div className='reviews-body'>
+						<div className='reviews-title-bar'>
+							{product.reviews.length > 0 && (
+								<div className={`reviews-item-button show-reviews-title-${showItemReviews}`}>
+									<button className='show-buttons' onClick={() => {
+										setShowItemReviews(true)
+										setShowSellerReviews(false)
+										setDivHeight(0)
+										// handleBackClick(0)
+									}}>Reviews for this item</button>
+									<p className='review-total'>{product?.reviews?.length}</p>
+								</div>
+							)}
+							<div
+								className={`reviews-seller-button show-reviews-title-${showSellerReviews}`}
 							>
-								Reviews for this seller
-							</button>
-							<p className='review-seller-total'>{allReviews.length}</p>
+								<button
+									className='show-buttons'
+									onClick={() => {
+										setShowSellerReviews(true);
+										setShowItemReviews(false);
+										setDivHeight(0);
+										// handleSellerBackClick(0)
+									}}
+								>
+									Reviews for this seller
+								</button>
+								<p className='review-seller-total'>{allReviews.length}</p>
+							</div>
 						</div>
 					</div>
-				</div>
-			<div className='reviews-body-div'>{content}</div>
-			</>
+					<div className='reviews-body-div'>{content}</div>
+				</>
 			}
 		</div>
 	);

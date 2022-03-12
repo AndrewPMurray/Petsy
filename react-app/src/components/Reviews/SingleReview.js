@@ -8,22 +8,21 @@ import { useHistory } from "react-router-dom";
 import ScrollToTop from "react-router-scroll-top";
 import dayjs from "dayjs";
 
-const SingleReview = forwardRef(({ review, seller, products }, ref) => {
+const SingleReview = forwardRef(({ review, seller, products, heightDifference, setHeightDifference }, ref) => {
 	const history = useHistory();
 
 	const [photoPresent, setPhotoPresent] = useState(false);
 	const [tooLong, setTooLong] = useState(true);
 
-	const [heightDifference, setHeightDifference] = useState();
-
 	const contentRef = useRef();
 
 	function isOverflowed(e) {
 		const difference = e?.scrollHeight - e?.clientHeight;
-		setHeightDifference(difference)
+		if (difference) {
+			setHeightDifference(difference)
+		}
 		return e?.scrollHeight - 1 > e?.clientHeight
 	}
-
 
 	useEffect(() => {
 		if (review?.url) setPhotoPresent(true);
