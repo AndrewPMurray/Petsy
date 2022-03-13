@@ -6,8 +6,23 @@
     min-height: 75vh;
 }
 
-#not-found-container > img {
-    max-height: 640px;
+.not-found-image-container{
+    display: block;
+    /* position: relative; */
+    height: 500px;
+    width: 700px;
+    /* object-fit: contain;
+    object-position: center; */
+}
+
+.not-found-image-container > img {
+    position: relative;
+    object-position: bottom;
+    object-fit: cover;
+    height: 500px;
+    width: 700px;
+    /* margin: auto; */
+    /* height: 100%; */
 }
 
 #not-found-container > h2 {
