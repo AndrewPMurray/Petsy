@@ -95,7 +95,7 @@
 
 
 #listingGrid {
-    display: flex;
+    /* display: flex;
     width: 80%;
     height: 100%;
     justify-content: center;
@@ -103,6 +103,15 @@
     padding-top: 20px;
     margin-bottom: 20px;
     gap: 10px;
+    flex-wrap: wrap; */
+    display: flex;
+    width: 90%;
+    height: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 20px;
+    margin-bottom: 20px;
+    gap: 7px;
     flex-wrap: wrap;
     
 }
@@ -113,9 +122,10 @@
     align-items: center;
     width: calc(100% * (1/4) - 10px - 1px);
     aspect-ratio: 1/1;
-    flex-grow: 1;
     background-color: white;
     border: 1px solid #D3D3D3;
+
+
 }
 
 #manageProdCard:hover  {
