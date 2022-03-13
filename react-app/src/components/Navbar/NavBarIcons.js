@@ -34,7 +34,7 @@ function NavBarIcons({ user }) {
 				)}
 				{user && (
 					<li>
-						<Link to='' id='favorites'>
+						<Link to='#' id='favorites'>
 							<div className='faIcons' id='fav-heart'>
 								<i className='far fa-heart'></i>
 								<p id='temp-message-fav'>Coming soon!</p>
