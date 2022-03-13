@@ -8,7 +8,7 @@ class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(500), nullable=False)
     price = db.Column(db.Float, nullable=False)
-    details = db.Column(db.Text, nullable=False)
+    details = db.Column(db.Text)
     description = db.Column(db.Text, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
