@@ -1,7 +1,7 @@
 # Welcome to Petsy!
 ![petsy home page](https://user-images.githubusercontent.com/89945390/158039225-604c9ced-6edd-47f3-8edd-7b0646720699.png)
 
-[Petsy](https://aa-petsy.herokuapp.com/), a fullstack clone of Etsy, is an online marketplace where people sell, buy, and collect unique pet items. Contributors: [Andrew Murray](https://github.com/AndrewPMurray), [Lucas Monteiro](https://github.com/lucascostamonteiro), [Whit Minson](https://github.com/whitnessme), [Yanelys Mena](https://github.com/yanelys-mena).
+[Petsy](https://aa-petsy.herokuapp.com/), a fullstack clone of Etsy, is an online marketplace where people sell, buy, and collect unique pet items. Contributors: [Andrew Murray](https://www.linkedin.com/in/andrew-murray-304b39231/), [Lucas Monteiro](https://www.linkedin.com/in/lucascostamonteiro/), [Whit Minson](https://www.linkedin.com/in/whitneylynnminson/), [Yanelys Mena](https://www.linkedin.com/in/yanelysmena/).
 
 ## Wiki Links
 
@@ -22,16 +22,27 @@
 
 ## Features
 
- - User login
-	 // screenshot
+ - User login/signup
+ ![signup window](https://user-images.githubusercontent.com/89945390/158081458-7d170b5d-adff-4087-8669-b0ef325efeec.png)
+ -----------------------------
  - Products
-![product page - leopard gecko tent](https://user-images.githubusercontent.com/89945390/158039082-3a8230f5-f279-4fc6-9591-c3a42b49f078.png)
+![product page - leopard gecko tent](https://user-images.githubusercontent.com/89945390/158081788-241db514-fbc3-4c69-88ac-8a3d0e5986cf.png)
+-----------------------------
+![edit listing](https://user-images.githubusercontent.com/89945390/158081538-866e65cd-0c6a-4575-9483-9853bc4591f8.png)
+
+-----------------------------
  - Shopping cart
-	 //screenshot
+![petsy cart](https://user-images.githubusercontent.com/89945390/158081351-faee161b-bc92-4880-96cb-ead0034483bf.png)
+-----------------------------
  - Reviews/Ratings
 ![product reviews list](https://user-images.githubusercontent.com/89945390/158039176-b8dee328-548a-42c7-b362-2db16bc0c762.png)
-
+-----------------------------
+- Purchases
+![purchases](https://user-images.githubusercontent.com/89945390/158081639-ad33db9d-14c8-49a8-9e65-7e911d4e2a25.png)
+-----------------------------
  - Search
+![bird search result](https://user-images.githubusercontent.com/89945390/158081400-a94f6619-6eff-4c3b-9d6b-82db2579dff1.png)
+-----------------------------
 
 ## Install Instructions
 
@@ -61,3 +72,12 @@
 	- `npm start`
 11. In your browser go to `localhost:3000`
 12. You may use the Demo user or create a new user by clicking on the  `Log In` button. Then you can search, look at products, leave reviews, add items to cart, purchase items, etc..
+
+## Bonus Features
+- Purchases
+    - A user can view their past purchases' information and create/edit reviews on each purchase.
+- 404 page
+
+![not found page gif](https://user-images.githubusercontent.com/89945390/158082119-54c72160-20d4-41a1-ba86-757409070659.gif)
+
+---------------------
