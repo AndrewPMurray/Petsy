@@ -22,8 +22,6 @@ const SingleReview = forwardRef(({ review, seller, products, heightDifference, s
 		if (initialHeight === null) {
 		setIntitialHeight(contentRef?.current?.clientHeight)
 	}}, [])
-
-	console.log("INT", initialHeight)
 	
 	function isOverflowed(e) {
 		return e?.scrollHeight - 1 > e?.clientHeight
@@ -47,8 +45,7 @@ const SingleReview = forwardRef(({ review, seller, products, heightDifference, s
 	const handleExpandContent = (e) => {
 		e.preventDefault();
 		setTooLong(false);
-		setHeightDifference(review)
-		setDivHeight(divHeight += heightDifferenceContent(initialHeight, contentRef.current.scrollHeight))
+		setHeightDifference(heightDifference + heightDifferenceContent(initialHeight, contentRef.current.scrollHeight))
 	}
 
 	const handleProductChange = (e) => {
