@@ -62,7 +62,6 @@ export default function ReviewForm({
 				await res.json();
 			} else {
 				const errors = res.json();
-				console.log('ERROR', errors);
 			}
 		}
 

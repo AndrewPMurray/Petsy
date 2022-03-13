@@ -2,7 +2,7 @@ import './ProductTypeBubbles.css';
 import { Link } from 'react-router-dom';
 
 function ProductTypeBubbles({ product, productType }) {
-	console.log(product);
+
 	return (
 		<div id='productTypeBubbles'>
 			<div id='bubble' key={product?.id}>

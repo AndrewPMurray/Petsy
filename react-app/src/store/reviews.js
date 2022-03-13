@@ -37,7 +37,7 @@ export const loadReviewsByUser = (userId) => async (dispatch) => {
         dispatch(loadByUser(reviews.userReviews))
     } else {
         const errors = await response.json();
-        console.log(errors.errors);
+        // console.log(errors.errors);
     }
 }
 
@@ -64,14 +64,13 @@ export const createReview = (review) => async (dispatch) => {
         return newReview;
     } else {
         const errors = await response.json();
-        console.log(errors.errors);
+        // console.log(errors.errors);
     }
 }
 
 export const editReview = (review, reviewId) => async (dispatch) => {
     const { content, rating, user_id, url, product_id, purchase_id } = review
 
-    console.log('THUNK', reviewId, review)
     const formData = new FormData();
     formData.append('content', content)
     formData.append('rating', rating)
@@ -92,7 +91,7 @@ export const editReview = (review, reviewId) => async (dispatch) => {
         return editedReview;
     } else {
         const errors = await response.json();
-        console.log(errors.errors);
+        // console.log(errors.errors);
     }
 };
 
@@ -107,7 +106,7 @@ export const deleteReview = (review) => async (dispatch) => {
         return deletedReview;
     } else {
         const errors = await response.json();
-        console.log(errors.errors);
+        // console.log(errors.errors);
     }
 };
 
