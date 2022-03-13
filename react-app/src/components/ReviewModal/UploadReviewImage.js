@@ -14,7 +14,7 @@ function UploadReviewImage({ review, setUrl, url, setImageToDelete }) {
 	return (
 		<>
 			<div id='dragDropImageDiv'>
-				<img src={image ? URL.createObjectURL(image) : review?.url} alt='preview-upload' />
+				<img src={url.length > 0 ? review?.url : 'https://www.gaithersburgdental.com/wp-content/uploads/2016/10/orionthemes-placeholder-image.png'} alt='preview-upload' />
 			</div>
 
 			<div id='dragDropArea'>

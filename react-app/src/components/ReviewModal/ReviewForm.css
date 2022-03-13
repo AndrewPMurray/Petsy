@@ -1,16 +1,15 @@
  
  #formPage {
+     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    justify-content: space-between;
     width: 35vw;
     height: 65vh; 
     background-color: white;
     border-radius: 20px;
     box-sizing: border-box;
-    padding: 10px;
+    padding: 30px;
  }
 
  #formModalHeader {
@@ -19,6 +18,8 @@
      align-items: flex-start;
      justify-content: space-between;
      margin-bottom: 20px;
+     margin-top: 20px;
+     height: 150px;
  }
 
 #formModalHeader > div >  * {
@@ -32,8 +33,6 @@
     width: 70%;
     display: flex;
     justify-content: flex-start;
-    background-color: palegreen;
-
  }
 
  #reviewRecs > span > h4 {
@@ -53,7 +52,6 @@
     width: 80%;
     display: flex;
     flex-direction: column; 
-/* background-color: palevioletred; */
 
 }
 
@@ -84,10 +82,12 @@ input[type="radio"] {
     border-radius: 15px;
     border: solid 1px #d3d3d3;
     padding: 15px;
+    margin-bottom: 40px;
+    margin-top: 29px;
 }
 
 #placeholder {
-    height: 20%;
+    height: 80px;
 }
 
 
@@ -153,8 +153,6 @@ text-decoration: underline;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-color: blue; */
-    margin-top: -30px;
 }
 
 #placeholder {
