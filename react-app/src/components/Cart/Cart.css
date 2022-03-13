@@ -2,7 +2,8 @@
   display: flex;
   justify-content: center;
   margin-top: 30px;
-  height: 80vh;
+  min-height: 75vh;
+  height: 100%;
   width: 100vw;
   /* background-color: aquamarine; */
   margin-bottom: 100px;
