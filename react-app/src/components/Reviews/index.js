@@ -8,6 +8,8 @@ function Reviews({ product, products }) {
 	const reviewsDivRef = useRef(0)
 
 	const [heightDifference, setHeightDifference] = useState(0);
+	const [heightSellerDifference, setHeightSellerDifference] = useState(0);
+
 	const [pageNum, setPageNum] = useState(1)
 	const [divHeight, setDivHeight] = useState()
 
@@ -69,7 +71,7 @@ function Reviews({ product, products }) {
 	let heightSellerItemsArr = [];
 
 	function getReviewHeight(ele) {
-		return ele.scrollHeight
+		return ele?.scrollHeight
 	}
 
 	function getPageHeightPer4Reviews(reviewElements) {
@@ -106,9 +108,9 @@ function Reviews({ product, products }) {
 				heightItemsArr?.push(getPageHeightPer4Reviews(range))
 			})
 
-			if (!divHeight) setDivHeight(heightItemsArr[pageNum])
+			if (!divHeight) setDivHeight(heightItemsArr[0])
 		}
-	}, [showItemReviews, products.length, heightDifference])
+	}, [showItemReviews, products.length])
 	
 	useEffect(() => {
 		if (showSellerReviews) {
@@ -123,29 +125,38 @@ function Reviews({ product, products }) {
 	}, [showSellerReviews, everyFourSellerItems]);
 
 	useEffect(() => {
-		reviewsRef?.current?.forEach((ele) => {
-			console.log(getReviewHeight(ele))
-		})
 		let curr = divHeight
-		setDivHeight(divHeight + heightDifference)
+		console.log(heightItemsArr)
+		if (showItemReviews) {
+			heightItemsArr[pageNum - 1] += heightDifference
+			setDivHeight(heightItemsArr[pageNum - 1])
+		}
+		console.log(heightItemsArr)
 		
-	}, [heightDifference])
+		console.log("SELLERS HEIGHTS",heightSellerItemsArr)
+		if (showSellerReviews) {
+			heightSellerItemsArr[pageNum - 1] += heightSellerDifference
+			setDivHeight(heightSellerItemsArr[pageNum - 1])
+		}
+		console.log("SELLERS HEIGHTS", heightSellerItemsArr)
+		
+	}, [heightDifference, heightSellerDifference])
 	
-	console.log('divHeight', divHeight)
+
 	// Handling Page turn button clicks:
 	function handleBackClick(ele, i) {
-		reviewsRef.current[ele].scrollIntoView({ block: 'start', inline: 'nearest' });
+		reviewsRef.current[ele].scrollIntoView({ block: 'start', inline: 'start' });
 		setPageNum(i+1)
-		setDivHeight(heightItemsArr[i] + heightDifference);
+		setDivHeight(heightItemsArr[pageNum - 1]);
+		console.log("height items:", heightItemsArr)
 	}
 	
 	function handleSellerBackClick(ele, i) {
-		reviewsSellerRef.current[ele].scrollIntoView({ block: 'start', inline: 'nearest' });
+		console.log(reviewsSellerRef.current[ele])
+		reviewsSellerRef.current[ele].scrollIntoView({ block: 'start', inline: 'start' });
 		setPageNum(i+1)
-		setDivHeight(heightSellerItemsArr[i] + heightDifference);
+		setDivHeight(heightSellerItemsArr[pageNum - 1]);
 	}
-
-	console.log(heightItemsArr)
 
 	let content;
 
@@ -162,7 +173,7 @@ function Reviews({ product, products }) {
 				{allReviews.length && showSellerReviews &&
 					<>
 						{roundedSellerProductReviews.map((review, i) => (
-							<SingleReview ref={el => reviewsSellerRef.current[i] = el} i={i} heightDifference={heightDifference} setHeightDifference={setHeightDifference} setDivHeight={setDivHeight} seller="true" products={products} review={review} />
+							<SingleReview ref={el => reviewsSellerRef.current[i] = el} i={i} heightDifference={heightSellerDifference} setHeightDifference={setHeightSellerDifference} setDivHeight={setDivHeight} seller="true" products={products} review={review} />
 						))}
 					</>
 				}
@@ -234,8 +245,7 @@ function Reviews({ product, products }) {
 										setShowSellerReviews(false)
 										setDivHeight(heightItemsArr[0]);
 										setPageNum(1)
-										setHeightDifference(0)
-										reviewsSellerRef.current[0].scrollIntoView({ block: 'start', inline: 'nearest' });
+										reviewsSellerRef?.current[0]?.scrollIntoView({ block: 'start', inline: 'nearest' });
 										// handleBackClick(0)
 									}}>Reviews for this item</button>
 									<p className='review-total'>{product?.reviews?.length}</p>
@@ -251,8 +261,7 @@ function Reviews({ product, products }) {
 										setShowItemReviews(false);
 										setDivHeight(heightSellerItemsArr[0]);
 										setPageNum(1)
-										setHeightDifference(0)
-										reviewsRef.current[0].scrollIntoView({ block: 'start', inline: 'nearest' });
+										reviewsRef?.current[0]?.scrollIntoView({ block: 'start', inline: 'nearest' });
 										// handleSellerBackClick(0)
 									}}
 								>

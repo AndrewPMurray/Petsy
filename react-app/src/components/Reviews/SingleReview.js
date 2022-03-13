@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 import ScrollToTop from "react-router-scroll-top";
 import dayjs from "dayjs";
 
-const SingleReview = forwardRef(({ review, seller, products, heightDifference, setHeightDifference, divHeight, setDivHeight }, ref) => {
+const SingleReview = forwardRef(({ review, seller, products, heightDifference, setHeightDifference}, ref) => {
 	const history = useHistory();
 
 	const [photoPresent, setPhotoPresent] = useState(false);
@@ -27,8 +27,11 @@ const SingleReview = forwardRef(({ review, seller, products, heightDifference, s
 		return e?.scrollHeight - 1 > e?.clientHeight
 	}
 
-	function heightDifferenceContent(initial, current) {
-		return current - initial
+	function getheightDifferenceContent(initial, current) {
+		// console.log("difference", current - initial)
+		let diff = current - initial
+		if (diff < 65) return 0
+		else return diff - 65
 	}
 	
 	useEffect(() => {
@@ -45,7 +48,7 @@ const SingleReview = forwardRef(({ review, seller, products, heightDifference, s
 	const handleExpandContent = (e) => {
 		e.preventDefault();
 		setTooLong(false);
-		setHeightDifference(heightDifference + heightDifferenceContent(initialHeight, contentRef.current.scrollHeight))
+		setHeightDifference(getheightDifferenceContent(initialHeight, contentRef.current.scrollHeight))
 	}
 
 	const handleProductChange = (e) => {
