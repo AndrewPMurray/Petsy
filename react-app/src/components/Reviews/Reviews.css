@@ -62,7 +62,7 @@
 .single-review-container-div{
   box-sizing: border-box;
   height: auto;
-  min-height: 200px;
+  min-height: 150px;
   width: 100%;
   background-color: white;
   display: flex;
@@ -105,9 +105,9 @@
   position: absolute;
   border-radius: 10px;
   background-color: rgb(190, 190, 190);
-  font-size: 20px;
-  right: -29px;
-  bottom: -5px;
+  font-size: 14px;
+  right: -20px;
+  bottom: -1px;
 }
 
 .review-star-div {
@@ -157,6 +157,10 @@
   height: 100%;
   /* text-align: end; */
   margin: 10px;
+}
+
+.review-left-side-false + .review-right-side-photo {
+  width: 0%;
 }
 
 .review-left-side-true {
