@@ -11,7 +11,6 @@ const SingleReview = forwardRef(({ review, seller, products, pageNum }, ref) => 
 
 	const contentRef = useRef();
 
-	// console.log(review.content, contentRef.current?.scrollHeight, contentRef.current?.clientHeight)
 	function isOverflowed(e) {
 		return e?.scrollHeight - 1 > e?.clientHeight;
 	}

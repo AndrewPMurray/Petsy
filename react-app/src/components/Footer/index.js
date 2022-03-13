@@ -90,10 +90,15 @@ function Footer() {
 					</div>
 					<div> Terms of Use</div>
 					<div> Privacy</div>
-					<div> Interest-based ads </div>
+					<div>  <a
+						style={{ color: 'white' }}
+						href='https://github.com/AndrewPMurray/Petsy'
+						target='_blank'
+						rel='noreferrer'
+					> GitHub </a></div>
 				</div>
 			</div>
-		</footer>
+		</footer >
 	);
 }
 

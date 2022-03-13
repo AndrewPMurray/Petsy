@@ -19,7 +19,6 @@ export const loadProductTypesByPet = (petTypeId, productTypeId) => async (dispat
 		return products.products;
 	} else {
 		const errors = await response.json();
-		console.log(errors.errors);
 	}
 };
 
@@ -31,7 +30,7 @@ export const loadProductTypes = () => async (dispatch) => {
 		return productTypes.all_types;
 	} else {
 		const errors = await response.json();
-		console.log(errors.errors);
+		// console.log(errors.errors);
 	}
 };
 

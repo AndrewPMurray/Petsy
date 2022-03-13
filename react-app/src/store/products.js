@@ -31,7 +31,6 @@ export const loadProducts = () => async (dispatch) => {
 		return products.all_products;
 	} else {
 		const errors = await response.json();
-		console.log(errors.errors);
 	}
 };
 
@@ -78,7 +77,6 @@ export const deleteProduct = (product) => async (dispatch) => {
 		return deletedProduct;
 	} else {
 		const errors = await response.json();
-		console.log(errors.errors);
 	}
 };
 
@@ -105,7 +103,6 @@ const productsReducer = (state = initialState, action) => {
 
 		case DELETE_PRODUCT: {
 			newState = { ...state };
-			console.log(action.deletedProduct);
 			delete newState[action.deletedProduct.id];
 			return newState;
 		}

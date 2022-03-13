@@ -13,7 +13,6 @@ export const loadPurchases = (userId) => async (dispatch) => {
         dispatch(load(purchases.purchases));
     } else {
         const errors = await response.json();
-        console.log(errors.errors);
     }
 };
 
