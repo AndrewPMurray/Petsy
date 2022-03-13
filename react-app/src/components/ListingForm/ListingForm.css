@@ -19,8 +19,14 @@
     margin-bottom: 10px;
 }
 
-#listing-form > * > * {
+#listing-form > label {
+    font-weight: bold;
+}
+
+#listing-form > * > input, 
+#listing-form > * > select {
     margin-top: 5px;
+    padding: 10px 15px;
 }
 
 #handmade-checkbox {
@@ -39,7 +45,9 @@
 
 #product-description {
     resize: none;
-    height: 500px;
+    height: 450px;
+    margin-top: 5px;
+    padding: 10px 15px;
 }
 
 #submit-buttons-container {
