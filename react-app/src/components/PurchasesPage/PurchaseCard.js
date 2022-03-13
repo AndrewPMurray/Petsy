@@ -32,7 +32,7 @@ function PurchaseCard({ purchaseId, purchase, userId, reviews, review }) {
 					<ReviewModal purchaseId={purchaseId} userId={userId} product={purchase.product} review={review} />
 				</div>
 			</div>
-			<div id='buyAgainDiv'>
+			{/* <div id='buyAgainDiv'>
 				<div>
 					{' '}
 					<button id='buyAgainButton'>Buy this again</button>
@@ -41,7 +41,7 @@ function PurchaseCard({ purchaseId, purchase, userId, reviews, review }) {
 					{' '}
 					<p>${(purchase.product.price * 1.07).toFixed(2)}</p>{' '}
 				</div>
-			</div>
+			</div> */}
 		</div>
 	);
 }
