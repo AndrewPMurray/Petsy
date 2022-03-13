@@ -11,6 +11,7 @@
     gap: 20px;
 }
 #about > div {
+  height: 100%;
   margin: 0 250px 0 250px;
 }
 
@@ -31,10 +32,11 @@
 .trio {
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
     font-family: Lato;
-    width: 80%;
-    height: 20vh;
+    width: 90%;
+    height: 100%;
+    gap: 10px;
 }
 
 .trio > div{
@@ -74,6 +76,7 @@
 }
 
 .trio-main-div {
+  height: 100%;
   display: flex;
   justify-content: center;
 }
