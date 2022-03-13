@@ -6,17 +6,16 @@ function Reviews({ product, products }) {
 	const reviewsRef = useRef([])
 	const reviewsSellerRef = useRef([])
 	const reviewsDivRef = useRef(0)
-	const [heightDifference, setHeightDifference] = useState(0);
-	const [pageNum, setPageNum] = useState(0)
 
-
+	const [heightDifference, setHeightDifference] = useState(false);
+	const [pageNum, setPageNum] = useState(1)
 	const [divHeight, setDivHeight] = useState()
+
 	const sellerProducts = Object.values(products).filter((p) => p?.user_id === product.user?.id);
 
-	console.log(heightDifference, divHeight)
-
+	
 	let allReviews = [];
-
+	
 	sellerProducts.forEach((p) => {
 		if (p.reviews) {
 			allReviews.push(...p.reviews);
@@ -39,26 +38,26 @@ function Reviews({ product, products }) {
 	while (roundedSellerProductReviews.length % 4 !== 0) {
 		roundedSellerProductReviews.push({})
 	}
-
-
+	
+	
 	const [showItemReviews, setShowItemReviews] = useState(!!product.reviews.length);
 	const [showSellerReviews, setShowSellerReviews] = useState(
 		!!allReviews.length && !product.reviews.length
-	);
-
-	// Yanelys' Avg Rating!
-	const reviews = Object.values(product?.reviews);
-	const ratings = [];
-	if (reviews) {
-		for (let i = 0; i < reviews.length; i++) {
-			ratings.push(reviews[i].rating);
+		);
+		
+		// Yanelys' Avg Rating!
+		const reviews = Object.values(product?.reviews);
+		const ratings = [];
+		if (reviews) {
+			for (let i = 0; i < reviews.length; i++) {
+				ratings.push(reviews[i].rating);
+			}
 		}
-	}
-	const averageRating = ratings.reduce((a, b) => a + b, 0) / reviews.length;
-	const stars = [];
-	for (let i = 0; i < averageRating; i++) {
-		stars.push(i);
-	}
+		const averageRating = ratings.reduce((a, b) => a + b, 0) / reviews.length;
+		const stars = [];
+		for (let i = 0; i < averageRating; i++) {
+			stars.push(i);
+		}
 
 	// Number of "Pages" for reviews div -- four reviews per "page"
 	let pageNumsItems = [];
@@ -72,38 +71,36 @@ function Reviews({ product, products }) {
 
 	function getPageHeightPer4Reviews(reviewElements) {
 		return reviewElements?.reduce((prev, curr, ele, i) => {
-			// console.log(i, curr.scrollHeight)
 			if (curr) {
 				return prev + curr.scrollHeight
 			}
 		}, 0)
 	}
-
+	
 	for (let i = 0; i < roundedProductReviews.length; i += 4) {
 		pageNumsItems.push(i)
 	}
-	console.log("pageNumsItems:", pageNumsItems)
 
+	
 	for (let i = 0; i < roundedSellerProductReviews.length; i += 4) {
 		pageNumsSeller.push(i);
 	}
-
+	
 	useEffect(() => {
 		if (showItemReviews) {
 			for (let i = 0; i < roundedProductReviews.length; i += 4) {
 				everyFourItems?.push(reviewsRef?.current.slice(i, i + 4))
-				// console.log("everyItem", everyFourItems)
 			}
-
-
+			
+			
 			everyFourItems?.forEach((range) => {
 				heightItemsArr?.push(getPageHeightPer4Reviews(range))
 			})
-
-			if (!divHeight) setDivHeight(heightItemsArr[0])
+			
+			if (!divHeight) setDivHeight(heightItemsArr[pageNum])
 		}
-	}, [showItemReviews, everyFourItems, products.length, heightDifference])
-
+	}, [showItemReviews, everyFourItems, products.length])
+	
 	useEffect(() => {
 		if (showSellerReviews) {
 			for (let i = 0; i < roundedSellerProductReviews?.length; i += 4) {
@@ -114,24 +111,25 @@ function Reviews({ product, products }) {
 			});
 			if (!divHeight) setDivHeight(heightSellerItemsArr[0]);
 		}
-	}, [showSellerReviews, everyFourSellerItems, heightDifference]);
-
-	// useEffect(() => {}, [divHeight]);
-
+	}, [showSellerReviews, everyFourSellerItems]);
+	
+	console.log('divHeight', divHeight)
 	// Handling Page turn button clicks:
-	function handleBackClick(iOfReview) {
-		reviewsRef.current[iOfReview].scrollIntoView({ block: 'start', inline: 'nearest' });
-		setPageNum()
-		setDivHeight(0);
+	function handleBackClick(ele, i) {
+		reviewsRef.current[ele].scrollIntoView({ block: 'start', inline: 'nearest' });
+		setPageNum(i+1)
+		setDivHeight(heightItemsArr[i]);
+	}
+	
+	function handleSellerBackClick(ele, i) {
+		reviewsSellerRef.current[ele].scrollIntoView({ block: 'start', inline: 'nearest' });
+		setPageNum(i+1)
+		setDivHeight(heightSellerItemsArr[i]);
 	}
 
-	function handleSellerBackClick(i) {
-		reviewsSellerRef.current[i].scrollIntoView({ block: 'start', inline: 'nearest' });
-		setDivHeight(0);
-	}
+	console.log(heightItemsArr)
 
 	let content;
-
 
 	content = (
 		<>
@@ -139,14 +137,14 @@ function Reviews({ product, products }) {
 				{product.reviews.length > 0 && showItemReviews &&
 					<>
 						{roundedProductReviews.map((review, i) => (
-							<SingleReview ref={el => reviewsRef.current[i] = el} i={i} heightDifference={heightDifference} setHeightDifference={setHeightDifference} review={review} />
+							<SingleReview ref={el => reviewsRef.current[i] = el} i={i} heightDifference={heightDifference} setHeightDifference={setHeightDifference} divHeight={divHeight} setDivHeight={setDivHeight} review={review} />
 						))}
 					</>
 				}
 				{allReviews.length && showSellerReviews &&
 					<>
 						{roundedSellerProductReviews.map((review, i) => (
-							<SingleReview ref={el => reviewsSellerRef.current[i] = el} i={i} heightDifference={heightDifference} setHeightDifference={setHeightDifference} seller="true" products={products} review={review} />
+							<SingleReview ref={el => reviewsSellerRef.current[i] = el} i={i} heightDifference={heightDifference} setHeightDifference={setHeightDifference} setDivHeight={setDivHeight} seller="true" products={products} review={review} />
 						))}
 					</>
 				}
@@ -156,8 +154,10 @@ function Reviews({ product, products }) {
 					<>
 						{pageNumsItems.map((ele, i) => (
 							<button
-								className='reviews-overflow-page-buttons'
-								onClick={() => handleBackClick(ele, i)}
+								className={"reviews-overflow-page-buttons " + (pageNum === i+1 ? "page-button-true" : "page-button-false")}
+								onClick={(e) => {
+									handleBackClick(ele, i)
+								}}
 							>
 								{i + 1}
 							</button>
@@ -169,7 +169,7 @@ function Reviews({ product, products }) {
 
 						{pageNumsSeller.map((ele, i) => (
 							<button
-								className='reviews-overflow-page-buttons'
+								className={"reviews-overflow-page-buttons " + (pageNum === i+1 ? "page-button-true" : "page-button-false")}
 								onClick={() => handleSellerBackClick(ele, i)}
 							>
 								{i + 1}
@@ -214,7 +214,9 @@ function Reviews({ product, products }) {
 									<button className='show-buttons' onClick={() => {
 										setShowItemReviews(true)
 										setShowSellerReviews(false)
-										setDivHeight(0)
+										setDivHeight(heightItemsArr[0]);
+										setPageNum(1)
+										reviewsSellerRef.current[0].scrollIntoView({ block: 'start', inline: 'nearest' });
 										// handleBackClick(0)
 									}}>Reviews for this item</button>
 									<p className='review-total'>{product?.reviews?.length}</p>
@@ -228,7 +230,9 @@ function Reviews({ product, products }) {
 									onClick={() => {
 										setShowSellerReviews(true);
 										setShowItemReviews(false);
-										setDivHeight(0);
+										setDivHeight(heightSellerItemsArr[0]);
+										setPageNum(1)
+										reviewsRef.current[0].scrollIntoView({ block: 'start', inline: 'nearest' });
 										// handleSellerBackClick(0)
 									}}
 								>
