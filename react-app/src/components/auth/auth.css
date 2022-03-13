@@ -20,11 +20,9 @@
   font-weight: 600;
 }
 
-.auth-user-buttons:hover,
+/* .auth-user-buttons:hover,
 .demo-button:hover {
-  background-color: rgb(214, 199, 178);
-}
-
+} */
 
 .auth-input-containers {
   width: fit-content;
@@ -32,7 +30,7 @@
 }
 
 .errors-div {
-  padding-bottom: 12px;
+  padding-bottom: 17px;
   color: red;
 }
 
@@ -53,10 +51,15 @@
 .auth-user-div {
   display: flex;
   flex-direction: column;
+  margin-top: 13px;
 }
 
 #repeat-password-input {
-  margin-right: -42px;
+  margin-right: -52px;
+}
+
+#username-label {
+  margin-right: -8px;
 }
 
 .email-label {
@@ -75,8 +78,49 @@
     Arial, sans-serif;
 }
 
-/* .signup-button {
+.form-title-2 {
+  font-size: 15px;
+  line-height: 28px;
+  font-weight: 500;
+  font-family: "Graphik Webfont", -apple-system, "Helvetica Neue", "Droid Sans",
+    Arial, sans-serif;
+}
+
+#auth-button {
+  padding: 12px 12px;
+  border-radius: 24px;
+  background-color: white;
+  color: black;
   border: 2px solid black;
-  border-radius: 8px;
-  padding: 2px;
-} */
+  cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+  margin-left: 140px;
+}
+
+#auth-login-button {
+  padding: 12px 12px;
+  border-radius: 20px;
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+  margin-left: 38px;
+}
+
+#auth-button:hover,
+#auth-login-button:hover {
+  background-color: black;
+  border-color: transparent;
+  color: white;
+}
+
+#sub-auth-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 43px;
+}
+

@@ -22,9 +22,9 @@ function ProductPage() {
 	}
 
 	useEffect(() => {
-		dispatch(loadProducts()).then((res) =>
-			!res[productId - 1] ? history.push('/not-found') : null
-		);
+		dispatch(loadProducts()).then((res) => {
+			if (!res[productId - 1]) history.push('/not-found');
+		});
 	}, [dispatch]);
 
 	return (
