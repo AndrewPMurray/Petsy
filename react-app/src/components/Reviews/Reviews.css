@@ -89,7 +89,7 @@
 .review-name-date-div {
   display: flex;
   flex-direction: row;
-  align-items: end;
+  align-items: flex-end;
 }
 
 .overflow-review {

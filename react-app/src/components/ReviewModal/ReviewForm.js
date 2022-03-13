@@ -41,7 +41,6 @@ export default function ReviewForm({
 	const handleEdit = async (e) => {
 		e.preventDefault();
 
-
 		const editedReview = {
 			content,
 			rating,
@@ -75,13 +74,13 @@ export default function ReviewForm({
 
 	const isActive = (num) => {
 		if (num === 1) {
-			return active === 1 || active === 2 || active == 3;
+			return active === 1 || active === 2 || active === 3;
 		}
 		if (num === 2) {
-			return active == 2 || active === 3;
+			return active === 2 || active === 3;
 		}
 		if (num === 3) {
-			return active == 3;
+			return active === 3;
 		}
 	};
 
@@ -174,7 +173,6 @@ export default function ReviewForm({
 
 					{active === 2 && (
 						<>
-
 							<div id='reviewImageDiv'>
 								<UploadReviewImage
 									review={review}
@@ -183,7 +181,7 @@ export default function ReviewForm({
 									url={url}
 								/>
 							</div>
-							<div id="placeholder"></div>
+							<div id='placeholder'></div>
 						</>
 					)}
 					<div id='form_button_div'>

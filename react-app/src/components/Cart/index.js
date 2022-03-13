@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadProducts } from '../../store/products';
 import { makePurchase } from '../../store/cart';
 import CartItem from './CartItem';
 import { Modal } from '../../context/Modal';
 import LoginForm from '../auth/LoginForm';
-import './Cart.css'
+import './Cart.css';
 
 function Cart() {
 	const [errors, setErrors] = useState('');
@@ -57,36 +57,34 @@ function Cart() {
 	};
 
 	const handleClick = (e) => {
-		e.preventDefault()
-		history.push('/')
-	}
+		e.preventDefault();
+		history.push('/');
+	};
 
 	if (!cartItems || !cartItems.length)
 		return (
 			<>
-				<div id="no-cart-page-div">
+				<div id='no-cart-page-div'>
 					<div id='sub-main-no-cart'>
 						<div className='cart-item-header'> Your cart is empty.</div>
-						<div >
-							<button
-								className='link-cart'
-								onClick={handleClick}
-							>Discover something unique for your pet(s) to fill it up</button>
+						<div>
+							<button className='link-cart' onClick={handleClick}>
+								Discover something unique for your pet(s) to fill it up
+							</button>
 						</div>
 					</div>
 				</div>
 			</>
 		);
 
-
 	let total = 0;
 
-	const findTotal = cartItems.map(item => total += (item.price * item.count))
+	cartItems.map((item) => (total += item.price * item.count));
 
 	return (
 		<div id='cart-page'>
-			<div id="main-content">
-				<div id="cart-left-side">
+			<div id='main-content'>
+				<div id='cart-left-side'>
 					<div className='amount-cart'>
 						{cartCount === 1
 							? `You have ${cartCount} item in your cart`
@@ -99,47 +97,52 @@ function Cart() {
 						))}
 					</ul>
 				</div>
-				<div id="cart-right-side">
+				<div id='cart-right-side'>
 					<div id='sub-right-div'>
-						<div id="checkout">
+						<div id='checkout'>
 							<div>How you'll pay</div>
-							<div id="cards">
-								<input
-									type="radio"
-									name='method-buy'
+							<div id='cards'>
+								<input type='radio' name='method-buy' />
+								<img
+									src='https://images.squarespace-cdn.com/content/v1/5cdac02165019ff805c12bd3/1563273051742-QSUPRDFV6OEVTGYIDDHG/visa-mastercard-american-express-discover-logo-12000-25968.png?format=1000w'
+									alt='cards'
 								/>
-								<img src="https://images.squarespace-cdn.com/content/v1/5cdac02165019ff805c12bd3/1563273051742-QSUPRDFV6OEVTGYIDDHG/visa-mastercard-american-express-discover-logo-12000-25968.png?format=1000w" alt="cards" />
 							</div>
 							<div id='paypal'>
-								<input
-									type="radio"
-									name='method-buy'
+								<input type='radio' name='method-buy' />
+								<img
+									src='https://2.bp.blogspot.com/-gzW3J2sXFm0/U5h4jgo_1UI/AAAAAAAACqo/E5KtY-0gZfw/s1600/Logo+Paypal.png'
+									alt='pay-pal'
 								/>
-								<img src="https://2.bp.blogspot.com/-gzW3J2sXFm0/U5h4jgo_1UI/AAAAAAAACqo/E5KtY-0gZfw/s1600/Logo+Paypal.png" alt="pay-pal" />
 							</div>
 							<div id='totals-text'>
-								<div id='total-div'>Item(s) total: <span>${total.toFixed(2)}</span></div>
-								<div id='subtotal-div'>Subtotal: <span>${(total * 1.07).toFixed(2)}</span></div>
+								<div id='total-div'>
+									Item(s) total: <span>${total.toFixed(2)}</span>
+								</div>
+								<div id='subtotal-div'>
+									Subtotal: <span>${(total * 1.07).toFixed(2)}</span>
+								</div>
 							</div>
 						</div>
-						<div >
-							{user ?
-								<form
-									id='form-div'
-									onSubmit={onSubmit}>
-									<button
-										id='purchase-button'
-										type='submit'>Purchase</button>
-								</form> :
+						<div>
+							{user ? (
+								<form id='form-div' onSubmit={onSubmit}>
+									<button id='purchase-button' type='submit'>
+										Purchase
+									</button>
+								</form>
+							) : (
 								<>
-									<button id='purchase-button' onClick={() => setShowModal(true)}>Purchase</button>
+									<button id='purchase-button' onClick={() => setShowModal(true)}>
+										Purchase
+									</button>
 									{showModal && (
 										<Modal onClose={() => setShowModal(false)}>
 											<LoginForm />
 										</Modal>
 									)}
 								</>
-							}
+							)}
 						</div>
 					</div>
 				</div>

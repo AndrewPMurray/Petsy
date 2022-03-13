@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './Navbar.css';
 import Account from './Account';
-import SignupFormModal from '../SignupFormModal';
 import LoginFormModal from '../LoginFormModal';
 import { useEffect, useState } from 'react';
 
@@ -64,19 +63,6 @@ function NavBarIcons({ user }) {
 			</ul>
 		</>
 	);
-
-	{
-		!user && (
-			<div id='NotLoggedNavButtons'>
-				<li>
-					<LoginFormModal />
-				</li>
-				<li>
-					<SignupFormModal />
-				</li>
-			</div>
-		);
-	}
 }
 
 export default NavBarIcons;

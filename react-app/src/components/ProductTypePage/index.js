@@ -15,7 +15,7 @@ export default function ProductTypePage() {
 		dispatch(loadProductTypesByPet(petTypeId, productTypeId)).then((res) => {
 			if (res.length === 0) history.push('/not-found');
 		});
-	}, [dispatch, petTypeId, productTypeId]);
+	}, [dispatch, petTypeId, productTypeId, history]);
 
 	return (
 		<>

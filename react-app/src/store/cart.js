@@ -1,5 +1,3 @@
-import productsReducer from './products';
-
 const ADD = 'cart/ADD';
 const REMOVE = 'cart/REMOVE';
 const UPDATE_COUNT = 'cart/UPDATE_COUNT';

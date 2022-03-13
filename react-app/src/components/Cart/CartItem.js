@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { remove, updateCount } from '../../store/cart';
+import { updateCount } from '../../store/cart';
 import './Cart.css';
 
 function CartItem({ item, cart }) {
@@ -13,12 +13,14 @@ function CartItem({ item, cart }) {
 
 	return (
 		<li className='cart-item'>
-			<div id="cart-item-user">
-				<i className="fa-solid fa-circle-user"></i>
+			<div id='cart-item-user'>
+				<i className='fa-solid fa-circle-user'></i>
 				{item?.user?.username}
 			</div>
-			<div id="item-content">
-				<div id="cart-item-image"><img src={cart?.images[0]?.url} alt="item-image" /></div>
+			<div id='item-content'>
+				<div id='cart-item-image'>
+					<img src={cart?.images[0]?.url} alt='cart-item' />
+				</div>
 				<div id='cart-item-title'>{item?.title}</div>
 				<div id='cart-item-count'>
 					<div className='cart-item-buttons'>
@@ -28,7 +30,7 @@ function CartItem({ item, cart }) {
 						>
 							-
 						</button>
-						<div id="count-text">{count}</div>
+						<div id='count-text'>{count}</div>
 						{/* <input
 							className='amount-item-input'
 							type='number'
@@ -48,9 +50,8 @@ function CartItem({ item, cart }) {
 						</button> */}
 					</div>
 				</div>
-				<div id="cart-item-price">${item?.price?.toFixed(2)}</div>
+				<div id='cart-item-price'>${item?.price?.toFixed(2)}</div>
 			</div>
-
 		</li>
 	);
 }

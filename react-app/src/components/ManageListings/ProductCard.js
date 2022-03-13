@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { loadProducts, deleteProduct } from '../../store/products';
+import { deleteProduct } from '../../store/products';
 
 function ProductCard({ product, setShowForm, setActiveProductId }) {
 	const dispatch = useDispatch();

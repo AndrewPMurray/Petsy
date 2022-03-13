@@ -7,7 +7,6 @@ import { useHistory } from 'react-router-dom';
 
 function ProductInfo({ product }) {
 	const dispatch = useDispatch();
-	const cart = useSelector((state) => state.cart);
 	const cartItem = useSelector((state) => state.cart[product.id]);
 	const [hiddenHighlights, setHiddenHighlights] = useState(false);
 	const [hiddenDes, setHiddenDes] = useState(false);
@@ -16,7 +15,7 @@ function ProductInfo({ product }) {
 	const [randomNum, setRandomNum] = useState(1);
 
 	const history = useHistory();
-	
+
 	useEffect(() => {
 		const min = 3;
 		const max = 25;
@@ -52,7 +51,9 @@ function ProductInfo({ product }) {
 				<h3>${product.price.toFixed(2)}+</h3>
 			</div>
 			<div className='info-button-quantity'>
-				<button className='add-cart-button' onClick={cartAdd}>Add to cart</button>
+				<button className='add-cart-button' onClick={cartAdd}>
+					Add to cart
+				</button>
 				<div className='info-icons'>
 					<div className='one-line'>
 						<i id='info-icon1' className='fa-solid fa-hourglass info-icon1'></i>
@@ -103,7 +104,10 @@ function ProductInfo({ product }) {
 											{product.description}
 										</pre>
 									</div>
-									<button className='learn-more' onClick={() => setShowDesp(true)}>
+									<button
+										className='learn-more'
+										onClick={() => setShowDesp(true)}
+									>
 										Learn more about this item
 									</button>
 								</>

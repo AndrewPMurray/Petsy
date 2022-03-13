@@ -20,7 +20,7 @@ function PetTypePage() {
 			if (res.indexOf(+petTypeId) === -1) history.push('/not-found');
 		});
 		dispatch(loadProductTypes());
-	}, [dispatch, petTypeId]);
+	}, [dispatch, petTypeId, history]);
 
 	return (
 		<>
