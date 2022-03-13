@@ -8,39 +8,36 @@ import { useHistory } from "react-router-dom";
 import ScrollToTop from "react-router-scroll-top";
 import dayjs from "dayjs";
 
-const SingleReview = forwardRef(({ review, seller, products, heightDifference, setHeightDifference }, ref) => {
+const SingleReview = forwardRef(({ review, seller, products, pageNum}, ref) => {
 	const history = useHistory();
 
 	const [photoPresent, setPhotoPresent] = useState(false);
 	const [tooLong, setTooLong] = useState(true);
 
 	const contentRef = useRef();
-
+	
+	// console.log(review.content, contentRef.current?.scrollHeight, contentRef.current?.clientHeight)
 	function isOverflowed(e) {
-		const difference = e?.scrollHeight - e?.clientHeight;
-		if (difference) {
-			setHeightDifference(difference)
-		}
 		return e?.scrollHeight - 1 > e?.clientHeight
 	}
-
+	
 	useEffect(() => {
 		if (review?.url) setPhotoPresent(true);
 	}, [review?.url]);
-
 	
 	useEffect(() => {
-		// console.log("wtf")
-		if (!isOverflowed(contentRef.current)) {
+		if (review.content?.length === 0) {
+			setTooLong(false)
+		}
+
+		if (review?.content && contentRef.current?.scrollHeight && !isOverflowed(contentRef.current)) {
 			setTooLong(false);
 		}
-	}, [products?.length, heightDifference]);
-
+	}, [products?.length, pageNum, contentRef.current?.scrollHeight]);
+	
 	const handleExpandContent = (e) => {
 		e.preventDefault();
 		setTooLong(false);
-		// console.log("click", contentRef.current.clientHeight, contentRef.current.scrollHeight)
-		isOverflowed(contentRef.current)
 	}
 
 	const handleProductChange = (e) => {
@@ -55,7 +52,6 @@ const SingleReview = forwardRef(({ review, seller, products, heightDifference, s
 		currentProduct = products[review.product_id];
 		sellerRevProductImg = currentProduct?.images[0].url;
 	}
-	// console.log(review)
 
 	const reviewLength = Object.keys(review).length
 

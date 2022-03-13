@@ -52,6 +52,11 @@
 
 .reviews-body-div {
   width: 92%;
+  height: 100%;
+}
+
+.reviews-container-div {
+  height: 100%;
 }
 
 .single-review-container-div{
@@ -60,7 +65,6 @@
   min-height: 200px;
   width: 100%;
   background-color: white;
-  margin-top: 15px;
   display: flex;
   flex-direction: row;
 }
@@ -209,9 +213,20 @@
 }
 
 .reviews-map-div {
+  position: relative;
   width: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
   /* min-height: 40px; */
+}
+
+.show-page-true {
+  position: static;
+}
+
+.show-page-false {
+  position: absolute;
+  top: 0;
+  display: none;
 }
 
 .seller-review-product-info {
@@ -247,4 +262,9 @@
   font-size: 13px;
   padding-top: 5px;
   padding-bottom: 10px;
+}
+
+.page-button-true {
+  background-color: rgb(156, 156, 156);
+  color: rgb(83, 83, 83)
 }

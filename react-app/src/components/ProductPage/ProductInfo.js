@@ -74,10 +74,6 @@ function ProductInfo({ product }) {
 					</div>
 				</div>
 			</div>
-			{/* //  main button (Highlights/Description) changes display: hidden
-                // two CSS class names <button>...</button>
-                //     1. overflow: hidden, text-overflow: ellipsis !important
-                //      2. regular css, not hidden */}
 			<div className='info-details-description-div'>
 				<div className='info-highlights'>
 					<div className='close-button-div' onClick={handleHiddenHighlights}>

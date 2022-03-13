@@ -140,3 +140,22 @@ a {
   width: 100%;
   height: 100%;
 }
+
+.fav-heart {
+  position: relative;
+}
+
+#temp-message-fav {
+  display: none;
+  position: absolute;
+  font-size: 10px;
+  font-style: oblique;
+  top: 45px;
+  padding: 5px;
+  font-weight: 500;
+  color: rgb(238, 127, 23)
+}
+
+#fav-heart:hover > #temp-message-fav{
+  display:initial
+}

@@ -25,10 +25,14 @@ function SearchResults() {
 
 	return results.length ? (
 		<>
+    <div className='search-results-container-div'>
 			<DetailedProductGrid products={results} />
+    </div>
 		</>
 	) : (
-		<h2>No results</h2>
+    <div className='search-results-container-div'>
+		  <h2>No results</h2>
+    </div>
 	);
 }
 
