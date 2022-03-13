@@ -1,6 +1,24 @@
 #not-found-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 75vh;
+}
+
+#not-found-container > img {
+    max-height: 640px;
+}
+
+#not-found-container > h2 {
+    font-size: 24px;
+}
+
+#not-found-container > a {
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+#not-found-container > a:hover {
+    text-decoration: underline;
 }
