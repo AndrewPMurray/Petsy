@@ -213,9 +213,20 @@
 }
 
 .reviews-map-div {
+  position: relative;
   width: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
   /* min-height: 40px; */
+}
+
+.show-page-true {
+  position: static;
+}
+
+.show-page-false {
+  position: absolute;
+  top: 0;
+  display: none;
 }
 
 .seller-review-product-info {

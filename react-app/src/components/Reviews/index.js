@@ -1,18 +1,14 @@
 import { useState, useRef, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import './Reviews.css';
 import SingleReview from './SingleReview';
 
 function Reviews({ product, products }) {
-	const reviewsRef = useRef([])
-	const reviewsSellerRef = useRef([])
 	const reviewsDivRef = useRef(0)
-
-	const [heightDifference, setHeightDifference] = useState(0);
-	const [heightSellerDifference, setHeightSellerDifference] = useState(0);
+	const user = useSelector(state => state.session.user);
 
 	const [pageNum, setPageNum] = useState(1)
-	const [divHeight, setDivHeight] = useState()
-
+	
 	const sellerProducts = Object.values(products).filter((p) => p?.user_id === product.user?.id);
 
 	
@@ -25,23 +21,44 @@ function Reviews({ product, products }) {
 	});
 
 	let roundedSellerProductReviews;
+	let roundedProductReviews = [...product?.reviews].reverse();
 
-	let roundedProductReviews = [...product?.reviews];
+	// Put Current User's Review on top
+	[...roundedProductReviews].forEach((review, i) => {
+		if (user && user.id === review.user_id) {
+			roundedProductReviews.splice(i, 1)
+			roundedProductReviews.unshift(review)
+		}
+	})
 
 	if (allReviews) {
-		roundedSellerProductReviews = [...allReviews];
+		roundedSellerProductReviews = [...allReviews].reverse();
 	}
-
 
 	while (roundedProductReviews.length % 4 !== 0) {
 		roundedProductReviews.push({})
 	}
-
 	while (roundedSellerProductReviews.length % 4 !== 0) {
 		roundedSellerProductReviews.push({})
 	}
 	
-	
+
+	// --------------------------------new-----------------------------------------//
+	let arrOfFourReviewsArrs = [];
+	let arrOfFourSellerReviewsArrs = [];
+	let pageNumsItems = [];
+	let pageNumsSeller = [];
+
+	for (let i = 0; i < roundedProductReviews.length; i += 4) {
+		arrOfFourReviewsArrs.push(roundedProductReviews.slice(i, i + 4))
+		pageNumsItems.push(i)
+	}
+
+	for (let i = 0; i < roundedSellerProductReviews.length; i += 4) {
+		arrOfFourSellerReviewsArrs.push(roundedSellerProductReviews.slice(i, i + 4))
+		pageNumsSeller.push(i);
+	}
+
 	const [showItemReviews, setShowItemReviews] = useState(!!product.reviews.length);
 	const [showSellerReviews, setShowSellerReviews] = useState(
 		!!allReviews.length && !product.reviews.length
@@ -61,122 +78,39 @@ function Reviews({ product, products }) {
 			stars.push(i);
 		}
 
-	// Number of "Pages" for reviews div -- four reviews per "page"
-	let pageNumsItems = [];
-	let everyFourItems = [];
-	let heightItemsArr = [];
-
-	let pageNumsSeller = [];
-	let everyFourSellerItems = [];
-	let heightSellerItemsArr = [];
-
-	function getReviewHeight(ele) {
-		return ele?.scrollHeight
-	}
-
-	function getPageHeightPer4Reviews(reviewElements) {
-		return reviewElements?.reduce((prev, curr, ele, i) => {
-			if (curr) {
-				return prev + curr.scrollHeight
-			}
-		}, 0)
-	}
-
-	// Getting number of page buttons
-	for (let i = 0; i < roundedProductReviews.length; i += 4) {
-		pageNumsItems.push(i)
-	}
-
-	for (let i = 0; i < roundedSellerProductReviews.length; i += 4) {
-		pageNumsSeller.push(i);
-	}
-
-	// make sure heightdifference is zero when going to new product
-	useEffect(() => {
-		setHeightDifference(0)
-		// reviewsRef.current[0].scrollIntoView({ block: 'start', inline: 'nearest' });
-	}, [])
-	
-	useEffect(() => {
-		if (showItemReviews) {
-
-			for (let i = 0; i < roundedProductReviews.length; i += 4) {
-				everyFourItems?.push(reviewsRef?.current.slice(i, i + 4))
-			}
-			
-			everyFourItems?.forEach((range) => {
-				heightItemsArr?.push(getPageHeightPer4Reviews(range))
-			})
-
-			// if (!divHeight) setDivHeight(heightItemsArr[0])
-		}
-	}, [showItemReviews, products.length])
-	
-	useEffect(() => {
-		if (showSellerReviews) {
-			for (let i = 0; i < roundedSellerProductReviews?.length; i += 4) {
-				everyFourSellerItems?.push(reviewsSellerRef?.current.slice(i, i + 4));
-			}
-			everyFourSellerItems?.forEach((range) => {
-				heightSellerItemsArr.push(getPageHeightPer4Reviews(range));
-			});
-			// if (!divHeight) setDivHeight(heightSellerItemsArr[0]);
-		}
-	}, [showSellerReviews, everyFourSellerItems]);
-
-	useEffect(() => {
-		let curr = divHeight
-		console.log(heightItemsArr)
-		if (showItemReviews) {
-			heightItemsArr[pageNum - 1] += heightDifference
-			setDivHeight(heightItemsArr[pageNum - 1])
-		}
-		console.log(heightItemsArr)
-		
-		console.log("SELLERS HEIGHTS",heightSellerItemsArr)
-		if (showSellerReviews) {
-			heightSellerItemsArr[pageNum -1] += heightSellerDifference
-			setDivHeight(heightSellerItemsArr[pageNum - 1])
-		}
-		console.log("SELLERS HEIGHTS", heightSellerItemsArr)
-		
-	}, [heightDifference, heightSellerDifference])
-	
 
 	// Handling Page turn button clicks:
 	function handleBackClick(ele, i) {
-		reviewsRef.current[ele].scrollIntoView({ block: 'start', inline: 'nearest' });
+		// reviewsRef.current[ele].scrollIntoView({ block: 'start', inline: 'nearest' });
 		setPageNum(i + 1)
-		console.log("PAGE", pageNum)
-		setDivHeight(heightItemsArr[pageNum]);
-		console.log("height items:", heightItemsArr)
 	}
 	
 	function handleSellerBackClick(ele, i) {
-		console.log(reviewsSellerRef.current[ele])
-		reviewsSellerRef.current[ele].scrollIntoView({ block: 'start', inline: 'nearest' });
+		// reviewsSellerRef.current[ele].scrollIntoView({ block: 'start', inline: 'nearest' });
 		setPageNum(i + 1)
-		console.log("i", i)
-		console.log("PAGE", pageNum)
-		setDivHeight(heightSellerItemsArr[pageNum]);
 	}
 
 	let content;
 
 	content = (
 		<>
-			<div ref={reviewsDivRef} className='reviews-map-div' style={{ height: `${divHeight}px` }} >
+			<div ref={reviewsDivRef} className='reviews-map-div' >
 				{product.reviews.length > 0 && showItemReviews &&
 					<>
-						{roundedProductReviews.map((review, i) => (
-							<SingleReview ref={el => reviewsRef.current[i] = el} i={i} heightDifference={heightDifference} setHeightDifference={setHeightDifference} divHeight={divHeight} setDivHeight={setDivHeight} review={review} />
-						))}
+						{arrOfFourReviewsArrs.map((arr, i) => (
+							<div className={"single-review-page " + (pageNum === i+1 ? "show-page-true" : "show-page-false")}>
+							{arr.map((review) => (
+								<SingleReview review={review} />
+							))}
+							</div>
+						))
+						}
 					</>
 				}
 				{allReviews.length && showSellerReviews &&
 					<>
 						{roundedSellerProductReviews.map((review, i) => (
-							<SingleReview ref={el => reviewsSellerRef.current[i] = el} i={i} heightDifference={heightSellerDifference} setHeightDifference={setHeightSellerDifference} setDivHeight={setDivHeight} seller="true" products={products} review={review} />
+							<SingleReview seller="true" products={products} review={review} />
 						))}
 					</>
 				}
@@ -246,10 +180,7 @@ function Reviews({ product, products }) {
 									<button className='show-buttons' onClick={() => {
 										setShowItemReviews(true)
 										setShowSellerReviews(false)
-										setDivHeight(heightItemsArr[0]);
 										setPageNum(1)
-										reviewsSellerRef?.current[0]?.scrollIntoView({ block: 'start', inline: 'nearest' });
-										// handleBackClick(0)
 									}}>Reviews for this item</button>
 									<p className='review-total'>{product?.reviews?.length}</p>
 								</div>
@@ -262,10 +193,7 @@ function Reviews({ product, products }) {
 									onClick={() => {
 										setShowSellerReviews(true);
 										setShowItemReviews(false);
-										setDivHeight(heightSellerItemsArr[0]);
 										setPageNum(1)
-										reviewsRef?.current[0]?.scrollIntoView({ block: 'start', inline: 'nearest' });
-										// handleSellerBackClick(0)
 									}}
 								>
 									Reviews for this seller

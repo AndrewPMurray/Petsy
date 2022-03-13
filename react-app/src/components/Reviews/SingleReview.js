@@ -8,29 +8,17 @@ import { useHistory } from "react-router-dom";
 import ScrollToTop from "react-router-scroll-top";
 import dayjs from "dayjs";
 
-const SingleReview = forwardRef(({ review, seller, products, heightDifference, setHeightDifference}, ref) => {
+const SingleReview = forwardRef(({ review, seller, products}, ref) => {
 	const history = useHistory();
 
 	const [photoPresent, setPhotoPresent] = useState(false);
 	const [tooLong, setTooLong] = useState(true);
 
 	const contentRef = useRef();
-
-	const [initialHeight, setIntitialHeight] = useState(null)
-	// ADD THE DIFFERENCE TO DIV HEIGHT
-	useEffect(() => {
-		if (initialHeight === null) {
-		setIntitialHeight(contentRef?.current?.clientHeight)
-	}}, [])
 	
+	console.log(review.content, contentRef.current?.scrollHeight, contentRef.current?.clientHeight)
 	function isOverflowed(e) {
 		return e?.scrollHeight - 1 > e?.clientHeight
-	}
-
-	function getheightDifferenceContent(initial, current) {
-		// console.log("difference", current - initial)
-		let diff = current - initial
-		return diff
 	}
 	
 	useEffect(() => {
@@ -39,15 +27,14 @@ const SingleReview = forwardRef(({ review, seller, products, heightDifference, s
 	
 	
 	useEffect(() => {
-		if (!isOverflowed(contentRef.current)) {
+		if (review.content && !isOverflowed(contentRef.current)) {
 			setTooLong(false);
 		}
-	}, [products?.length, heightDifference]);
+	}, [products?.length]);
 	
 	const handleExpandContent = (e) => {
 		e.preventDefault();
 		setTooLong(false);
-		setHeightDifference(getheightDifferenceContent(initialHeight, contentRef.current.scrollHeight))
 	}
 
 	const handleProductChange = (e) => {
