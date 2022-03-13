@@ -10,7 +10,6 @@ function Reviews({ product, products }) {
 	const [pageNum, setPageNum] = useState(1)
 	
 	const sellerProducts = Object.values(products).filter((p) => p?.user_id === product.user?.id);
-
 	
 	let allReviews = [];
 	
