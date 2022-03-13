@@ -6,6 +6,8 @@
 #footer2 {
   height: 60px;
   background-color: #232347;
+  display: flex;
+  flex-direction: column;
 }
 
 #footer-names-all {
@@ -35,9 +37,25 @@
   margin-left: 20px;
 }
 
-.fa-linkedin {
-  color: white;
-}
+.fa-linkedin,
 .fa-github {
   color: white;
+}
+
+.fa-linkedin:hover,
+.fa-github:hover {
+  font-weight: bold;
+}
+
+#sub-footer2 {
+  display: flex;
+  justify-content: center;
+}
+
+#sub-footer2 > div {
+  display: inline-block;
+  color: white;
+  font-family: Lato;
+  font-size: 15px;
+  padding: 10px 15px;
 }

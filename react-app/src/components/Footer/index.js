@@ -79,7 +79,14 @@ function Footer() {
                     </div>
                 </div>
             </div>
-            <div id="footer2">Dark Links</div>
+            <div id="footer2">
+                <div id="sub-footer2">
+                    <div><i class="far fa-copyright"></i> 2022 Petsy, Inc. </div>
+                    <div> Terms of Use</div>
+                    <div> Privacy</div>
+                    <div> Interest-based ads </div>
+                </div>
+            </div>
         </footer>
     )
 }
