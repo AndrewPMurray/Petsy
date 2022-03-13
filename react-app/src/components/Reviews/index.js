@@ -100,7 +100,7 @@ function Reviews({ product, products }) {
 						{arrOfFourReviewsArrs.map((arr, i) => (
 							<div className={"single-review-page " + (pageNum === i+1 ? "show-page-true" : "show-page-false")}>
 							{arr.map((review) => (
-								<SingleReview review={review} />
+								<SingleReview review={review} pageNum={pageNum} />
 							))}
 							</div>
 						))
@@ -109,9 +109,15 @@ function Reviews({ product, products }) {
 				}
 				{allReviews.length && showSellerReviews &&
 					<>
-						{roundedSellerProductReviews.map((review, i) => (
-							<SingleReview seller="true" products={products} review={review} />
+						{arrOfFourSellerReviewsArrs.map((arr, i) => (
+							<div className={"single-review-page " + (pageNum === i+1 ? "show-page-true" : "show-page-false")}>
+
+						{arr.map((review, i) => (
+							<SingleReview seller="true" pageNum={pageNum} products={products} review={review} />
 						))}
+						</div>
+						))
+						}
 					</>
 				}
 			</div>
