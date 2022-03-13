@@ -30,8 +30,7 @@ const SingleReview = forwardRef(({ review, seller, products, heightDifference, s
 	function getheightDifferenceContent(initial, current) {
 		// console.log("difference", current - initial)
 		let diff = current - initial
-		if (diff < 65) return 0
-		else return diff - 65
+		return diff
 	}
 	
 	useEffect(() => {

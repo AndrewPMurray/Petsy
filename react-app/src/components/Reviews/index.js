@@ -108,7 +108,7 @@ function Reviews({ product, products }) {
 				heightItemsArr?.push(getPageHeightPer4Reviews(range))
 			})
 
-			if (!divHeight) setDivHeight(heightItemsArr[0])
+			// if (!divHeight) setDivHeight(heightItemsArr[0])
 		}
 	}, [showItemReviews, products.length])
 	
@@ -120,7 +120,7 @@ function Reviews({ product, products }) {
 			everyFourSellerItems?.forEach((range) => {
 				heightSellerItemsArr.push(getPageHeightPer4Reviews(range));
 			});
-			if (!divHeight) setDivHeight(heightSellerItemsArr[0]);
+			// if (!divHeight) setDivHeight(heightSellerItemsArr[0]);
 		}
 	}, [showSellerReviews, everyFourSellerItems]);
 
@@ -135,7 +135,7 @@ function Reviews({ product, products }) {
 		
 		console.log("SELLERS HEIGHTS",heightSellerItemsArr)
 		if (showSellerReviews) {
-			heightSellerItemsArr[pageNum - 1] += heightSellerDifference
+			heightSellerItemsArr[pageNum -1] += heightSellerDifference
 			setDivHeight(heightSellerItemsArr[pageNum - 1])
 		}
 		console.log("SELLERS HEIGHTS", heightSellerItemsArr)
@@ -145,17 +145,20 @@ function Reviews({ product, products }) {
 
 	// Handling Page turn button clicks:
 	function handleBackClick(ele, i) {
-		reviewsRef.current[ele].scrollIntoView({ block: 'start', inline: 'start' });
-		setPageNum(i+1)
-		setDivHeight(heightItemsArr[pageNum - 1]);
+		reviewsRef.current[ele].scrollIntoView({ block: 'start', inline: 'nearest' });
+		setPageNum(i + 1)
+		console.log("PAGE", pageNum)
+		setDivHeight(heightItemsArr[pageNum]);
 		console.log("height items:", heightItemsArr)
 	}
 	
 	function handleSellerBackClick(ele, i) {
 		console.log(reviewsSellerRef.current[ele])
-		reviewsSellerRef.current[ele].scrollIntoView({ block: 'start', inline: 'start' });
-		setPageNum(i+1)
-		setDivHeight(heightSellerItemsArr[pageNum - 1]);
+		reviewsSellerRef.current[ele].scrollIntoView({ block: 'start', inline: 'nearest' });
+		setPageNum(i + 1)
+		console.log("i", i)
+		console.log("PAGE", pageNum)
+		setDivHeight(heightSellerItemsArr[pageNum]);
 	}
 
 	let content;
