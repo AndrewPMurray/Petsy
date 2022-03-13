@@ -1,4 +1,5 @@
 .search-results-container-div {
     display: flex;
     justify-content: center;
+    height: 100%;
 }

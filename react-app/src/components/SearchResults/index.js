@@ -25,14 +25,17 @@ function SearchResults() {
 
 	return results.length ? (
 		<>
-    <div className='search-results-container-div'>
-			<DetailedProductGrid products={results} />
-    </div>
+			<div className='search-results-container-div'>
+				<DetailedProductGrid products={results} />
+			</div>
 		</>
 	) : (
-    <div className='search-results-container-div'>
-		  <h2>No results</h2>
-    </div>
+		<div
+			className='search-results-container-div'
+			style={{ height: '80vh', alignItems: 'center', fontSize: '32px' }}
+		>
+			<h2>No results</h2>
+		</div>
 	);
 }
 
