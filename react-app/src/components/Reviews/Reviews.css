@@ -52,6 +52,11 @@
 
 .reviews-body-div {
   width: 92%;
+  height: 100%;
+}
+
+.reviews-container-div {
+  height: 100%;
 }
 
 .single-review-container-div{
@@ -247,4 +252,9 @@
   font-size: 13px;
   padding-top: 5px;
   padding-bottom: 10px;
+}
+
+.page-button-true {
+  background-color: rgb(156, 156, 156);
+  color: rgb(83, 83, 83)
 }

@@ -95,14 +95,22 @@
 
 
 #listingGrid {
-    display: flex;
+    /* display: flex;
     width: 80%;
     height: 100%;
-    justify-content: center;
     align-items: flex-start;
     padding-top: 20px;
     margin-bottom: 20px;
     gap: 10px;
+    flex-wrap: wrap; */
+    display: flex;
+    width: 90%;
+    height: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 20px;
+    margin-bottom: 20px;
+    gap: 7px;
     flex-wrap: wrap;
     
 }
@@ -111,11 +119,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: calc(100% * (1/4) - 10px - 1px);
+    width: 250px;
     aspect-ratio: 1/1;
-    flex-grow: 1;
     background-color: white;
     border: 1px solid #D3D3D3;
+
+
 }
 
 #manageProdCard:hover  {
@@ -175,15 +184,15 @@
     display: flex;
     width: 100%;
     justify-content: flex-end; 
-    height: 8%;
+    height: 25px;
     border-top: #D3D3D3 solid 1px;
 }
 
 
 .fa-trash-can {
     color: gray;
-    font-size: 1.5vh;
-    margin: 8px;
+    font-size: 20px;
+    margin: 3px;
 }
 
 .fa-trash-can:hover {

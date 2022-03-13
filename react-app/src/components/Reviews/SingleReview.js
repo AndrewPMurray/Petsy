@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 import ScrollToTop from "react-router-scroll-top";
 import dayjs from "dayjs";
 
-const SingleReview = forwardRef(({ review, seller, products, heightDifference, setHeightDifference }, ref) => {
+const SingleReview = forwardRef(({ review, seller, products, heightDifference, setHeightDifference, divHeight, setDivHeight }, ref) => {
 	const history = useHistory();
 
 	const [photoPresent, setPhotoPresent] = useState(false);
@@ -16,31 +16,39 @@ const SingleReview = forwardRef(({ review, seller, products, heightDifference, s
 
 	const contentRef = useRef();
 
+	const [initialHeight, setIntitialHeight] = useState(null)
+	// ADD THE DIFFERENCE TO DIV HEIGHT
+	useEffect(() => {
+		if (initialHeight === null) {
+		setIntitialHeight(contentRef?.current?.clientHeight)
+	}}, [])
+
+	console.log("INT", initialHeight)
+	
 	function isOverflowed(e) {
-		const difference = e?.scrollHeight - e?.clientHeight;
-		if (difference) {
-			setHeightDifference(difference)
-		}
 		return e?.scrollHeight - 1 > e?.clientHeight
 	}
 
+	function heightDifferenceContent(initial, current) {
+		return current - initial
+	}
+	
 	useEffect(() => {
 		if (review?.url) setPhotoPresent(true);
 	}, [review?.url]);
-
+	
 	
 	useEffect(() => {
-		// console.log("wtf")
 		if (!isOverflowed(contentRef.current)) {
 			setTooLong(false);
 		}
 	}, [products?.length, heightDifference]);
-
+	
 	const handleExpandContent = (e) => {
 		e.preventDefault();
 		setTooLong(false);
-		// console.log("click", contentRef.current.clientHeight, contentRef.current.scrollHeight)
-		isOverflowed(contentRef.current)
+		setHeightDifference(review)
+		setDivHeight(divHeight += heightDifferenceContent(initialHeight, contentRef.current.scrollHeight))
 	}
 
 	const handleProductChange = (e) => {
@@ -55,7 +63,6 @@ const SingleReview = forwardRef(({ review, seller, products, heightDifference, s
 		currentProduct = products[review.product_id];
 		sellerRevProductImg = currentProduct?.images[0].url;
 	}
-	// console.log(review)
 
 	const reviewLength = Object.keys(review).length
 

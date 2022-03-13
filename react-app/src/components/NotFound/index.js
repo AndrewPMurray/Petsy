@@ -1,5 +1,9 @@
 import './NotFound.css';
 
 export default function NotFound() {
-	return <h2>NOT FOUND</h2>;
+	return (
+		<div id='not-found-container'>
+			<h2>NOT FOUND</h2>
+		</div>
+	);
 }
