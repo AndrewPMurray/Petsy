@@ -1,22 +1,10 @@
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
 import ReviewModal from "../ReviewModal";
 
 
+
 function PurchaseCard({ purchaseId, purchase, userId, reviews, review }) {
-	// const dispatch = useDispatch();
-	let message = reviews[purchase.product_id] ? 'Edit Review' : 'Add Review'
-	console.log('=====', review?.rating)
-
-	/*
-	the product can be purchased multiple times by a user. 
-	the user can add a review for the product the same amount of times the product exists in the purchases table. 
-	if product.id 
-
-	*/
-
 
 	return (
 		<div id='purchaseCard'>
@@ -41,7 +29,7 @@ function PurchaseCard({ purchaseId, purchase, userId, reviews, review }) {
 			</div>
 			<div id='purchaseReview'>
 				<div>
-					<ReviewModal purchaseId={purchaseId} message={message} userId={userId} product={purchase.product} reviews={reviews} review={review} />
+					<ReviewModal purchaseId={purchaseId} userId={userId} product={purchase.product} review={review} />
 				</div>
 			</div>
 			<div id='buyAgainDiv'>

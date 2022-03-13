@@ -4,7 +4,7 @@ import { Modal } from '../../context/Modal';
 import ReviewForm from './ReviewForm';
 import { FaStar } from 'react-icons/fa';
 
-function ReviewModal({ message, product, userId, reviews, review, purchaseId }) {
+function ReviewModal({ product, userId, review, purchaseId }) {
 	const [showModal, setShowModal] = useState(false);
 	const [stars, setStars] = useState(0)
 
@@ -76,7 +76,6 @@ function ReviewDoesNotExist({ setShowModal, setStars }) {
 }
 
 function ReviewDoesExist({ setShowModal, review }) {
-	console.log('IN THE REVIEW EXISTS', review)
 	const stars = [];
 	for (let i = 0; i < review.rating; i++) {
 		stars.push(i)
