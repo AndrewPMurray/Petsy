@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadProducts } from '../../store/products';
 import { makePurchase } from '../../store/cart';
@@ -56,12 +56,26 @@ function Cart() {
 		});
 	};
 
+	const handleClick = (e) => {
+		e.preventDefault()
+		history.push('/')
+	}
+
 	if (!cartItems || !cartItems.length)
 		return (
-			<div className='cart-item-header'>
-				No items in the cart.
-				Start selecting items to purchase.
-			</div>
+			<>
+				<div id="no-cart-page-div">
+					<div id='sub-main-no-cart'>
+						<div className='cart-item-header'> Your cart is empty.</div>
+						<div >
+							<button
+								className='link-cart'
+								onClick={handleClick}
+							>Discover something unique for your pet(s) to fill it up</button>
+						</div>
+					</div>
+				</div>
+			</>
 		);
 
 

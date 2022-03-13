@@ -34,13 +34,32 @@
   height: 100%;
 }
 
+#no-cart-page-div {
+  height: 62.5vh;
+}
+
 .cart-item-header {
-  padding: 20px 5px;
   font-size: 27px;
   line-height: 36px;
+}
+
+.link-cart {
+  padding-top: 7px;
+  font-size: 17px;
+  line-height: 36px;
+  background-color: white;
+}
+
+.link-cart:hover {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+#sub-main-no-cart {
   display: flex;
   flex-direction: column;
-  min-height: 62vh;
+  align-items: center;
+  padding-top: 100px;
 }
 
 .cart-item {
