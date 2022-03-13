@@ -12,9 +12,9 @@ export default function ProductTypePage() {
 	const history = useHistory();
 
 	useEffect(() => {
-		dispatch(loadProductTypesByPet(petTypeId, productTypeId)).then((res) =>
-			res.length === 0 ? history.push('/not-found') : res
-		);
+		dispatch(loadProductTypesByPet(petTypeId, productTypeId)).then((res) => {
+			if (res.length === 0) history.push('/not-found');
+		});
 	}, [dispatch, petTypeId, productTypeId]);
 
 	return (

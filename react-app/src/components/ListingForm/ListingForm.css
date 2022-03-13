@@ -61,7 +61,7 @@
 }
 
 #picture-preview-container {
-    margin: 25px;
+    max-width: 750px;
 }
 
 #picture-preview {

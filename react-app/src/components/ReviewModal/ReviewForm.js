@@ -9,7 +9,6 @@ import UploadReviewImage from './UploadReviewImage';
 export default function ReviewForm({
 	userId,
 	product,
-	reviews,
 	setShowModal,
 	reviewExists,
 	stars,
@@ -42,10 +41,6 @@ export default function ReviewForm({
 	const handleEdit = async (e) => {
 		e.preventDefault();
 
-		// let reviewId;
-		// if (reviewExists) {
-		// 	reviewId = reviews[product.id].id
-		// }
 
 		const editedReview = {
 			content,
@@ -178,14 +173,18 @@ export default function ReviewForm({
 					)}
 
 					{active === 2 && (
-						<div id='reviewImageDiv'>
-							<UploadReviewImage
-								review={review}
-								setUrl={setUrl}
-								setImageToDelete={setImageToDelete}
-								url={url}
-							/>
-						</div>
+						<>
+
+							<div id='reviewImageDiv'>
+								<UploadReviewImage
+									review={review}
+									setUrl={setUrl}
+									setImageToDelete={setImageToDelete}
+									url={url}
+								/>
+							</div>
+							<div id="placeholder"></div>
+						</>
 					)}
 					<div id='form_button_div'>
 						{active === 2 ? (

@@ -18,12 +18,13 @@ function ProductPage() {
 
 	if (products) {
 		product = products[productId];
-		if (!product) history.push('/not-found');
 		firstImage = product?.images[0].id;
 	}
 
 	useEffect(() => {
-		dispatch(loadProducts());
+		dispatch(loadProducts()).then((res) => {
+			if (!res[productId - 1]) history.push('/not-found');
+		});
 	}, [dispatch]);
 
 	return (

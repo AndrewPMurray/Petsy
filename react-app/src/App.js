@@ -54,6 +54,9 @@ function App() {
 				<Route path='/search/:searchInput'>
 					<SearchResults />
 				</Route>
+				<Route path='/search/'>
+					<SearchResults />
+				</Route>
 				<Route path='/pets/:petTypeId/:productTypeId'>
 					<ProductTypePage />
 				</Route>

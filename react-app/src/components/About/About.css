@@ -1,24 +1,26 @@
 #about {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #fdebd2;
-  padding-bottom: 50px;
-  margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    background-color: #FDEBD2;
+    /* height: 100%; */
+    padding-bottom: 50px;
+    padding: 20px;
+    margin-top: 50px;
+    gap: 20px;
 }
 #about > div {
   margin: 0 250px 0 250px;
 }
 
 .aboutMeHead {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-family: Lato;
-  padding-top: 10px;
-  padding-bottom: 27px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Lato;
+    gap: 10px;
 }
 
 .aboutMeHead > h3 {
@@ -27,19 +29,21 @@
 }
 
 .trio {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: Lato;
-  padding: 0px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Lato;
+    width: 80%;
+    height: 20vh;
 }
 
-.questions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: Lato;
-  padding-top: 25px;
+.trio > div{
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    width: 30%;
+    height: 100%;
+    gap: 10px;
 }
 
 #gitButton {
@@ -54,12 +58,12 @@
   margin-top: 15px;
 }
 
-.individual-div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 0px 30px;
+.questions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Lato;
+    gap: 20px;
 }
 
 .individual-div > p {

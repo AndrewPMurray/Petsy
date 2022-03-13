@@ -16,7 +16,7 @@ const UploadPicture = ({ images, setImages, imagesToDelete, setImagesToDelete })
 		<>
 			<div id='picture-preview'>
 				{images.map((image, i) => (
-					<div key={`picture-preview-${i}`} className='picture-preview-node'>
+					<div key={`picture-preview-${i}`} className='picture-preview-node fade-in'>
 						<i
 							key={`delete-picture${i}`}
 							id='delete-picture'
