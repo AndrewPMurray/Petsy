@@ -13,9 +13,9 @@ function SearchResults() {
 
 	const results = products.filter((product) => {
 		return (
-			product.title.toLowerCase().includes(searchInput.toLowerCase()) ||
-			product.description.toLowerCase().includes(searchInput.toLowerCase()) ||
-			product.details.join().toLowerCase().includes(searchInput.toLowerCase())
+			product.title.toLowerCase().includes(searchInput?.toLowerCase()) ||
+			product.description.toLowerCase().includes(searchInput?.toLowerCase()) ||
+			product.details.join().toLowerCase().includes(searchInput?.toLowerCase())
 		);
 	});
 
@@ -23,10 +23,12 @@ function SearchResults() {
 		dispatch(loadProducts());
 	}, [dispatch]);
 
-	return (
+	return results.length ? (
 		<>
 			<DetailedProductGrid products={results} />
 		</>
+	) : (
+		<h2>No results</h2>
 	);
 }
 
