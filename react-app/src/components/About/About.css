@@ -9,12 +9,10 @@
     padding: 20px;
     margin-top: 50px;
     gap: 20px;
-
 }
 #about > div {
-    margin: 0 250px 0 250px;
+  margin: 0 250px 0 250px;
 }
-
 
 .aboutMeHead {
     display: flex;
@@ -26,10 +24,9 @@
 }
 
 .aboutMeHead > h3 {
-    font-family: 'Lora', serif;
-    font-size: 35px;
+  font-family: "Lora", serif;
+  font-size: 35px;
 }
-
 
 .trio {
     display: flex;
@@ -38,7 +35,6 @@
     font-family: Lato;
     width: 80%;
     height: 20vh;
-
 }
 
 .trio > div{
@@ -48,7 +44,18 @@
     width: 30%;
     height: 100%;
     gap: 10px;
+}
 
+#gitButton {
+  border-radius: 30px;
+  border: 1px solid black;
+  font-family: Lato;
+  font-weight: 500;
+  width: 200px;
+  font-size: 20px;
+  background-color: transparent;
+  padding: 15px;
+  margin-top: 15px;
 }
 
 .questions {
@@ -57,16 +64,12 @@
     align-items: center;
     font-family: Lato;
     gap: 20px;
-
 }
 
-#gitButton {
-    border-radius: 30px;
-    border: 1px solid black;
-    font-family: Lato;
-    font-weight:500;
-    width: 200px;
-    font-size: 20px;
-    background-color: transparent;
-    padding: 15px;
+.individual-div > p {
+  text-align: center;
+}
+
+.trio-main-div {
+  display: flex;
 }

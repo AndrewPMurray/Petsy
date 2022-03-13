@@ -48,20 +48,25 @@ const SignUpForm = ({ setPage }) => {
 
   return (
     < form className="main-auth-user-container" onSubmit={onSignUp}>
-      <h2 className='form-title'>Create your account</h2>
-      <h2 className="form-title">Registration is easy.</h2>
-      <div>
-        <button
-          onClick={() => setPage(1)}
-        >Login</button>
-      </div>
       <div className='errors-div'>
         {errors.map((error, ind) => (
           <div className='single-error-div' key={ind}>{error}</div>
         ))}
       </div>
+      <div id="sub-auth-div">
+        <div id="signup-titles">
+          <h2 className='form-title'>Create your account</h2>
+          <h2 className="form-title form-title-2">Registration is easy.</h2>
+        </div>
+        <div>
+          <button
+            id="auth-login-button"
+            onClick={() => setPage(1)}
+          >Login</button>
+        </div>
+      </div>
       <div>
-        <label>Username</label>
+        <label id='username-label'>Username</label>
         <input
           className='auth-form-input'
           type='text'

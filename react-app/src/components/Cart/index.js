@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadProducts } from '../../store/products';
 import { makePurchase } from '../../store/cart';
@@ -56,11 +56,26 @@ function Cart() {
 		});
 	};
 
+	const handleClick = (e) => {
+		e.preventDefault()
+		history.push('/')
+	}
+
 	if (!cartItems || !cartItems.length)
 		return (
-			<div className='cart-item-header'>
-				No items in the cart. Start selecting items to purchase.
-			</div>
+			<>
+				<div id="no-cart-page-div">
+					<div id='sub-main-no-cart'>
+						<div className='cart-item-header'> Your cart is empty.</div>
+						<div >
+							<button
+								className='link-cart'
+								onClick={handleClick}
+							>Discover something unique for your pet(s) to fill it up</button>
+						</div>
+					</div>
+				</div>
+			</>
 		);
 
 
@@ -85,31 +100,47 @@ function Cart() {
 					</ul>
 				</div>
 				<div id="cart-right-side">
-					<div id="checkout">
-						<div>How you'll pay</div>
-						<div id="cards">
-							<input
-								type="radio"
-							/>
-							<img src="https://images.squarespace-cdn.com/content/v1/5cdac02165019ff805c12bd3/1563273051742-QSUPRDFV6OEVTGYIDDHG/visa-mastercard-american-express-discover-logo-12000-25968.png?format=1000w" alt="cards" />
+					<div id='sub-right-div'>
+						<div id="checkout">
+							<div>How you'll pay</div>
+							<div id="cards">
+								<input
+									type="radio"
+									name='method-buy'
+								/>
+								<img src="https://images.squarespace-cdn.com/content/v1/5cdac02165019ff805c12bd3/1563273051742-QSUPRDFV6OEVTGYIDDHG/visa-mastercard-american-express-discover-logo-12000-25968.png?format=1000w" alt="cards" />
+							</div>
+							<div id='paypal'>
+								<input
+									type="radio"
+									name='method-buy'
+								/>
+								<img src="https://2.bp.blogspot.com/-gzW3J2sXFm0/U5h4jgo_1UI/AAAAAAAACqo/E5KtY-0gZfw/s1600/Logo+Paypal.png" alt="pay-pal" />
+							</div>
+							<div id='totals-text'>
+								<div id='total-div'>Item(s) total: <span>${total.toFixed(2)}</span></div>
+								<div id='subtotal-div'>Subtotal: <span>${(total * 1.07).toFixed(2)}</span></div>
+							</div>
 						</div>
-						<div id='total-div'>Item(s) total: ${total.toFixed(2)}</div>
-						<div id='subtotal-div'>Subtotal: ${(total * 1.07).toFixed(2)}</div>
-					</div>
-					<div>
-						{user ?
-							<form onSubmit={onSubmit}>
-								<button type='submit'>Purchase</button>
-							</form> :
-							<>
-								<button id='purchase-button' onClick={() => setShowModal(true)}>Purchase</button>
-								{showModal && (
-									<Modal onClose={() => setShowModal(false)}>
-										<LoginForm />
-									</Modal>
-								)}
-							</>
-						}
+						<div >
+							{user ?
+								<form
+									id='form-div'
+									onSubmit={onSubmit}>
+									<button
+										id='purchase-button'
+										type='submit'>Purchase</button>
+								</form> :
+								<>
+									<button id='purchase-button' onClick={() => setShowModal(true)}>Purchase</button>
+									{showModal && (
+										<Modal onClose={() => setShowModal(false)}>
+											<LoginForm />
+										</Modal>
+									)}
+								</>
+							}
+						</div>
 					</div>
 				</div>
 			</div>

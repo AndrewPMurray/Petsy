@@ -1,10 +1,61 @@
-
 #footer1 {
-    height: 200px;
-    background-color: #2F466C;
+  height: 200px;
+  background-color: #2f466c;
 }
 
 #footer2 {
-    height: 60px;
-    background-color: #232347;
+  height: 60px;
+  background-color: #232347;
+  display: flex;
+  flex-direction: column;
+}
+
+#footer-names-all {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding-top: 20px;
+  color: white;
+}
+
+#individual-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+
+#links {
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+  padding: 4px 8px;
+  /* color: white; */
+}
+
+.fa-linkedin {
+  margin-left: 20px;
+}
+
+.fa-linkedin,
+.fa-github {
+  color: white;
+}
+
+.fa-linkedin:hover,
+.fa-github:hover {
+  font-weight: bold;
+}
+
+#sub-footer2 {
+  display: flex;
+  justify-content: center;
+}
+
+#sub-footer2 > div {
+  display: inline-block;
+  color: white;
+  font-family: Lato;
+  font-size: 15px;
+  padding: 10px 15px;
 }
