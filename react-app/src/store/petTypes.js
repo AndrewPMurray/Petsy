@@ -13,6 +13,7 @@ export const loadPetTypes = (id) => async (dispatch) => {
 		return products.pet_types;
 	} else {
 		const errors = await response.json();
+		return errors;
 	}
 };
 

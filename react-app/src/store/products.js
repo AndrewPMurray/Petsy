@@ -31,6 +31,7 @@ export const loadProducts = () => async (dispatch) => {
 		return products.all_products;
 	} else {
 		const errors = await response.json();
+		return errors;
 	}
 };
 
@@ -77,6 +78,7 @@ export const deleteProduct = (product) => async (dispatch) => {
 		return deletedProduct;
 	} else {
 		const errors = await response.json();
+		return errors;
 	}
 };
 
