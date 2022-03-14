@@ -24,8 +24,12 @@ function ProductPage() {
 	useEffect(() => {
 		dispatch(loadProducts()).then((res) => {
 			let productExists = false;
-			res.forEach((product) => {
-				if (product.id === +productId) productExists = true;
+			res.every((product) => {
+				if (product.id === +productId) {
+					productExists = true;
+					return false;
+				}
+				return true;
 			});
 			if (!productExists) history.push('/not-found');
 		});
