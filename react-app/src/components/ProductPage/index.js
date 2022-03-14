@@ -23,7 +23,11 @@ function ProductPage() {
 
 	useEffect(() => {
 		dispatch(loadProducts()).then((res) => {
-			if (!res[productId - 1]) history.push('/not-found');
+			let productExists = false;
+			res.forEach((product) => {
+				if (product.id === +productId) productExists = true;
+			});
+			if (!productExists) history.push('/not-found');
 		});
 	}, [dispatch, history, productId]);
 
