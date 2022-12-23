@@ -1,7 +1,7 @@
 # Welcome to Petsy!
 ![petsy home page](https://user-images.githubusercontent.com/89945390/158039225-604c9ced-6edd-47f3-8edd-7b0646720699.png)
 
-[Petsy](https://aa-petsy.herokuapp.com/), a fullstack clone of Etsy, is an online marketplace where people sell, buy, and collect unique pet items. Contributors: [Andrew Murray](https://www.linkedin.com/in/andrew-murray-304b39231/), [Lucas Monteiro](https://www.linkedin.com/in/lucascostamonteiro/), [Whit Minson](https://www.linkedin.com/in/whitneylynnminson/), [Yanelys Mena](https://www.linkedin.com/in/yanelysmena/).
+[Petsy](https://aa-petsy.onrender.com), a fullstack clone of Etsy, is an online marketplace where people sell, buy, and collect unique pet items. Contributors: [Andrew Murray](https://www.linkedin.com/in/andrew-murray-304b39231/), [Lucas Monteiro](https://www.linkedin.com/in/lucascostamonteiro/), [Whit Minson](https://www.linkedin.com/in/whitneylynnminson/), [Yanelys Mena](https://www.linkedin.com/in/yanelysmena/).
 
 ## Wiki Links
 

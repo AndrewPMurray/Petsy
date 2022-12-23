@@ -5,7 +5,7 @@ from logging.config import fileConfig
 
 from flask import current_app
 
-from future import with_statement
+# from future import with_statement
 
 import logging
 from logging.config import fileConfig
