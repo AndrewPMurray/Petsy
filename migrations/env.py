@@ -5,6 +5,14 @@ from logging.config import fileConfig
 
 from flask import current_app
 
+from future import with_statement
+
+import logging
+from logging.config import fileConfig
+
+from sqlalchemy import engine_from_config
+from sqlalchemy import pool
+
 from alembic import context
 
 import os
