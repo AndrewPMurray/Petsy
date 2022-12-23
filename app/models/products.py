@@ -1,9 +1,11 @@
-from .db import db
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 import json
 
 
 class Product(db.Model):
     __tablename__ = 'products'
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(500), nullable=False)
@@ -11,9 +13,9 @@ class Product(db.Model):
     details = db.Column(db.Text)
     description = db.Column(db.Text, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    product_type_id = db.Column(db.Integer, db.ForeignKey('product_types.id'), nullable=False)
-    pet_type_id = db.Column(db.Integer, db.ForeignKey('pet_types.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    product_type_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('product_types.id')), nullable=False)
+    pet_type_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('pet_types.id')), nullable=False)
     
     user = db.relationship("User", back_populates="products")
     product_type = db.relationship("ProductType", back_populates="products")
