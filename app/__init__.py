@@ -50,6 +50,11 @@ Migrate(app, db)
 # Application Security
 CORS(app)
 
+# Handle Flask 404 that occurs on production site sometimes
+@app.errorhandler(404)
+def not_found(e):
+    return app.send_static_file('index.html')
+
 
 # Since we are deploying with Docker and Flask,
 # we won't be using a buildpack when we deploy to Heroku.
